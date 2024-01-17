@@ -1,0 +1,226 @@
+# Preliminaries {.unnumbered}
+
+The notets were developed with Quarto; for details about Quarto, visit
+<https://quarto.org/docs/books>.
+
+
+## Sources at GitHub
+These lecture notes for STAT 3255/5255 in Spring 2024 represent a
+collaborative effort between Professor Jun Yan and the students
+enrolled in the course. This cooperative approach to education was
+facilitated through the use of GitHub, a platform that encourages
+collaborative coding and content development.
+
+
+Students contributed to the lecture notes by submitting pull requests
+to our dedicated GitHub repository. This method not only enriched the
+course material but also provided students with practical experience
+in collaborative software development and version control. To view
+these contributions and the lecture notes in their entirety, please
+visit our Spring 2024 repository at <https://github.com/statds/ids-s24>.
+
+
+For those interested in exploring the lecture notes from the previous
+years, the [Spring 2023](https://github.com/statds/ids-s23) and
+[Spring 2024](https://github.com/statds/ids-s22)
+are both publicly accessible. These archives offer
+valuable insights into the evolution of the course content and the
+different perspectives brought by successive student cohorts.
+
+## Midterm Project
+
+Our mid-term project on rat sightings in New York City is to be
+showcased in a virtual session at the NYC Open Data Week, 2024, the
+week following the Spring Break. Four students will be selected to
+present topics on the mid-term project.
+
+## Final Project
+
+Students are encouraged to start designing their final projects from
+the beginning of the semester. There are many open data that can be
+used. Here is a list of data challenges that you may find useful:
+
++ [ASA Data Challenge Expo](https://community.amstat.org/dataexpo/home)
++ [Kaggle](https://www.kaggle.com)
++ [DrivenData](https://www.drivendata.org)
++ [Top 10 Data Science Competitions in
+  2024](https://www.knowledgehut.com/blog/data-science/data-science-competitions)
+
+If you work on sports analytics, you are welcome to submit a
+poster to [UConn Sports Analytics Symposium
+(UCSAS) 2024](https://statds.org/events/ucsas2024/).
+
+
+## Adapting to Rapid Skill Acquisition
+
+In this course, students are expected to rapidly acquire new skills, a
+critical aspect of data science. To emphasize this, consider this
+insightful quote from @vanderplas2016python:
+
+> When a technologically-minded person is asked to help a friend, family member,
+> or colleague with a computer problem, most of the time it's less a matter of
+> knowing the answer as much as knowing how to quickly find an unknown
+> answer. In data science it's the same: searchable web resources such as online
+> documentation, mailing-list threads, and StackOverflow answers contain a
+> wealth of information, even (especially?) if it is a topic you've found
+> yourself searching before. Being an effective practitioner of data science is
+> less about memorizing the tool or command you should use for every possible
+> situation, and more about learning to effectively find the information you
+> don't know, whether through a web search engine or another means.
+
+This quote captures the essence of what we aim to develop in our
+students: the ability to swiftly navigate and utilize the vast
+resources available to solve complex problems in data science.
+
+## Wishlist
+
+This is a wish list from all members of the class (alphabetical
+order, last name first, comma, then first name).
+Add yours through a pull request; note the syntax of nested list in
+Markdown.
+
++ Last, First
+    - Wish 1
+    - Wish 2
++ Yan, Jun
+    - Make data science more accessible to undergraduates
+    - Co-develop a Quarto book in collaboration with the students
+    - Train students to participate real data science competitions
+
+
+### Presentation Orders
+
+The topic presentation order is set up in class.
+```{python}
+presenters = ["Doe, John",
+              "Doe, Jane",
+              "Smith, Alan",
+              "Harris, Joe"]
+
+import random
+random.seed(71323498112697523) # jointly set by the class on 01/30/2023
+random.sample(presenters, len(presenters))
+```
+
+## Course Logistics
+
+### Presentation Task Board
+
+Here are some example tasks:
+
++ Data science ethics
++ Data science communication skills
++ Import/Export data
++ Descriptive statistics
++ Statistical hypothesis tests `scypy.stats`
++ Model formulas with `patsy`
++ Statistical models with `statsmodels`
++ Data visualization with `matplotlib`
++ Grammer of graphics for python `plotnine`
++ Handling spatial data with `geopandas`
++ Visualize spatial data in a Google map with `gmplot`
++ Random forest
++ Naive Bayes
++ Bagging vs boosting
++ Neural networks
++ Deep learning
++ TensorFlow
++ Autoencoders
++ Reinforcement learning
++ Calling C/C++ from Python
++ Calling R from Python and vice versa
++ Developing a Python package
+
+
+Please use the following table to sign up.
+
+   Date  | Presenter              | Topic
+  ------ | ---------------------- | ------
+  02/06  | Cheu, Catherine        | Visualization with `matplotlib`
+  02/08  | Ho, Garrick            | Pandas part 1
+  02/13  | Mastrorilli, Ginamarie | Pandas part 2
+  02/13  | Yi, Guanghong          | Grammer of graphics for python `plotnine`
+  02/15  | Karandikar, Shivaram   | Text processing with `nltk`
+  02/20  | Chua, Yang Kang        | Support Vector Machine with `scikit-learn`
+  02/20  | Jones, Courtney        | Descriptive Statistics
+  02/22  | Sullivan, Colin        | Statistical hypothesis tests scypy.stats
+  02/27  | Shen, Tong             | Decision tree with `scikit-learn`
+  03/01  | Bedard, Kaitlyn        | Handling spatial data with `geopandas`
+  03/06  | Nhan, Nathan           | Bagging vs boosting
+  03/08  | Parchekani, Kian       | Naive Bayes
+  03/20  | Noel, Luke             | Plotting on maps with `gmplot`
+  03/20  | Whitney, William       | Autoencoder
+  03/27  | Nguyen, Christine      | Calling R from Python and vice versa
+  03/27  | Cummins, Patrick       | K-means clustering
+  03/29  | Zheng, Michael         | Web Scraping with `Selenium`
+  04/03  | Lunetta, Giovanni      | Softmax Regression & Neural Networks with `TensorFlow`
+
+### Final Project Presentation Schedule
+
+We use the same order as the topic presentation for undergraduate
+final presentation.
+
+   Date  | Presenter
+  ------ | ---------------------- 
+  04/10  | 
+  04/15  | 
+  04/17  | 
+  04/22  | 
+  04/24  |
+
+
+
+### Contributing to the Class Notes
+
+Contribution to the class notes is through a `pull request'.
+
++ Start a new branch and switch to the new branch.
++ On the new branch, add a qmd file for your presentation
++ Edit `_quarto.yml` add a line for your qmd file to include it in the notes.
++ Work on your qmd file, test with `quarto render`.
++ When satisfied, commit and make a pull request.
+
+I have added a template file `mysection.qmd` and a new line to `_quarto.yml`
+as an example.
+
+For more detailed style guidance, please see my notes on [statistical
+wrirting](https://statds.github.io/stat-writing/using-the-right-tools-for-writing.html#latex-for-typesetting).
+
+
+Plagiarism is to be prevented. Remember that these class notes are publicly
+available online with your names attached.  Here are some resources on []how to
+avoid plagiarism](https://usingsources.fas.harvard.edu/how-avoid-plagiarism). 
+In particular, in our course, one convenient way to avoid plagiarism is to use
+our own data (e.g., NYC Open Data). Combined with your own explanation of the
+code chunks, it would be hard to plagiarize.
+
+
+### Homework Requirements
+
++ Use the repo from Git Classroom to submit your work. See @sec-git.
+    - Keep the repo clean (no tracking generated files).
+	- Never "Upload" your files; use the git command lines.
+	- Make commit message informative (think about the readers).
++ Use `quarto` source only. See @sec-quarto.
++ For the conveinence of greading, add your html output to a release in your
+  repo.
+
+
+## Practical Tips
+
+### Data analysis
+
++ Use an IDE so you can play with the data interactively
++ Collect codes that have tested out into a script for batch processing
++ During data cleaning, keep in mind how each variable will be used later
++ No keeping large data files in a repo; assume a reasonable location with your collaborators
+
+### Presentation
+
++ Don't forget to introduce yourself if there is no moderator
++ Highlight your research questions and results, not code
++ Give an outline, carry it out, and summarize
+
+
+<!-- Topic presentation template -->
+{{< include _mysection.qmd >}}
