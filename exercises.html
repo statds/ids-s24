@@ -169,6 +169,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p><strong>Git basics and GitHub setup</strong> Learn the Git basics and set up an account on GitHub if you do not already have one. Practice the tips on Git in the notes. By going through the following tasks, ensure your repo has at least 10 commits, each with an informative message. Regularly check the status of your repo using <code>git status</code>. The specific tasks are:</p>
 <ol type="1">
 <li>Clone the class notes repo to an appropriate folder on your computer.</li>
+<li>Add all the files to your designated homework repo from GitHub Classroom and work on that repo for the rest of the problem.</li>
 <li>Add your name and wishes to the Wishlist; commit.</li>
 <li>Remove the <code>Last, First</code> entry from the list; commit.</li>
 <li>Create a new file called <code>add.qmd</code> containing a few lines of texts; commit.</li>
@@ -186,9 +187,17 @@ ul.task-list li input[type="checkbox"] {
 <li>Checkout your branch and add your wishes to the wish list; push to your GitHub account.</li>
 <li>Make a pull request to class notes repo from your fork at GitHub. Make sure you have clear messages to document the changes.</li>
 </ol></li>
-<li><p>Write a function to demonstrate the Monty Hall problem through simulation. The function takes two arguments <code>ndoors</code> and <code>ntrials</code>, representing the number of doors in the experiment and the number of trails in a simulation, respectively. The function should return the proportion of wins for both the switch and no-switch strategy. Apply your function with 3 doors and 5 doors, both with 1000 trials. Include sufficient text around the code to explain your them.</p></li>
-<li><p>Write a function to do a Monte Carlo approximation of <span class="math inline">\(\pi\)</span>. The function takes a Monte Carlo sample size <code>n</code> as input, and returns a point estimate of <span class="math inline">\(\pi\)</span> and a 95% confidence interval. Apply your function with sample size 1000, 2000, 4000, and 8000. Repeat the experiment 1000 times for each sample size and check the empirical probability that the confidence intervals cover the true value of <span class="math inline">\(\pi\)</span>. Comment on the results.</p></li>
-<li><p>Find the first 10-digit prime number occurring in consecutive digits of <span class="math inline">\(e\)</span>. This was a <a href="http://mathworld.wolfram.com/news/2004-10-13/google/">Google recruiting ad</a>.</p></li>
+<li><p><strong>Monty Hall</strong> Write a function to demonstrate the Monty Hall problem through simulation. The function takes two arguments <code>ndoors</code> and <code>ntrials</code>, representing the number of doors in the experiment and the number of trails in a simulation, respectively. The function should return the proportion of wins for both the switch and no-switch strategy. Apply your function with 3 doors and 5 doors, both with 1000 trials. Include sufficient text around the code to explain your them.</p></li>
+<li><p><strong>Approximating <span class="math inline">\(\pi\)</span></strong> Write a function to do a Monte Carlo approximation of <span class="math inline">\(\pi\)</span>. The function takes a Monte Carlo sample size <code>n</code> as input, and returns a point estimate of <span class="math inline">\(\pi\)</span> and a 95% confidence interval. Apply your function with sample size 1000, 2000, 4000, and 8000. Repeat the experiment 1000 times for each sample size and check the empirical probability that the confidence intervals cover the true value of <span class="math inline">\(\pi\)</span>. Comment on the results.</p></li>
+<li><p><strong>Google Billboard Ad</strong> Find the first 10-digit prime number occurring in consecutive digits of <span class="math inline">\(e\)</span>. This was a <a href="http://mathworld.wolfram.com/news/2004-10-13/google/">Google recruiting ad</a>.</p></li>
+<li><p><strong>Game 24</strong> The <a href="http://en.wikipedia.org/wiki/24_Game">math game 24</a> is one of the addictive games among number lovers. With four randomly selected cards form a deck of poker cards, use all four values and elementary arithmetic operations (<span class="math inline">\(+-\times /\)</span>) to come up with 24. Let <span class="math inline">\(\square\)</span> be one of the four numbers. Let <span class="math inline">\(\bigcirc\)</span> represent one of the four operators. For example, <span class="math display">\[\begin{equation*}
+(\square \bigcirc \square) \bigcirc (\square \bigcirc \square)
+\end{equation*}\]</span> is one way to group the the operations.</p>
+<ol type="1">
+<li>List all the possible ways to group the four numbers.</li>
+<li>How many possibly ways are there to check for a solution?</li>
+<li>Write a function to solve the problem in a brutal force way. The inputs of the function are four numbers. The function returns a list of solutions. Some of the solutions will be equivalent, but let us not worry about that for now.</li>
+</ol></li>
 <li><p>The NYC motor vehicle collisions data with documentation is available from <a href="https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95">NYC Open Data</a>. The raw data needs some cleaning. (JY: Add variable name cleaning next year.)</p>
 <ol type="1">
 <li>Use the filter from the website to download the crash data of January 2023; save it under a directory <code>data</code> with an informative name (e.g., <code>nyc_crashes_202301.csv</code>).</li>
