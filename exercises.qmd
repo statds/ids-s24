@@ -32,7 +32,8 @@
     1. Make a pull request to class notes repo from your fork at
     GitHub. Make sure you have clear messages to document the changes.
 
-1. Write a function to demonstrate the Monty Hall problem through
+1. **Monty Hall**
+   Write a function to demonstrate the Monty Hall problem through
    simulation. The function takes two arguments `ndoors` and
    `ntrials`, representing the number of doors in the experiment and
    the number of trails in a simulation, respectively. The function
@@ -41,7 +42,8 @@
    both with 1000 trials. Include sufficient text around the code to
    explain your them.
 
-1. Write a function to do a Monte Carlo approximation of $\pi$. The
+1. **Approximating $\pi$**
+   Write a function to do a Monte Carlo approximation of $\pi$. The
    function takes a Monte Carlo sample size `n` as input, and returns
    a point estimate of $\pi$ and a 95% confidence interval. Apply your
    function with sample size 1000, 2000, 4000, and 8000. Repeat the experiment 
@@ -49,9 +51,28 @@
    confidence intervals cover the true value of $\pi$. Comment on
    the results.
 
-1. Find the first 10-digit prime number occurring in consecutive
-   digits of $e$. This was a
-   [Google recruiting ad](http://mathworld.wolfram.com/news/2004-10-13/google/).
+1. **Google Billboard Ad**
+   Find the first 10-digit prime number occurring in consecutive
+   digits of $e$. This was a [Google recruiting
+   ad](http://mathworld.wolfram.com/news/2004-10-13/google/).
+
+1. **Game 24**
+   The [math game 24](http://en.wikipedia.org/wiki/24_Game) is one of the
+   addictive games among number lovers. With four randomly selected cards form
+   a deck of poker cards, use all four values and elementary arithmetic
+   operations ($+-\times /$) to come up with 24. Let $\square$ be one of
+   the four numbers. Let $\bigcirc$ represent one of the four operators.
+   For example, 
+   \begin{equation*}
+    (\square \bigcirc \square) \bigcirc (\square \bigcirc \square)
+   \end{equation*}
+   is one way to group the the operations.
+   1. List all the possible ways to group the four numbers.
+   1. How many possibly ways are there to check for a solution?
+   1. Write a function to solve the problem in a brutal force way. The
+   inputs of the function are four numbers. The function returns a list
+   of solutions. Some of the solutions will be equivalent, but let us
+   not worry about that for now.
 
 1. The NYC motor vehicle collisions data with documentation is available from
    [NYC Open
