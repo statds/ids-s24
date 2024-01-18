@@ -7,6 +7,7 @@
   commits, each with an informative message. Regularly check the
   status of your repo using `git status`. The specific tasks are:
     1. Clone the class notes repo to an appropriate folder on your computer.
+    1. Add all the files to your designated homework repo from GitHub Classroom and work on that repo for the rest of the problem.
     1. Add your name and wishes to the Wishlist; commit.
     1. Remove the `Last, First` entry from the list; commit.
     1. Create a new file called `add.qmd` containing a few lines of
