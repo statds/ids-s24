@@ -39,7 +39,7 @@
     "href": "index.html#wishlist",
     "title": "Introduction to Data Science",
     "section": "Wishlist",
-    "text": "Wishlist\nThis is a wish list from all members of the class (alphabetical order, last name first, comma, then first name). Add yours through a pull request; note the syntax of nested list in Markdown.\n\nSchober, Henry\n\nBe more proficient in Git and Python\nDeepen my understanding of Data Science\n\nYan, Jun\n\nMake data science more accessible to undergraduates\nCo-develop a Quarto book in collaboration with the students\nTrain students to participate real data science competitions"
+    "text": "Wishlist\nThis is a wish list from all members of the class (alphabetical order, last name first, comma, then first name). Add yours through a pull request; note the syntax of nested list in Markdown.\n\nSchober, Henry\n\nBe more proficient in Git and Python\nDeepen my understanding of Data Science\n\nYan, Jun\n\nMake data science more accessible to undergraduates\nCo-develop a Quarto book in collaboration with the students\nTrain students to participate real data science competitions\n\nYankson, Emmanuel\n\nGet better with python\nGet an A in STAT 3255"
   },
   {
     "objectID": "index.html#presentation-orders",
