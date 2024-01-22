@@ -80,15 +80,21 @@ Add yours through a pull request; note the syntax of nested list in
 Markdown.
 
 + Pugh, Alex
-    - Learn enhanced data visualization techniques
+    - Increase my knowledge of Git and Python
     - Learn to properly clean a data set
++ Schober, Henry
+    - Be more proficient in Git and Python
+    - Deepen my understanding of Data Science
 + Yan, Jun
     - Make data science more accessible to undergraduates
     - Co-develop a Quarto book in collaboration with the students
     - Train students to participate real data science competitions
++ Yankson, Emmanuel
+    - Get better with python
+    - Get an A in STAT 3255
 
 
-### Presentation Orders
+## Presentation Orders
 
 The topic presentation order is set up in class.
 ```{python}
@@ -113,7 +119,6 @@ Here are some example tasks:
 + Import/Export data
 + Descriptive statistics
 + Statistical hypothesis tests `scypy.stats`
-+ Model formulas with `patsy`
 + Statistical models with `statsmodels`
 + Data visualization with `matplotlib`
 + Grammer of graphics for python `plotnine`
