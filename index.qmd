@@ -86,6 +86,9 @@ Markdown.
     - Make data science more accessible to undergraduates
     - Co-develop a Quarto book in collaboration with the students
     - Train students to participate real data science competitions
++ Yankson, Emmanuel
+    - Get better with python
+    - Get an A in STAT 3255
 
 
 ### Presentation Orders
