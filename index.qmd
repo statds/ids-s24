@@ -89,8 +89,10 @@ Markdown.
 + Yankson, Emmanuel
     - Get better with python
     - Get an A in STAT 3255
-
-
++ Ge, Li
+    - Be more proficient in Git and Python
+    - Gain experiences in finishing the data science projects in person
+    - Get knowledge in participating real data science competitions
 ## Presentation Orders
 
 The topic presentation order is set up in class.
