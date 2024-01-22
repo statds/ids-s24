@@ -82,6 +82,11 @@ Markdown.
 + Schober, Henry
     - Be more proficient in Git and Python
     - Deepen my understanding of Data Science
++ Lee, Joshua
+    - Improve model optimization techniques
+    - learn how to conduct better feature engineering
+    - learn how to perform better model selection and feature selection
+    - learn how to deploy ml models and processes to the cloud
 + Yan, Jun
     - Make data science more accessible to undergraduates
     - Co-develop a Quarto book in collaboration with the students
