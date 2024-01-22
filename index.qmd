@@ -78,7 +78,9 @@ This is a wish list from all members of the class (alphabetical
 order, last name first, comma, then first name).
 Add yours through a pull request; note the syntax of nested list in
 Markdown.
-
++ Chugh, Charitarth
+    - Get better at analyzing data/features
+    - Learn about more xgboost & gradient boosted trees. 
 + Schober, Henry
     - Be more proficient in Git and Python
     - Deepen my understanding of Data Science
