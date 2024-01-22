@@ -82,6 +82,9 @@ Markdown.
 + Schober, Henry
     - Be more proficient in Git and Python
     - Deepen my understanding of Data Science
++ Woo, Madison 
+    - Become comfortable using GitHub
+    - Strengthen my python skills 
 + Yan, Jun
     - Make data science more accessible to undergraduates
     - Co-develop a Quarto book in collaboration with the students
