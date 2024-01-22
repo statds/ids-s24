@@ -81,7 +81,7 @@ Markdown.
 
 + Pugh, Alex
     - Increase my knowledge of Git and Python
-    - Learn to properly clean a data set
+    - Learn to efficiently clean a data set
 + Schober, Henry
     - Be more proficient in Git and Python
     - Deepen my understanding of Data Science
