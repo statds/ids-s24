@@ -1,3 +1,6 @@
 # testing the add.qmd file 
 This file will help me practice using GitHub
 I need to make changes to the file on my local computer
+
++ So far, I have already removed the file "accidentally" then commited those changes. I then recovered the file and am currently writing the long line of code for this homework assigment.
++ This is my short line of code that I am adding. 
