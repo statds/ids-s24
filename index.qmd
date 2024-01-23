@@ -95,6 +95,9 @@ Markdown.
     - Become more proficient and efficient with GitHub and Python
     - Get a deeper understanding and appreciate of the Data Science workflow
     - Understand collaboration and project creation on GitHub
++ Pugh, Alex
+    - Increase my knowledge of Git and Python
+    - Learn to efficiently clean a data set
 + Schober, Henry
     - Be more proficient in Git and Python
     - Deepen my understanding of Data Science
