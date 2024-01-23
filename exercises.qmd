@@ -7,11 +7,12 @@
   commits, each with an informative message. Regularly check the
   status of your repo using `git status`. The specific tasks are:
     1. Clone the class notes repo to an appropriate folder on your computer.
-    1. Add all the files to your designated homework repo from GitHub Classroom and work on that repo for the rest of the problem.
+    1. Add all the files to your designated homework repo from
+    GitHub Classroom and work on that repo for the rest of the problem.
     1. Add your name and wishes to the Wishlist; commit.
     1. Remove the `Last, First` entry from the list; commit.
     1. Create a new file called `add.qmd` containing a few lines of
-  texts; commit.
+    texts; commit.
     1. Remove `add.qmd` (pretending that this is by accident); commit.
     1. Recover the accidently removed file `add.qmd`; add a long line
   (a paragraph without a hard break); add a short line (under 80
@@ -20,8 +21,6 @@
   line; use `git diff` to see the difference from the last commit;
   commit.
     1. Play with other git operations and commit.
-    1. Put the repo into the GitHub Classroom homework repo with `git
-  remote add` and `git push`.
   
 
 1. **Contributing to the Class Notes**
