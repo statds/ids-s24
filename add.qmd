@@ -1,1 +1,2 @@
-a
+# testing the add.qmd file 
+This file will help me practice using GitHub
