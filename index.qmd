@@ -95,6 +95,10 @@ Markdown.
     - Become more proficient and efficient with GitHub and Python
     - Get a deeper understanding and appreciate of the Data Science workflow
     - Understand collaboration and project creation on GitHub
++ Perez, Isabelle 
+    - Become comfortable working with git and quarto 
+    - Learn data management strategies and the relevant 
+    programming skills 
 + Pugh, Alex
     - Increase my knowledge of Git and Python
     - Learn to efficiently clean a data set
