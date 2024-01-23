@@ -79,12 +79,31 @@ order, last name first, comma, then first name).
 Add yours through a pull request; note the syntax of nested list in
 Markdown.
 
++ Chugh, Charitarth
+    - Get better at analyzing data/features
+    - Learn about more xgboost & gradient boosted trees. 
++ Lee, Joshua
+    - Improve model optimization techniques
+    - learn how to conduct better feature engineering
+    - learn how to perform better model selection and feature selection
+    - learn how to deploy ml models and processes to the cloud
++ Nguyen, Leon
+    - Become proficient in utilizing Git and GitHub workflow processes
+    - Develop proficiency in Quarto and Python packages
+    - Create a data science project start to finish for portfolio work
++ Patel, Pratham
+    - Become more proficient and efficient with GitHub and Python
+    - Get a deeper understanding and appreciate of the Data Science workflow
+    - Understand collaboration and project creation on GitHub
 + Pugh, Alex
     - Increase my knowledge of Git and Python
     - Learn to efficiently clean a data set
 + Schober, Henry
     - Be more proficient in Git and Python
     - Deepen my understanding of Data Science
++ Taki, William
+    - Get comfortable with Git and Python
+    - Use the learnings from this class to help with STAT 33494W
 + Yan, Jun
     - Make data science more accessible to undergraduates
     - Co-develop a Quarto book in collaboration with the students
