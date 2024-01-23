@@ -82,6 +82,9 @@ Markdown.
 + Schober, Henry
     - Be more proficient in Git and Python
     - Deepen my understanding of Data Science
++ Taki, William
+    - Get comfortable with Git and Python
+    - Use the learnings from this class to help with STAT 33494W
 + Yan, Jun
     - Make data science more accessible to undergraduates
     - Co-develop a Quarto book in collaboration with the students
