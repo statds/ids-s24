@@ -68,8 +68,8 @@ In this course, students will be expected to achieve the following outcomes:
     visualization.
     
 
-- **Full Grasp of the Meaning of Results from Data Science
-    Algorithms**: Learn to not only apply data science algorithms but
+- **Full Grasp of the Meaning of Results from Data Science Algorithms**:
+    Learn to not only apply data science algorithms but
     also to deeply understand the implications and meanings of their
     results. This is crucial for making informed decisions based on
     these outcomes.
