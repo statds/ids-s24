@@ -91,6 +91,10 @@ Markdown.
     - Become proficient in utilizing Git and GitHub workflow processes
     - Develop proficiency in Quarto and Python packages
     - Create a data science project start to finish for portfolio work
++ Patel, Pratham
+    - Become more proficient and efficient with GitHub and Python
+    - Get a deeper understanding and appreciate of the Data Science workflow
+    - Understand collaboration and project creation on GitHub
 + Schober, Henry
     - Be more proficient in Git and Python
     - Deepen my understanding of Data Science
