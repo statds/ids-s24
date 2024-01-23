@@ -79,6 +79,9 @@ order, last name first, comma, then first name).
 Add yours through a pull request; note the syntax of nested list in
 Markdown.
 
++ Mori, Abigail
+    - Become proficient in Git 
+    - Learn how to properly communicate statistical results 
 + Schober, Henry
     - Be more proficient in Git and Python
     - Deepen my understanding of Data Science
