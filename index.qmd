@@ -79,7 +79,9 @@ order, last name first, comma, then first name).
 Add yours through a pull request; note the syntax of nested list in
 Markdown.
 
-
++ Qualls, William
+    - Better understand the Data Science Pipeline
+    - Gain practical knowledge with tools such as Github that aren't covered in other classes
 + Chugh, Charitarth
     - Get better at analyzing data/features
     - Learn about more xgboost & gradient boosted trees. 
