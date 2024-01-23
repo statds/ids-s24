@@ -1,2 +1,3 @@
 # testing the add.qmd file 
 This file will help me practice using GitHub
+I need to make changes to the file on my local computer
