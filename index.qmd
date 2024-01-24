@@ -106,6 +106,9 @@ Markdown.
 + Pugh, Alex
     - Increase my knowledge of Git and Python
     - Learn to efficiently clean a data set
++ Qualls, William
+    - Better understand the Data Science Pipeline
+    - Gain practical knowledge with tools such as Github that aren't covered in other classes
 + Schober, Henry
     - Be more proficient in Git and Python
     - Deepen my understanding of Data Science
