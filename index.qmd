@@ -79,12 +79,39 @@ order, last name first, comma, then first name).
 Add yours through a pull request; note the syntax of nested list in
 Markdown.
 
+
++ Chugh, Charitarth
+    - Get better at analyzing data/features
+    - Learn about more xgboost & gradient boosted trees. 
++ Lee, Joshua
+    - Improve model optimization techniques
+    - learn how to conduct better feature engineering
+    - learn how to perform better model selection and feature selection
+    - learn how to deploy ml models and processes to the cloud
++ Massad, Olivia
+    - Be able to use Git effectively
+    - Gain knowledge about Data Science and its importance
++ Nguyen, Leon
+    - Become proficient in utilizing Git and GitHub workflow processes
+    - Develop proficiency in Quarto and Python packages
+    - Create a data science project start to finish for portfolio work
++ Patel, Pratham
+    - Become more proficient and efficient with GitHub and Python
+    - Get a deeper understanding and appreciate of the Data Science workflow
+    - Understand collaboration and project creation on GitHub
++ Perez, Isabelle 
+    - Become comfortable working with git and quarto 
+    - Learn data management strategies and the relevant 
+    programming skills 
++ Pugh, Alex
+    - Increase my knowledge of Git and Python
+    - Learn to efficiently clean a data set
 + Schober, Henry
     - Be more proficient in Git and Python
     - Deepen my understanding of Data Science
 + Woo, Madison 
-    - Become comfortable using GitHub
-    - Strengthen my python skills 
+    - Be able to comfortably use Git 
+    - Gain more knowledge about project management and data science 
 + Yan, Jun
     - Make data science more accessible to undergraduates
     - Co-develop a Quarto book in collaboration with the students
@@ -98,15 +125,28 @@ Markdown.
 
 The topic presentation order is set up in class.
 ```{python}
-presenters = ["Doe, John",
-              "Doe, Jane",
-              "Smith, Alan",
-              "Harris, Joe"]
+with open('rosters/3255.txt', 'r') as file:
+    ug = [line.strip() for line in file]
+with open('rosters/5255.txt', 'r') as file:
+    gr = [line.strip() for line in file]
+presenters = ug + gr
 
 import random
-random.seed(71323498112697523) # jointly set by the class on 01/30/2023
+random.seed(1234 + 5678) # jointly set by the class on 01/24/2024
 random.sample(presenters, len(presenters))
+## random.shuffle(presenters) # This would shuffle the list in place
 ```
+
+Switching slots is allowed as long as you find someone who
+is willing to switch with you. In this case, make a pull request
+to switch the order and let me know.
+
+
+You are welcome to choose a topic that you are interested the 
+most, subject to some order restrictions. For example, decision
+tree should be presented before random forest or extreme gradient
+boosting. This justifies certain requests for switching slots.
+
 
 ## Course Logistics
 
@@ -117,6 +157,7 @@ Here are some example tasks:
 + Data science ethics
 + Data science communication skills
 + Import/Export data
++ Database operation wi1th Structured query language (SQL)
 + Descriptive statistics
 + Statistical hypothesis tests `scypy.stats`
 + Statistical models with `statsmodels`
@@ -141,24 +182,33 @@ Please use the following table to sign up.
 
    Date  | Presenter              | Topic
   ------ | ---------------------- | ------
-  02/06  | Cheu, Catherine        | Visualization with `matplotlib`
-  02/08  | Ho, Garrick            | Pandas part 1
-  02/13  | Mastrorilli, Ginamarie | Pandas part 2
-  02/13  | Yi, Guanghong          | Grammer of graphics for python `plotnine`
-  02/15  | Karandikar, Shivaram   | Text processing with `nltk`
-  02/20  | Chua, Yang Kang        | Support Vector Machine with `scikit-learn`
-  02/20  | Jones, Courtney        | Descriptive Statistics
-  02/22  | Sullivan, Colin        | Statistical hypothesis tests scypy.stats
-  02/27  | Shen, Tong             | Decision tree with `scikit-learn`
-  03/01  | Bedard, Kaitlyn        | Handling spatial data with `geopandas`
-  03/06  | Nhan, Nathan           | Bagging vs boosting
-  03/08  | Parchekani, Kian       | Naive Bayes
-  03/20  | Noel, Luke             | Plotting on maps with `gmplot`
-  03/20  | Whitney, William       | Autoencoder
-  03/27  | Nguyen, Christine      | Calling R from Python and vice versa
-  03/27  | Cummins, Patrick       | K-means clustering
-  03/29  | Zheng, Michael         | Web Scraping with `Selenium`
-  04/03  | Lunetta, Giovanni      | Softmax Regression & Neural Networks with `TensorFlow`
+  02/07  |                        | 
+  02/07  |                        | 
+  02/12  | Dr. Haim Bar           | Database management
+  02/14  |                        |
+  02/14  |                        |
+  02/19  |                        |
+  02/19  |                        |
+  02/21  |                        |
+  02/21  |                        |
+  02/26  |                        |
+  02/26  |                        |
+  02/28  |                        |
+  02/28  |                        |
+  03/02  |                        |
+  03/02  |                        |
+  03/04  |                        |
+  03/04  |                        |
+  03/25  |                        |
+  03/25  |                        |
+  03/27  |                        |
+  03/27  |                        |
+  04/01  |                        |
+  04/01  |                        |
+  04/03  |                        |
+  04/03  |                        |
+  04/08  |                        |
+  04/08  |                        |
 
 ### Final Project Presentation Schedule
 
