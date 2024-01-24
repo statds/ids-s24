@@ -132,7 +132,7 @@ with open('rosters/5255.txt', 'r') as file:
 presenters = ug + gr
 
 import random
-random.seed(1234 + 5678) # jointly set by the class on 01/24/2024
+random.seed(4737 + 8852 + 3196 + 2344 + 47) # jointly set by the class on 01/24/2024
 random.sample(presenters, len(presenters))
 ## random.shuffle(presenters) # This would shuffle the list in place
 ```
