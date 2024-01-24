@@ -1,4 +1,4 @@
-# Reproducibile Data Science with Quarto {#sec-quarto}
+# Reproducibile Data Science {#sec-quarto}
 
 Data science projects should be reproducible to be trustworthy. Dynamic
 documents facilitate reproducibility. [Quarto](https://quarto.org) is an
@@ -19,4 +19,4 @@ course.
 To get started, see documentation at
 [Quarto](https://quarto.org/docs/get-started/).
 
-This is an extra line.
+A template for homework is in this repo: `hwtemp.qmd`.
