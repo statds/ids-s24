@@ -106,12 +106,22 @@ Markdown.
 + Pugh, Alex
     - Increase my knowledge of Git and Python
     - Learn to efficiently clean a data set
++ Qualls, William
+    - Better understand the Data Science Pipeline
+    - Gain practical knowledge with tools such as Github that aren't covered in other classes
 + Schober, Henry
     - Be more proficient in Git and Python
     - Deepen my understanding of Data Science
++ Taki, William
+    - Get comfortable with Git and Python
+    - Use the learnings from this class to help with STAT 33494W
 + Woo, Madison 
     - Be able to comfortably use Git 
     - Gain more knowledge about project management and data science 
++ Xie, Vincent
+    - Become more proficient with Git.
+    - Learn how to create a proper data science project.
+    - Be introduced to core concepts in data science.
 + Yan, Jun
     - Make data science more accessible to undergraduates
     - Co-develop a Quarto book in collaboration with the students
@@ -132,7 +142,7 @@ with open('rosters/5255.txt', 'r') as file:
 presenters = ug + gr
 
 import random
-random.seed(1234 + 5678) # jointly set by the class on 01/24/2024
+random.seed(4737 + 8852 + 3196 + 2344 + 47) # jointly set by the class on 01/24/2024
 random.sample(presenters, len(presenters))
 ## random.shuffle(presenters) # This would shuffle the list in place
 ```
@@ -182,31 +192,31 @@ Please use the following table to sign up.
 
    Date  | Presenter              | Topic
   ------ | ---------------------- | ------
-  02/07  |                        | 
-  02/07  |                        | 
+  02/07  | Matt Elliot            | 
+  02/07  | Weijia Wu              | 
   02/12  | Dr. Haim Bar           | Database management
-  02/14  |                        |
-  02/14  |                        |
-  02/19  |                        |
-  02/19  |                        |
-  02/21  |                        |
-  02/21  |                        |
-  02/26  |                        |
-  02/26  |                        |
-  02/28  |                        |
-  02/28  |                        |
-  03/02  |                        |
-  03/02  |                        |
-  03/04  |                        |
-  03/04  |                        |
-  03/25  |                        |
-  03/25  |                        |
-  03/27  |                        |
-  03/27  |                        |
-  04/01  |                        |
-  04/01  |                        |
-  04/03  |                        |
-  04/03  |                        |
+  02/14  | Victor, Lek            |
+  02/14  | Willam Taki            |
+  02/19  | Henry Schober          |
+  02/19  | Joshua Lee             |
+  02/21  | Pratham, Patel         |
+  02/21  | Olivia Massad          |
+  02/26  | Ge Li                  |
+  02/26  | Xingye Zhang           |
+  02/28  | Jack Dennison          |
+  02/28  | Isabelle Perez         |
+  03/02  | Emmanuel Yankson       |
+  03/02  | David Li               |
+  03/04  | Abigail Mori           |
+  03/04  | Leon Nguyen            |
+  03/25  | Alex Pugh              |
+  03/25  | Charitath Chugh        |
+  03/27  | Vincent Xie            |
+  03/27  | Jyothsna Vijayaraghavendra  |
+  04/01  | William Qualls         |
+  04/01  | Madison Woo            |
+  04/03  | Braedon Hook           |
+  04/03  | Amelia Chowaniec       |
   04/08  |                        |
   04/08  |                        |
 
