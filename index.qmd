@@ -211,7 +211,7 @@ Please use the following table to sign up.
   03/02  | Emmanuel Yankson       | Random Forest
   03/02  | David Li               |
   03/04  | Abigail Mori           |
-  03/04  | Leon Nguyen            |
+  03/04  | Leon Nguyen            | Statistical Modeling with statsmodels
   03/25  | Alex Pugh              |
   03/25  | Charitath Chugh        | PyTorch
   03/27  | Vincent Xie            | Database Operations with SQL
