@@ -88,6 +88,9 @@ Markdown.
     - learn how to conduct better feature engineering
     - learn how to perform better model selection and feature selection
     - learn how to deploy ml models and processes to the cloud
++ Mori, Abigail 
+    - Become proficient using Git 
+    - Learn how to properly communiacte statistical evidence and findings 
 + Massad, Olivia
     - Be able to use Git effectively
     - Gain knowledge about Data Science and its importance
