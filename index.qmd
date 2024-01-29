@@ -208,7 +208,7 @@ Please use the following table to sign up.
   02/26  | Xingye Zhang           |
   02/28  | Jack Dennison          |
   02/28  | Isabelle Perez         | Statistical hypothesis tests `scypy.stats`
-  03/02  | Emmanuel Yankson       |
+  03/02  | Emmanuel Yankson       | Random Forest
   03/02  | David Li               |
   03/04  | Abigail Mori           |
   03/04  | Leon Nguyen            |
