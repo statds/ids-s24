@@ -132,6 +132,9 @@ Markdown.
 + Zhang, Xingye
     - Get better with computers.
     - Get an A in STAT 3255.
++ Wu, Weijia
+    - Get better with Python skills
+    - Learn how to use Git
 
 
 ## Presentation Orders
@@ -196,7 +199,7 @@ Please use the following table to sign up.
    Date  | Presenter              | Topic
   ------ | ---------------------- | ------
   02/07  | Matt Elliot            | 
-  02/07  | Weijia Wu              | 
+  02/07  | Weijia Wu              | Data visualization with `matplotlib`
   02/12  | Dr. Haim Bar           | Database management
   02/14  | Victor, Lek            |
   02/14  | Willam Taki            |
