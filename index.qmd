@@ -207,7 +207,7 @@ Please use the following table to sign up.
   03/04  | Abigail Mori           |
   03/04  | Leon Nguyen            |
   03/25  | Alex Pugh              |
-  03/25  | Charitath Chugh        |
+  03/25  | Charitath Chugh        | PyTorch
   03/27  | Vincent Xie            | Database Operations with SQL
   03/27  | Jyothsna Vijayaraghavendra  |
   04/01  | William Qualls         |
