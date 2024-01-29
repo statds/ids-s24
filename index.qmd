@@ -132,7 +132,9 @@ Markdown.
 + Zhang, Xingye
     - Get better with computers.
     - Get an A in STAT 3255.
-
++ Wu, Weijia
+    - Get better in coding skills (python)
+    - Be proficient in Git
 
 ## Presentation Orders
 
