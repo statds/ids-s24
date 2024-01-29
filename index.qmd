@@ -118,6 +118,9 @@ Markdown.
 + Taki, William
     - Get comfortable with Git and Python
     - Use the learnings from this class to help with STAT 33494W
++ Woo, Madison 
+    - Be able to comfortably use Git and Python 
+    - Gain more knowledge about project management and data science 
 + Xie, Vincent
     - Become more proficient with Git.
     - Learn how to create a proper data science project.
@@ -217,7 +220,7 @@ Please use the following table to sign up.
   03/27  | Vincent Xie            | Database Operations with SQL
   03/27  |                        |
   04/01  | William Qualls         |
-  04/01  | Madison Woo            |
+  04/01  | Madison Woo            | Data Science Ethics 
   04/03  | Braedon Hook           |
   04/03  |                        |
   04/08  |                        |
