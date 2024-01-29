@@ -215,11 +215,11 @@ Please use the following table to sign up.
   03/25  | Alex Pugh              |
   03/25  | Charitath Chugh        | PyTorch
   03/27  | Vincent Xie            | Database Operations with SQL
-  03/27  | Jyothsna Vijayaraghavendra  |
+  03/27  |                        |
   04/01  | William Qualls         |
   04/01  | Madison Woo            |
   04/03  | Braedon Hook           |
-  04/03  | Amelia Chowaniec       |
+  04/03  |                        |
   04/08  |                        |
   04/08  |                        |
 
