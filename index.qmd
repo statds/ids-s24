@@ -129,6 +129,9 @@ Markdown.
 + Yankson, Emmanuel
     - Get better with python
     - Get an A in STAT 3255
++ Zhang, Xingye
+    - Get better with computers.
+    - Get an A in STAT 3255.
 
 
 ## Presentation Orders
