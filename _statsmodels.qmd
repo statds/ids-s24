@@ -1,0 +1,32 @@
+## My Presentation Topic (Template)
+
+
+### Introduction
+
+Put an overview here. Use Markdown syntax.
+
+
+### Sub Topic 1
+
+Put materials on topic 1 here
+
+Python examples can be put into `python` code chunks:
+
+```{python}
+import pandas as pd
+
+# do something
+```
+
+### Sub Topic 2
+
+Put materials on topic 2 here.
+
+### Sub Topic 3
+
+Put matreials on topic 3 here.
+
+
+### Conclusion
+
+Put sumaries here.
