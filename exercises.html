@@ -235,12 +235,22 @@ ul.task-list li input[type="checkbox"] {
 <li>Explain the confusion matrix retult from each fit.</li>
 <li>Compare the performance of the two approaches in terms of accuracy, precision, recall, F1-score, and AUC.</li>
 </ol></li>
-<li><p>(Mid-term team project) The <a href="https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9">NYC Open Data of 311 Service Requests</a> contains all requests from 2010 to present. We consider a subset of it with request time between 00:00:00 01/15/2023 and 24:00:00 01/21/2023. The subset is available in CSV format as <code>data/nyc311_011523-012123_by022023.csv</code>. Read the data dictionary to understand the meaning of the variables,</p>
+<li><p>The <a href="https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9">NYC Open Data of 311 Service Requests</a> contains all requests from 2010 to present. We consider a subset of it with request time between 00:00:00 01/15/2023 and 24:00:00 01/21/2023. The subset is available in CSV format as <code>data/nyc311_011523-012123_by022023.csv</code>. Read the data dictionary to understand the meaning of the variables,</p>
 <ol type="1">
 <li>Clean the data: fill missing fields as much as possible; check for obvious data entry errors (e.g., can <code>Closed Date</code> be earlier than <code>Created Date</code>?); summarize your suggestions to the data curator in several bullet points.</li>
 <li>Remove requests that are not made to NYPD and create a new variable <code>duration</code>, which represents the time period from the <code>Created Date</code> to <code>Closed Date</code>. Note that <code>duration</code> may be censored for some requests. Visualize the distribution of uncensored <code>duration</code> by weekdays/weekend and by borough, and test whether the distributions are the same across weekdays/weekends of their creation and across boroughs.</li>
 <li>Define a binary variable <code>over3h</code> which is 1 if <code>duration</code> is greater than 3 hours. Note that it can be obtained even for censored <code>duration</code>. Build a model to predict <code>over3h</code>. If your model has tuning parameters, justify their choices. Apply this model to the 311 requests of NYPD in the week of 01/22/2023. Assess the performance of your model.</li>
 <li>Now you know the data quite well. Come up with a research question of interest that can be answered by the data, which could be analytics or visualizations. Perform the needed analyses and answer your question.</li>
+</ol></li>
+<li><p><strong>NYC Rats</strong> Rats in NYC are widespread, as they are in many densely populated areas (https://en.wikipedia.org/wiki/Rats_in_New_York_City). As of October 2023, NYC dropped from the 2nd to the 3rd places in the annual <a href="https://www.orkin.com/press-room/top-rodent-infested-cities-2023#">“rattiest city” list</a> released by a pest control company. In the 311 Service Request Data, there is one complain type <code>Rodent'.  Extract all the requests with complain type</code>Rodent’, created between January 1, 2022 and December 31, 2023. Save them into a csv file named <code>rodent_2022-2023.csv</code>.</p>
+<ol type="1">
+<li>Are there any complains that are not closed yet?</li>
+<li>Are there any complains with a closed data before the created date?</li>
+<li>How many agencies were this complain type reported to?</li>
+<li>Summarize the missingess for each variable.</li>
+<li>Summarize a frequency table for the <code>DESCRIPTOR</code> variable, and summarize a cross table by year.</li>
+<li>Which types of ‘DESCRIPTOR’ do you think should be included if our interest is rodent sighting?</li>
+<li>Take a subset of the data with the descriptors you chose and summarize the response time by borough.</li>
 </ol></li>
 </ol>
 
