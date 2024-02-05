@@ -83,6 +83,9 @@ Markdown.
 + Chugh, Charitarth
     - Get better at analyzing data/features
     - Learn about more xgboost & gradient boosted trees. 
++ Dennison, Jack
+    - Learn how to use Git and GitHub
+    - Be able to apply my skills in Python and Git to data analytics tasks
 + Elliott, Matt
     - Faciliate myself into becoming a Data Scientist
     - Learn new skills such as Quarto and GitHub
@@ -212,7 +215,7 @@ Please use the following table to sign up.
   02/21  | Olivia Massad          |
   02/26  | Ge Li                  |
   02/26  | Xingye Zhang           |
-  02/28  | Jack Dennison          |
+  02/28  | Jack Dennison          | Geographic Data Analysis
   02/28  | Isabelle Perez         | Statistical hypothesis tests `scypy.stats`
   03/02  | Emmanuel Yankson       | Random Forest
   03/02  | David Li               |
