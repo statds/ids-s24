@@ -13,11 +13,8 @@ especially handy for dealing with CSV files.
 ```{python}
 import pandas as pd
 
-# Load the dataset
-import pandas as pd
-
 # Define the file name
-csvnm = "data/rodent_22_23.csv"
+csvnm = "data/rodent_2022_2023.csv"
 
 # Specify the strings that indicate missing values
 # Q: How would you know these?
@@ -104,12 +101,12 @@ Feather is a fast, lightweight, and easy-to-use binary file format for
 storing data frames, optimized for speed and efficiency, particularly
 for IPC and data sharing between Python and R.
 ```{python}
-df.to_feather('data/rodent_22_23.feather')
+df.to_feather('data/rodent_2022_2023.feather')
 ```
 
 Read the feather file back in:
 ```{python}
-dff = pd.read_feather("data/rodent_22_23.feather")
+dff = pd.read_feather("data/rodent_2022_2023.feather")
 dff.shape
 ```
 
