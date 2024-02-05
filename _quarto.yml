@@ -12,6 +12,7 @@ book:
     - git.qmd
     - quarto.qmd
     - python.qmd
+    - import.qmd
     - communication.qmd
     - exercises.qmd
     - references.qmd
