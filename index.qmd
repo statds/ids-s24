@@ -138,6 +138,9 @@ Markdown.
 + Zhang, Xingye
     - Get better with computers.
     - Get an A in STAT 3255.
++ Wu, Weijia
+    - Get better with python and github
+    - Work on real-life data
 
 
 ## Presentation Orders
@@ -204,7 +207,7 @@ Please use the following table to sign up.
    Date  | Presenter              | Topic
   ------ | ---------------------- | ------
   02/07  | Matt Elliott           | Data science communication skills
-  02/07  | Weijia Wu              | 
+  02/07  | Weijia Wu              | Data visualization(Matplotlib)
   02/12  | Dr. Haim Bar           | Database management
   02/14  | Willam Taki            |
   02/19  | Joshua Lee             |
