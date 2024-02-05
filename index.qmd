@@ -83,6 +83,9 @@ Markdown.
 + Chugh, Charitarth
     - Get better at analyzing data/features
     - Learn about more xgboost & gradient boosted trees. 
++ Elliott, Matt
+    - Faciliate myself into becoming a Data Scientist
+    - Learn new skills such as Quarto and GitHub
 + Lee, Joshua
     - Improve model optimization techniques
     - learn how to conduct better feature engineering
@@ -198,7 +201,7 @@ Please use the following table to sign up.
 
    Date  | Presenter              | Topic
   ------ | ---------------------- | ------
-  02/07  | Matt Elliot            | 
+  02/07  | Matt Elliot            | Data science communication skills
   02/07  | Weijia Wu              | 
   02/12  | Dr. Haim Bar           | Database management
   02/14  | Victor, Lek            |
