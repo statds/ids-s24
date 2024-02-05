@@ -130,7 +130,7 @@
        precision, recall, F1-score, and AUC.
 
 
-1. (Mid-term team project) The [NYC Open Data of 311 Service Requests](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9) contains
+1. The [NYC Open Data of 311 Service Requests](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9) contains
    all requests from 2010 to present. We consider a subset of it with request
    time between 00:00:00 01/15/2023 and 24:00:00 01/21/2023. The subset is
    available in CSV format as `data/nyc311_011523-012123_by022023.csv`. Read the
@@ -155,3 +155,25 @@
     1. Now you know the data quite well. Come up with a research question of
        interest that can be answered by the data, which could be analytics or
        visualizations. Perform the needed analyses and answer your question.
+
+1. **NYC Rats**
+Rats in NYC are widespread, as they are in many densely populated
+areas (https://en.wikipedia.org/wiki/Rats_in_New_York_City). As of 
+October 2023, NYC dropped from the 2nd to the 3rd places in the 
+annual ["rattiest city" list](https://www.orkin.com/press-room/top-rodent-infested-cities-2023#)
+released by a pest control company. In 
+the 311 Service Request Data, there is one complain type `Rodent`. 
+Extract all the requests with complain type `Rodent`, created 
+between January 1, 2022 and December 31, 2023. Save them into a 
+csv file named `rodent_2022-2023.csv`.
+    1. Are there any complains that are not closed yet?
+    1. Are there any complains with a closed data before the
+    created date?
+    1. How many agencies were this complain type reported to?
+    1. Summarize the missingess for each variable.
+    1. Summarize a frequency table for the `DESCRIPTOR` variable, 
+    and summarize a cross table by year.
+    1. Which types of 'DESCRIPTOR' do you think should be included
+    if our interest is rodent sighting?
+    1. Take a subset of the data with the descriptors you chose and
+    summarize the response time by borough.

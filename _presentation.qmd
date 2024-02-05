@@ -1,0 +1,185 @@
+## Data Science Communication Skills
+
+This section was written by Matt Elliott.
+
+
+### Introduction
+
+Hi! My name is Matt Elliott and I decided to start this presentation off by 
+introducing myself and what I hope to become moving forward! I am currently 
+a Senior aiming to graduate in Fall 2024 with a Bachelor’s of Arts in 
+Individualized Data Science under the CLAS’ IISP program. My primary advisor
+is our professor Jun Yan! Moving forward, I hope to learn valuable skill sets 
+and ideas from both this course and the Data Science field. Even using Quarto
+instead of typical Google Slides is a step for me in creating new skills! The 
+topic I chose to discuss today in class is “Data Science Communication Skills”
+. I find this to be one of the most crucial topics to discuss about 
+Data Science; since Data Scientists are often the glue that keeps 
+projects, companies, and ideas together. 
+
+
+### Describing Data Science and its Rise
+
+- According to IBM, Data Science “combines math and statistics, specialized 
+programming, advanced analytics, artificial intelligence (AI), and machine 
+learning with specific subject matter expertise to uncover actionable insights
+hidden in an organization’s data.   
+
+- These insights are then used to “guide decision making” and create 
+“strategic planning”
+
+- According to the U.S. Bureau of Labor Statistics, Data Science is  
+“projected to grow 35 percent from 2022 to 2032, much faster than the average 
+for all occupations”
+
+- The median annual pay for Data Scientists in May 2022 was around $103,500, 
+showing its high demand in a monetary light 
+
+
+### Why does Communication Matter?
+
+
+- Communication matters in any professional setting in our lives, and 
+especially in a field that can be extremely confusing and perplexing to 
+those who are viewing it from an outside perspective. 
+
+- The Data Incubator states that “You may work alongside data analysts or 
+other scientists as part of a team, especially when handling large datasets 
+or working on big projects. Beyond this, you may also frequently work with 
+other teams of professionals who don’t work with data. Thus, it’s essential 
+to be an excellent communicator to work with others effectively”. This is an 
+important idea as being able to be a cooperative person will create 
+partnerships that flow in the correct manner.
+
+- Data Scientists often present insights to other partners in order to 
+facilitate goals and achievements in a professional setting. 
+
+- Karen Church for Medium writes that “Communication enables data scientists to
+gather all the necessary information, clarify needs and expectations of 
+stakeholders, and align their work with broader business goals.” 
+
+
+
+
+
+### Inherent Communication Skills
+
+
+- Using the right communication methods
+- Friendliness
+- Confidence
+- Volume and tone
+- Empathy
+- Respect
+- Cues 
+
+
+
+### Identify your audience
+- The Data Incubator states that “Transferring knowledge across departments is 
+crucial, so it’s vital to share insights and analyses in simple, clear terms 
+that don’t overwhelm individuals with jargon or technical details.”
+
+- Identifying your audience and speaking their language is an important step,
+as it can vary to low familiarity to full comprehension of the topic
+
+- In a 2018 HBR.org article, Hugo Bowne-Anderson interviewed 35 data scientists
+on his podcast and found that their main issues were: 
+“lack of management/financial support,” “lack of clear questions to answer,” 
+“results not used by decision makers,” and “explaining data science to others.”
+from Harvard Business Review 
+
+- Knowing your audience in this situation can cover your back on how 
+Data Scientists are treated in the field, communicating creates cooperation 
+that can lead to the avoidance of these issues found. 
+
+
+
+
+### Data Fields
+
+- Data scientists have their hands full as many different fields and 
+professions can use data analytics and information to 
+facilitate their operations
+
+- These fields include:
+   + Healthcare
+   + Media/Entertainment
+   + Retail
+   + Telecommunication
+   + Automotive 
+   + Digital Marketing
+   + Cyber security 
+- Data science communication skills vary in these fields, as some may prefer
+verbal information or visual information. 
+
+
+### Storytelling
+
+- Storytelling in the context of Data Science gives the audience a shared goal 
+within understanding the topics and information given. 
+- The goals of promoting improved customer service, innovation, or operation 
+optimization need to be conveyed in a manner that is direct and professional.
+- According to Sonali Verghese for Medium, here are the possibilities of 
+telling a story within the Data Science field:
+    + Explain how you arrived at a particular conclusion
+    + Justify rationally why you approached a problem in a specific manner
+    + Convey interesting insights in a way that gets people to think or act 
+    differently
+    + Persuade your audience that your results are conclusive and can be turned
+    into something actionable
+    + Express why your findings are valuable and how they fit into the overall
+    picture
+- This is an inspiring quotation that I found while researching this 
+presentation. Valentin Mucke for Medium: “Data science is about humans. 
+Data scientists must remember that, and not just when presenting to people
+with a non-technical background. It’s important to find common ground with
+everyone you work with to build trust and move forward effectively.
+
+
+### Data Visualization
+
+- The idea of expressing data through visualization has been a 
+vital step for Data Scientists in the field
+- Examples of Data Visualization for Data Scientists are:
+    + Many of these forms of visualization can be combined with other
+learned skill sets that will be mentioned in the next topic 
+
+
+### Usable Skill Sets for Data Communication
+
+- Coding languages: Python, Structured Query Language, R, Visual Basic 
+for Applications, Julia
+
+- Statistical programming:  the process of using computer programming 
+languages to analyze and manipulate data for statistical purposes
+
+- Statistics and probability: help predict the likelihood of future events 
+and understand patterns in data
+
+- Machine learning/Artificial intelligence: automates the data analysis process 
+and makes predictions in real-time without human involvement, leading to 
+further building and training of a data model to make real-time predictions
+
+- Statistical visualization: the graphical representation of information and
+data that uses visual elements like charts, graphs, and maps, and tools to 
+provide an accessible ways to see and understand trends, outliers, and patterns
+in data
+
+- Data management: process of collecting, storing, organizing and maintaining
+data to ensure that it is accurate and accessible to those who need it reliably
+throughout the data science project lifecycle
+
+
+### Gather questions and Feedback
+
+- According to the Data Incubator, a step to take before finalizing the project
+or an end of a report is to “consider soliciting direct feedback from your 
+audience. It doesn’t matter if you have to prompt them to ask you questions 
+or if they’re impatient to put your knowledge to the test—this form of 
+interaction can help you improve your communication skills and establish a 
+successful career as a data scientist.” 
+
+- Being able to interact with your audience gives them a better
+understanding of the topic at hand, and can help avoid ambiguity that 
+would occur if communication was not present 

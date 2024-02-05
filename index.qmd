@@ -83,6 +83,9 @@ Markdown.
 + Chugh, Charitarth
     - Get better at analyzing data/features
     - Learn about more xgboost & gradient boosted trees. 
++ Elliott, Matt
+    - Faciliate myself into becoming a Data Scientist
+    - Learn new skills such as Quarto and GitHub
 + Lee, Joshua
     - Improve model optimization techniques
     - learn how to conduct better feature engineering
@@ -118,6 +121,9 @@ Markdown.
 + Taki, William
     - Get comfortable with Git and Python
     - Use the learnings from this class to help with STAT 33494W
++ Woo, Madison 
+    - Be able to comfortably use Git and Python
+    - Learn about project managment and data science 
 + Xie, Vincent
     - Become more proficient with Git.
     - Learn how to create a proper data science project.
@@ -170,14 +176,16 @@ Here are some example tasks:
 + Data science ethics
 + Data science communication skills
 + Import/Export data
-+ Database operation wi1th Structured query language (SQL)
++ Arrow as a cross-platform data format
++ Database operation with Structured query language (SQL)
 + Descriptive statistics
-+ Statistical hypothesis tests `scypy.stats`
-+ Statistical models with `statsmodels`
-+ Data visualization with `matplotlib`
-+ Grammer of graphics for python `plotnine`
-+ Handling spatial data with `geopandas`
-+ Visualize spatial data in a Google map with `gmplot`
++ Statistical hypothesis tests
++ Statistical modeling
++ Data visualization
++ Grammer of graphics
++ Handling spatial data
++ Visualize spatial data in a Google map
++ Animation
 + Random forest
 + Naive Bayes
 + Bagging vs boosting
@@ -195,14 +203,12 @@ Please use the following table to sign up.
 
    Date  | Presenter              | Topic
   ------ | ---------------------- | ------
-  02/07  | Matt Elliot            | 
+  02/07  | Matt Elliott           | Data science communication skills
   02/07  | Weijia Wu              | 
   02/12  | Dr. Haim Bar           | Database management
-  02/14  | Victor, Lek            |
   02/14  | Willam Taki            |
-  02/19  | Henry Schober          |
   02/19  | Joshua Lee             |
-  02/21  | Pratham, Patel         |
+  02/21  | Pratham Patel          |
   02/21  | Olivia Massad          |
   02/26  | Ge Li                  |
   02/26  | Xingye Zhang           |
@@ -217,7 +223,7 @@ Please use the following table to sign up.
   03/27  | Vincent Xie            | Database Operations with SQL
   03/27  |                        |
   04/01  | William Qualls         |
-  04/01  | Madison Woo            |
+  04/01  | Madison Woo            | Data Science Ethics 
   04/03  | Braedon Hook           |
   04/03  |                        |
   04/08  |                        |
@@ -230,11 +236,10 @@ final presentation.
 
    Date  | Presenter
   ------ | ---------------------- 
-  04/10  | 
-  04/15  | 
-  04/17  | 
-  04/22  | 
-  04/24  |
+  04/15  | Matt Elliott; Weijia Wu; William Taki; Joshua Lee; Pratham Patel
+  04/17  | Olivia Massad; Ge Li; Xingye Zhang; Jack Dennison; Isabelle Perez
+  04/22  | Emmanual Yankson; Davi Li; Abigail Mori; Leon Nguyen; Alex Pugh
+  04/24  | Charitath Chugh; Vincent Xie; Madison Woo; Braedon Hook
 
 
 
@@ -252,7 +257,7 @@ I have added a template file `mysection.qmd` and a new line to `_quarto.yml`
 as an example.
 
 For more detailed style guidance, please see my notes on [statistical
-wrirting](https://statds.github.io/stat-writing/using-the-right-tools-for-writing.html#latex-for-typesetting).
+writing](https://statds.github.io/stat-writing/using-the-right-tools-for-writing.html#latex-for-typesetting).
 
 
 Plagiarism is to be prevented. Remember that these class notes are publicly
@@ -270,7 +275,7 @@ code chunks, it would be hard to plagiarize.
 	- Never "Upload" your files; use the git command lines.
 	- Make commit message informative (think about the readers).
 + Use `quarto` source only. See @sec-quarto.
-+ For the conveinence of greading, add your html output to a release in your
++ For the convenience of grading, add your html output to a release in your
   repo.
 
 
@@ -288,6 +293,8 @@ code chunks, it would be hard to plagiarize.
 + Don't forget to introduce yourself if there is no moderator
 + Highlight your research questions and results, not code
 + Give an outline, carry it out, and summarize
++ Use your own examples to reduce the risk of plagiarism
+\item
 
 
 <!-- Topic presentation template -->
