@@ -193,14 +193,20 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./import.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Import/Export</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./communication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Communicating Data Science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Communicating Data Science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -418,7 +424,7 @@ div.csl-indent {
 <section id="presentation-orders" class="level2">
 <h2 class="anchored" data-anchor-id="presentation-orders">Presentation Orders</h2>
 <p>The topic presentation order is set up in class.</p>
-<div id="b3a5f11f" class="cell" data-execution_count="1">
+<div id="8ee22b9d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'rosters/3255.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    ug <span class="op">=</span> [line.strip() <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'rosters/5255.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
@@ -468,14 +474,16 @@ div.csl-indent {
 <li>Data science ethics</li>
 <li>Data science communication skills</li>
 <li>Import/Export data</li>
-<li>Database operation wi1th Structured query language (SQL)</li>
+<li>Arrow as a cross-platform data format</li>
+<li>Database operation with Structured query language (SQL)</li>
 <li>Descriptive statistics</li>
-<li>Statistical hypothesis tests <code>scypy.stats</code></li>
-<li>Statistical models with <code>statsmodels</code></li>
-<li>Data visualization with <code>matplotlib</code></li>
-<li>Grammer of graphics for python <code>plotnine</code></li>
-<li>Handling spatial data with <code>geopandas</code></li>
-<li>Visualize spatial data in a Google map with <code>gmplot</code></li>
+<li>Statistical hypothesis tests</li>
+<li>Statistical modeling</li>
+<li>Data visualization</li>
+<li>Grammer of graphics</li>
+<li>Handling spatial data</li>
+<li>Visualize spatial data in a Google map</li>
+<li>Animation</li>
 <li>Random forest</li>
 <li>Naive Bayes</li>
 <li>Bagging vs boosting</li>
@@ -676,7 +684,7 @@ div.csl-indent {
 <li>When satisfied, commit and make a pull request.</li>
 </ul>
 <p>I have added a template file <code>mysection.qmd</code> and a new line to <code>_quarto.yml</code> as an example.</p>
-<p>For more detailed style guidance, please see my notes on <a href="https://statds.github.io/stat-writing/using-the-right-tools-for-writing.html#latex-for-typesetting">statistical wrirting</a>.</p>
+<p>For more detailed style guidance, please see my notes on <a href="https://statds.github.io/stat-writing/using-the-right-tools-for-writing.html#latex-for-typesetting">statistical writing</a>.</p>
 <p>Plagiarism is to be prevented. Remember that these class notes are publicly available online with your names attached. Here are some resources on []how to avoid plagiarism](https://usingsources.fas.harvard.edu/how-avoid-plagiarism). In particular, in our course, one convenient way to avoid plagiarism is to use our own data (e.g., NYC Open Data). Combined with your own explanation of the code chunks, it would be hard to plagiarize.</p>
 </section>
 <section id="homework-requirements" class="level3">
@@ -689,7 +697,7 @@ div.csl-indent {
 <li>Make commit message informative (think about the readers).</li>
 </ul></li>
 <li>Use <code>quarto</code> source only. See <a href="quarto.html" class="quarto-xref"><span>3&nbsp; Reproducibile Data Science</span></a>.</li>
-<li>For the conveinence of greading, add your html output to a release in your repo.</li>
+<li>For the convenience of grading, add your html output to a release in your repo.</li>
 </ul>
 </section>
 </section>
@@ -710,6 +718,7 @@ div.csl-indent {
 <li>Don’t forget to introduce yourself if there is no moderator</li>
 <li>Highlight your research questions and results, not code</li>
 <li>Give an outline, carry it out, and summarize</li>
+<li>Use your own examples to reduce the risk of plagiarism</li>
 </ul>
 <!-- Topic presentation template -->
 </section>
@@ -724,7 +733,7 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="sub-topic-1">Sub Topic 1</h3>
 <p>Put materials on topic 1 here</p>
 <p>Python examples can be put into <code>python</code> code chunks:</p>
-<div id="a1a1e5ea" class="cell" data-execution_count="2">
+<div id="fd893ace" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># do something</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
