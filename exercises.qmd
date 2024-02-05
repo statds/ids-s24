@@ -162,8 +162,8 @@ areas (https://en.wikipedia.org/wiki/Rats_in_New_York_City). As of
 October 2023, NYC dropped from the 2nd to the 3rd places in the 
 annual ["rattiest city" list](https://www.orkin.com/press-room/top-rodent-infested-cities-2023#)
 released by a pest control company. In 
-the 311 Service Request Data, there is one complain type `Rodent'. 
-Extract all the requests with complain type `Rodent', created 
+the 311 Service Request Data, there is one complain type `Rodent`. 
+Extract all the requests with complain type `Rodent`, created 
 between January 1, 2022 and December 31, 2023. Save them into a 
 csv file named `rodent_2022-2023.csv`.
     1. Are there any complains that are not closed yet?
