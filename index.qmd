@@ -201,14 +201,12 @@ Please use the following table to sign up.
 
    Date  | Presenter              | Topic
   ------ | ---------------------- | ------
-  02/07  | Matt Elliot            | Data science communication skills
+  02/07  | Matt Elliott           | Data science communication skills
   02/07  | Weijia Wu              | 
   02/12  | Dr. Haim Bar           | Database management
-  02/14  | Victor, Lek            |
   02/14  | Willam Taki            |
-  02/19  | Henry Schober          |
   02/19  | Joshua Lee             |
-  02/21  | Pratham, Patel         |
+  02/21  | Pratham Patel          |
   02/21  | Olivia Massad          |
   02/26  | Ge Li                  |
   02/26  | Xingye Zhang           |
@@ -236,11 +234,10 @@ final presentation.
 
    Date  | Presenter
   ------ | ---------------------- 
-  04/10  | 
-  04/15  | 
-  04/17  | 
-  04/22  | 
-  04/24  |
+  04/15  | Matt Elliott; Weijia Wu; William Taki; Joshua Lee; Pratham Patel
+  04/17  | Olivia Massad; Ge Li; Xingye Zhang; Jack Dennison; Isabelle Perez
+  04/22  | Emmanual Yankson; Davi Li; Abigail Mori; Leon Nguyen; Alex Pugh
+  04/24  | Charitath Chugh; Vincent Xie; Madison Woo; Braedon Hook
 
 
 
