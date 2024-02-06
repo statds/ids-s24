@@ -1,6 +1,6 @@
 # Preliminaries {.unnumbered}
 
-The notets were developed with Quarto; for details about Quarto, visit
+The notes were developed with Quarto; for details about Quarto, visit
 <https://quarto.org/docs/books>.
 
 
