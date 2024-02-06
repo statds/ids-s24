@@ -185,6 +185,7 @@ Here are some example tasks:
 + Statistical hypothesis tests
 + Statistical modeling
 + Data visualization
++ Accessing census and ACS data
 + Grammer of graphics
 + Handling spatial data
 + Visualize spatial data in a Google map
@@ -293,11 +294,10 @@ code chunks, it would be hard to plagiarize.
 
 ### Presentation
 
-+ Don't forget to introduce yourself if there is no moderator
-+ Highlight your research questions and results, not code
-+ Give an outline, carry it out, and summarize
-+ Use your own examples to reduce the risk of plagiarism
-\item
++ Don't forget to introduce yourself if there is no moderator.
++ Highlight your research questions and results, not code.
++ Give an outline, carry it out, and summarize.
++ Use your own examples to reduce the risk of plagiarism.
 
 
 <!-- Topic presentation template -->
