@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science - 8&nbsp; Exercises</title>
+<title>Introduction to Data Science - 7&nbsp; Visualization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
-<link href="./visualization.html" rel="prev">
+<link href="./exercises.html" rel="next">
+<link href="./communication.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,35 +69,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -110,7 +81,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./exercises.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exercises</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./visualization.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -179,13 +150,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exercises.html" class="sidebar-item-text sidebar-link active">
+  <a href="./exercises.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
   </div>
 </li>
@@ -201,14 +172,23 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#matplotlib" id="toc-matplotlib" class="nav-link active" data-scroll-target="#matplotlib"><span class="header-section-number">7.1</span> Matplotlib</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">7.1.1</span> Introduction</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exercises</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></h1>
 </div>
 
 
@@ -225,90 +205,15 @@ window.Quarto = {
 </header>
 
 
-<ol type="1">
-<li><p><strong>Git basics and GitHub setup</strong> Learn the Git basics and set up an account on GitHub if you do not already have one. Practice the tips on Git in the notes. By going through the following tasks, ensure your repo has at least 10 commits, each with an informative message. Regularly check the status of your repo using <code>git status</code>. The specific tasks are:</p>
-<ol type="1">
-<li>Clone the class notes repo to an appropriate folder on your computer.</li>
-<li>Add all the files to your designated homework repo from GitHub Classroom and work on that repo for the rest of the problem.</li>
-<li>Add your name and wishes to the Wishlist; commit.</li>
-<li>Remove the <code>Last, First</code> entry from the list; commit.</li>
-<li>Create a new file called <code>add.qmd</code> containing a few lines of texts; commit.</li>
-<li>Remove <code>add.qmd</code> (pretending that this is by accident); commit.</li>
-<li>Recover the accidently removed file <code>add.qmd</code>; add a long line (a paragraph without a hard break); add a short line (under 80 characters); commit.</li>
-<li>Change one word in the long line and one word in the short line; use <code>git diff</code> to see the difference from the last commit; commit.</li>
-<li>Play with other git operations and commit.</li>
-</ol></li>
-<li><p><strong>Contributing to the Class Notes</strong></p>
-<ol type="1">
-<li>Create a fork of the notes repo into your own GitHub account.</li>
-<li>Clone it to your local computer.</li>
-<li>Make a new branch to experiment with your changes.</li>
-<li>Checkout your branch and add your wishes to the wish list; push to your GitHub account.</li>
-<li>Make a pull request to class notes repo from your fork at GitHub. Make sure you have clear messages to document the changes.</li>
-</ol></li>
-<li><p><strong>Monty Hall</strong> Write a function to demonstrate the Monty Hall problem through simulation. The function takes two arguments <code>ndoors</code> and <code>ntrials</code>, representing the number of doors in the experiment and the number of trails in a simulation, respectively. The function should return the proportion of wins for both the switch and no-switch strategy. Apply your function with 3 doors and 5 doors, both with 1000 trials. Include sufficient text around the code to explain your them.</p></li>
-<li><p><strong>Approximating <span class="math inline">\(\pi\)</span></strong> Write a function to do a Monte Carlo approximation of <span class="math inline">\(\pi\)</span>. The function takes a Monte Carlo sample size <code>n</code> as input, and returns a point estimate of <span class="math inline">\(\pi\)</span> and a 95% confidence interval. Apply your function with sample size 1000, 2000, 4000, and 8000. Repeat the experiment 1000 times for each sample size and check the empirical probability that the confidence intervals cover the true value of <span class="math inline">\(\pi\)</span>. Comment on the results.</p></li>
-<li><p><strong>Google Billboard Ad</strong> Find the first 10-digit prime number occurring in consecutive digits of <span class="math inline">\(e\)</span>. This was a <a href="http://mathworld.wolfram.com/news/2004-10-13/google/">Google recruiting ad</a>.</p></li>
-<li><p><strong>Game 24</strong> The <a href="http://en.wikipedia.org/wiki/24_Game">math game 24</a> is one of the addictive games among number lovers. With four randomly selected cards form a deck of poker cards, use all four values and elementary arithmetic operations (<span class="math inline">\(+-\times /\)</span>) to come up with 24. Let <span class="math inline">\(\square\)</span> be one of the four numbers. Let <span class="math inline">\(\bigcirc\)</span> represent one of the four operators. For example, <span class="math display">\[\begin{equation*}
-(\square \bigcirc \square) \bigcirc (\square \bigcirc \square)
-\end{equation*}\]</span> is one way to group the the operations.</p>
-<ol type="1">
-<li>List all the possible ways to group the four numbers.</li>
-<li>How many possibly ways are there to check for a solution?</li>
-<li>Write a function to solve the problem in a brutal force way. The inputs of the function are four numbers. The function returns a list of solutions. Some of the solutions will be equivalent, but let us not worry about that for now.</li>
-</ol></li>
-<li><p>The NYC motor vehicle collisions data with documentation is available from <a href="https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95">NYC Open Data</a>. The raw data needs some cleaning. (JY: Add variable name cleaning next year.)</p>
-<ol type="1">
-<li>Use the filter from the website to download the crash data of January 2023; save it under a directory <code>data</code> with an informative name (e.g., <code>nyc_crashes_202301.csv</code>).</li>
-<li>Get basic summaries of each variable: missing percentage; descriptive statistics for continuous variables; frequency tables for discrete variables.</li>
-<li>Are the <code>LATITUDE</code> and <code>LONGITIDE</code> values all look legitimate? If not (e.g., zeroes), code them as missing values.</li>
-<li>If <code>OFF STREET NAME</code> is not missing, are there any missing <code>LATITUDE</code> and <code>LONGITUDE</code>? If so, geocode the addresses.</li>
-<li>(Optional) Are the missing patterns of <code>ON STREET NAME</code> and <code>LATITUDE</code> the same? Summarize the missing patterns by a cross table. If <code>ON STREET NAME</code> and <code>CROSS STREET NAME</code> are available, use geocoding by intersection to fill the <code>LATITUDE</code> and <code>LONGITUDE</code>.</li>
-<li>Are <code>ZIP CODE</code> and <code>BOROUGH</code> always missing together? If <code>LATITUDE</code> and <code>LONGITUDE</code> are available, use reverse geocoding to fill the <code>ZIP CODE</code> and <code>BOROUGH</code>.</li>
-<li>Print the whole frequency table of <code>CONTRIBUTING FACTOR VEHICLE 1</code>. Convert lower cases to uppercases and check the frequencies again.</li>
-<li>Provided an opportunity to meet the data provider, what suggestions do you have to make the data better based on your data exploration experience?</li>
-</ol></li>
-<li><p>Except the first problem, use the cleaned data set with missing geocode imputed (<code>data/nyc_crashes_202301_cleaned.csv</code>).</p>
-<ol type="1">
-<li>Construct a contigency table for missing in geocode (latitude and longitude) by borough. Is the missing pattern the same across borough? Formulate a hypothesis and test it.</li>
-<li>Construct a <code>hour</code> variable with integer values from 0 to 23. Plot the histogram of the number of crashes by <code>hour</code>. Plot it by borough.</li>
-<li>Overlay the locations of the crashes on a map of NYC. The map could be a static map or Google map.</li>
-<li>Create a new variable <code>injury</code> which is one if the number of persons injured is 1 or more; and zero otherwise. Construct a cross table for <code>injury</code> versus borough. Test the null hypothesis that the two variables are not associated.</li>
-<li>Merge the crash data with the zip code database.</li>
-<li>Fit a logistic model with <code>injury</code> as the outcome variable and covariates that are available in the data or can be engineered from the data. For example, zip code level covariates can be obtained by merging with the zip code database.</li>
-</ol></li>
-<li><p>Using the cleaned NYC crash data, perform classification of <code>injury</code> with support vector machine and compare the results with the benchmark from regularized logistic regression. Use the last week’s data as testing data.</p>
-<ol type="1">
-<li>Explain the parameters you used in your fitting for each method.</li>
-<li>Explain the confusion matrix retult from each fit.</li>
-<li>Compare the performance of the two approaches in terms of accuracy, precision, recall, F1-score, and AUC.</li>
-</ol></li>
-<li><p>The <a href="https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9">NYC Open Data of 311 Service Requests</a> contains all requests from 2010 to present. We consider a subset of it with request time between 00:00:00 01/15/2023 and 24:00:00 01/21/2023. The subset is available in CSV format as <code>data/nyc311_011523-012123_by022023.csv</code>. Read the data dictionary to understand the meaning of the variables,</p>
-<ol type="1">
-<li>Clean the data: fill missing fields as much as possible; check for obvious data entry errors (e.g., can <code>Closed Date</code> be earlier than <code>Created Date</code>?); summarize your suggestions to the data curator in several bullet points.</li>
-<li>Remove requests that are not made to NYPD and create a new variable <code>duration</code>, which represents the time period from the <code>Created Date</code> to <code>Closed Date</code>. Note that <code>duration</code> may be censored for some requests. Visualize the distribution of uncensored <code>duration</code> by weekdays/weekend and by borough, and test whether the distributions are the same across weekdays/weekends of their creation and across boroughs.</li>
-<li>Define a binary variable <code>over3h</code> which is 1 if <code>duration</code> is greater than 3 hours. Note that it can be obtained even for censored <code>duration</code>. Build a model to predict <code>over3h</code>. If your model has tuning parameters, justify their choices. Apply this model to the 311 requests of NYPD in the week of 01/22/2023. Assess the performance of your model.</li>
-<li>Now you know the data quite well. Come up with a research question of interest that can be answered by the data, which could be analytics or visualizations. Perform the needed analyses and answer your question.</li>
-</ol></li>
-<li><p><strong>NYC Rodents</strong> Rats in NYC are widespread, as they are in many densely populated areas (https://en.wikipedia.org/wiki/Rats_in_New_York_City). As of October 2023, NYC dropped from the 2nd to the 3rd places in the annual <a href="https://www.orkin.com/press-room/top-rodent-infested-cities-2023#">“rattiest city” list</a> released by a pest control company. In the 311 Service Request Data, there is one complain type <code>Rodent</code>. Extract all the requests with complain type <code>Rodent</code>, created between January 1, 2022 and December 31, 2023. Save them into a csv file named <code>rodent_2022-2023.csv</code>.</p>
-<ol type="1">
-<li>Are there any complains that are not closed yet?</li>
-<li>Are there any complains with a closed data before the created date?</li>
-<li>How many agencies were this complain type reported to?</li>
-<li>Summarize the missingess for each variable.</li>
-<li>Summarize a frequency table for the <code>DESCRIPTOR</code> variable, and summarize a cross table by year.</li>
-<li>Which types of ‘DESCRIPTOR’ do you think should be included if our interest is rodent sighting?</li>
-<li>Take a subset of the data with the descriptors you chose and summarize the response time by borough.</li>
-</ol></li>
-<li><p><strong>NYC rodent sightings data cleaning</strong> The data appears to need some cleaning before any further analysis. Some missing values could be filled based on other columns.</p>
-<ol type="1">
-<li>Checking all 47 column names suggests that some columns might be redundant. Identify them and demonstrate the redundancy.</li>
-<li>Are zip code and borough always missing together? If geocodes are available, use reverse geocoding to fill the zip code.</li>
-<li>Export the cleaned data in both csv and feather format. Comment on the file sizes.</li>
-</ol></li>
-</ol>
+<section id="matplotlib" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="matplotlib"><span class="header-section-number">7.1</span> Matplotlib</h2>
+<section id="introduction" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">7.1.1</span> Introduction</h3>
+<p>Please use rodent sighting data for illustrations</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -700,13 +605,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./visualization.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></span>
+      <a href="./communication.html" class="pagination-link  aria-label=" &lt;span="" data="" science&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Communicating Data Science</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./exercises.html" class="pagination-link" aria-label="<span class='chapter-number'>8</span>&nbsp; <span class='chapter-title'>Exercises</span>">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exercises</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
