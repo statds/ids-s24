@@ -34,18 +34,18 @@ def custom_date_parser(x):
 # Read the CSV file
 df = pd.read_csv(
     csvnm,
-    na_values=na_values,
-    parse_dates=['Created Date', 'Closed Date'],  # Specify the date columns to parse
-    date_parser=custom_date_parser,
-    dtype={'Latitude': 'float32', 'Longitude': 'float32'},
+    na_values = na_values,
+    parse_dates = ['Created Date', 'Closed Date'], 
+    date_parser = custom_date_parser,
+    dtype = {'Latitude': 'float32', 'Longitude': 'float32'},
 )
-
-# Drop the 'Location' since it is redundant
-# df.drop(columns=['Location'], inplace=True)
 
 # Strip leading and trailing whitespace from the column names
 df.columns = df.columns.str.strip()
-df.columns = df.columns.str.replace(' ', '_', regex=False).str.lower()
+df.columns = df.columns.str.replace(' ', '_', regex = False).str.lower()
+
+# Drop the 'Location' since it is redundant
+# df.drop(columns=['Location'], inplace=True)
 ```
 
 
@@ -121,7 +121,8 @@ and preserved.
 + Simplicity: The API for reading and writing Feather files is
 straightforward, making it accessible to users with varying levels of
 programming expertise.
-+ By using Feather format for data storage, you leverage a modern
+
+By using Feather format for data storage, you leverage a modern
 approach optimized for speed and compatibility, significantly
 enhancing the performance of data-intensive applications.
 
