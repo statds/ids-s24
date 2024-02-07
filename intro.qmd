@@ -98,6 +98,7 @@ On Linux or MacOS, simply open a terminal.
 
 On Windows, several options can be considered.
 
++ Windows Subsystem Linux (WSL): <https://learn.microsoft.com/en-us/windows/wsl/>
 + Cygwin (with X): <https://x.cygwin.com>
 + Git Bash: <https://www.gitkraken.com/blog/what-is-git-bash>
 

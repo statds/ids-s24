@@ -1,0 +1,128 @@
+# Data Import/Export
+
+Working with data is a fundamental aspect of data science in Python,
+with data import and export being crucial skills. Throughout, we will
+use the 311 service request data for illustrations, downloaded from
+the NYC Open Data as a `csv` file.
+
+## Using the `Pandas` Package
+
+The pandas library simplifies data manipulation and analysis. It's
+especially handy for dealing with CSV files.
+
+```{python}
+import pandas as pd
+
+# Define the file name
+csvnm = "data/rodent_2022-2023.csv"
+
+# Specify the strings that indicate missing values
+# Q: How would you know these?
+na_values = [
+    "",
+    "0 Unspecified",
+    "N/A",
+    "na",
+    "na na",
+    "Unspecified",
+    "UNKNOWN",
+]
+
+def custom_date_parser(x):
+    return pd.to_datetime(x, format="%m/%d/%Y %I:%M:%S %p", errors='coerce')
+
+# Read the CSV file
+df = pd.read_csv(
+    csvnm,
+    na_values = na_values,
+    parse_dates = ['Created Date', 'Closed Date'], 
+    date_parser = custom_date_parser,
+    dtype = {'Latitude': 'float32', 'Longitude': 'float32'},
+)
+
+# Strip leading and trailing whitespace from the column names
+df.columns = df.columns.str.strip()
+df.columns = df.columns.str.replace(' ', '_', regex = False).str.lower()
+
+# Drop the 'Location' since it is redundant
+# df.drop(columns=['Location'], inplace=True)
+```
+
+
+The `pandas` package also provides some utility functions for quick
+summaries about the data frame.
+```{python}
+df.shape
+df.describe()
+df.isnull().sum()
+```
+
+What are the unique values of `descriptor`?
+```{python}
+df.descriptor.unique()
+```
+
+## Using Appache `Arrow` Library
+
+To read and export data efficiently, leveraging the Apache `Arrow`
+library can significantly improve performance and storage efficiency,
+especially with large datasets. The IPC (Inter-Process Communication)
+file format in the context of Apache Arrow is a key component for
+efficiently sharing data between different processes, potentially
+written in different programming languages. Arrow's IPC mechanism is
+designed around two main file formats:
+
++ Stream Format: For sending an arbitrary length sequence of Arrow
+record batches (tables). The stream format is useful for real-time
+data exchange where the size of the data is not known upfront and can
+grow indefinitely.
++ File (or Feather) Format: Optimized for storage and memory-mapped
+access, allowing for fast random access to different sections of the
+data. This format is ideal for scenarios where the entire dataset is
+available upfront and can be stored in a file system for repeated
+reads and writes.
+
+
+Apache Arrow provides a columnar
+memory format for flat and hierarchical data, optimized for efficient
+data analytics. It can be used in Python through the `pyarrow`
+package. Here's how you can use Arrow to read, manipulate, and export
+data, including a demonstration of storage savings.
+
+
+First, ensure you have pyarrow installed on your computer (and
+preferrably, in your current virtual environment):
+```
+pip install pyarrow
+```
+
+
+Feather is a fast, lightweight, and easy-to-use binary file format for
+storing data frames, optimized for speed and efficiency, particularly
+for IPC and data sharing between Python and R.
+```{python}
+df.to_feather('data/rodent_2022-2023.feather')
+```
+
+Read the feather file back in:
+```{python}
+dff = pd.read_feather("data/rodent_2022-2023.feather")
+dff.shape
+```
+
+Benefits of Using Feather:
+
++ Efficiency: Feather is designed to support fast reading and writing
+of data frames, making it ideal for analytical workflows that need to
+exchange large datasets between Python and R.
++ Compatibility: Maintains data type integrity across Python and R,
+ensuring that numbers, strings, and dates/times are correctly handled
+and preserved.
++ Simplicity: The API for reading and writing Feather files is
+straightforward, making it accessible to users with varying levels of
+programming expertise.
+
+By using Feather format for data storage, you leverage a modern
+approach optimized for speed and compatibility, significantly
+enhancing the performance of data-intensive applications.
+
