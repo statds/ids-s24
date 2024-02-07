@@ -2,4 +2,97 @@
 
 ### Introduction
 
-Please use rodent sighting data for illustrations
+Matplotlib is a library designed for plotting and arranging data visually in Python, usually in twodimensional. It was created by Dr. John Hunter in 2003 to enable a MATLAB-like plotting interface in Python
+Matplotlib is widely used because of its simplicity and effectiveness.
+
+The library can be installed using either `pip` or `conda`. 
+
+Type "pip install matplotlib" in your terminal
+
+There are several types of graphs such as:
+1. Lineplot
+2. Barplot
+3. Scatterplot
+4. 3D plot
+
+Let's start with an simple example:
+```{python}
+t = range(0, 10)
+r = [i**2 for i in t]
+
+plt.figure(figsize=(10, 8)) 
+plt.plot(t, r)
+plt.title('Line Plot Example')
+plt.xlabel('t value')
+plt.ylabel('r value')
+plt.grid(True)
+plt.show()
+```
+
+If we need multiple plots together, we can use a subplot shown as follows, here ara an example with the lineplot and the scatter plot.
+
+```{python}
+df = pd.read_csv('rodent_2022-2023.csv')
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+
+x = df['X_COORD']
+y1 = df['Y_COORD'] 
+y2 = df['LATITUDE'] 
+
+# Line plot
+ax1.plot(x, y1, 'g', label='sin(x)')
+ax1.set_title('Line Plot')
+ax1.set_xlabel('x')
+ax1.set_ylabel('sin(x)')
+ax1.legend()
+ax1.grid(True)
+
+# Scatter plot
+ax2.scatter(x, y2, c='blue', label='cos(x)', alpha=0.5)
+ax2.set_title('Scatter Plot')
+ax2.set_xlabel('x')
+ax2.set_ylabel('cos(x)')
+ax2.legend()
+ax2.grid(True)
+
+
+plt.tight_layout()
+plt.show()
+```
+# bar plot
+```{python}
+grouped = df.groupby(['ZIP_CODE', 'HOUSE_NUMBER', 'BBL']).size()
+grouped_df = grouped.reset_index(name='Counts')
+
+top_n = grouped_df.sort_values(by='Counts', ascending=False).head(3)
+
+categories = [f"{zip}-{house}-{bbl}" for zip, house, bbl in zip(top_n['ZIP_CODE'], top_n['HOUSE_NUMBER'], top_n['BBL'])]
+values = top_n['Counts'].tolist()
+
+plt.figure(figsize=(10, 6))
+plt.bar(categories, values)
+plt.title('Bar Plot Example')
+plt.xlabel('Categories (ZIPCODE,HOUSENUMBER,BBL)')
+plt.ylabel('Counts')
+plt.xticks(rotation=45)  # Rotate category labels for better readability
+plt.show()
+
+```
+
+# 3D example
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+x = df['X_COORD']
+y = df['Y_COORD'] 
+z = df['LATITUDE'] 
+
+ax.scatter(x, y, z)
+ax.set_xlabel('X_COORD')
+ax.set_ylabel('X_COORD')
+ax.set_zlabel('LATITUDE')
+plt.show()
+
+## Reference 
+A useful Matplotlib cheatsheet from git: https://github.com/matplotlib/cheatsheets/blob/master/cheatsheets.tex 
