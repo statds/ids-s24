@@ -210,7 +210,7 @@ Please use the following table to sign up.
   02/28  | Isabelle Perez         | Statistical hypothesis tests `scypy.stats`
   03/02  | Emmanuel Yankson       |
   03/02  | David Li               |
-  03/04  | Abigail Mori           |
+  03/04  | Abigail Mori           | Handling spatial data with `geopandas`
   03/04  | Leon Nguyen            |
   03/25  | Alex Pugh              |
   03/25  | Charitath Chugh        | PyTorch
