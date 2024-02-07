@@ -1,6 +1,6 @@
 # Preliminaries {.unnumbered}
 
-The notets were developed with Quarto; for details about Quarto, visit
+The notes were developed with Quarto; for details about Quarto, visit
 <https://quarto.org/docs/books>.
 
 
@@ -83,6 +83,9 @@ Markdown.
 + Chugh, Charitarth
     - Get better at analyzing data/features
     - Learn about more xgboost & gradient boosted trees. 
++ Dennison, Jack
+    - Learn how to use Git and GitHub
+    - Be able to apply my skills in Python and Git to data analytics tasks
 + Elliott, Matt
     - Faciliate myself into becoming a Data Scientist
     - Learn new skills such as Quarto and GitHub
@@ -182,6 +185,7 @@ Here are some example tasks:
 + Statistical hypothesis tests
 + Statistical modeling
 + Data visualization
++ Accessing census and ACS data
 + Grammer of graphics
 + Handling spatial data
 + Visualize spatial data in a Google map
@@ -207,12 +211,12 @@ Please use the following table to sign up.
   02/07  | Weijia Wu              | 
   02/12  | Dr. Haim Bar           | Database management
   02/14  | Willam Taki            |
-  02/19  | Joshua Lee             |
-  02/21  | Pratham Patel          |
+  02/19  | Joshua Lee             | Descriptive Statistics
+  02/21  | Pratham Patel          | Handling spatial data with `geopandas`
   02/21  | Olivia Massad          |
   02/26  | Ge Li                  |
   02/26  | Xingye Zhang           |
-  02/28  | Jack Dennison          |
+  02/28  | Jack Dennison          | Geographic Data Analysis
   02/28  | Isabelle Perez         | Statistical hypothesis tests `scypy.stats`
   03/02  | Emmanuel Yankson       | Random Forest
   03/02  | David Li               |
@@ -222,7 +226,7 @@ Please use the following table to sign up.
   03/25  | Charitath Chugh        | PyTorch
   03/27  | Vincent Xie            | Database Operations with SQL
   03/27  |                        |
-  04/01  | William Qualls         |
+  04/01  | William Qualls         | Web Scraping
   04/01  | Madison Woo            | Data Science Ethics 
   04/03  | Braedon Hook           |
   04/03  |                        |
@@ -290,11 +294,10 @@ code chunks, it would be hard to plagiarize.
 
 ### Presentation
 
-+ Don't forget to introduce yourself if there is no moderator
-+ Highlight your research questions and results, not code
-+ Give an outline, carry it out, and summarize
-+ Use your own examples to reduce the risk of plagiarism
-\item
++ Don't forget to introduce yourself if there is no moderator.
++ Highlight your research questions and results, not code.
++ Give an outline, carry it out, and summarize.
++ Use your own examples to reduce the risk of plagiarism.
 
 
 <!-- Topic presentation template -->
