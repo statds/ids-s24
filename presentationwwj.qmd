@@ -1,0 +1,170 @@
+###  Matplotlib 
+https://drive.google.com/file/d/1rlbhFkhuuUzJEnJ60Cc7qQ-BCWirymO7/view?usp=sharing
+
+#Matplotlib is a library designed for plotting and arranging data visually in Python, usually in twodimensional. It was created by Dr. John Hunter in 2003 to enable a MATLAB-like plotting interface in Python
+#Matplotlib is widely used because of its simplicity and effectiveness.
+
+#The library can be installed using either `pip` or `conda`. 
+
+# Type "pip install matplotlib" in your terminal
+
+#There are several types of graphs such as:
+# Lineplot
+# Barplot
+# Scatterplot
+# 3D plot
+# Start with an simple example:
+  
+```{python}
+t = range(0, 10)
+r = [i**2 for i in t]
+
+plt.figure(figsize=(4, 4)) 
+plt.plot(t, r)
+plt.title('Line Plot Example')
+plt.xlabel('t value')
+plt.ylabel('r value')
+plt.grid(True)
+plt.show()
+# The positive part of a parabola
+
+r2 = [i**3 for i in t]
+plt.figure(figsize=(4, 4)) 
+
+plt.plot(t, r, linestyle = '--', color = 'r', marker = 'o', label = 'r')
+plt.plot(t, r2, linestyle = '-', color = 'b', marker = 'v', label = 'r2')
+
+plt.title('Line Plot Example2')
+plt.xlabel('t value')
+plt.ylabel('r value')
+plt.grid(True)
+plt.show()
+
+#and this is an example of scatterplot, 
+
+np.random.seed(8465);
+x = np.random.uniform(0, 3, 10);
+y = np.random.uniform(0, 3, 10);
+z = np.random.uniform(0, 3, 10);
+
+plt.scatter(x, y)
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.show()
+```
+
+#If we need multiple plots together, we can use a subplot shown as follows, here ara an example with the lineplot and the scatter plot.
+
+```{python}
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+
+x = np.linspace(0, 10, 100)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+# Line plot
+ax1.plot(x, y1, 'g', label='sin(x)')
+ax1.set_title('Line Plot')
+ax1.set_xlabel('x')
+ax1.set_ylabel('sin(x)')
+ax1.legend()
+ax1.grid(True)
+
+# Scatter plot
+ax2.scatter(x, y2, c='blue', label='cos(x)', alpha=0.5)
+ax2.set_title('Scatter Plot')
+ax2.set_xlabel('x')
+ax2.set_ylabel('cos(x)')
+ax2.legend()
+ax2.grid(True)
+
+plt.tight_layout() #Avoiding overlap
+plt.show()
+```
+# bar plot
+```{python}
+categories = ['Category A', 'Category B', 'Category C']
+values = [23, 45, 56]
+
+plt.figure()
+plt.bar(categories, values)
+plt.title('Bar Plot')
+plt.xlabel('Categories')
+plt.ylabel('Values')
+plt.show()
+
+x = np.linspace(0, 10, 10)
+y = np.linspace(0, 20, 10)
+```
+here are examples of Boxplot and Histogram:
+```{python
+fig, axs = plt.subplots(1, 2, figsize=(12, 10), sharey=True)
+
+
+# Boxplot
+axs[0].boxplot(y1)
+axs[0].set_xlabel("x label")
+axs[0].set_ylabel("y label")
+axs[0].set_title("boxplot")
+
+
+# Histogram
+
+axs[1].hist(np.random.randn(100))
+axs[1].set_xlabel("x label")
+axs[1].set_ylabel("y label")
+axs[1].set_title("histogram")
+
+plt.show()
+```
+# 3D example
+
+```{python}
+from mpl_toolkits.mplot3d import Axes3D
+
+x = [1, 2, 3, 4] 
+y = [5, 6, 7, 8]
+z = [10, 11, 12, 13] 
+
+fig1, ax1 = plt.subplots() 
+ax1.plot(x, z) 
+plt.show()
+
+fig2 = plt.figure() 
+ax2 = fig2.add_subplot(111, projection='3d') 
+
+
+sc = ax2.scatter(x, y, z, c=z, cmap='cool', label="Scatter in 3D")
+plt.legend() 
+plt.show()
+```
+
+#There are other visualization packages besides Matplotlib, 
+#and seaborne is also a very common visualization tool for python.
+```{python}
+df = pd.read_csv('rodent_2022-2023.csv')
+import seaborn as sns
+plt.figure(figsize=(10,8))
+sns.histplot(df['INSPECTION_TYPE'], bins=10, kde = True)
+```
+#KDE (Kernel Density Estimate Line) is kernel density estimate line 
+#by smoothing sample points into a continuous curve 
+#and using a continuous probability density curve in one or more dimensions. 
+
+#Seaborn can also be used to create scatterplots (not a good example). 
+#In this example we have x and y showing a linear regression.
+```{python}
+plt.figure(figsize=(10,8))
+
+sns.regplot(x='X_COORD', y='Y_COORD', data=df)
+
+plt.xlim(900000, 1050000)
+plt.ylim(100000, 270000)
+
+plt.title('Regression Plot')
+plt.show()
+```
+## Reference 
+#A useful Matplotlib cheatsheet from git: https://github.com/matplotlib/cheatsheets/blob/master/cheatsheets.tex 
+
+# https://seaborn.pydata.org/generated/seaborn.kdeplot.html
