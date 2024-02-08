@@ -243,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="using-the-pandas-package" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="using-the-pandas-package"><span class="header-section-number">5.1</span> Using the <code>Pandas</code> Package</h2>
 <p>The pandas library simplifies data manipulation and analysis. It’s especially handy for dealing with CSV files.</p>
-<div id="cdd3c1ba" class="cell" data-execution_count="1">
+<div id="7b446ef3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the file name</span></span>
@@ -281,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># df.drop(columns=['Location'], inplace=True)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>pandas</code> package also provides some utility functions for quick summaries about the data frame.</p>
-<div id="28de8d7a" class="cell" data-execution_count="2">
+<div id="492964b8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.shape</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.describe()</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -337,7 +337,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>What are the unique values of <code>descriptor</code>?</p>
-<div id="d74e46a3" class="cell" data-execution_count="3">
+<div id="8cf40961" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.descriptor.unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>array(['Rat Sighting', 'Mouse Sighting', 'Condition Attracting Rodents',
@@ -348,7 +348,7 @@ dtype: int64</code></pre>
 <section id="filling-missing-values" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="filling-missing-values"><span class="header-section-number">5.2</span> Filling Missing Values</h2>
 <p>If geocodes are available but zip code is missing, we can use reverse geocoding to fill the zip code. This process involves querying a geocoding service with latitude and longitude to get the corresponding address details, including the ZIP code. This can be done with package <code>geopy</code>, which needs to be installed first: <code>pip install geopy</code>.</p>
-<div id="52dc4385" class="cell" data-execution_count="4">
+<div id="db398e21" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.geocoders <span class="im">import</span> Nominatim</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.exc <span class="im">import</span> GeocoderTimedOut, GeocoderServiceError</span>
@@ -387,11 +387,11 @@ dtype: int64</code></pre>
 <p>First, ensure you have pyarrow installed on your computer (and preferrably, in your current virtual environment):</p>
 <pre><code>pip install pyarrow</code></pre>
 <p>Feather is a fast, lightweight, and easy-to-use binary file format for storing data frames, optimized for speed and efficiency, particularly for IPC and data sharing between Python and R.</p>
-<div id="f8b37fc2" class="cell" data-execution_count="5">
+<div id="8247f2a3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.to_feather(<span class="st">'data/rodent_2022-2023.feather'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Read the feather file back in:</p>
-<div id="65213cd9" class="cell" data-execution_count="6">
+<div id="4f6697a2" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dff <span class="op">=</span> pd.read_feather(<span class="st">"data/rodent_2022-2023.feather"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>dff.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -409,7 +409,7 @@ dtype: int64</code></pre>
 <section id="accessing-the-census-data-with-uszipcode" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="accessing-the-census-data-with-uszipcode"><span class="header-section-number">5.4</span> Accessing the Census Data with <code>uszipcode</code></h2>
 <p>First, ensure the DataFrame (df) is ready for merging with census data. Specifically, check that the <code>incident_zip</code> column is clean and consistent.</p>
-<div id="b38a271a" class="cell" data-execution_count="7">
+<div id="7fb6e781" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'incident_zip'</span>].isnull().<span class="bu">sum</span>())</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize to 5-digit codes, if necessary</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'incident_zip'</span>] <span class="op">=</span> df[<span class="st">'incident_zip'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -419,20 +419,47 @@ dtype: int64</code></pre>
 </div>
 <p>We can use the <code>uszipcode</code> package to get basic demographic data for each zip code. For more detailed or specific census data, using the <code>CensusData</code> package or direct API calls to the Census Bureau’s API.</p>
 <p>The <code>uszipcode</code> package provides a range of information about ZIP codes in the United States. When you query a ZIP code using <code>uszipcode</code>, you can access various attributes related to demographic data, housing, geographic location, and more. Here are some of the key variables available at the ZIP code level:</p>
-<p><strong>emographic Information</strong> + <code>population</code>: The total population. + <code>population_density</code>: The population per square kilometer. + <code>housing_units</code>: The total number of housing units. + <code>occupied_housing_units</code>: The number of occupied housing units. + <code>median_home_value</code>: The median value of homes. + <code>median_household_income</code>: The median household income. + <code>age_distribution</code>: A breakdown of the population by age.</p>
-<p><strong>Geographic Information</strong> + <code>zipcode</code>: The ZIP code. + <code>zipcode_type</code>: The type of ZIP code (e.g., Standard, PO Box). + <code>major_city</code>: The major city associated with the ZIP code. + <code>post_office_city</code>: The city name recognized by the U.S. Postal Service. + <code>common_city_list</code>: A list of common city names for the ZIP code. + <code>county</code>: The county in which the ZIP code is located. + <code>state</code>: The state in which the ZIP code is located. + <code>lat</code>: The latitude of the approximate center of the ZIP code. + <code>lng</code>: The longitude of the approximate center of the ZIP code. + <code>timezone</code>: The timezone of the ZIP code.</p>
-<p><strong>Economic and Housing Data</strong> + <code>land_area_in_sqmi</code>: The land area in square miles. + <code>water_area_in_sqmi</code>: The water area in square miles. + <code>occupancy_rate</code>: The rate of occupancy for housing units. + <code>median_age</code>: The median age of the population.</p>
+<p><strong>emographic Information</strong></p>
+<ul>
+<li><code>population</code>: The total population.</li>
+<li><code>population_density</code>: The population per square kilometer.</li>
+<li><code>housing_units</code>: The total number of housing units.</li>
+<li><code>occupied_housing_units</code>: The number of occupied housing units.</li>
+<li><code>median_home_value</code>: The median value of homes.</li>
+<li><code>median_household_income</code>: The median household income.</li>
+<li><code>age_distribution</code>: A breakdown of the population by age.</li>
+</ul>
+<p><strong>Geographic Information</strong></p>
+<ul>
+<li><code>zipcode</code>: The ZIP code.</li>
+<li><code>zipcode_type</code>: The type of ZIP code (e.g., Standard, PO Box).</li>
+<li><code>major_city</code>: The major city associated with the ZIP code.</li>
+<li><code>post_office_city</code>: The city name recognized by the U.S. Postal Service.</li>
+<li><code>common_city_list</code>: A list of common city names for the ZIP code.</li>
+<li><code>county</code>: The county in which the ZIP code is located.</li>
+<li><code>state</code>: The state in which the ZIP code is located.</li>
+<li><code>lat</code>: The latitude of the approximate center of the ZIP code.</li>
+<li><code>lng</code>: The longitude of the approximate center of the ZIP code.</li>
+<li><code>timezone</code>: The timezone of the ZIP code.</li>
+</ul>
+<p><strong>Economic and Housing Data</strong></p>
+<ul>
+<li><code>land_area_in_sqmi</code>: The land area in square miles.</li>
+<li><code>water_area_in_sqmi</code>: The water area in square miles.</li>
+<li><code>occupancy_rate</code>: The rate of occupancy for housing units.</li>
+<li><code>median_age</code>: The median age of the population.</li>
+</ul>
 <p>Install the <code>uszipcode</code> package into the current virtual environment by <code>pip install uszipcode</code>.</p>
 <p>Now let’s work on the rodent sightings data.</p>
 <p>We will first clean the incident_zip column to ensure it only contains valid ZIP codes. Then, we will use a vectorized approach to fetch the required data for each unique ZIP code and merge this information back into the original <code>DataFrame</code>.</p>
-<div id="df7908df" class="cell" data-execution_count="8">
+<div id="4859497a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows where 'incident_zip' is missing or not a valid ZIP code format</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>valid_zip_df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'incident_zip'</span>]).copy()</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>valid_zip_df[<span class="st">'incident_zip'</span>] <span class="op">=</span> valid_zip_df[<span class="st">'incident_zip'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>unique_zips <span class="op">=</span> valid_zip_df[<span class="st">'incident_zip'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Since uszipcode doesn’t inherently support vectorized operations for multiple ZIP code queries, we’ll optimize the process by querying each unique ZIP code once, then merging the results with the original <code>DataFrame</code>. This approach minimizes redundant queries for ZIP codes that appear multiple times.</p>
-<div id="921545fd" class="cell" data-execution_count="9">
+<p>Since <code>uszipcode</code> doesn’t inherently support vectorized operations for multiple ZIP code queries, we’ll optimize the process by querying each unique ZIP code once, then merging the results with the original <code>DataFrame</code>. This approach minimizes redundant queries for ZIP codes that appear multiple times.</p>
+<div id="96edb640" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> uszipcode <span class="im">import</span> SearchEngine</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the SearchEngine</span></span>
