@@ -21,8 +21,8 @@ visit our Spring 2024 repository at <https://github.com/statds/ids-s24>.
 
 
 For those interested in exploring the lecture notes from the previous
-years, the [Spring 2023](https://github.com/statds/ids-s23) and
-[Spring 2024](https://github.com/statds/ids-s22)
+years, the [Spring 2023](https://statds.github.io/ids-s23) and
+[Spring 2022](https://statds.github.io/ids-s22/)
 are both publicly accessible. These archives offer
 valuable insights into the evolution of the course content and the
 different perspectives brought by successive student cohorts.
