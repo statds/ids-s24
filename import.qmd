@@ -14,7 +14,7 @@ especially handy for dealing with CSV files.
 import pandas as pd
 
 # Define the file name
-csvnm = "data/rodent_2022_2023.csv"
+csvnm = "data/rodent_2022-2023.csv"
 
 # Specify the strings that indicate missing values
 # Q: How would you know these?
