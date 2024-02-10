@@ -171,7 +171,7 @@ csv file named `rodent_2022-2023.csv`.
     created date?
     1. How many agencies were this complain type reported to?
     1. Summarize the missingess for each variable.
-    1. Summarize a frequency table for the `DESCRIPTOR` variable, 
+    1. Summarize a frequency table for the `descriptor` variable, 
     and summarize a cross table by year.
     1. Which types of 'DESCRIPTOR' do you think should be included
     if our interest is rodent sighting?
