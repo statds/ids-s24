@@ -1,0 +1,3 @@
+# Visualization
+
+{{< include _matplotlib.qmd >}}

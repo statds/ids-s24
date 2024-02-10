@@ -5,7 +5,11 @@ book:
   title: "Introduction to Data Science"
   subtitle: "STAT 3255/5255 @ UConn, Spring 2024"
   author: "Jun Yan and Students in Spring 2024"
-  date: "1/17/2024"
+  date: today
+
+  sidebar:
+    logo: images/ids-s24.png
+  
   chapters:
     - index.qmd
     - intro.qmd
@@ -14,6 +18,7 @@ book:
     - python.qmd
     - import.qmd
     - communication.qmd
+    - visualization.qmd
     - exercises.qmd
     - references.qmd
 bibliography: references.bib
