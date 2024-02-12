@@ -79,7 +79,9 @@ order, last name first, comma, then first name).
 Add yours through a pull request; note the syntax of nested list in
 Markdown.
 
-
++ Li, David
+    - Improve at Git/Python
+    - Learn to effectively communicate data science projects and ideas
 + Chugh, Charitarth
     - Get better at analyzing data/features
     - Learn about more xgboost & gradient boosted trees. 
@@ -219,7 +221,7 @@ Please use the following table to sign up.
   02/28  | Jack Dennison          | Geographic Data Analysis
   02/28  | Isabelle Perez         | Statistical hypothesis tests `scypy.stats`
   03/02  | Emmanuel Yankson       | Random Forest
-  03/02  | David Li               |
+  03/02  | David Li               | Data Visualization
   03/04  | Abigail Mori           | Handling spatial data with `geopandas`
   03/04  | Leon Nguyen            | Statistical Modeling with `statsmodels`
   03/25  | Alex Pugh              |
