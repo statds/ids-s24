@@ -21,8 +21,8 @@ visit our Spring 2024 repository at <https://github.com/statds/ids-s24>.
 
 
 For those interested in exploring the lecture notes from the previous
-years, the [Spring 2023](https://github.com/statds/ids-s23) and
-[Spring 2024](https://github.com/statds/ids-s22)
+years, the [Spring 2023](https://statds.github.io/ids-s23) and
+[Spring 2022](https://statds.github.io/ids-s22/)
 are both publicly accessible. These archives offer
 valuable insights into the evolution of the course content and the
 different perspectives brought by successive student cohorts.
@@ -185,6 +185,7 @@ Here are some example tasks:
 + Statistical hypothesis tests
 + Statistical modeling
 + Data visualization
++ Accessing census and ACS data
 + Grammer of graphics
 + Handling spatial data
 + Visualize spatial data in a Google map
@@ -212,15 +213,15 @@ Please use the following table to sign up.
   02/14  | Willam Taki            |
   02/19  | Joshua Lee             | Descriptive Statistics
   02/21  | Pratham Patel          | Handling spatial data with `geopandas`
-  02/21  | Olivia Massad          |
+  02/21  | Olivia Massad          | Grammar of Graphics `plotnine`
   02/26  | Ge Li                  |
   02/26  | Xingye Zhang           |
   02/28  | Jack Dennison          | Geographic Data Analysis
   02/28  | Isabelle Perez         | Statistical hypothesis tests `scypy.stats`
   03/02  | Emmanuel Yankson       | Random Forest
   03/02  | David Li               |
-  03/04  | Abigail Mori           |
-  03/04  | Leon Nguyen            | Statistical Modeling with statsmodels
+  03/04  | Abigail Mori           | Handling spatial data with `geopandas`
+  03/04  | Leon Nguyen            | Statistical Modeling with `statsmodels`
   03/25  | Alex Pugh              |
   03/25  | Charitath Chugh        | PyTorch
   03/27  | Vincent Xie            | Database Operations with SQL
@@ -293,11 +294,10 @@ code chunks, it would be hard to plagiarize.
 
 ### Presentation
 
-+ Don't forget to introduce yourself if there is no moderator
-+ Highlight your research questions and results, not code
-+ Give an outline, carry it out, and summarize
-+ Use your own examples to reduce the risk of plagiarism
-\item
++ Don't forget to introduce yourself if there is no moderator.
++ Highlight your research questions and results, not code.
++ Give an outline, carry it out, and summarize.
++ Use your own examples to reduce the risk of plagiarism.
 
 
 <!-- Topic presentation template -->

@@ -156,7 +156,7 @@
        interest that can be answered by the data, which could be analytics or
        visualizations. Perform the needed analyses and answer your question.
 
-1. **NYC Rats**
+1. **NYC Rodents**
 Rats in NYC are widespread, as they are in many densely populated
 areas (https://en.wikipedia.org/wiki/Rats_in_New_York_City). As of 
 October 2023, NYC dropped from the 2nd to the 3rd places in the 
@@ -171,9 +171,18 @@ csv file named `rodent_2022-2023.csv`.
     created date?
     1. How many agencies were this complain type reported to?
     1. Summarize the missingess for each variable.
-    1. Summarize a frequency table for the `DESCRIPTOR` variable, 
+    1. Summarize a frequency table for the `descriptor` variable, 
     and summarize a cross table by year.
     1. Which types of 'DESCRIPTOR' do you think should be included
     if our interest is rodent sighting?
     1. Take a subset of the data with the descriptors you chose and
     summarize the response time by borough.
+1. **NYC rodent sightings data cleaning**
+The data appears to need some cleaning before any further analysis.
+Some missing values could be filled based on other columns.
+   1. Checking all 47 column names suggests that some columns 
+   might be redundant. Identify them and demonstrate the redundancy.
+   2. Are zip code and borough always missing together? If geocodes
+   are available, use reverse geocoding to fill the zip code.
+   3. Export the cleaned data in both csv and feather format. 
+   Comment on the file sizes.
