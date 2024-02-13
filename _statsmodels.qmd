@@ -1,12 +1,18 @@
-## My Presentation Topic (Template)
+## Statistical Modeling with `statsmodels`
 
+This section was written by Leon Nguyen.
 
 ### Introduction
 
-Put an overview here. Use Markdown syntax.
+Hello, my name is Leon Nguyen (they/she) and I am a second-year undergraduate 
+student studying Statistical Data Science and Mathematics at the University 
+of Connecticut, aiming to graduate in Fall 2025. One of my long-term goals is to 
+make the field of data science more accessible to marginalized communities. My 
+research interests include statistical modeling, data visualization and design. 
+Statistical modeling is one of the fundamental skills required for data science, 
 
 
-### Sub Topic 1
+### What is `statsmodels`?
 
 Put materials on topic 1 here
 
@@ -18,15 +24,21 @@ import pandas as pd
 # do something
 ```
 
-### Sub Topic 2
+### Key Features and Capabilities
 
 Put materials on topic 2 here.
 
-### Sub Topic 3
+### Installation and Setup
 
 Put matreials on topic 3 here.
 
 
+### Basic Statistical Analysis
+
+### Advanced Topics
+
+### Real World Applications
+
 ### Conclusion
 
-Put sumaries here.
+Put summaries
