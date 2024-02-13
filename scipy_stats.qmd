@@ -1,0 +1,16 @@
+---
+title: "Hypothesis Testing with Scipy Stats"
+author: "Isabelle Perez"
+toc: true
+number-sections: true
+highlight-style: pygments
+format: 
+  html: 
+    code-fold: true
+    html-math-method: katex
+  pdf: 
+    geometry: 
+      - top=30mm
+      - left=20mm
+##  docx: default
+--- 
