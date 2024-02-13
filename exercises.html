@@ -309,6 +309,14 @@ window.Quarto = {
 <li>Are zip code and borough always missing together? If geocodes are available, use reverse geocoding to fill the zip code.</li>
 <li>Export the cleaned data in both csv and feather format. Comment on the file sizes.</li>
 </ol></li>
+<li><p><strong>SQL Practice on NYC rodent sightings</strong> The NYC rodent sightings data that we prepared could be stored more efficiently using a database. Let us start from the csv file you exported from the last problem.</p>
+<ol type="1">
+<li>Create a table called <code>rodent</code> from the csv file.</li>
+<li>The <code>agency</code> and <code>agency_name</code> columns are redundant in the table. Create a table called <code>agency</code>, which contains only these two columns, one agency a row.</li>
+<li>Drop the <code>agency_name</code> name from the <code>rodent</code> table. Justify why we do not need it here.</li>
+<li>Comment on the sizes of the table (or exported csv file) of <code>rodent</code> before and after dropping the <code>agency_name</code> column.</li>
+<li>Come up with a scheme for the two tables that allows even more efficient storage of the <code>agency</code> column in the <code>rodent</code> table. <em>Hint: use an integer to code the agencies.</em></li>
+</ol></li>
 </ol>
 
 
