@@ -1,5 +1,5 @@
 ---
-title: "Hypothesis Testing with Scipy Stats"
+title: "Hypothesis Testing with scipy.stats"
 author: "Isabelle Perez"
 toc: true
 number-sections: true
@@ -14,3 +14,12 @@ format:
       - left=20mm
 ##  docx: default
 --- 
+# Introduction 
+
+# Basic Statistical Hypothesis Tests 
+
+# Normality Tests 
+
+# Correlation Tests 
+
+# Nonparametric Hypothesis Tests 
