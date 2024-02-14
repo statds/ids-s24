@@ -17,9 +17,32 @@ format:
 # Introduction 
 
 # Basic Statistical Hypothesis Tests 
+```{python}
+import numpy as np 
+import pandas as pd
+from scipy import stats 
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('rodent_2022-2023.csv') 
+```
 
 # Normality Tests 
+## Shapiro-Wilk Test 
+The Shapiro-Wilk test is performed with the null hypothesis assuming the data was drawn
+from a normal distribution. 
+```{python}
+area = df.groupby('Incident Zip') 
+area_counts = area.size() 
+res = stats.shapiro(area_counts)
+print(res)
+```  
+
+```{python}
+plt.figure(figsize = (8, 4))
+plt.hist(area_counts)
+plt.show
+``` 
 
 # Correlation Tests 
 
-# Nonparametric Hypothesis Tests 
+# Nonparametric Hypothesis Tests   
