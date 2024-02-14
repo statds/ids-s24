@@ -1,3 +1,25 @@
 ## Handling Spatial Data with `GeoPandas`
 
 This section was written by Pratham Patel.
+
+### Introduction and Installation
+
+Hello! my name is Pratham Patel and I am a Senior due to graduate this 
+semster with a Bachelor's Degree of Science in Mathematics/Statistics 
+with a Computer Science minor. I hope to gain skills in using various 
+different packages of Python in this course, as well as understand 
+even more about the Data Science field. An example of learning new 
+Python packages is the topic I will present today on the `geopandas` 
+package. GeoPandas is an extension of the `pandas` package to support 
+geographic data in its dataframes.
+
+The GeoPandas packaage can be installed via the terminal using any of the following commands.
+
+The documentation recommends:
+`conda install -c conda-forge geopandas`
+
+Standard conda install:
+`conda install geopandas`
+
+Using pip:
+`pip install geopandas`
