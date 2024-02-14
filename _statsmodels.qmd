@@ -4,7 +4,7 @@ This section was written by Leon Nguyen.
 
 ### Introduction
 
-Hello, my name is Leon Nguyen (they/she) and I am a second-year undergraduate 
+Hello! My name is Leon Nguyen (they/she) and I am a second-year undergraduate 
 student studying Statistical Data Science and Mathematics at the University 
 of Connecticut, aiming to graduate in Fall 2025. One of my long-term goals is to 
 make the field of data science more accessible to marginalized communities. My 
@@ -35,7 +35,9 @@ Put matreials on topic 3 here.
 
 ### Basic Statistical Analysis
 
-### Advanced Topics
+### Time Series Analysis
+
+### Generalized Linear Models
 
 ### Real World Applications
 
