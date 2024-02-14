@@ -1,0 +1,3 @@
+## Handling Spatial Data with `GeoPandas`
+
+This section was written by Pratham Patel.
