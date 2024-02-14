@@ -31,16 +31,18 @@ df = pd.read_csv('rodent_2022-2023.csv')
 The Shapiro-Wilk test is performed with the null hypothesis assuming the data was drawn
 from a normal distribution. 
 ```{python}
-area = df.groupby('Incident Zip') 
-area_counts = area.size() 
+area = df.groupby('Incident Zip')  
+area_counts = area.size()  
 res = stats.shapiro(area_counts)
 print(res)
 ```  
 
 ```{python}
-plt.figure(figsize = (8, 4))
-plt.hist(area_counts)
-plt.show
+plt.figure()  
+plt.hist(area_counts) 
+plt.xlabel('Incident Zip') 
+plt.ylabel('Frequency') 
+plt.show 
 ``` 
 
 # Correlation Tests 
