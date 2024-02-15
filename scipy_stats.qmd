@@ -28,7 +28,7 @@ normally distributed, and have equal variances.
   + If set to False, performs Welch's t-test, which doesn't use pooled sample variance. 
 
 | H~0~: $\mu_1 = \mu_2$, where $mu_i$ is the population mean of population $i$  
-| H~1~: $mu_1 \neq$ or $>$ or $<$ $mu_2$ 
+| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$ 
 
 ## Paired t-test 
 * Same assumptions as t-test with addition of observations across the two samples being 
@@ -37,7 +37,7 @@ paired.
 * The input arrays must have the same shape. 
 
 | H~0~: $\mu_1 = \mu_2$
-| H~1~: $mu_1 \neq$ or $>$ or $<$ $mu_2$  
+| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$  
 
 ## ANOVA
 * Can be performed on more than two samples. 
@@ -45,8 +45,8 @@ paired.
 * Raises `ConstantInputWarning` if all the input arrays are the same and 
 `DegenerateDataWarning` if any input has length $0$. 
 
-| H~0~: $m_1 = $mu_2$ = ... = $mu_n$ 
-| H~1~: $>= 2 mu_i$ are not equal 
+| H~0~: $\mu_1 = \mu_2 = ... = \mu_n$ 
+| H~1~: $>= 2 \mu_i$ are not equal 
 
 # Normality 
 ## Shapiro-Wilk Test 
