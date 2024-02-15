@@ -57,9 +57,18 @@ plt.show
   + Can "propagate" (return nan), "raise" (raise an error), or "omit"(ignore null values). 
 ```{python} 
 res_2 = stats.normaltest(area_counts, nan_policy = 'propagate') 
-print(res_2)
+print(res_2) 
 ```
 
 # Correlation Tests 
+## Pearson's Correlation 
+* Tests for a linear relationship between two samples.
+* Assumes observations are i.i.d, normally distributed, and have equal variances.  
+* Returns a correlation coefficient as well as the test statistic and p-value. 
+
+H0: the samples are independent 
+H1: there exists dependency between the samples 
+
+## Chi-Squared Test 
 
 # Nonparametric Hypothesis Tests   
