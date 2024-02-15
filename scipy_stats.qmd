@@ -28,16 +28,16 @@ df = pd.read_csv('rodent_2022-2023.csv')
 
 # Normality Tests 
 ## Shapiro-Wilk Test 
-* used to test normality of a data sample 
-* assumes observations are independent and identically distributed (i.i.d) 
+* Used to test normality of a data sample.
+* Assumes observations are independent and identically distributed (i.i.d). 
 
 H0: data is drawn from a normal distribution  
 H1: data is not drawn from a normal distribution   
 ```{python}
-area = df.groupby('Incident Zip')  
+area = df.groupby('Zip Codes')  
 area_counts = area.size()  
-res = stats.shapiro(area_counts)
-print(res)
+res_1 = stats.shapiro(area_counts)
+print(res_1)
 ```  
 
 ```{python}
@@ -49,7 +49,16 @@ plt.show
 ``` 
 
 ## NormalTest 
-Scipy's normaltest is based on D'Agostino and Pearson's test. 
+* Based on the D'Agostino-Pearson test for assessing normality with shape. 
+  + Measures skewness and kurtosis, which is a measure of the heaviness/lightness of the
+  tail relative to a normal distribution. 
+  + A normal distribution has skewness of 0 and kurtosis of 3.0.  
+* Takes an additional parameter for handling null values 
+  + Can "propagate" (return nan), "raise" (raise an error), or "omit"(ignore null values). 
+```{python} 
+res_2 = stats.normaltest(area_counts, nan_policy = 'propagate') 
+print(res_2)
+```
 
 # Correlation Tests 
 
