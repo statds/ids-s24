@@ -18,17 +18,17 @@ format:
 
 # Basic Statistical Hypothesis Tests 
 ## Two-sample t-test 
-* Assumes observations are independent and identically distributed, normally distributed, 
-and have equal variances. 
+* Assumes observations are independent and identically distributed (i.i.d), 
+normally distributed, and have equal variances. 
 * Takes parameter alternative that can be set to "two_sided", "less", or "greater". 
 * Takes optional parameter for handling null values. 
-  + Can "propagate" (return nan), "raise" (raise `ValueError`), or "omit"(ignore null values). 
+  + Can "propagate" (return NaN), "raise" (raise `ValueError`), or "omit"(ignore null values). 
 * Takes optional boolean parameter indicating equal variances. 
   + Default is True.  
   + If set to False, performs Welch's t-test, which doesn't use pooled sample variance. 
 
 | H~0~: $\mu_1 = \mu_2$, where $mu_i$ is the population mean of population $i$  
-| H~1~: $mu_1 !=$ or $>$ or $<$ $mu_2$ 
+| H~1~: $mu_1 \neq$ or $>$ or $<$ $mu_2$ 
 
 ## Paired t-test 
 * Same assumptions as t-test with addition of observations across the two samples being 
@@ -36,70 +36,58 @@ paired.
 * Same null and alternate hypotheses as t-test and same parameters.  
 * The input arrays must have the same shape. 
 
-| H~0~: mean of sample 1 = mean of sample 2 
-| H~1~: mean of sample 1 !=/>/< mean of sample 2 
-
-```{python}
-import numpy as np 
-import pandas as pd
-from scipy import stats  
-
-df = pd.read_csv('rodent_2022-2023.csv')  
-```
+| H~0~: $\mu_1 = \mu_2$
+| H~1~: $mu_1 \neq$ or $>$ or $<$ $mu_2$  
 
 ## ANOVA
 * Can be performed on more than two samples. 
 * Same assumptions as t-test. 
+* Raises `ConstantInputWarning` if all the input arrays are the same and 
+`DegenerateDataWarning` if any input has length $0$. 
 
-| H~0~: mean of sample 1 = mean of sample 2 = ... = mean of sample n 
-| H~1~: at least two samples have unequal means 
+| H~0~: $m_1 = $mu_2$ = ... = $mu_n$ 
+| H~1~: $>= 2 mu_i$ are not equal 
 
 # Normality 
 ## Shapiro-Wilk Test 
 * Used to test normality of a data sample.
 * Assumes observations are i.i.d. 
 
-H0: data is drawn from a normal distribution  
-H1: data is not drawn from a normal distribution   
-```{python}
-area = df.groupby('Zip Codes')  
-area_counts = area.size()  
-res_1 = stats.shapiro(area_counts)
-print(res_1)
-```   
+| H~0~: data is drawn from a normal distribution  
+| H~1~: data is not drawn from a normal distribution    
 
 ## NormalTest 
 * Based on the D'Agostino-Pearson test for assessing normality with shape. 
-  + Measures skewness and kurtosis, which is a measure of the heaviness/lightness of the
-  tail relative to a normal distribution. 
-  + A normal distribution has skewness of 0 and kurtosis of 3.0.  
-```{python} 
-res_2 = stats.normaltest(area_counts, nan_policy = 'propagate') 
-print(res_2) 
-```
+  + Measures skewness and kurtosis, which is the heaviness/lightness of the tail. 
+  + A normal distribution has skewness of $0$ and kurtosis of $3$.  
+* Assumes observations are i.i.d. 
+
+| H~0~: data is drawn from a normal distribution  
+| H~1~: data is not drawn from a normal distribution   
 
 # Correlation & Independence  
 ## Pearson's Correlation 
 * Tests for a linear relationship between two samples.
 * Assumes observations are i.i.d, normally distributed, and have equal variances.  
 * Returns a correlation coefficient as well as the test statistic and p-value. 
+* Raises `ConstantInputWarning` if an input array has all constant values.   
 
-H0: the samples are independent 
-H1: there exists dependency between the samples 
+| H~0~: the samples are independent 
+| H~1~: there exists dependency between the samples 
 
 ## Chi-Squared Test
 * Tests independece of two categorical variables using a contingency table.   
 * Assumes the observations are independent and each cell of the contingency table 
-has at least 25 observations.  
+has at least 25 observations.   
 
-H0: the samples are independent
-H1: there exists dependency between the samples 
+| H~0~: the samples are independent
+| H~1~: there exists dependency between the samples 
 
 # Nonparametric Hypothesis Tests   
 ## Mann-Whiney U Test 
 * Tests that two samples are drawn from the same distribution. 
 * Assumes observations are i.i.d. and can be ranked/compared. 
-* Nonparametric version of t-test. 
+* Nonparametric version of t-test.  
 
 H0: distribution of sample 1 = distribution of sample 2
 H1: distribution of sample 1 !=/>/< distribution of sample 2  
