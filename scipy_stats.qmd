@@ -39,6 +39,7 @@ df = pd.read_csv('rodent_2022-2023.csv')
 * Same assumptions as t-test with addition of observations across the two samples being 
 paired. 
 * Same null and alternate hypotheses as t-test and same parameters.  
+* The input arrays must have the same shape. 
 
 
 ## ANOVA
@@ -98,3 +99,16 @@ H0: the samples are independent
 H1: there exists dependency between the samples 
 
 # Nonparametric Hypothesis Tests   
+## Mann-Whiney U Test 
+* Tests that two samples are drawn from the same distribution. 
+* Assumes observations are i.i.d. and can be ranked/compared. 
+* Nonparametric version of t-test. 
+
+H0: distribution of sample 1 = distribution of sample 2
+H1: distribution of sample 1 !=/>/< distribution of sample 2 
+
+## Kruskal-Wallis H Test 
+* Tests that two or more samples are drawn from the same distribution. 
+
+H0: all the samples have the same distribution 
+H1: at least two samples have differing distributions 
