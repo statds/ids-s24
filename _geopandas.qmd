@@ -13,7 +13,7 @@ Python packages is the topic I will present today on the `geopandas`
 package. GeoPandas is an extension of the `pandas` package to support 
 geographic data in its dataframes.
 
-The GeoPandas packaage can be installed via the terminal using any of the following commands.
+The GeoPandas package can be installed via the terminal using any of the following commands.
 
 The documentation recommends:
 `conda install -c conda-forge geopandas`
@@ -23,3 +23,64 @@ Standard conda install:
 
 Using pip:
 `pip install geopandas`
+
+### Base Concepts
+
+GeoPandas relvolves around the `GeoDataFrame` object, which is essentially the 
+pandas `DataFrame` object, with all the traditional capabilities in addition to 
+the ability store and operate on geometry columns.
+
+The geometry types include points, lines and closed polygons (the first and last 
+coordinates in the list must be the same).
+
+The objects made by `shapely.geometry` can represent these geometry types:
+
+```{python}
+from shapely.geometry import Point, LineString, Polygon
+import geopandas as gpd
+
+point = Point(0, 1)
+gdf1 = gpd.GeoDataFrame(geometry=[point])
+
+line = LineString([(0, 0), (1, 1)])
+gdf2 = gpd.GeoDataFrame(geometry=[line])
+
+#note: the first and last element of 
+#the list of tupled points are the same
+polygon = Polygon([(0, 0), (0, 2), (2, 2), (2, 0), (0, 0)])
+gdf3 = gpd.GeoDataFrame(geometry=[polygon])
+```
+
+```{python}
+gdf1
+```
+
+Some of the basic attributes of a GeoSeries include:
+* `length`: returns length of a line
+```{python}
+gdf2.length
+```
+
+* `area`: returns the area of the polygon
+```{python}
+gdf3.area
+```
+
+* `bounds`: gives the bounds of each row in a column of geometry
+
+* `total_bounds`: gives the bounds of a geometry series
+
+* `geom_type`: returns geometry type
+```{python}
+gdf1.geom_type
+```
+
+* `is_valid`: return True for valid geometries and false otherwise
+
+
+Next, we will cover various methods to be used on GeoSeries objects:
+
+* `distance()`: returns the Series with the minimum distance from each entry to another Series
+```{python}
+
+```
