@@ -28,8 +28,11 @@ df = pd.read_csv('rodent_2022-2023.csv')
 
 # Normality Tests 
 ## Shapiro-Wilk Test 
-The Shapiro-Wilk test is performed with the null hypothesis assuming the data was drawn
-from a normal distribution. 
+* used to test normality of a data sample 
+* assumes observations are independent and identically distributed (i.i.d) 
+
+H0: data is drawn from a normal distribution  
+H1: data is not drawn from a normal distribution   
 ```{python}
 area = df.groupby('Incident Zip')  
 area_counts = area.size()  
@@ -44,6 +47,9 @@ plt.xlabel('Incident Zip')
 plt.ylabel('Frequency') 
 plt.show 
 ``` 
+
+## NormalTest 
+Scipy's normaltest is based on D'Agostino and Pearson's test. 
 
 # Correlation Tests 
 
