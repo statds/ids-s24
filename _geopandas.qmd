@@ -75,12 +75,66 @@ gdf3.area
 gdf1.geom_type
 ```
 
-* `is_valid`: return True for valid geometries and false otherwise
+* `is_valid`: return True for valid geometries and false otherwise (mostly important for polygons).
+```{python}
+gdf3.is_valid
+```
 
 
 Next, we will cover various methods to be used on GeoSeries objects:
 
-* `distance()`: returns the Series with the minimum distance from each entry to another Series
+* `distance()`: returns the Series with the minimum distance from each entry to another geometry or 
+Series (argument `other`).
+    + Note: a secondary argument `align` is a boolean to align the GeoSeries by index if set to True
 ```{python}
+gdf2.distance(Point((1,0)))
+gdf2.distance(LineString([(0, 2), (1, 2)]))
+```
 
+* `centroid`: returns a new GeoSeries with the center of each row's geometry.
+```{python}
+gdf3.centroid
+```
+
+* `contains()`: returns True if the shape contains a specific geometry or Series.
+    + parameters `other` and `align`
+```{python}
+gdf3.contains(gdf1)
+```
+
+```{python}
+gdf3.contains(Point((0.5, 1.5)))
+```
+
+* `intersects()` returns true if shape intersects another geometry of series
+    + parameters `other` and `align`
+
+### Reading Files into `GeoDataFrame`'s
+
+The function `geopandas.read_file()` is the best way to read a file with both data and geometry into a `GeoDataFrame` object. From here, we will be using the nyc rodent data and visualize it. The code below converts every incident's location into a point on the geometry.
+
+```{python}
+# Reading csv file 
+import pandas as pd 
+import numpy as np
+# Shapely for converting latitude/longtitude to a point
+from shapely.geometry import Point 
+# To create GeoDataFrame
+import geopandas as gpd 
+
+rat_22_23 = pd.read_csv('data/rodent_2022-2023.csv')
+
+# creating geometry using shapely (removing missing points)
+geometry = [Point(xy) for xy in zip(rat_22_23["longitude"], rat_22_23["latitude"]) if not Point(xy).is_empty]
+
+# creating geometry column to be used by geopandas
+geo = gpd.points_from_xy(rat_22_23["longitude"], rat_22_23["latitude"])
+
+# coordinate reference system (epsg:4326 implies geographic coordinates)
+crs = {'init': 'epsg:4326'}
+
+# create GeoDataFrame (taking care of missing coordinates)
+rodent_gdf = gpd.GeoDataFrame(rat_22_23.loc[~pd.isna(rat_22_23["longitude"]) & ~pd.isna(rat_22_23["latitude"])], crs=crs, geometry=geometry)
+
+rodent_gdf.head()
 ```
