@@ -41,7 +41,12 @@ paired.
 * Same null and alternate hypotheses as t-test and same parameters.  
 
 
-## ANOVA 
+## ANOVA
+* Can be performed on more than two samples. 
+* Same assumptions as t-test. 
+
+H0: mean of sample 1 = mean of sample 2 = ... = mean of sample n 
+H1: at least two samples have unequal means 
 
 # Normality 
 ## Shapiro-Wilk Test 
