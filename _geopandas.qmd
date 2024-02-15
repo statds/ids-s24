@@ -138,3 +138,39 @@ rodent_gdf = gpd.GeoDataFrame(rat_22_23.loc[~pd.isna(rat_22_23["longitude"]) & ~
 
 rodent_gdf.head()
 ```
+
+
+### Plotting
+The new geometry allows us to plot the data easily.
+```{python}
+rodent_gdf.plot()
+
+#color by borough
+rodent_gdf.plot(column = 'borough', legend=True)
+
+#Plot the missing information
+rodent_gdf.plot(column='borough', missing_kwds={'color':'red'})
+```
+
+### Interactive Maps
+A very interesting aspect is the ability to create interactive graphs using the `.explore()` method.
+
+Note that `folium`, `matplotlib`, and `mapclassify` are necessary for the `.explore()` function.
+
+```{python}
+#interactive map with incidents colored by borough
+rodent_gdf.explore(column='borough', legend=True)
+```
+
+
+### Setting and Changing Projections
+In the code, a Coordinate Reference System(CRS) was set using `crs = {'init':'epsg:4326'}`. CRS can be set on on initialized GeoDataFrame using the `.set_crs` function. We can do this for our previous example `gdf3`
+
+```{python}
+gdf3 = gdf3.set_crs("EPSG:4326")
+gdf3.plot()
+```
+
+There are other CRS's that can be set by the `.to_crs()` function. Examples include:
+* ESPG:2263 - coordinates labeled in feet
+* ESPG:3395 - World Mercator System
