@@ -27,7 +27,7 @@ normally distributed, and have equal variances.
   + Default is True.  
   + If set to False, performs Welch's t-test, which doesn't use pooled sample variance. 
 
-| H~0~: $\mu_1 = \mu_2$, where $mu_i$ is the population mean of population $i$  
+| H~0~: $\mu_1 = \mu_2$, where $\mu_i$ is the population mean of population $i$  
 | H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$ 
 
 ## Paired t-test 
@@ -37,16 +37,7 @@ paired.
 * The input arrays must have the same shape. 
 
 | H~0~: $\mu_1 = \mu_2$
-| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$  
-
-## ANOVA
-* Can be performed on more than two samples. 
-* Same assumptions as t-test. 
-* Raises `ConstantInputWarning` if all the input arrays are the same and 
-`DegenerateDataWarning` if any input has length $0$. 
-
-| H~0~: $\mu_1 = \mu_2 = ... = \mu_n$ 
-| H~1~: $>= 2 \mu_i$ are not equal 
+| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$   
 
 # Normality 
 ## Shapiro-Wilk Test 
@@ -65,7 +56,7 @@ paired.
 | H~0~: data is drawn from a normal distribution  
 | H~1~: data is not drawn from a normal distribution   
 
-# Correlation & Independence  
+# Correlation   
 ## Pearson's Correlation 
 * Tests for a linear relationship between two samples.
 * Assumes observations are i.i.d, normally distributed, and have equal variances.  
@@ -73,14 +64,6 @@ paired.
 * Raises `ConstantInputWarning` if an input array has all constant values.   
 
 | H~0~: the samples are independent 
-| H~1~: there exists dependency between the samples 
-
-## Chi-Squared Test
-* Tests independece of two categorical variables using a contingency table.   
-* Assumes the observations are independent and each cell of the contingency table 
-has at least 25 observations.   
-
-| H~0~: the samples are independent
 | H~1~: there exists dependency between the samples 
 
 # Nonparametric Hypothesis Tests   
