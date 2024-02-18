@@ -32,8 +32,7 @@ normally distributed, and have equal variances.
 
 ```{python} 
 import pandas as pd  
-import scipy.stats 
-import datetime 
+import scipy.stats  
 
 # read in file 
 df = pd.read_csv('rodent_2022-2023.csv')  
@@ -81,7 +80,33 @@ paired.
 * Assumes observations are i.i.d. 
 
 | H~0~: data is drawn from a normal distribution  
-| H~1~: data is not drawn from a normal distribution      
+| H~1~: data is not drawn from a normal distribution   
+
+```{python}  
+# only select rows where Response Time is not null 
+modified_df = df[df['Response Time'].notnull()] 
+
+sample3 = modified_df.sample(5000, random_state = 0)['Response Time'] 
+
+t_2, p_2 = scipy.stats.shapiro(sample3)
+
+print(t_2, p_2)  
+```  
+
+```{python}
+import matplotlib.pyplot as plt 
+ 
+bins = [i for i in range(0, 12600000, 1000000)]
+ 
+plt.xticks(bins)
+
+# set axis labels 
+plt.xlabel('Response Time') 
+plt.ylabel('Value Counts')
+
+# plot sample3 data 
+plt.hist(sample3.values, bins = bins) 
+``` 
 
 ## NormalTest 
 * Based on the D'Agostino-Pearson test for assessing normality with shape. 
