@@ -30,6 +30,23 @@ normally distributed, and have equal variances.
 | H~0~: $\mu_1 = \mu_2$, where $\mu_i$ is the population mean of population $i$  
 | H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$ 
 
+```{python} 
+import pandas as pd  
+import scipy.stats 
+
+# read in file 
+df = pd.read_csv('rodent_2022-2023.csv')  
+
+# sample 200 data pts 
+samples = df.sample(200, random_state = 0)
+
+# split into two samples 
+sample1 = samples.iloc[:100]['Response Time'].reset_index()
+sample2 = samples.iloc[100:]['Response Time'].reset_index()  
+
+print(type(df['Created Date'][1]))
+```  
+
 ## Paired t-test 
 * Same assumptions as t-test with addition of observations across the two samples being 
 paired. 
@@ -72,7 +89,7 @@ paired.
 * Assumes observations are i.i.d. and can be ranked/compared. 
 * Nonparametric version of t-test.  
 
-| H~0~: distribution of sample 1 = distribution of sample 2
+| H~0~: distribution of sample 1 $=$ distribution of sample 2
 | H~1~: distribution of sample 1 $\neq$ or $>$ or $<$ distribution of sample 2  
 
 ## Kruskal-Wallis H Test 
