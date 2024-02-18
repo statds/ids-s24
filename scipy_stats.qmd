@@ -72,11 +72,11 @@ paired.
 * Assumes observations are i.i.d. and can be ranked/compared. 
 * Nonparametric version of t-test.  
 
-H0: distribution of sample 1 = distribution of sample 2
-H1: distribution of sample 1 !=/>/< distribution of sample 2  
+| H~0~: distribution of sample 1 = distribution of sample 2
+| H~1~: distribution of sample 1 $\neq$ or $>$ or $<$ distribution of sample 2  
 
 ## Kruskal-Wallis H Test 
 * Tests that two or more samples are drawn from the same distribution. 
 
-H0: all the samples have the same distribution 
-H1: at least two samples have differing distributions 
+| H~0~: all the samples have the same distribution 
+| H~1~: at least two samples have differing distributions  
