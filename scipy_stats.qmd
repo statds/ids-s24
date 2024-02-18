@@ -33,18 +33,37 @@ normally distributed, and have equal variances.
 ```{python} 
 import pandas as pd  
 import scipy.stats 
+import datetime 
 
 # read in file 
 df = pd.read_csv('rodent_2022-2023.csv')  
+
+df['Created Date'] = pd.to_datetime(df['Created Date'])
+df['Closed Date'] = pd.to_datetime(df['Closed Date'])
+df['Response Time'] = df['Closed Date'] - df['Created Date']
+
+df['Response Time'] = df['Response Time'].apply(lambda x: x.total_seconds()) 
 
 # sample 200 data pts 
 samples = df.sample(200, random_state = 0)
 
 # split into two samples 
 sample1 = samples.iloc[:100]['Response Time'].reset_index()
-sample2 = samples.iloc[100:]['Response Time'].reset_index()  
+sample2 = samples.iloc[100:]['Response Time'].reset_index() 
 
-print(type(df['Created Date'][1]))
+# show the samples have unequal variances
+print(sample1['Response Time'].std())
+print(sample2['Response Time'].std())
+
+# perform test and omit null values
+t_1, p_1 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, nan_policy = 'omit')
+
+# perform test and propagate null values
+t_2, p_2 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, nan_policy = 'propagate')
+
+# print results 
+print(t_1, p_1)
+print(t_2, p_2)
 ```  
 
 ## Paired t-test 
@@ -62,7 +81,7 @@ paired.
 * Assumes observations are i.i.d. 
 
 | H~0~: data is drawn from a normal distribution  
-| H~1~: data is not drawn from a normal distribution    
+| H~1~: data is not drawn from a normal distribution      
 
 ## NormalTest 
 * Based on the D'Agostino-Pearson test for assessing normality with shape. 
