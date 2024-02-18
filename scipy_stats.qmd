@@ -117,6 +117,12 @@ plt.hist(sample3.values, bins = bins)
 | H~0~: data is drawn from a normal distribution  
 | H~1~: data is not drawn from a normal distribution   
 
+```{python}
+t_3, p_3 = scipy.stats.normaltest(sample3)
+
+print(t_3, p_3) 
+``` 
+
 # Correlation   
 ## Pearson's Correlation 
 * Tests for a linear relationship between two samples.
