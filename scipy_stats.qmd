@@ -30,6 +30,10 @@ normally distributed, and have equal variances.
 | H~0~: $\mu_1 = \mu_2$, where $\mu_i$ is the population mean of population $i$  
 | H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$ 
 
+Looking at the 2022-2023 rodent sighting data from the NYC 311 Service Requests, there are many
+ways a two-sample t-test may be useful. For example, we can consider samples drawn from different
+boroughs and perform this hypothesis test to identify whether their mean response time to 
+the service requests differ. 
 ```{python} 
 import pandas as pd  
 import scipy.stats  
@@ -46,17 +50,21 @@ df['Response Time'] = df['Closed Date'] - df['Created Date']
 df['Response Time'] = df['Response Time'].apply(lambda x: x.total_seconds()) 
 
 # select Bronx and Queens boroughs 
-df_man = df.loc[df['Borough'] == 'BRONX']
+df_bronx = df.loc[df['Borough'] == 'BRONX']
 df_queens = df.loc[df['Borough'] == 'QUEENS']
 
 # sample from respective dfs 
-sample1 = df_man.sample(1000, random_state = 0)['Response Time']
+sample1 = df_bronx.sample(1000, random_state = 0)['Response Time']
 sample2 = df_queens.sample(1000, random_state = 0)['Response Time'] 
 
 # show the samples have unequal variances 
 print(sample1.std())
 print(sample2.std())
+```
+Since the two samples have very different standard deviations, and therefore unequal variances, 
+we must run the test without a pooled sample variance, by setting `equal_var` equal to `False`.
 
+```{python}
 # perform test and omit null values
 t_1, p_1 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, nan_policy = 'omit')
 
@@ -70,7 +78,14 @@ t_3, p_3 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, alternativ
 print(t_1, p_1)
 print(t_2, p_2)
 print(t_3, p_3)
-```  
+``` 
+As per the above results, at most confidence levels, the p-value of $1.23 * 10^-15$ will lead to 
+a rejection of the null hypothesis, suggesting that the mean response times for the Bronx and
+Queens differ significantly. When the null values are propagated instead of omitted, though,
+the t-statistic and p-value both return `nan` due to missing values. And in the third case, when 
+the alterative is set to $>$, the null hypothesis would not be rejected at most confidence levels,
+suggesting that although the mean response time for the Bronx and Queens differ, that for the Bronx
+is not significantly larger.  
 
 ### Paired t-test 
 * Same assumptions as t-test with addition of observations across the two samples being 
@@ -130,7 +145,7 @@ t_5, p_5 = scipy.stats.normaltest(sample3)
 print(t_5, p_5)  
 ``` 
 
-# Correlation   
+## Correlation   
 ### Pearson's Correlation 
 * Tests for a linear relationship between two samples.
 * Assumes observations are i.i.d, normally distributed, and have equal variances.  
@@ -155,7 +170,7 @@ t_6, p_6 = scipy.stats.pearsonr(x, y)
 print(t_6, p_6)
 ``` 
 
-# Nonparametric Hypothesis Tests   
+## Nonparametric Hypothesis Tests   
 ### Mann-Whitney U Test 
 * Tests that two samples are drawn from the same distribution. 
 * Assumes observations are i.i.d. and can be ranked/compared. 
@@ -174,10 +189,4 @@ print(t_6, p_6)
 t_7, p_7 = scipy.stats.mannwhitneyu(sample1, sample2, nan_policy = 'omit')
 
 print(t_7, p_7)
-``` 
-
-### Kruskal-Wallis H Test 
-* Tests that two or more samples are drawn from the same distribution. 
-
-| H~0~: all the samples have the same distribution 
-| H~1~: at least two samples have differing distributions  
+```   
