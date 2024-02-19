@@ -81,13 +81,19 @@ can make using `plotnine` and the personalizations we can add to them.
 For these graphics I used the rodent sighting data from the NYC open data
 311 requests. We also will need pandas and numpy for some of these graphs
 so we need to import those as well. Additionally, because the data set is
-so large, we will only be lookng at the last 500 complaints.
+so large, we will only be lookng at the first 500 complaints.
 
 ```{python}
+from plotnine import *
+from plotnine.data import *
 import pandas as pd 
 import numpy as np 
-data = pd.read_csv('rodent_2022-2023.csv')
-data_used = data.tail(500)
+import os
+folder = 'data'
+file = 'rodent_2022-2023.feather'
+path = os.path.join(folder, file)
+data = pd.read_feather(path)
+data_used = data.head(500)
 ```
 
 #### Bar Chart
@@ -97,7 +103,7 @@ bar chart. For this graph we will look at the data for the descriptors
 of each complaint.
 
 ```{python}
-(ggplot(data_used, aes(x = 'Descriptor')) 
+(ggplot(data_used, aes(x = 'descriptor')) 
     + geom_bar())
 ```
 
@@ -111,7 +117,7 @@ make it easier to read and more appealing. Some simple things we can do are:
 - Add titles to the axes.
 
 ```{python}
-(ggplot(data_used, aes(x = 'Descriptor', fill = 'Descriptor')) # Color code the bars.
+(ggplot(data_used, aes(x = 'descriptor', fill = 'descriptor')) # Color code the bars.
     + geom_bar() # Bar Chart
     + ggtitle('Descriptor Counts') # Add a title.
     + coord_flip() # Change the orientation of the graph.
@@ -126,7 +132,7 @@ Some more complex changes we can make to our graph are:
 - Add color coded descriptors to each bar.
 
 ```{python}
-(ggplot(data_used, aes(x = 'Descriptor', fill = 'Borough')) # Add color coded descriptors.
+(ggplot(data_used, aes(x = 'descriptor', fill = 'borough')) # Add color coded descriptors.
     + geom_bar() # Bar Chart
     + ggtitle('Descriptor Counts') # Add a title.
     + xlab("Descriptor") # Add title to x axis.
@@ -141,11 +147,11 @@ Another common visualization we can create is a scatterplot. When looking at the
 the 311 requests, we can see that there are many data points for locations of these 
 complaints. A scatter plot would be a great way to see the location of the complaints by
 graphing the longitudes and latitudes. In order to better see the points, for this 
-graph we will only use th last 200 complaints.
+graph we will only use the first 200 complaints.
 
 ```{python}
 data_scatter = data.tail(200)
-(ggplot(data_scatter, aes(x = 'Longitude', y = 'Latitude')) 
+(ggplot(data_scatter, aes(x = 'longitude', y = 'latitude')) 
     + geom_point())
 ```
 
@@ -158,16 +164,28 @@ plot in order to differentiate the points from each other. We can:
 - Differentiate using point shape.
 
 ```{python}
-(ggplot(data_scatter, aes(x = 'Longitude', y = 'Latitude',
-       color = 'Location Type')) # Add color to the points.
+(ggplot(data_scatter, aes(x = 'longitude', y = 'latitude',
+       color = 'location_type')) # Add color to the points.
     + geom_point())
 ```
 
 ```{python}
-(ggplot(data_scatter, aes(x = 'Longitude', y = 'Latitude',
-    size = 'Descriptor', # Differentiate using point size.
-    shape = 'Borough')) # Differentiate using point shape.
+(ggplot(data_scatter, aes(x = 'longitude', y = 'latitude',
+    size = 'descriptor', # Differentiate using point size.
+    shape = 'borough')) # Differentiate using point shape.
     + geom_point())
+```
+
+We can see that due to the close data points, filtering the data using
+size and shape can become a little congested. One thing we can do to fix
+this while still viewing the same data is through the use of "facet_grid".
+
+```{python}
+(ggplot(data_scatter, aes(x = 'longitude', y = 'latitude',
+    shape = 'borough')) # Differentiate using point shape.
+    + geom_point()
+    + facet_grid('descriptor ~ .') # Create multiple plots.
+)
 ```
 
 #### Histogram
@@ -178,10 +196,10 @@ Here we will use the created date data as a continuous variable. Using
 were able to do with bar charts.
 
 ```{python}
-data_used['Created Date']=pd.to_datetime(
-  data_used['Created Date'],
+data_used['created_date']=pd.to_datetime(
+  data_used['created_date'],
   format = "%m/%d/%Y %I:%M:%S %p", errors='coerce')
-(ggplot(data_used, aes(x='Created Date'))
+(ggplot(data_used, aes(x='created_date'))
     + geom_histogram())
 ```
 Now that we have a simple histogram with our data we can add specializations,
@@ -194,18 +212,31 @@ inclduing:
 - Change the orientation of the words on the axes to make them easier to read.
 
 ```{python}
-(ggplot(data_used, aes(x='Created Date', fill = 'Borough')) # Add color coded descriptors.
+(ggplot(data_used, aes(x='created_date', fill = 'borough')) # Add color coded descriptors.
     + geom_histogram(binwidth=1,  # Change width of bins
-      colour = 'black') # Change outline color.
+      color = 'black') # Change outline color.
     + theme(axis_text_x=element_text(angle=45)) # Change the orientation of the words.
 )
 ```
 
 ```{python}
-(ggplot(data_used, aes(x='Created Date', fill = 'Borough')) # Add color coded descriptors.
+(ggplot(data_used, aes(x='created_date', fill = 'borough')) # Add color coded descriptors.
     + geom_histogram(binwidth=1,  # Change width of bins
       colour = 'black') # Change outline color.
     + coord_flip() # Change oreintation of graph.
+)
+```
+
+While we're able to color code the histogram to show other descriptors 
+of the data, another way we can do this with `plotnine` is through the use
+of multiple graphs. Using "facet_wrap" we can create a multi facet graph with 
+the same data.
+
+```{python}
+(ggplot(data_used, aes(x='created_date')) 
+    + geom_histogram(binwidth=1) # Change width of bins
+    + facet_wrap('borough') # Create multiple graphs.
+    + theme(axis_text_x=element_text(angle=45)) # Change the orientation of the words.
 )
 ```
 
@@ -216,7 +247,7 @@ the graphs previously discussed, density plots show the distribution of a specif
 variable.
 
 ```{python}
-(ggplot(data_used, aes(x='Created Date'))
+(ggplot(data_used, aes(x='created_date'))
     + geom_density())
 ```
 
@@ -228,14 +259,14 @@ Above we can see a very simple density graph with very little description. Using
 - Change the orientation of the words on the axes to make them easier to read.
 
 ```{python}
-(ggplot(data_used, aes(x='Created Date', color = 'Descriptor')) #Add color coded descriptors.
+(ggplot(data_used, aes(x='created_date', color = 'descriptor')) #Add color coded descriptors.
     + geom_density()
     + theme(axis_text_x=element_text(angle=45)) # Change the orientation of the words.
 )
 ```
 
 ```{python}
-(ggplot(data_used, aes(x='Created Date', color = 'Descriptor')) #Add color coded descriptors.
+(ggplot(data_used, aes(x='created_date', color = 'descriptor')) #Add color coded descriptors.
     + geom_density(aes(y=after_stat('count'))) # Scale groups by relative size.
     + theme(axis_text_x=element_text(angle=45)) # Change the orientation of the words.
 )
