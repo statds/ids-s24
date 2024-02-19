@@ -128,7 +128,7 @@ We can also graph the sample using `matplotlib` to see that the data is not norm
 ```{python}
 import matplotlib.pyplot as plt 
  
-bins = [i for i in range(0, 12600000, 1000000)]
+bins = [i for i in range(0, 12600000, 1000000)] 
  
 plt.xticks(bins)
 
