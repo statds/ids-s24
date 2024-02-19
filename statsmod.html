@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science - References</title>
+<title>Introduction to Data Science - 7&nbsp; Statistical Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +64,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./exercises.html" rel="prev">
+<link href="./visualization.html" rel="next">
+<link href="./communication.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -87,6 +103,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -99,7 +144,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./statsmod.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical Models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -171,7 +216,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./statsmod.html" class="sidebar-item-text sidebar-link">
+  <a href="./statsmod.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical Models</span></span></a>
   </div>
 </li>
@@ -189,7 +234,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -199,14 +244,28 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">7.1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#installation-of-statsmodels" id="toc-installation-of-statsmodels" class="nav-link" data-scroll-target="#installation-of-statsmodels"><span class="header-section-number">7.1.1</span> Installation of <code>statsmodels</code></a></li>
+  <li><a href="#features-of-statsmodels" id="toc-features-of-statsmodels" class="nav-link" data-scroll-target="#features-of-statsmodels"><span class="header-section-number">7.1.2</span> Features of <code>statsmodels</code></a></li>
+  </ul></li>
+  <li><a href="#generalized-linear-models" id="toc-generalized-linear-models" class="nav-link" data-scroll-target="#generalized-linear-models"><span class="header-section-number">7.2</span> Generalized Linear Models</a>
+  <ul class="collapse">
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">7.2.1</span> Examples</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical Models</span></h1>
 </div>
 
 
@@ -223,15 +282,70 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-vanderplas2016python" class="csl-entry" role="listitem">
-VanderPlas, Jake. 2016. <em>Python Data Science Handbook:
-<span>E</span>ssential Tools for Working with Data</em>. O’Reilly Media,
-Inc.
-</div>
-</div>
+<section id="introduction" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">7.1</span> Introduction</h2>
+<p>Statistical modeling is a cornerstone of data science, offering tools to understand complex relationships within data and to make predictions. Python, with its rich ecosystem for data analysis, features the <code>statsmodels</code> package— a comprehensive library designed for statistical modeling, tests, and data exploration. <code>statsmodels</code> stands out for its focus on classical statistical models and compatibility with the Python scientific stack (<code>numpy</code>, <code>scipy</code>, <code>pandas</code>).</p>
+<section id="installation-of-statsmodels" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="installation-of-statsmodels"><span class="header-section-number">7.1.1</span> Installation of <code>statsmodels</code></h3>
+<p>To start with statistical modeling, ensure <code>statsmodels</code> is installed:</p>
+<p>Using pip:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install statsmodels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="features-of-statsmodels" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="features-of-statsmodels"><span class="header-section-number">7.1.2</span> Features of <code>statsmodels</code></h3>
+<p>Package <code>statsmodels</code> offers a comprehensive range of statistical models and tests, making it a powerful tool for a wide array of data analysis tasks:</p>
+<ul>
+<li><p><strong>Linear Regression Models</strong>: Essential for predicting quantitative responses, these models form the backbone of many statistical analysis operations.</p></li>
+<li><p><strong>Generalized Linear Models (GLM)</strong>: Expanding upon linear models, GLMs allow for response variables that have error distribution models other than a normal distribution, catering to a broader set of data characteristics.</p></li>
+<li><p><strong>Time Series Analysis</strong>: This includes models like ARIMA for analyzing and forecasting time-series data, as well as more complex state space models and seasonal decompositions.</p></li>
+<li><p><strong>Nonparametric Methods</strong>: For data that does not fit a standard distribution, <code>statsmodels</code> provides tools like kernel density estimation and smoothing techniques.</p></li>
+<li><p><strong>Statistical Tests</strong>: A suite of hypothesis testing tools allows users to rigorously evaluate their models and assumptions, including diagnostics for model evaluation.</p></li>
+</ul>
+<p>Integrating <code>statsmodels</code> into your data science workflow enriches your analytical capabilities, allowing for both exploratory data analysis and complex statistical modeling.</p>
+</section>
+</section>
+<section id="generalized-linear-models" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="generalized-linear-models"><span class="header-section-number">7.2</span> Generalized Linear Models</h2>
+<p>Generalized Linear Models (GLM) extend the classical linear regression to accommodate response variables, that follow distributions other than the normal distribution. GLMs consist of three main components:</p>
+<ul>
+<li><strong>Random Component</strong>: This specifies the distribution of the response variable <span class="math inline">\(Y\)</span>. It is assumed to be from the exponential family of distributions, such as Binomial for binary data and Poisson for count data.</li>
+<li><strong>Systematic Component</strong>: This consists of the linear predictor, a linear combination of unknown parameters and explanatory variables. It is denoted as <span class="math inline">\(\eta = X\beta\)</span>, where <span class="math inline">\(X\)</span> represents the explanatory variables, and <span class="math inline">\(\beta\)</span> represents the coefficients.</li>
+<li><strong>Link Function</strong>: The link function, <span class="math inline">\(g\)</span>, provides the relationship between the linear predictor and the mean of the distribution function. For a GLM, the mean of <span class="math inline">\(Y\)</span> is related to the linear predictor through the link function as <span class="math inline">\(\mu = g^{-1}(\eta)\)</span>.</li>
+</ul>
+<p>Generalized Linear Models (GLM) adapt to various data types through the selection of appropriate link functions and probability distributions. Here, we outline four special cases of GLM: normal regression, logistic regression, Poisson regression, and gamma regression.</p>
+<ul>
+<li>Normal Regression (Linear Regression). In normal regression, the response variable has a normal distribution. The identity link function (<span class="math inline">\(g(\mu) = \mu\)</span>) is typically used, making this case equivalent to classical linear regression.
+<ul>
+<li><strong>Use Case</strong>: Modeling continuous data where residuals are normally distributed.</li>
+<li><strong>Link Function</strong>: Identity (<span class="math inline">\(g(\mu) = \mu\)</span>)</li>
+<li><strong>Distribution</strong>: Normal</li>
+</ul></li>
+<li>Logistic Regression. Logistic regression is used for binary response variables. It employs the logit link function to model the probability that an observation falls into one of two categories.
+<ul>
+<li><strong>Use Case</strong>: Binary outcomes (e.g., success/failure).</li>
+<li><strong>Link Function</strong>: Logit (<span class="math inline">\(g(\mu) = \log\frac{\mu}{1-\mu}\)</span>)</li>
+<li><strong>Distribution</strong>: Binomial</li>
+</ul></li>
+<li>Poisson Regression. Poisson regression models count data using the Poisson distribution. It’s ideal for modeling the rate at which events occur.
+<ul>
+<li><strong>Use Case</strong>: Count data, such as the number of occurrences of an event.</li>
+<li><strong>Link Function</strong>: Log (<span class="math inline">\(g(\mu) = \log(\mu)\)</span>)</li>
+<li><strong>Distribution</strong>: Poisson</li>
+</ul></li>
+<li>Gamma Regression. Gamma regression is suited for modeling positive continuous variables, especially when data are skewed and variance increases with the mean.
+<ul>
+<li><strong>Use Case</strong>: Positive continuous outcomes with non-constant variance.</li>
+<li><strong>Link Function</strong>: Inverse (<span class="math inline">\(g(\mu) = \frac{1}{\mu}\)</span>)</li>
+<li><strong>Distribution</strong>: Gamma</li>
+</ul></li>
+</ul>
+<p>Each GLM variant addresses specific types of data and research questions, enabling precise modeling and inference based on the underlying data distribution.</p>
+<section id="examples" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="examples"><span class="header-section-number">7.2.1</span> Examples</h3>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -623,11 +737,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./exercises.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Exercises</span></span>
+      <a href="./communication.html" class="pagination-link  aria-label=" &lt;span="" data="" science&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Communicating Data Science</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./visualization.html" class="pagination-link" aria-label="<span class='chapter-number'>8</span>&nbsp; <span class='chapter-title'>Visualization</span>">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualization</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
