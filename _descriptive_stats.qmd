@@ -1,0 +1,15 @@
+## Sources
+
+https://towardsdatascience.com/a-data-scientists-essential-guide-to-exploratory-data-analysis-25637eee0cf6
+
+https://www.dwstockburger.com/Introbook/sbk22.htm#:~:text=The%20procedure%20used%20to%20test%20the%20significance%20of,number%20of%20times%20when%20there%20were%20no%20effects. 
+
+Pandas Profiling ... https://www.youtube.com/watch?v=Ef169VELt5o
+
+https://stats.stackexchange.com/questions/112829/how-do-i-calculate-confidence-intervals-for-a-non-normal-distribution
+
+http://staff.ustc.edu.cn/~zwp/teach/Stat-Comp/Efron_Bootstrap_CIs.pdf
+
+https://dl.acm.org/doi/pdf/10.1145/3534678.3542604
+
+https://dl.acm.org/doi/10.1145/3290605.3300358
