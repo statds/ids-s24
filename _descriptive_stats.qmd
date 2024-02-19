@@ -126,7 +126,32 @@ closely match an exponential distribution with a very high $\lambda$
 parameter value. Below is a figure displaying a series of 
 exponential distributions for different values of $\lambda$:
 
-![Exponential Distributions for different lambdas](descriptive_stats_imgs/Exponential-Distribution.jpg)
+```{python}
+import matplotlib.pyplot as plt
+
+# Define the lambda parameters
+lambdas = [0.5, 1, 2, 4, 8]
+
+# Define the x range
+x = np.linspace(0, 2*np.pi, 1000)
+
+# Create the plot
+plt.figure(figsize=(10, 6))
+
+# Plot the exponential distribution for each lambda
+for lam in lambdas:
+    y = lam * np.exp(-lam * x)
+    plt.plot(x, y, label=f'λ = {lam}')
+
+# Set the x-axis labels
+plt.xticks([np.pi/2, np.pi, 3*np.pi/2, 2*np.pi], ['π/2', 'π', '3π/2', '2π'])
+
+# Add a legend
+plt.legend()
+
+# Show the plot
+plt.show()
+```
 
 ### Central Tendency Measures
 
@@ -383,8 +408,6 @@ Now we can create a plot to demonstrate the location of the chi-squared
 statistic with respect to the chi-squared distribution
 
 ```{python}
-import matplotlib.pyplot as plt
-
 x = np.arange(0, 60, 0.001)
 # x2 = np.arange(59, 60, 0.001)
 
