@@ -43,16 +43,16 @@ df['Response Time'] = df['Closed Date'] - df['Created Date']
 
 df['Response Time'] = df['Response Time'].apply(lambda x: x.total_seconds()) 
 
-# sample 200 data pts 
-samples = df.sample(200, random_state = 0)
+df_man = df.loc[df['Borough'] == 'BRONX']
+df_queens = df.loc[df['Borough'] == 'QUEENS']
 
-# split into two samples 
-sample1 = samples.iloc[:100]['Response Time'].reset_index()
-sample2 = samples.iloc[100:]['Response Time'].reset_index() 
+# sample from respective dfs 
+sample1 = df_man['Response Time'].sample(1000, random_state = 0) 
+sample2 = df_queens['Response Time'].sample(1000, random_state = 0)
 
-# show the samples have unequal variances
-print(sample1['Response Time'].std())
-print(sample2['Response Time'].std())
+# show the samples have unequal variances 
+print(sample1.std())
+print(sample2.std())
 
 # perform test and omit null values
 t_1, p_1 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, nan_policy = 'omit')
@@ -60,9 +60,13 @@ t_1, p_1 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, nan_policy
 # perform test and propagate null values
 t_2, p_2 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, nan_policy = 'propagate')
 
+# perform one-sided test (mean sample 1 > mean sample 2)
+t_3, p_3 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, alternative = 'greater', nan_policy = 'omit')
+
 # print results 
 print(t_1, p_1)
 print(t_2, p_2)
+print(t_3, p_3)
 ```  
 
 ## Paired t-test 
@@ -120,7 +124,7 @@ plt.hist(sample3.values, bins = bins)
 ```{python}
 t_3, p_3 = scipy.stats.normaltest(sample3)
 
-print(t_3, p_3) 
+print(t_3, p_3)  
 ``` 
 
 # Correlation   
