@@ -72,14 +72,15 @@ t_1, p_1 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, nan_policy
 t_2, p_2 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, nan_policy = 'propagate')
 
 # perform one-sided test (mean sample 1 > mean sample 2)
-t_3, p_3 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, alternative = 'greater', nan_policy = 'omit')
+t_3, p_3 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, 
+                                    alternative = 'greater', nan_policy = 'omit')
 
 # print results 
 print(t_1, p_1)
 print(t_2, p_2)
 print(t_3, p_3)
 ``` 
-As per the above results, at most confidence levels, the p-value of $1.23 * 10^-15$ will lead to 
+As per the above results, at most confidence levels, the p-value of $1.23 \times 10^{-15}$ will lead to 
 a rejection of the null hypothesis, suggesting that the mean response times for the Bronx and
 Queens differ significantly. When the null values are propagated instead of omitted, though,
 the t-statistic and p-value both return `nan` due to missing values. And in the third case, when 
