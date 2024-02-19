@@ -27,7 +27,7 @@ normally distributed, and have equal variances.
   + Default is True.  
   + If set to False, performs Welch's t-test, which doesn't use pooled sample variance. 
 
-| H~0~: $\mu_1 = \mu_2$, where $\mu_i$ is the population mean of population $i$  
+| H~0~: $\mu_1 = \mu_2$  
 | H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$ 
 
 Looking at the 2022-2023 rodent sighting data from the NYC 311 Service Requests, there are many
@@ -105,17 +105,26 @@ paired.
 | H~0~: data is drawn from a normal distribution  
 | H~1~: data is not drawn from a normal distribution   
 
+In order to describe data, it may be useful to identify whether the data is normally distributed
+or not. We can take a sample from the data frame and test whether the distribution of response 
+times is normal or not. The Shapiro-Wilk test does not have options to omit null values,
+so the sample must be selected from rows where the Response Time is not null. 
 ```{python}  
 # only select rows where Response Time is not null 
 modified_df = df[df['Response Time'].notnull()] 
 
 sample3 = modified_df.sample(5000, random_state = 0)['Response Time'] 
 
-t_4, p_4 = scipy.stats.shapiro(sample3)
+# perform test  
+t_4, p_4 = scipy.stats.shapiro(sample3) 
 
 print(t_4, p_4)  
 ```  
+With such a small p-value, we can reject the null hypothesis at most confidence levels and
+conclude that the Response Times for the rodent sighting service requests are not
+normally distributed. 
 
+We can also graph the sample using `matplotlib` to see that the data is not normally distributed. 
 ```{python}
 import matplotlib.pyplot as plt 
  
