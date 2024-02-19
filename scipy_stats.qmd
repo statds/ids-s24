@@ -14,10 +14,10 @@ format:
       - left=20mm
 ##  docx: default
 --- 
-# Introduction 
+## Introduction 
 
-# Basic Statistical Hypothesis Tests 
-## Two-sample t-test 
+## Basic Statistical Hypothesis Tests 
+### Two-sample t-test 
 * Assumes observations are independent and identically distributed (i.i.d), 
 normally distributed, and have equal variances. 
 * Takes parameter alternative that can be set to "two_sided", "less", or "greater". 
@@ -72,7 +72,7 @@ print(t_2, p_2)
 print(t_3, p_3)
 ```  
 
-## Paired t-test 
+### Paired t-test 
 * Same assumptions as t-test with addition of observations across the two samples being 
 paired. 
 * Same null and alternate hypotheses as t-test and same parameters.  
@@ -81,8 +81,8 @@ paired.
 | H~0~: $\mu_1 = \mu_2$
 | H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$   
 
-# Normality 
-## Shapiro-Wilk Test 
+## Normality 
+### Shapiro-Wilk Test 
 * Used to test normality of a data sample.
 * Assumes observations are i.i.d. 
 
@@ -115,7 +115,7 @@ plt.ylabel('Value Counts')
 plt.hist(sample3.values, bins = bins) 
 ``` 
 
-## NormalTest 
+### NormalTest 
 * Based on the D'Agostino-Pearson test for assessing normality with shape. 
   + Measures skewness and kurtosis, which is the heaviness/lightness of the tail. 
   + A normal distribution has skewness of $0$ and kurtosis of $3$.  
@@ -125,13 +125,13 @@ plt.hist(sample3.values, bins = bins)
 | H~1~: data is not drawn from a normal distribution   
 
 ```{python}
-t_3, p_3 = scipy.stats.normaltest(sample3)
+t_5, p_5 = scipy.stats.normaltest(sample3)
 
-print(t_3, p_3)  
+print(t_5, p_5)  
 ``` 
 
 # Correlation   
-## Pearson's Correlation 
+### Pearson's Correlation 
 * Tests for a linear relationship between two samples.
 * Assumes observations are i.i.d, normally distributed, and have equal variances.  
 * Returns a correlation coefficient as well as the p-value corresponding to the chosen 
@@ -150,21 +150,33 @@ sample4 = modified_df2.sample(5000, random_state = 0)
 x = sample4['Latitude'] 
 y = sample4['Response Time'] 
 
-t_5, p_5 = scipy.stats.pearsonr(x, y)
+t_6, p_6 = scipy.stats.pearsonr(x, y)
 
-print(t_5, p_5)
+print(t_6, p_6)
 ``` 
 
 # Nonparametric Hypothesis Tests   
-## Mann-Whiney U Test 
+### Mann-Whitney U Test 
 * Tests that two samples are drawn from the same distribution. 
 * Assumes observations are i.i.d. and can be ranked/compared. 
-* Nonparametric version of t-test.  
+* Nonparametric version of t-test. 
+* Takes optional parameter `method` with three options. 
+  + `asymptotic` provides an estimation of the test statistic using sum
+  of rankings.  
+  + `exact` calculates the exact p-value. 
+  + Default option `auto` uses `exact` for sample sizes $<= 8$ and 
+  `asymptotic` otherwise. 
 
 | H~0~: distribution of sample 1 $=$ distribution of sample 2
 | H~1~: distribution of sample 1 $\neq$ or $>$ or $<$ distribution of sample 2  
 
-## Kruskal-Wallis H Test 
+```{python}
+t_7, p_7 = scipy.stats.mannwhitneyu(sample1, sample2, nan_policy = 'omit')
+
+print(t_7, p_7)
+``` 
+
+### Kruskal-Wallis H Test 
 * Tests that two or more samples are drawn from the same distribution. 
 
 | H~0~: all the samples have the same distribution 
