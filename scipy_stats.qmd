@@ -21,31 +21,52 @@ The package `scipy.stats`
 
 ## Basic Statistical Hypothesis Tests 
 ### Two-sample t-test 
-* Assumes observations are independent and identically distributed (i.i.d), 
-normally distributed, and have equal variances. 
-* Takes parameter alternative that can be set to "two_sided", "less", or "greater". 
-* Takes optional parameter for handling null values. 
-  + Can "propagate" (return NaN), "raise" (raise `ValueError`), or "omit"(ignore null values). 
-* Takes optional boolean parameter indicating equal variances. 
-  + Default is True.  
-  + If set to False, performs Welch's t-test, which doesn't use pooled sample variance. 
 
 | H~0~: $\mu_1 = \mu_2$  
-| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$ 
+| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$  
+
+**Code:** `scipy.stats.ttest_ind(sample1, sample2)`  
+
+**Assumptions:** Observations are independent and identically distributed (i.i.d), 
+normally distributed, and have equal variances. 
+
+**Optional Parameters:**
+
+* `nan_policy` can be set to `propagate` (return `nan`), `raise` (raise `ValueError`),
+or `omit`(ignore null values).
+* `alternative` can be `two-sided` (default), `less`, or `greater`. 
+* `equal_var` is a boolean representing whether the variances of the two samples are 
+equal. 
+* `axis` defines the axis along which the statistic should be computed (default is 0). 
+
+**Returns:** The t-statisic, a corresponding p-value, and the degrees of freedom. 
 
 ### Paired t-test 
-* Same assumptions as t-test with addition of observations across the two samples being 
-paired. 
-* Same null and alternate hypotheses as t-test and same parameters.  
-* The input arrays must have the same shape. 
 
 | H~0~: $\mu_1 = \mu_2$
-| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$   
+| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$  
+ 
+**Code:** `scipy.stats.ttest_rel(sample1, sample2)` 
+
+**Assumptions:** Observations are independent and identically distributed (i.i.d), 
+normally distributed, have equal variances, and are related. The input arrays must
+also be of the same size since the observations are paired.  
+
+**Optional Parameters:** Can use `nan_policy` or `alternative`. 
+
+**Returns:** The t-statisic, a corresponding p-value, and the degrees of freedom. 
+Also has a method called `confidence_interval` with input parameter `confidence_level`
+that returns a tuple with the confidence interval around the difference in 
+population means of the two samples.  
 
 ### ANOVA 
-* Same assumptions as t-test. 
 
-### Example: 2-sample t-test of Mean Response Times by Borough  
+| H~0~: $\mu_1 = \mu_2 = ... = \mu_n$
+| H~1~: at least two $\mu_i$ are not equal  
+
+**Code:** `scipy.stats.f_oneway(sample1, sample2, ..., samplen)`
+
+### Example: Comparison of Mean Response Times by Borough  
 Looking at the 2022-2023 rodent sighting data from the NYC 311 Service Requests, there are many
 ways a two-sample t-test may be useful. For example, we can consider samples drawn from different
 boroughs and perform this hypothesis test to identify whether their mean response time to 
@@ -65,7 +86,7 @@ df['Closed Date'] = pd.to_datetime(df['Closed Date'])
 df['Response Time'] = df['Closed Date'] - df['Created Date']
 
 # convert data to total seconds
-df['Response Time'] = df['Response Time'].apply(lambda x: x.total_seconds() / 3600) 
+df['Response Time'] = df['Response Time'].apply(lambda x: x.total_seconds() / 3600)    
 ``` 
 
 ```{python}
@@ -81,20 +102,7 @@ Since the two samples have very different variances, we need to run the test wit
 pooled sample variance, by setting `equal_var` equal to `False`.
 
 ```{python}
-# perform test and omit null values
-t_1, p_1 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, nan_policy = 'omit')
 
-# perform test and propagate null values
-t_2, p_2 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, nan_policy = 'propagate')
-
-# perform one-sided test (mean sample 1 > mean sample 2)
-t_3, p_3 = scipy.stats.ttest_ind(sample1, sample2, equal_var = False, 
-                                    alternative = 'greater', nan_policy = 'omit')
-
-# print results 
-print(t_1, p_1)
-print(t_2, p_2)
-print(t_3, p_3)
 ``` 
 As per the above results, at most confidence levels, the p-value of $1.23 \times 10^{-15}$ will lead to 
 a rejection of the null hypothesis, suggesting that the mean response times for the Bronx and
@@ -135,7 +143,7 @@ We can also graph the sample using `matplotlib` to see that the data is not norm
 ```{python}
 import matplotlib.pyplot as plt 
  
-bins = [i for i in range(0, 2500, 20 0)] 
+bins = [i for i in range(0, 2500, 200)] 
  
 plt.xticks(bins)
 
@@ -203,7 +211,5 @@ print(t_6, p_6)
 | H~1~: distribution of sample 1 $\neq$ or $>$ or $<$ distribution of sample 2  
 
 ```{python}
-t_7, p_7 = scipy.stats.mannwhitneyu(sample1, sample2, nan_policy = 'omit')
 
-print(t_7, p_7)
 ```   
