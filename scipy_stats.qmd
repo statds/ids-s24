@@ -37,18 +37,21 @@ import scipy.stats
 # read in file 
 df = pd.read_csv('rodent_2022-2023.csv')  
 
+# data cleaning - change dates to timestamp object
 df['Created Date'] = pd.to_datetime(df['Created Date'])
 df['Closed Date'] = pd.to_datetime(df['Closed Date'])
 df['Response Time'] = df['Closed Date'] - df['Created Date']
 
+# convert data to total seconds
 df['Response Time'] = df['Response Time'].apply(lambda x: x.total_seconds()) 
 
+# select Bronx and Queens boroughs 
 df_man = df.loc[df['Borough'] == 'BRONX']
 df_queens = df.loc[df['Borough'] == 'QUEENS']
 
 # sample from respective dfs 
-sample1 = df_man['Response Time'].sample(1000, random_state = 0) 
-sample2 = df_queens['Response Time'].sample(1000, random_state = 0)
+sample1 = df_man.sample(1000, random_state = 0)['Response Time']
+sample2 = df_queens.sample(1000, random_state = 0)['Response Time'] 
 
 # show the samples have unequal variances 
 print(sample1.std())
@@ -92,9 +95,9 @@ modified_df = df[df['Response Time'].notnull()]
 
 sample3 = modified_df.sample(5000, random_state = 0)['Response Time'] 
 
-t_2, p_2 = scipy.stats.shapiro(sample3)
+t_4, p_4 = scipy.stats.shapiro(sample3)
 
-print(t_2, p_2)  
+print(t_4, p_4)  
 ```  
 
 ```{python}
@@ -131,11 +134,26 @@ print(t_3, p_3)
 ## Pearson's Correlation 
 * Tests for a linear relationship between two samples.
 * Assumes observations are i.i.d, normally distributed, and have equal variances.  
-* Returns a correlation coefficient as well as the test statistic and p-value. 
+* Returns a correlation coefficient as well as the p-value corresponding to the chosen 
+hypothesis. 
 * Raises `ConstantInputWarning` if an input array has all constant values.   
 
 | H~0~: the samples are independent 
 | H~1~: there exists dependency between the samples 
+
+```{python}
+# only select rows where neither Response Time nor Latitude is null 
+modified_df2 = modified_df[modified_df['Latitude'].notnull()]
+
+sample4 = modified_df2.sample(5000, random_state = 0)  
+
+x = sample4['Latitude'] 
+y = sample4['Response Time'] 
+
+t_5, p_5 = scipy.stats.pearsonr(x, y)
+
+print(t_5, p_5)
+``` 
 
 # Nonparametric Hypothesis Tests   
 ## Mann-Whiney U Test 
