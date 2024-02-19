@@ -1,0 +1,166 @@
+---
+title: "Visualization"
+format: html
+---
+
+# Visualization
+
+
+## Matplotlib
+
+### Introduction
+One of the most important tasks in data analysis is making informative visualizations, in this section sepcifically plots. Using visuals helps people indentify outliers or needed data transformers as a way of aiding in the creation of models. To help create this models and visuals we will be using Matplotlib. Matplotlib is a desktop plotting package desinged for creating plots and figures suitable for publications. In order to be a suitable package matplotlib supports various GUI (Graphical User Interface) backends on all operating systems and can export the visuals to the most common raster graphic formats such as, PDF, SVG JPG, PNG, GIF, and more. 
+
+### A Brief matplot API Primer
+With matplotlib, we use the following import convention:
+```{python}
+import matplotlib.pyplot as plt
+```
+Now we can try in creating a simple plot
+
+```{python}
+data = np.arange(10)
+
+print(data)
+print(plt.plot(data))
+```
+Now a simple line plot should be shown like the one above.
+This was a simple way to see how a line plot would be created and to test if matplotlib would be installed in your system correctly. Now we can move onto the more in depth parts of matplotlib.
+## Figures and Subplots
+Plots in matplotlib reside within a figure object. Which you can create like so:
+```{python}
+fig = plt.figure()
+```
+In Python, if you first run '%matplotlib' to set up the matplotlib integration, an empty plot window will appear, but in Jupyter nothing will be shown until a few more commands are used.
+You can’t make a plot with a blank figure. You have to create one or more subplots using 'add_subplot'
+```{python}
+ax1 = fig.add_subplot(2,2,1)
+```
+Now with this there should be a 2x2. Also to create more subplots of the same dimension, simply increase the last digit like so:
+```{python}
+ax2 = fig.add_subplot(2,2,2)
+### This one would create a 2nd 2x2 plot
+ax3 = fig.add_subplot(2,2,3)
+### This one would create a 3rd 2x2 plot
+```
+With all of these empty plots, lets make them into plots with visuals in them!
+First, we can make a histogram chart:
+```{python}
+ax1.hist(np.random.standard_normal(100), bins=20, color="blue", alpha=0.3);
+```
+Next, we can do a scatter plot:
+```{python}
+ax2.scatter(np.arange(50), np.arange(50) + 3 * np.random.standard_normal(50));
+```
+Last, it can be a line plot:
+```{python}
+ax3.plot(np.random.standard_normal(50).cumsum(), color="black", linestyle="dashed")
+```
+
+### Adjusting the spacing around subplots
+After making all the subplots its time to adjust the spaces around them. By default, matplotlib leaves a certain amount of padding around the outside of the subplots and in spacing between subplots. This spacing is all relative to the height and width of the plot, so that if you resize the plot either programmatically or manually using the GUI window, the plot will adjust itself. The way to control the percent of the figure width and height would be to use 'wspace' and 'hspace' like this:
+```{python}
+fig, axes = plt.subplots(2, 2, sharex=True, sharey=True)
+### Still using the same dimension of a 2x2
+for i in range(2):
+    for j in range(2):
+        axes[i, j].hist(np.random.standard_normal(500), bins=50,
+                        color="blue", alpha=0.5)
+fig.subplots_adjust(wspace=0, hspace=0)
+```
+Now we have four historgrams with a variety of spacing between each of them because of the relative spacing that matplotlib adjusted for us.
+But now there is an issue with some of the plots we have here. If you notice that that the top two histograms don't have their respective proper x axis labels anymore. This is because matplotlib doesn't check for any labels that could overlap in the output. To fix this we would have to do it manually by specifying the tick locations and tick labels.
+
+
+## Ticks, Labels, and Legends
+In order to control the plot range, tick locations, and tick labels of matplotlib we have to use methods such as: 'xlim', 'xticks', and 'xticklabels'.
+These can be used in two ways:
++ Called with no arguments, which returns the current parameter value
+> The benefit of this is that it allows you to query and retrieve the current state or value of a specific parameter without needing to remember the current satte separately. Which is useful in checking the current configuration of the plot.
++ Called with parameters, which sets the parameter value
+> The benefit of this is that it allows you to easily modify or set parameter value in a single line of cod. It's useufl in a sense where it provides a concise and readable way to update the plot configuration.
+
+All methods act on the active or most recently created 'AxesSubplot'. Each corresponding to the two methods on the subplot object itself. In the case of 'xlim', it would be 'ax.get_xlim' and 'ax.set_xlim'.
+
+### Setting the title, axis labels, ticks, and tick labels
+Let's start by creating a simple figure to work with:
+```{python}
+fig, ax = plt.subplots()
+ax.plot(np.random.standard_normal(1000).cumsum());
+```
+
+In order to change the x-axis ticks we would use 'set_xticks' and 'set_xticklabels'
+```{python}
+ticks = ax.set_xticks([0, 250, 500, 750, 1000])
+
+labels = ax.set_xticklabels(["one", "two", "three", "four", "five"], rotation=30, fontsize=8)
+```
+Here we set the location along the x axis of where the labels would be put, then later we provide the names for the labels while giving them the size and slant angle we would like it to be put at.
+
+And now to add a title we simply use 'set_title'
+```{python}
+ax.set_xlabel("Stages")
+Text(0.5, 6.666666666666652, 'Stages')
+ax.set_title("My plot")
+```
+>another way to write this with one line of code would be [ax.set(title="My first matplotlib plot", xlabel="Stages")]
+To modify the y axis we would do the same process but replace the 'x' with 'y'
+
+### Adding legends
+When having multiple lines in the plot or visual, a legend is going to be needed in order to keep track of which represents which data line.
+The easiest way to do this would be to pass the 'label' argument when adding each piece of the plot:
+```{python}
+fig, ax = plt.subplots()
+ax.plot(np.random.randn(500).cumsum(), color="black", label="one");
+ax.plot(np.random.randn(500).cumsum(), color="red", linestyle="dashed", label="two");
+ax.plot(np.random.randn(500).cumsum(), color="blue", linestyle="dotted", label="three");
+```
+Now we can simply call with 'ax.legend()' which just creates a legend within the plot for us.
+```{python}
+ax.legend()
+```
+
+## Colors, Makers, and Line Styles
+We've seen a lot of ways in the code provided that allowed the change of color and line styles. There are many different ways to refer to a color in python, it can range from using the name to specifically getting the hex code of the color. For the supported line styles in matplotlib, just refer to the docstring of 'plt.plot'.
+In an addition, we can also make it so that the plots we create can have markers to highlight the data points. However, matplotlib creates a continuous line plot, it can occasoinally be unclear where the points lie.
+Example:
+```{python}
+ax = fig.add_subplot()
+
+ax.plot(np.random.standard_normal(30).cumsum(), color="black", linestyle="dashed", marker="o");
+```
+From the plot we see above it can be apparent that the subsequent points are automatically drawn for us. This can be changed to however you want to as well with the 'drawstyle' option that matplotlab provides.
+```{python}
+fig = plt.figure()
+ax = fig.add_subplot()
+data = np.random.standard_normal(30).cumsum()
+
+ax.plot(data, color="black", linestyle="dashed", label="Default");
+ax.plot(data, color="black", linestyle="dashed", drawstyle="steps-post", label="steps-post");
+ax.legend()
+```
+As seen above with the use of 'ax.legend()' we are able to see the difference in the default lines and the lines using the 'drawstyle' method.
+
+## Saving Plots to a File
+Now to save all the beautiful plots you will create in the future, we have to use the 'savefig' method.
+For an SVG version of a figure:
+```{python}
+fig.savefig("figpath.svg")
+```
+The file type is inferred from the file extension. So to gain a PDF file as well if you were to just replace it with a '.pdf'
+But another feature can be used when saving in a photo format file, such as 'png' and 'jpg', which is the 'dpi' feature.
+```{python}
+fig.savefig("figpath.png", dpi=400)
+```
+With this we will have a png file with the resolution of 400 dpi.
+>In most cases you will never have to go over 400 dpi, but if the graph in the file seems too blurry do not raise it. Simply lower it to 300 dpi but no lower than 150 dpi because that would be too blurry, as it would be the same case in the other direction when you try to raise the dpi too high.
+
+## Matplot Configuration
+Matplotlib comes configured with color schemes and defaults that are primarily towards preparing figures for publications. But lucky for us nearly all of the default setitngs can be customized with global parameters that can alter figure size, subplot spacing, colors, font sizes, grid styles, and so on.
+Exmaple:
+```{python}
+plt.rc("figure", figsize=(10, 10))
+```
+>Here we set the global default size to be 10x10 within python
+
+For more extensive customization that you would like to do and mess around with, to see a list of all the options, matplotlib comes with a configuration file matplotlibrc in the matplotlib/mpl-data directory. If you customize this file and place it in your home directory titled .matplotlibrc, it will be loaded each time you use matplotlib so you can have your own personal matplotlib style.
