@@ -162,3 +162,7 @@ cython_debug/
 /.quarto/
 /_book/
 /_freeze/
+
+# Sample Data for Demonstration
+
+rodent_2022_2023_edited.csv

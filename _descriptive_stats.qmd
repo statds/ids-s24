@@ -1,7 +1,223 @@
-## Sources
+## Numerical Descriptive Statistics
 
-https://towardsdatascience.com/a-data-scientists-essential-guide-to-exploratory-data-analysis-25637eee0cf6
+When you first begin working with a new dataset, it is important 
+to develop an understanding of the data's overall behavior. This
+is important for both understanding numerical and categorical 
+data. 
 
+For numeric data, we can develop this understanding through the use
+of **descriptive statistics**. The goal of descriptive statistics
+is to understand three primary elements of a given variable [2]:
+
++ **distribution**
++ **central tendency**
++ **variability**
+
+### Variable Distributions
+
+Every random variable is given by a **probability distribution**, 
+which is "a mathematical function that describes the probability of 
+different possible values of a variable" [3]. 
+
+There are a few common types of distributions which appear 
+frequently in real-world data [3]:
+
++ **Uniform**: 
++ **Poisson**:
++ **Binomial**:
++ **Normal and Standard Normal**:
++ **Gamma**: 
++ **Chi-squared**:
++ **Exponential**
++ **Beta**
++ **T-distribution**
++ **F-distribution**
+
+Understanding the distribution of different variables in a given 
+dataset can inform how we may decide to transform that data. 
+For example, in the context of the `rodent` data, we are interested
+in the patterns which are associated with "rodent" complaints which 
+occur. 
+
+```{python}
+import pandas as pd
+import numpy as np
+import plotly.express as px
+
+data = pd.read_csv("rodent_2022_2023_edited.csv")
+```
+
+Now that we have read in the data, we can examine the distributions of 
+several important variables. Namely, let us examine a numerical 
+variable which is associated with rodent sightings: 
+
+```{python}
+data.head(2).T
+```
+
+In this dataset, the most relevant numerical data to consider is the 
+time between the opening of a rodent complaint and its closing. All
+of the other relevant variables are either geospatial or categorical:
+
+```{python}
+# convert strings into datetime objects
+data["Closed_Date"] = pd.to_datetime(data["Closed_Date"])
+data["Created_Date"] = pd.to_datetime(data["Created_Date"])
+
+data["time_dif"] = data["Closed_Date"] - data["Created_Date"]
+
+# set the time delta as the number of hours difference
+data["time_dif"] = data["time_dif"].dt.total_seconds()/3600
+data["time_dif"]
+```
+
+Now we have a column describing the time difference between when 
+a complaint is opened and closed. We can plot this distribution 
+with `plotly` to provide a better visual representation of the 
+distribution: 
+
+```{python}
+import plotly.graph_objects as go
+from scipy import stats
+
+response_dat2 = data["time_dif"].dropna()
+
+hist2 = go.Histogram(x=response_dat2, 
+                    nbinsx=50, 
+                    opacity=0.75, 
+                    name='response time')
+
+# Calculate KDE
+mu, sigma = stats.norm.fit(response_dat2)
+x_range = np.linspace(min(response_dat2), max(response_dat2), 200)
+fitted_vals = stats.norm.pdf(x_range, mu, sigma)
+fitted_dist = go.Scatter(x=x_range, y=fitted_vals, mode="lines", 
+                         name="Fitted Exponential Distribution")
+
+# Create a layout
+layout = go.Layout(title='Complaint Response Time Histogram',
+                   xaxis=dict(title='Value'),
+                   yaxis=dict(title='Density'),
+                   bargap=0.2)
+
+# Create a figure and add both the histogram and KDE
+fig = go.Figure(data=[hist, fitted_dist], layout=layout)
+
+# Show the figure
+fig.show()
+```
+As you can see, there is a strong right skew (the majority of observations
+are concentrated at the lower end of the distribution, but there 
+are a few observations at the extreme right end).
+
+Here, we use pandas plotting to generate a density estimation 
+curve.
+
+```{python}
+x_range = np.linspace(response_dat2.min(), response_dat2.max(), 1000)
+response_dat2.plot.kde(ind=x_range)
+```
+
+We can compare this density curve to plots of the exponential 
+distribution, and see that this variable (complaint response times)
+closely match an exponential distribution with a very high $\lambda$
+parameter value. Below is a figure displaying a series of 
+exponential distributions for different values of $\lambda$:
+
+![Exponential Distributions for different lambdas](descriptive_stats/Exponential-Distribution.jpeg){fig-align="center"}
+
+### Central Tendency Measures
+
+Now that we have examined the distribution of the 
+response time, it is appropriate to investigate the 
+important measures of central tendency for the data.
+
+There are three main measures of central tendency which are 
+used: 
+
++ **Mean**: The average or expected value of a random variable
+  + $\overline{X} = (1/n)\sum_{i=1}^{n} X_{i}$
+  (where $X_{i}\text{s}$ are independent random samples from 
+  the same distribution)
++ **Median**: exact middle value of a random variable [5]
+  + For even $n$, $\overset{\sim}{X} = (1/2)[X_{(n/2+1)} + X_{(n/2)}]$
+  + For odd $n$, $\overset{\sim}{X} = X_{([n+1]/2)}$
++ **Mode**: the most frequently occurring value of a random variable
+
+For the given variable (complaint response time), we can find 
+each of the respective statistics using pandas: 
+
+```{python}
+central_tendency = pd.Series(
+    {"Mean": response_dat2.mean(), 
+     "Median": response_dat2.median(), 
+     "Mode": response_dat2.mode().iloc[0]}
+)
+central_tendency
+```
+
+As you can see, the most commonly occurring value (as is obvious from
+the density plot) is 0. This means that the time between when a 
+rodent sighting complaint is filed and responded to (or closed) is most
+likely to be 0. Additionally, it implies that more than half of all 
+data points have a complaint response time of zero since the median is 
+zero as well. 
+
+It makes sense that the mean is greater than the median in this case since
+the distribution is exponential and skewed to the right. 
+
+### Variability Measures
+
+As with central tendency, there are also several relevant measures of 
+variance [2]. These include: 
+
++ **range**: $X_{(n)} - X_{(1)}$ - the difference between the greatest
+  observed value and the smallest one.
++ **standard deviation**: 
+  $S = \sqrt{(1/[n-1])\sum_{i=1}^{n}(X_{i} - \overline{X})^{2}}$ - 
+  the average difference of values from the observed mean of a sample.
++ **variance**: Square of the standard deviation of a sample
+  $S^{2} = (1/[n-1])\sum_{i=1}^{n}(X_{i} - \overline{X})^{2}$
++ **Interquartile Range**: $X_{[3/4]} - X_{[1/4]}$ where 
+  $X_{[p]}$ is the $p\text{th}$ sample quantile - 
+  A measure of the difference between the 1st 
+  and third quantiles of a distribution
+
+ We can easily calculate all of these values using pandas in python [6]
+
+ ```{python}
+quartiles = response_dat2.quantile([0.25, 0.75])
+iqr = quartiles[0.75] - quartiles[0.25]
+
+variability = pd.Series(
+    {"range": response_dat2.max() - response_dat2.min(), 
+     "standard deviation": response_dat2.std(), 
+     "variance": response_dat2.std()**2, 
+     "IQR": iqr}
+)
+variability
+ ```
+
+We can also use the interquartile range as a means to obtain 
+a rudimentary measure of outliers in the data. Specifically, 
+any observations which are a distance of $1.5 * IQR$ beyond the 
+third or first quartiles. 
+
+Seeing as the first quartile is also the minimum in this, case
+we only need to be concerned with outliers at the higher end 
+of the spectrum. We calculate the upper fence for outliers
+as follows [5]:
+
+$\text{upper fence } = X_{[0.75]} + 1.5\cdot IQR$
+
+```{python}
+upper_lim = quartiles[0.75] + 1.5*iqr
+
+outliers = response_dat2[response_dat2 > upper_lim]
+outliers
+```
+
+   
 https://www.dwstockburger.com/Introbook/sbk22.htm#:~:text=The%20procedure%20used%20to%20test%20the%20significance%20of,number%20of%20times%20when%20there%20were%20no%20effects. 
 
 Pandas Profiling ... https://www.youtube.com/watch?v=Ef169VELt5o
