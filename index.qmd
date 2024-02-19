@@ -190,6 +190,8 @@ Here are some example tasks:
 + Handling spatial data
 + Visualize spatial data in a Google map
 + Animation
++ Classification and regression trees
++ Support vector machine
 + Random forest
 + Naive Bayes
 + Bagging vs boosting
@@ -210,7 +212,7 @@ Please use the following table to sign up.
   02/07  | Matt Elliott           | Data science communication skills
   02/07  | Weijia Wu              | 
   02/12  | Dr. Haim Bar           | Database management
-  02/14  | Willam Taki            |
+  02/19  | Willam Taki            |
   02/19  | Joshua Lee             | Descriptive Statistics
   02/21  | Pratham Patel          | Handling spatial data with `geopandas`
   02/21  | Olivia Massad          | Grammar of Graphics `plotnine`
