@@ -16,6 +16,9 @@ format:
 --- 
 ## Introduction 
 
+## Overview of `scipy.stats` 
+The package `scipy.stats`  
+
 ## Basic Statistical Hypothesis Tests 
 ### Two-sample t-test 
 * Assumes observations are independent and identically distributed (i.i.d), 
@@ -30,6 +33,19 @@ normally distributed, and have equal variances.
 | H~0~: $\mu_1 = \mu_2$  
 | H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$ 
 
+### Paired t-test 
+* Same assumptions as t-test with addition of observations across the two samples being 
+paired. 
+* Same null and alternate hypotheses as t-test and same parameters.  
+* The input arrays must have the same shape. 
+
+| H~0~: $\mu_1 = \mu_2$
+| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$   
+
+### ANOVA 
+* Same assumptions as t-test. 
+
+### Example: 2-sample t-test of Mean Response Times by Borough  
 Looking at the 2022-2023 rodent sighting data from the NYC 311 Service Requests, there are many
 ways a two-sample t-test may be useful. For example, we can consider samples drawn from different
 boroughs and perform this hypothesis test to identify whether their mean response time to 
@@ -44,25 +60,25 @@ df = pd.read_csv('rodent_2022-2023.csv')
 # data cleaning - change dates to timestamp object
 df['Created Date'] = pd.to_datetime(df['Created Date'])
 df['Closed Date'] = pd.to_datetime(df['Closed Date'])
+
+# add column Response Time 
 df['Response Time'] = df['Closed Date'] - df['Created Date']
 
 # convert data to total seconds
-df['Response Time'] = df['Response Time'].apply(lambda x: x.total_seconds()) 
+df['Response Time'] = df['Response Time'].apply(lambda x: x.total_seconds() / 3600) 
+``` 
 
+```{python}
 # select Bronx and Queens boroughs 
-df_bronx = df.loc[df['Borough'] == 'BRONX']
-df_queens = df.loc[df['Borough'] == 'QUEENS']
-
-# sample from respective dfs 
-sample1 = df_bronx.sample(1000, random_state = 0)['Response Time']
-sample2 = df_queens.sample(1000, random_state = 0)['Response Time'] 
+df_man = df.loc[df['Borough'] == 'MANHATTAN']['Response Time']
+df_queens = df.loc[df['Borough'] == 'QUEENS']['Response Time'] 
 
 # show the samples have unequal variances 
-print(sample1.std())
-print(sample2.std())
+print('Mean, variance for Manhattan:', (df_man.mean(), df_man.std() ** 2))
+print('Mean, variance for Queens:', (df_queens.mean(), df_queens.std() ** 2)) 
 ```
-Since the two samples have very different standard deviations, and therefore unequal variances, 
-we must run the test without a pooled sample variance, by setting `equal_var` equal to `False`.
+Since the two samples have very different variances, we need to run the test without a 
+pooled sample variance, by setting `equal_var` equal to `False`.
 
 ```{python}
 # perform test and omit null values
@@ -86,16 +102,7 @@ Queens differ significantly. When the null values are propagated instead of omit
 the t-statistic and p-value both return `nan` due to missing values. And in the third case, when 
 the alterative is set to $>$, the null hypothesis would not be rejected at most confidence levels,
 suggesting that although the mean response time for the Bronx and Queens differ, that for the Bronx
-is not significantly larger.  
-
-### Paired t-test 
-* Same assumptions as t-test with addition of observations across the two samples being 
-paired. 
-* Same null and alternate hypotheses as t-test and same parameters.  
-* The input arrays must have the same shape. 
-
-| H~0~: $\mu_1 = \mu_2$
-| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$   
+is not significantly larger.   
 
 ## Normality 
 ### Shapiro-Wilk Test 
@@ -128,7 +135,7 @@ We can also graph the sample using `matplotlib` to see that the data is not norm
 ```{python}
 import matplotlib.pyplot as plt 
  
-bins = [i for i in range(0, 12600000, 1000000)] 
+bins = [i for i in range(0, 2500, 20 0)] 
  
 plt.xticks(bins)
 
