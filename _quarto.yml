@@ -18,7 +18,7 @@ book:
     - python.qmd
     - import.qmd
     - communication.qmd
-    - descriptive_statistics.qmd
+    - descriptive_stats.qmd
     - visualization.qmd
     - exercises.qmd
     - references.qmd
