@@ -14,6 +14,10 @@ format:
       - left=20mm
 ##  docx: default
 --- 
+
+This section was written by Isabelle Perez. 
+
+
 ## Introduction  
 The package `scipy.stats` is a subpackage of `Scipy` and contains many methods useful
 for statistics such as probability distributions, summary statistics, statistical tests,
@@ -344,6 +348,8 @@ test statistic associated with `sample_1`.
 normal, so the statisic can be measured as $z = \frac{U-\mu_{U}}{\sigma_{U}}$.
 * To adjust for ties, the standard deviation is calculated as follows: 
 
-$\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - \frac{\sum_{k = 1}^{K}(t^{3}_{k} - t_{k})}{n(n - 1)})}$
+$\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - \frac{\sum_{k = 1}^{K}(t^{3}_{k} - t_{k})}{n(n - 1)})}$, where $t_{k}$ is the number of ties. 
 ::: 
 
+## References 
+<https://docs.scipy.org/doc/scipy/reference/stats.html>
