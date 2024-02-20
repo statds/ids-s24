@@ -269,6 +269,22 @@ have equal variances.
 **Returns:** The correlation coefficient and a corresponding p-value. It also 
 has the `confidence_interval` method. 
 
+### Chi-Squared Test 
+
+| H~0~: the two variables are independent of one another
+| H~1~: a dependency exists between the two variables 
+
+**Code:** `scipy.stats.chi2_contingency(table)` 
+
+**Assumptions:** The cells in the table contain frequencies, the levels of each
+variable are mutually exclusive, observations are independent, and both
+variables are categorical. 
+
+**Returns:** The test statistic, a corresponding p-value, the degrees of freedom, 
+and an array of expected frequencies from the table. 
+
+* `dof = table.size - sum(table.shape) + table.ndim - 1` 
+
 ## Nonparametric Hypothesis Tests   
 ### Mann-Whitney U Test 
 * Tests that two samples are drawn from the same distribution. 
