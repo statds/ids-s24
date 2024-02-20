@@ -22,16 +22,15 @@ be easily conducted using `scipy.stats` and will provide examples of situations 
 which they may be useful.  
 
 Firstly, ensure `scipy.stats` is installed by using 
-`pip install scipy.stats` 
-or
-`pip3 install scipy.stats`
-depending on what version of python you are using. 
+`pip install scipy.stats` or `pip3 install scipy.stats`, depending on what version of python you are using. 
 
 ## Basic Statistical Hypothesis Tests 
 ### Two-sample t-test 
 
 | H~0~: $\mu_1 = \mu_2$  
 | H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$   
+
+&NewLine; 
 
 **Code:** `scipy.stats.ttest_ind(sample_1, sample_2)`  
 
@@ -54,6 +53,8 @@ equal (default is True).
 | H~0~: $\mu_1 = \mu_2$
 | H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$  
  
+&NewLine; 
+
 **Code:** `scipy.stats.ttest_rel(sample_1, sample_2)` 
 
 **Assumptions:** Observations are i.i.d, normally distributed, and related, 
@@ -71,6 +72,8 @@ population means of the two samples.
 
 | H~0~: $\mu_1 = \mu_2 = ... = \mu_n$
 | H~1~: at least two $\mu_i$ are not equal  
+
+&NewLine; 
 
 **Code:** `scipy.stats.f_oneway(sample_1, sample_2, ..., sample_n)`
 
@@ -187,6 +190,8 @@ it is for Queens.
 | H~0~: data is drawn from a normal distribution  
 | H~1~: data is not drawn from a normal distribution     
 
+&NewLine; 
+
 **Code:** `scipy.stats.shapiro(sample)` 
 
 **Assumptions:** Observations are i.i.d. 
@@ -201,6 +206,8 @@ distribution, with $1$ being a perfect match.
 
 | H~0~: data is drawn from a normal distribution  
 | H~1~: data is not drawn from a normal distribution   
+
+&NewLine; 
 
 **Code:** `scipy.stats.normaltest(sample)`  
 
@@ -261,6 +268,8 @@ plt.show()
 | H~0~: the correlations is $0$
 | H~1~: the correlations is $\neq$, $<$, or $> 0$ 
 
+&NewLine; 
+
 **Code:** `scipy.stats.pearsonr(sample_1, sample_2)`
 
 **Assumptions:** Observations are i.i.d, normally distributed, and the two samples
@@ -282,6 +291,8 @@ has the `confidence_interval` method.
 | H~0~: the two variables are independent of one another
 | H~1~: a dependency exists between the two variables 
 
+&NewLine; 
+
 **Code:** `scipy.stats.chi2_contingency(table)` 
 
 **Assumptions:** The cells in the table contain frequencies, the levels of each
@@ -300,6 +311,8 @@ and an array of expected frequencies from the table.
 
 | H~0~: distribution of sample 1 $=$ distribution of sample 2
 | H~1~: distribution of sample 1 $\neq$ or $>$ or $<$ distribution of sample 2   
+
+&NewLine; 
 
 **Code:** `scipy.stats.mannwhitneyu(sample_1, sample_2)` 
 
