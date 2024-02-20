@@ -69,7 +69,7 @@ population means of the two samples.
 **Assumptions:** Samples are i.i.d., normally distributed, and the samples have
 equal variances. 
 
-**Errors:** 
+**Errors:**  
 
 * Raises `ConstantInputWarning` if all values in each of the inputs are 
 identical. 
@@ -200,15 +200,15 @@ distribution, with $1$ being a perfect match.
 
 **Optional Parameters:** Can use `nan_policy`. 
 
-**Returns:** The test-statistic $s^2 + k^2$ where $s^2$ is from the `skewtest`
-and $k$ is from the `kurtosistest` 
+**Returns:** The test-statistic $s^2 + k^2$, where $s^2$ is from the `skewtest`
+and $k$ is from the `kurtosistest`, and a corresponding p-value
 
 This test is based on D'Agostino and Pearson's test which combines skew
 and kurtosis (heaviness of the tail or how much data resides in the tails). 
 The test compares the skewness and kurtosis of the sample to that of a normal 
 distribution, which are $0$ and $3$, respectively. 
 
-## Example: Distribution of Response Times 
+### Example: Distribution of Response Times 
 It can be useful to identify the distribution of a population because it gives
 us the ability to summarize the data more efficiently. We can identify whether
 or not the distribution of a sample of response times from the rodent sighting
@@ -248,15 +248,26 @@ plt.show()
 ``` 
 
 ## Correlation   
-### Pearson's Correlation 
-* Tests for a linear relationship between two samples.
-* Assumes observations are i.i.d, normally distributed, and have equal variances.  
-* Returns a correlation coefficient as well as the p-value corresponding to the chosen 
-hypothesis. 
-* Raises `ConstantInputWarning` if an input array has all constant values.   
+### Pearson's Correlation     
 
-| H~0~: the samples are independent 
-| H~1~: there exists dependency between the samples 
+| H~0~: the correlations is $0$
+| H~1~: the correlations is $\neq$, $<$, or $> 0$ 
+
+**Code:** `scipy.stats.pearsonr(sample_1, sample_2)`
+
+**Assumptions:** Observations are i.i.d, normally distributed, and the two samples
+have equal variances. 
+
+**Optional Parameters:** Can use `alternative`. 
+
+**Errors:** 
+
+* Raises `ConstantInputWarning` if either input has all constant values. 
+* Raises `NearConstantInputWarning` if 
+`np.linalg.norm(x - mean(x)) < 1e-13 * np.abs(mean(x))`. 
+
+**Returns:** The correlation coefficient and a corresponding p-value. It also 
+has the `confidence_interval` method. 
 
 ## Nonparametric Hypothesis Tests   
 ### Mann-Whitney U Test 
