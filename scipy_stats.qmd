@@ -23,11 +23,11 @@ The package `scipy.stats`
 ### Two-sample t-test 
 
 | H~0~: $\mu_1 = \mu_2$  
-| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$  
+| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$   
 
-**Code:** `scipy.stats.ttest_ind(sample1, sample2)`  
+**Code:** `scipy.stats.ttest_ind(sample_1, sample_2)`  
 
-**Assumptions:** Observations are independent and identically distributed (i.i.d), 
+**Assumptions:** Samples are independent and identically distributed (i.i.d), 
 normally distributed, and have equal variances. 
 
 **Optional Parameters:**
@@ -36,7 +36,7 @@ normally distributed, and have equal variances.
 or `omit`(ignore null values).
 * `alternative` can be `two-sided` (default), `less`, or `greater`. 
 * `equal_var` is a boolean representing whether the variances of the two samples are 
-equal. 
+equal (default is True). 
 * `axis` defines the axis along which the statistic should be computed (default is 0). 
 
 **Returns:** The t-statisic, a corresponding p-value, and the degrees of freedom. 
@@ -46,11 +46,11 @@ equal.
 | H~0~: $\mu_1 = \mu_2$
 | H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$  
  
-**Code:** `scipy.stats.ttest_rel(sample1, sample2)` 
+**Code:** `scipy.stats.ttest_rel(sample_1, sample_2)` 
 
-**Assumptions:** Observations are independent and identically distributed (i.i.d), 
-normally distributed, have equal variances, and are related. The input arrays must
-also be of the same size since the observations are paired.  
+**Assumptions:** Samples are i.i.d, normally distributed, have equal variances, 
+and are related. The input arrays must also be of the same size since the 
+observations are paired.  
 
 **Optional Parameters:** Can use `nan_policy` or `alternative`. 
 
@@ -64,16 +64,27 @@ population means of the two samples.
 | H~0~: $\mu_1 = \mu_2 = ... = \mu_n$
 | H~1~: at least two $\mu_i$ are not equal  
 
-**Code:** `scipy.stats.f_oneway(sample1, sample2, ..., samplen)`
+**Code:** `scipy.stats.f_oneway(sample_1, sample_2, ..., sample_n)`
+
+**Assumptions:** Samples are i.i.d., normally distributed, and have 
+equal variances. 
+
+**Errors:** 
+
+* Raises `ConstantInputWarning` if all values in each of the inputs are 
+identical. 
+* Raises `DegenerateDataWarning` if any input has length $0$ or all inputs
+have length $1$. 
 
 ### Example: Comparison of Mean Response Times by Borough  
 Looking at the 2022-2023 rodent sighting data from the NYC 311 Service Requests, there are many
 ways a two-sample t-test may be useful. For example, we can consider samples drawn from different
-boroughs and perform this hypothesis test to identify whether their mean response time to 
-the service requests differ. 
+boroughs and perform this hypothesis test to identify whether their mean response times differ. 
+If so, this may suggest that some boroughs are being underserviced.  
 ```{python} 
-import pandas as pd  
-import scipy.stats  
+import pandas as pd 
+import numpy as np 
+import scipy.stats   
 
 # read in file 
 df = pd.read_csv('rodent_2022-2023.csv')  
@@ -89,28 +100,76 @@ df['Response Time'] = df['Closed Date'] - df['Created Date']
 df['Response Time'] = df['Response Time'].apply(lambda x: x.total_seconds() / 3600)    
 ``` 
 
+Since the two-sample t-test assumes the data is drawn from a normal distribution, we need to
+ensure the samples we are comparing are normally distributed. According to the Central Limit theorem,
+the distribution of sample means from repeated samples of a population will be roughly normal. 
+Therefore, we can take 100 samples of each borough's response times, measure the mean of each sample,
+and perform the hypothesis test on the arrays of sample means. 
 ```{python}
+import matplotlib.pyplot as plt 
+
 # select Bronx and Queens boroughs 
-df_man = df.loc[df['Borough'] == 'MANHATTAN']['Response Time']
-df_queens = df.loc[df['Borough'] == 'QUEENS']['Response Time'] 
+df_mhtn = df[df['Borough'] == 'MANHATTAN']['Response Time'] 
+df_queens = df[df['Borough'] == 'QUEENS']['Response Time']  
 
-# show the samples have unequal variances 
-print('Mean, variance for Manhattan:', (df_man.mean(), df_man.std() ** 2))
-print('Mean, variance for Queens:', (df_queens.mean(), df_queens.std() ** 2)) 
+mhtn_means = []
+queens_means = []
+
+# create samples of sampling means 
+for i in range(100): 
+  sample1 = df_mhtn.sample(1000, replace = True)
+  mhtn_means.append(sample1.mean())
+
+  sample2 = df_queens.sample(1000, replace = True) 
+  queens_means.append(sample2.mean())  
+
+# plot distribution of sample means for Manhattan
+plt.hist(mhtn_means)
+plt.xlabel('Mean Response Times for Manhattan')
+plt.ylabel('Value Counts')
+plt.show()
+
+# plot distribution of sample means for Queens 
+plt.hist(queens_means) 
+plt.xlabel('Mean Response Times for Queens')
+plt.ylabel('Value Counts')
+plt.show() 
+```  
+
+We also need to check if the variances of the two samples are equal. 
+```{python}
+# convert to numpy array 
+mhtn_means = np.array(mhtn_means)
+queens_means = np.array(queens_means)
+
+print('Mean, variance for Manhattan', (mhtn_means.mean(), mhtn_means.std() ** 2))
+print('Mean, variance for Queens:', (queens_means.mean(), queens_means.std() ** 2))
 ```
-Since the two samples have very different variances, we need to run the test without a 
-pooled sample variance, by setting `equal_var` equal to `False`.
+Since the ratio of the variances is less than $2$, it is safe to assume equal variances.  
 
 ```{python}
+result_1 = scipy.stats.ttest_ind(mhtn_means, queens_means, equal_var = True)
 
+print('t-statistic:', result_1.statistic)
+print('p-value:', result_1.pvalue) 
+print('degrees of freedom:', result_1.df) 
 ``` 
-As per the above results, at most confidence levels, the p-value of $1.23 \times 10^{-15}$ will lead to 
-a rejection of the null hypothesis, suggesting that the mean response times for the Bronx and
-Queens differ significantly. When the null values are propagated instead of omitted, though,
-the t-statistic and p-value both return `nan` due to missing values. And in the third case, when 
-the alterative is set to $>$, the null hypothesis would not be rejected at most confidence levels,
-suggesting that although the mean response time for the Bronx and Queens differ, that for the Bronx
-is not significantly larger.   
+At an alpha level of $0.05$, the p-value allows us to reject the null hypothesis
+and conclude that there is a statistically significant difference in the mean of 
+sample means drawn from rodent sighting response times for Manhattan compared to Queens. 
+
+```{python}
+result_2 = scipy.stats.ttest_ind(mhtn_means, queens_means, equal_var = True, alternative = 'less') 
+
+print('t-statistic:', result_2.statistic)
+print('p-value:', result_2.pvalue) 
+print('degrees of freedom:', result_2.df) 
+```
+We can also set the alternative equal to `less` to test if the mean of sample means
+drawn from the Manhattan response times is less than that of sample means drawn from
+Queens response times. At the alpha level of $0.05$, we can also reject this null
+hypothesis and conclude that the mean of sample means is less for Manhattan than 
+it is for Queens. 
 
 ## Normality 
 ### Shapiro-Wilk Test 
@@ -141,8 +200,6 @@ normally distributed.
 
 We can also graph the sample using `matplotlib` to see that the data is not normally distributed. 
 ```{python}
-import matplotlib.pyplot as plt 
- 
 bins = [i for i in range(0, 2500, 200)] 
  
 plt.xticks(bins)
@@ -154,6 +211,8 @@ plt.ylabel('Value Counts')
 # plot sample3 data 
 plt.hist(sample3.values, bins = bins) 
 ``` 
+
+### Example: Distribution of Response Times 
 
 ### NormalTest 
 * Based on the D'Agostino-Pearson test for assessing normality with shape. 
