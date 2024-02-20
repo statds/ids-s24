@@ -1,0 +1,192 @@
+## Handling Spatial Data with `GeoPandas`
+
+This section was written by Pratham Patel.
+
+### Introduction and Installation
+
+Hello! my name is Pratham Patel and I am a Senior due to graduate this 
+semster with a Bachelor's Degree of Science in Mathematics/Statistics 
+with a Computer Science minor. I hope to gain skills in using various 
+different packages of Python in this course, as well as understand 
+even more about the Data Science field. An example of learning new 
+Python packages is the topic I will present today on the `geopandas` 
+package. GeoPandas is an extension of the `pandas` package to support 
+geographic data in its dataframes.
+
+The GeoPandas package can be installed via the terminal using any of the following commands.
+
+The documentation recommends:
+`conda install -c conda-forge geopandas`
+
+Standard conda install:
+`conda install geopandas`
+
+Using pip:
+`pip install geopandas`
+
+### Base Concepts
+
+GeoPandas relvolves around the `GeoDataFrame` object, which is essentially the 
+pandas `DataFrame` object, with all the traditional capabilities in addition to 
+the ability store and operate on geometry columns.
+
+The geometry types include points, lines and closed polygons (the first and last 
+coordinates in the list must be the same).
+
+The objects made by `shapely.geometry` can represent these geometry types:
+
+```{python}
+from shapely.geometry import Point, LineString, Polygon
+import geopandas as gpd
+
+point = Point(0, 1)
+gdf1 = gpd.GeoDataFrame(geometry=[point])
+
+line = LineString([(0, 0), (1, 1)])
+gdf2 = gpd.GeoDataFrame(geometry=[line])
+
+#note: the first and last element of 
+#the list of tupled points are the same
+polygon = Polygon([(0, 0), (0, 2), (2, 2), (2, 0), (0, 0)])
+gdf3 = gpd.GeoDataFrame(geometry=[polygon])
+```
+
+```{python}
+gdf1
+```
+
+Some of the basic attributes of a GeoSeries include:
+* `length`: returns length of a line
+```{python}
+gdf2.length
+```
+
+* `area`: returns the area of the polygon
+```{python}
+gdf3.area
+```
+
+* `bounds`: gives the bounds of each row in a column of geometry
+
+* `total_bounds`: gives the bounds of a geometry series
+
+* `geom_type`: returns geometry type
+```{python}
+gdf1.geom_type
+```
+
+* `is_valid`: return True for valid geometries and false otherwise (mostly important for polygons).
+```{python}
+gdf3.is_valid
+```
+
+
+Next, we will cover various methods to be used on GeoSeries objects:
+
+* `distance()`: returns the Series with the minimum distance from each entry to another geometry or 
+Series (argument `other`).
+    + Note: a secondary argument `align` is a boolean to align the GeoSeries by index if set to True
+```{python}
+gdf2.distance(Point((1,0)))
+gdf2.distance(LineString([(0, 2), (1, 2)]))
+```
+
+* `centroid`: returns a new GeoSeries with the center of each row's geometry.
+```{python}
+gdf3.centroid
+```
+
+* `contains()`: returns True if the shape contains a specific geometry or Series.
+    + parameters `other` and `align`
+```{python}
+gdf3.contains(gdf1)
+```
+
+```{python}
+gdf3.contains(Point((0.5, 1.5)))
+```
+
+* `intersects()` returns true if shape intersects another geometry of series
+    + parameters `other` and `align`
+
+### Reading Files into `GeoDataFrame`'s
+
+The function `geopandas.read_file()` is the best way to read a file 
+with both data and geometry into a `GeoDataFrame` object. From 
+here, we will be using the nyc rodent data and visualize it. The 
+code below converts every incident's location into a point 
+on the geometry.
+
+```{python}
+# Reading csv file 
+import pandas as pd 
+import numpy as np
+# Shapely for converting latitude/longtitude to a point
+from shapely.geometry import Point 
+# To create GeoDataFrame
+import geopandas as gpd 
+
+rat_22_23 = pd.read_feather('data/rodent_2022-2023.feather')
+
+# creating geometry using shapely (removing missing points)
+geometry = [Point(xy) for xy in zip(rat_22_23["longitude"], rat_22_23["latitude"]) if not Point(xy).is_empty]
+
+# creating geometry column to be used by geopandas
+geo = gpd.points_from_xy(rat_22_23["longitude"], rat_22_23["latitude"])
+
+# coordinate reference system (epsg:4326 implies geographic coordinates)
+crs = {'init': 'epsg:4326'}
+
+# create GeoDataFrame (taking care of missing coordinates)
+rodent_gdf = gpd.GeoDataFrame(rat_22_23.loc[~pd.isna(rat_22_23["longitude"]) & ~pd.isna(rat_22_23["latitude"])], crs=crs, geometry=geometry)
+
+rodent_gdf.head()
+```
+
+
+### Plotting
+The new geometry allows us to plot the data easily.
+```{python}
+rodent_gdf.plot()
+
+#color by borough
+rodent_gdf.plot(column = 'borough', legend=True)
+
+#Plot the missing information
+rodent_gdf.plot(column='borough', missing_kwds={'color':'red'})
+```
+
+### Interactive Maps
+A very interesting aspect is the ability to create interactive graphs using the `.explore()` method.
+
+Note that `folium`, `matplotlib`, and `mapclassify` are necessary for the `.explore()` function.
+
+```{python}
+#interactive map with incidents colored by borough
+rodent_gdf.explore(column='borough', legend=True)
+```
+
+
+### Setting and Changing Projections
+In the code, a Coordinate Reference System(CRS) was set using `crs = {'init':'epsg:4326'}`. CRS can be set on on initialized GeoDataFrame using the `.set_crs` function. We can do this for our previous example `gdf3`
+
+```{python}
+gdf3 = gdf3.set_crs("EPSG:4326")
+gdf3.plot()
+```
+
+There are other CRS's that can be set by the `.to_crs()` function. 
+Examples include:
+* ESPG:2263 - coordinates labeled in feet
+* ESPG:3395 - World Mercator System
+
+
+### References
+
+* GeoPandas Documentation: 
+    + https://geopandas.org/en/stable/index.html
+
+* NYC 311 Service Request
+    + https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9/about_data
+
+
