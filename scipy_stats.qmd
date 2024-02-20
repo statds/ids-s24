@@ -313,12 +313,20 @@ and an array of expected frequencies from the table.
 freq_table = pd.crosstab(df.Borough, df.Descriptor, margins = True) 
 
 freq_table
-
+```
+```{python}
 results_chi2 = scipy.stats.chi2_contingency(freq_table)
 
 print('test statistic:', results_chi2.statistic)
 print('p-value:', results_chi2.pvalue)
 print('degrees of freedom:', results_chi2.dof) 
+```  
+
+```{python}
+x = ['Condition', 'M.Sighting', 'R.Sighting', 'Bite', 'Signs of Rodents']
+
+for i in range(5): 
+  plt.bar(x, freq_table.iloc[i][:-1])
 ``` 
 
 ## Nonparametric Hypothesis Tests   
