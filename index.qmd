@@ -127,6 +127,9 @@ Markdown.
 + Woo, Madison 
     - Be able to comfortably use Git and Python
     - Learn about project managment and data science 
++ Wu, Weijia 
+    - Get to know with github and get better with python skills
+    - Developed a data-science project
 + Xie, Vincent
     - Become more proficient with Git.
     - Learn how to create a proper data science project.
@@ -210,7 +213,7 @@ Please use the following table to sign up.
    Date  | Presenter              | Topic
   ------ | ---------------------- | ------
   02/07  | Matt Elliott           | Data science communication skills
-  02/07  | Weijia Wu              | 
+  02/07  | Weijia Wu              | Data Visualization
   02/12  | Dr. Haim Bar           | Database management
   02/19  | Willam Taki            |
   02/19  | Joshua Lee             | Descriptive Statistics
