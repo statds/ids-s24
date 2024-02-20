@@ -208,6 +208,45 @@ and kurtosis (heaviness of the tail or how much data resides in the tails).
 The test compares the skewness and kurtosis of the sample to that of a normal 
 distribution, which are $0$ and $3$, respectively. 
 
+## Example: Distribution of Response Times 
+It can be useful to identify the distribution of a population because it gives
+us the ability to summarize the data more efficiently. We can identify whether
+or not the distribution of a sample of response times from the rodent sighting
+dataset is normal by conducting a normality test using `scipy.stats`. 
+
+```{python}
+# take a sample from Response Time column 
+resp_time_samp = df['Response Time'].sample(10000, random_state = 0)  
+
+results_2 = scipy.stats.normaltest(resp_time_samp, nan_policy = 'propagate')
+
+print('test statistic:', results_2.statistic) 
+print('p-value:', results_2.pvalue)
+``` 
+Because there are null values in the sample data, if we set the `nan_policy` 
+to `propagate`, both the test statistic and p-value will return as `nan`. 
+If we still want to obtain results when there is missing data, we must set the
+`nan_policy` to `omit`. 
+
+```{python}
+results_3 = scipy.stats.normaltest(resp_time_samp, nan_policy = 'omit') 
+
+print('test statistic:', results_3.statistic) 
+print('p-value:', results_3.pvalue)
+```
+At an alpha level of $0.05$, the p-value allows us to reject the null hypothesis
+and conclude that the data is not drawn from a normal distribution. We can further
+show this by plotting the data in a histogram. 
+
+```{python}
+bins = [i for i in range(int(resp_time_samp.min()), int(resp_time_samp.max()), 300)]
+
+plt.hist(resp_time_samp, bins = bins)
+plt.xlabel('Response Times')
+plt.ylabel('Value Counts')
+plt.show()
+``` 
+
 ## Correlation   
 ### Pearson's Correlation 
 * Tests for a linear relationship between two samples.
