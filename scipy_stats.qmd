@@ -27,8 +27,8 @@ The package `scipy.stats`
 
 **Code:** `scipy.stats.ttest_ind(sample_1, sample_2)`  
 
-**Assumptions:** Samples are independent and identically distributed (i.i.d), 
-normally distributed, and have equal variances. 
+**Assumptions:** Observations are independent and identically distributed (i.i.d), 
+normally distributed, and the two samples have equal variances. 
 
 **Optional Parameters:**
 
@@ -48,9 +48,9 @@ equal (default is True).
  
 **Code:** `scipy.stats.ttest_rel(sample_1, sample_2)` 
 
-**Assumptions:** Samples are i.i.d, normally distributed, have equal variances, 
-and are related. The input arrays must also be of the same size since the 
-observations are paired.  
+**Assumptions:** Observations are i.i.d, normally distributed, and related, 
+and the two samples have equal variances. The input arrays must also be 
+of the same size since the observations are paired.  
 
 **Optional Parameters:** Can use `nan_policy` or `alternative`. 
 
@@ -66,7 +66,7 @@ population means of the two samples.
 
 **Code:** `scipy.stats.f_oneway(sample_1, sample_2, ..., sample_n)`
 
-**Assumptions:** Samples are i.i.d., normally distributed, and have 
+**Assumptions:** Samples are i.i.d., normally distributed, and the samples have
 equal variances. 
 
 **Errors:** 
@@ -75,6 +75,8 @@ equal variances.
 identical. 
 * Raises `DegenerateDataWarning` if any input has length $0$ or all inputs
 have length $1$. 
+
+**Returns:** The F-statistic and a corresponding p-value. 
 
 ### Example: Comparison of Mean Response Times by Borough  
 Looking at the 2022-2023 rodent sighting data from the NYC 311 Service Requests, there are many
@@ -173,61 +175,26 @@ it is for Queens.
 
 ## Normality 
 ### Shapiro-Wilk Test 
-* Used to test normality of a data sample.
-* Assumes observations are i.i.d. 
 
 | H~0~: data is drawn from a normal distribution  
-| H~1~: data is not drawn from a normal distribution   
+| H~1~: data is not drawn from a normal distribution     
 
-In order to describe data, it may be useful to identify whether the data is normally distributed
-or not. We can take a sample from the data frame and test whether the distribution of response 
-times is normal or not. The Shapiro-Wilk test does not have options to omit null values,
-so the sample must be selected from rows where the Response Time is not null. 
-```{python}  
-# only select rows where Response Time is not null 
-modified_df = df[df['Response Time'].notnull()] 
+**Code:** `scipy.stats.shapiro(sample)` 
 
-sample3 = modified_df.sample(5000, random_state = 0)['Response Time'] 
+**Assumptions:** Observations are i.i.d. 
 
-# perform test  
-t_4, p_4 = scipy.stats.shapiro(sample3) 
+**Returns:** The test statistic and corresponding p-value. 
 
-print(t_4, p_4)  
-```  
-With such a small p-value, we can reject the null hypothesis at most confidence levels and
-conclude that the Response Times for the rodent sighting service requests are not
-normally distributed. 
-
-We can also graph the sample using `matplotlib` to see that the data is not normally distributed. 
-```{python}
-bins = [i for i in range(0, 2500, 200)] 
- 
-plt.xticks(bins)
-
-# set axis labels 
-plt.xlabel('Response Time') 
-plt.ylabel('Value Counts')
-
-# plot sample3 data 
-plt.hist(sample3.values, bins = bins) 
-``` 
-
-### Example: Distribution of Response Times 
+* More appropriate for smaller sample sizes ($<50$). 
+* The closer the test statistic is to $1$, the closer it is to a normal 
+distribution, with $1$ being a perfect match.   
 
 ### NormalTest 
-* Based on the D'Agostino-Pearson test for assessing normality with shape. 
-  + Measures skewness and kurtosis, which is the heaviness/lightness of the tail. 
-  + A normal distribution has skewness of $0$ and kurtosis of $3$.  
-* Assumes observations are i.i.d. 
 
 | H~0~: data is drawn from a normal distribution  
 | H~1~: data is not drawn from a normal distribution   
 
-```{python}
-t_5, p_5 = scipy.stats.normaltest(sample3)
 
-print(t_5, p_5)  
-``` 
 
 ## Correlation   
 ### Pearson's Correlation 
@@ -239,20 +206,6 @@ hypothesis.
 
 | H~0~: the samples are independent 
 | H~1~: there exists dependency between the samples 
-
-```{python}
-# only select rows where neither Response Time nor Latitude is null 
-modified_df2 = modified_df[modified_df['Latitude'].notnull()]
-
-sample4 = modified_df2.sample(5000, random_state = 0)  
-
-x = sample4['Latitude'] 
-y = sample4['Response Time'] 
-
-t_6, p_6 = scipy.stats.pearsonr(x, y)
-
-print(t_6, p_6)
-``` 
 
 ## Nonparametric Hypothesis Tests   
 ### Mann-Whitney U Test 
@@ -267,8 +220,4 @@ print(t_6, p_6)
   `asymptotic` otherwise. 
 
 | H~0~: distribution of sample 1 $=$ distribution of sample 2
-| H~1~: distribution of sample 1 $\neq$ or $>$ or $<$ distribution of sample 2  
-
-```{python}
-
-```   
+| H~1~: distribution of sample 1 $\neq$ or $>$ or $<$ distribution of sample 2   
