@@ -204,7 +204,7 @@ it is for Queens.
 
 * More appropriate for smaller sample sizes ($<50$). 
 * The closer the test statistic is to $1$, the closer it is to a normal 
-distribution, with $1$ being a perfect match.   
+distribution, with $1$ being a perfect match. [@Mishra2019] 
 
 ### NormalTest 
 
@@ -301,7 +301,7 @@ has the `confidence_interval` method.
 
 **Assumptions:** The cells in the table contain frequencies, the levels of each
 variable are mutually exclusive, observations are independent, and both
-variables are categorical. 
+variables are categorical. [@McHugh2013]
 
 **Returns:** The test statistic, a corresponding p-value, the degrees of freedom, 
 and an array of expected frequencies from the table. 
