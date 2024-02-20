@@ -14,10 +14,18 @@ format:
       - left=20mm
 ##  docx: default
 --- 
-## Introduction 
+## Introduction  
+The package `scipy.stats` is a subpackage of `Scipy` and contains many methods useful
+for statistics such as probability distributions, summary statistics, statistical tests,
+etc. The focus of this presentation will be on some of the many hypothesis tests that can 
+be easily conducted using `scipy.stats` and will provide examples of situations in 
+which they may be useful.  
 
-## Overview of `scipy.stats` 
-The package `scipy.stats`  
+Firstly, ensure `scipy.stats` is installed by using 
+`pip install scipy.stats` 
+or
+`pip3 install scipy.stats`
+depending on what version of python you are using. 
 
 ## Basic Statistical Hypothesis Tests 
 ### Two-sample t-test 
@@ -299,6 +307,7 @@ and an array of expected frequencies from the table.
 
 **Optional Parameters:** 
 
+:::{}
 * `alternative` can allow us to test if one sample has a distribution that is 
 stochastically less than or greater than that of the second sample.   
 * Can use `nan_policy`. 
@@ -309,16 +318,19 @@ stochastically less than or greater than that of the second sample.
   + `exact` does not correct for ties and computes the exact p-value.
   + `auto` is the default and chooses exact when there are no ties and the 
   size of one sample is $<=8$, `asymptotic` otherwise. 
+::: 
 
-  **Returns:** The Mann-Whitney U Statistic corresponding with the first sample 
-  and a corresponding p-value. 
+**Returns:** The Mann-Whitney U Statistic corresponding with the first sample 
+and a corresponding p-value. 
 
-  * The statistic corresponding to the second sample is not returned but can 
-  be calculated as `sample_1.shape * sample_2.shape - U1` where `U1` is the 
-  test statistic associated with `sample_1`. 
-  * For large sample sizes, the distribution can be assumed to be approximately
-  normal, so the statisic can be measured as $z = \frac{U-\mu_{U}}{\sigma_{U}}$.
-  * To adjust for ties, the standard deviation is calculated as follows: 
-  
-  $\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - \frac{\sum_{k = 1}^{K}(t^{3}_{k} - t_{k})}{n(n - 1)})}$
+:::{}
+* The statistic corresponding to the second sample is not returned but can 
+be calculated as `sample_1.shape * sample_2.shape - U1` where `U1` is the 
+test statistic associated with `sample_1`. 
+* For large sample sizes, the distribution can be assumed to be approximately
+normal, so the statisic can be measured as $z = \frac{U-\mu_{U}}{\sigma_{U}}$.
+* To adjust for ties, the standard deviation is calculated as follows: 
+
+$\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - \frac{\sum_{k = 1}^{K}(t^{3}_{k} - t_{k})}{n(n - 1)})}$
+::: 
 
