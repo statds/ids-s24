@@ -194,7 +194,19 @@ distribution, with $1$ being a perfect match.
 | H~0~: data is drawn from a normal distribution  
 | H~1~: data is not drawn from a normal distribution   
 
+**Code:** `scipy.stats.normaltest(sample)`  
 
+**Assumptions:** Observations are i.i.d. 
+
+**Optional Parameters:** Can use `nan_policy`. 
+
+**Returns:** The test-statistic $s^2 + k^2$ where $s^2$ is from the `skewtest`
+and $k$ is from the `kurtosistest` 
+
+This test is based on D'Agostino and Pearson's test which combines skew
+and kurtosis (heaviness of the tail or how much data resides in the tails). 
+The test compares the skewness and kurtosis of the sample to that of a normal 
+distribution, which are $0$ and $3$, respectively. 
 
 ## Correlation   
 ### Pearson's Correlation 
