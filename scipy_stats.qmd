@@ -285,17 +285,39 @@ and an array of expected frequencies from the table.
 
 * `dof = table.size - sum(table.shape) + table.ndim - 1` 
 
+### Example: 
+
 ## Nonparametric Hypothesis Tests   
-### Mann-Whitney U Test 
-* Tests that two samples are drawn from the same distribution. 
-* Assumes observations are i.i.d. and can be ranked/compared. 
-* Nonparametric version of t-test. 
-* Takes optional parameter `method` with three options. 
-  + `asymptotic` provides an estimation of the test statistic using sum
-  of rankings.  
-  + `exact` calculates the exact p-value. 
-  + Default option `auto` uses `exact` for sample sizes $<= 8$ and 
-  `asymptotic` otherwise. 
+### Mann-Whitney U Test  
 
 | H~0~: distribution of sample 1 $=$ distribution of sample 2
 | H~1~: distribution of sample 1 $\neq$ or $>$ or $<$ distribution of sample 2   
+
+**Code:** `scipy.stats.mannwhitneyu(sample_1, sample_2)` 
+
+**Assumptions:** Observations are i.i.d. and are ordinal.  
+
+**Optional Parameters:** 
+
+* `alternative` can allow us to test if one sample has a distribution that is 
+stochastically less than or greater than that of the second sample.   
+* Can use `nan_policy`. 
+* `method` selects how the p-value is calculated and can be set to 
+`asymptotic`, `exact`, or `auto`. 
+  + `asymptotic` corrects for ties and compares the standardized test statistic
+  to the normal distribution. 
+  + `exact` does not correct for ties and computes the exact p-value.
+  + `auto` is the default and chooses exact when there are no ties and the 
+  size of one sample is $<=8$, `asymptotic` otherwise. 
+
+  **Returns:** The Mann-Whitney U Statistic corresponding with the first sample 
+  and a corresponding p-value. 
+
+  * The statistic corresponding to the second sample is not returned but can 
+  be calculated as `sample_1.shape * sample_2.shape - U1` where `U1` is the 
+  test statistic associated with `sample_1`. 
+  * For large sample sizes, the distribution can be assumed to be approximately
+  normal, so the statisic can be measured as $z = \frac{U-\mu_{U}}{\sigma_{U}}$.
+  * To adjust for ties, the standard deviation is calculated as follows: 
+  $\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - \frac{\sum_{k = 1}^{K}(t^{3}_{k} - t_{k})}{n(n - 1)})}$
+
