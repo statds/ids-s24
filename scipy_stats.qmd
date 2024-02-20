@@ -364,3 +364,6 @@ $\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - \frac{\sum_{k = 1}^{K}(t^{3}
 
 ## References 
 <https://docs.scipy.org/doc/scipy/reference/stats.html>
+<https://neuraldatascience.io/5-eda/ttests.html> 
+<https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/>
+<https://www.graphpad.com/guides/prism/latest/statistics/stat_choosing_a_normality_test.htm>
