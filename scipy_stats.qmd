@@ -204,7 +204,7 @@ it is for Queens.
 
 * More appropriate for smaller sample sizes ($<50$). 
 * The closer the test statistic is to $1$, the closer it is to a normal 
-distribution, with $1$ being a perfect match. [@Mishra2019] 
+distribution, with $1$ being a perfect match.   
 
 ### NormalTest 
 
@@ -300,15 +300,26 @@ has the `confidence_interval` method.
 **Code:** `scipy.stats.chi2_contingency(table)` 
 
 **Assumptions:** The cells in the table contain frequencies, the levels of each
-variable are mutually exclusive, observations are independent, and both
-variables are categorical. [@McHugh2013]
+variable are mutually exclusive, and observations are independent.  
 
 **Returns:** The test statistic, a corresponding p-value, the degrees of freedom, 
 and an array of expected frequencies from the table. 
 
 * `dof = table.size - sum(table.shape) + table.ndim - 1` 
 
-### Example: 
+### Example: Analyzing the Relationship Between Borough and Response Time 
+```{python}
+# create frequency table 
+freq_table = pd.crosstab(df.Borough, df.Descriptor, margins = True) 
+
+freq_table
+
+results_chi2 = scipy.stats.chi2_contingency(freq_table)
+
+print('test statistic:', results_chi2.statistic)
+print('p-value:', results_chi2.pvalue)
+print('degrees of freedom:', results_chi2.dof) 
+``` 
 
 ## Nonparametric Hypothesis Tests   
 ### Mann-Whitney U Test  
