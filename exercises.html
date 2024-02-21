@@ -321,7 +321,15 @@ window.Quarto = {
 <li>The <code>agency</code> and <code>agency_name</code> columns are redundant in the table. Create a table called <code>agency</code>, which contains only these two columns, one agency a row.</li>
 <li>Drop the <code>agency_name</code> name from the <code>rodent</code> table. Justify why we do not need it here.</li>
 <li>Comment on the sizes of the table (or exported csv file) of <code>rodent</code> before and after dropping the <code>agency_name</code> column.</li>
-<li>Come up with a scheme for the two tables that allows even more efficient storage of the <code>agency</code> column in the <code>rodent</code> table. <em>Hint: use an integer to code the agencies.</em></li>
+<li>Come up with a scheme for the two tables that allows even more efficient storage of the <code>agency</code> column in the <code>rodent</code> table. _Hint: use an integer to code the agencies.</li>
+</ol></li>
+<li><p><strong>Logistic Modeling</strong> The response time to 311 service requests is a measure of civic service quality. Let us model the response time to 311 requests with complain type <code>Rodent</code>.</p>
+<ol type="1">
+<li>Compute the response time in hours. Note that some response will be missing because of unavailable closed date.</li>
+<li>Compute a binary variable <code>over3d</code>, which is one if the response time is greater than 3 days, and zero otherwise. Note that this variable should have no missing values.</li>
+<li>Use the package <code>uszipcode</code> to obtain the zip code level covaraites such as median house income and median home value. Merge these variables to the rodent data.</li>
+<li>Split the data at random into training (80%) and testing (20%). Build a logistic model to predict <code>over3d</code> on the training data, and validate the performance on the testing data.</li>
+<li>Build a lasso logistic model to predict <code>over3d</code>, and justify your choice of the tuning parameter. Validate on the testing data.</li>
 </ol></li>
 </ol>
 
