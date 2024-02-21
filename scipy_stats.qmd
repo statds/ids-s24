@@ -362,11 +362,11 @@ freq_table_2
 ``` 
 
 ```{python}
-results_chi2_2 = scipy.stats.chi2_contingency(freq_table_2)
+results_4 = scipy.stats.chi2_contingency(freq_table_2)
 
-print('test statistic:', results_chi2_2.statistic)
-print('p-value:', results_chi2_2.pvalue)
-print('degrees of freedom:', results_chi2_2.dof) 
+print('test statistic:', results_4_2.statistic)
+print('p-value:', results_4.pvalue)
+print('degrees of freedom:', results_4_2.dof) 
 ``` 
 At an alpha level of $0.05$, the p-value allows us to reject the null hypothesis
 and conclude that the `Season` and `Descriptor` columns are indeed dependent for 
@@ -433,6 +433,8 @@ $\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - \frac{\sum_{k = 1}^{K}(t^{3}
 | H~0~: distribution of population 1 $=$ distribution of population 2
 | H~1~: distribution of population 1 $\neq$ or $>$ or $<$ distribution of population 2  
 
+&NewLine;  
+
 **Code:** `scipy.stats.wilcoxon(sample_1, sample_2)` or  
 `scipy.statss.wilcoxon(sample_diff, None)` 
 
@@ -457,6 +459,36 @@ is stochastically greater than or less than a distribution symmetric about $0$.
 **Returns:** The test statistic, a corresponding p-value, and the calculated
 z-score when the `method` is `approx`. 
 
+
+### Example: Distribution of Response Times for 2022 vs. 2023 
+
+We can use the Mann-Whitney test to compare the distributions of response times
+from our rodent data. For example, we can split the data into two groups, one for 2022
+and the other for 2023, to compare their distributions. 
+```{python}
+# create dfs for 2022 and 2023
+df_2022 = df[df['Created Date'].dt.year == 2022]['Response Time']
+df_2023 = df[df['Created Date'].dt.year == 2023]['Response Time']
+
+# perform test with H_0 df_2022 > df_2023
+results_5 = scipy.stats.mannwhitneyu(df_2022, df_2023, nan_policy = 'omit', 
+                                                      alternative = 'greater')
+
+# perform test with H_0 df_2022 < df_2023
+results_6 = scipy.stats.mannwhitneyu(df_2022, df_2023, nan_policy = 'omit', 
+                                                        alternative = 'less')
+
+print('test statistic:', results_5.statistic)
+print('p-value:', results_5.pvalue)
+print()
+print('test statistic:', results_6.statistic)
+print('p-value:', results_6.pvalue)
+``` 
+At an alpha level of $0.05$, the p-value of $1$ is too large to reject the null hypothesis,
+therefore we cannot conclude that the distribution of response times for 2022 is 
+stochastically greater than that for 2023. But when we set the alternative to `less`, our
+p-value is small enough to conclude that the distribution of response times for 2022
+is stochasitcally greater than the distribution of response times for 2023. 
 
 ## References 
 1. [`scipy.stats` documentation]<https://docs.scipy.org/doc/scipy/reference/stats.html>
