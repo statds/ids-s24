@@ -25,8 +25,9 @@ etc. The focus of this presentation will be on some of the many hypothesis tests
 be easily conducted using `scipy.stats` and will provide examples of situations in 
 which they may be useful.  
 
-Firstly, ensure `scipy.stats` is installed by using 
-`pip install scipy.stats` or `pip3 install scipy.stats`, depending on what version of python you are using. 
+Firstly, ensure `scipy.stats`
+is installed by using `pip install scipy.stats` or   
+`pip3 install scipy.stats`, depending on what version of python you are using. 
 
 ## Basic Statistical Hypothesis Tests 
 ### Two-sample t-test 
@@ -43,11 +44,11 @@ normally distributed, and the two samples have equal variances.
 
 **Optional Parameters:**
 
-* `nan_policy` can be set to `propagate` (return `nan`), `raise` (raise `ValueError`),
+* `nan_policy` can be set to `propagate` (return `nan`), `raise` (raise `ValueError`),  
 or `omit` (ignore null values).
 * `alternative` can be `two-sided` (default), `less`, or `greater`. 
 * `equal_var` is a boolean representing whether the variances of the two samples are 
-equal 
+equal  
 (default is True). 
 * `axis` defines the axis along which the statistic should be computed (default is 0). 
 
@@ -95,10 +96,11 @@ have length $1$.
 **Returns:** The F-statistic and a corresponding p-value. 
 
 ### Example: Comparison of Mean Response Times by Borough  
-Looking at the 2022-2023 rodent sighting data from the NYC 311 Service Requests, there are many
-ways a two-sample t-test may be useful. For example, we can consider samples drawn from different
-boroughs and perform this hypothesis test to identify whether their mean response times differ. 
-If so, this may suggest that some boroughs are being underserviced.  
+Looking at the 2022-2023 rodent sighting data from the NYC 311 Service Requests,  
+there are many ways a two-sample t-test may be useful. For example, we can consider 
+samples drawn from different boroughs and perform this hypothesis test to 
+identify whether their mean response times differ. If so, this may suggest 
+that some boroughs are being underserviced.  
 ```{python} 
 import pandas as pd 
 import numpy as np 
@@ -118,11 +120,12 @@ df['Response Time'] = df['Closed Date'] - df['Created Date']
 df['Response Time'] = df['Response Time'].apply(lambda x: x.total_seconds() / 3600)    
 ``` 
 
-Since the two-sample t-test assumes the data is drawn from a normal distribution, we need to
-ensure the samples we are comparing are normally distributed. According to the Central Limit theorem,
-the distribution of sample means from repeated samples of a population will be roughly normal. 
-Therefore, we can take 100 samples of each borough's response times, measure the mean of each sample,
-and perform the hypothesis test on the arrays of sample means. 
+Since the two-sample t-test assumes the data is drawn from a normal distribution,  
+we need to ensure the samples we are comparing are normally distributed. According 
+to the Central Limit theorem, the distribution of sample means from repeated 
+samples of a population will be roughly normal. Therefore, we can take 100 samples 
+of each borough's response times, measure the mean of each sample, and perform the 
+hypothesis test on the arrays of sample means. 
 ```{python}
 import matplotlib.pyplot as plt 
 
@@ -206,7 +209,7 @@ it is for Queens.
 
 * More appropriate for smaller sample sizes ($<50$). 
 * The closer the test statistic is to $1$, the closer it is to a normal 
-distribution, with $1$ being a perfect match.   
+distribution, with $1$ being a perfect match. [2]   
 
 ### NormalTest 
 
@@ -231,9 +234,9 @@ distribution, which are $0$ and $3$, respectively. [4]
 
 ### Example: Distribution of Response Times 
 It can be useful to identify the distribution of a population because it gives
-us the ability to summarize the data more efficiently. We can identify whether
-or not the distribution of a sample of response times from the rodent sighting
-dataset is normal by conducting a normality test using `scipy.stats`. 
+us the ability to summarize the data more efficiently. We can identify 
+whether or not the distribution of a sample of response times  
+from the rodent sighting dataset is normal by conducting a normality test using `scipy.stats`. 
 
 ```{python}
 # take a sample from Response Time column 
