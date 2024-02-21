@@ -308,6 +308,12 @@ and an array of expected frequencies from the table.
 * `dof = table.size - sum(table.shape) + table.ndim - 1` 
 
 ### Example: Analyzing the Relationship Between Borough and Response Time 
+
+One way in which the chi-squared test may prove useful with the 2022-2023 311 Service
+Request rodent sighting data is by allowing us to identify dependencies between 
+different variables, categorical ones in particular. For example, we can create
+a frequency table showing the relative frequencies of rodent sighting per Borough, 
+where the rodent sightings are split into categories by their descriptor. 
 ```{python}
 # create frequency table 
 freq_table = pd.crosstab(df.Borough, df.Descriptor, margins = True) 
@@ -321,7 +327,12 @@ print('test statistic:', results_chi2.statistic)
 print('p-value:', results_chi2.pvalue)
 print('degrees of freedom:', results_chi2.dof) 
 ```  
+At an alpha level of $0.05$, the p-value allows us to reject the null hypothesis
+and conclude that the `Borough` and `Descriptor` columns are indeed dependent. 
 
+We can further explore this data by now choosing the Borough with the most rodent
+sightings and testing whether the season in which the request was created is independent
+of the type of sighting, using the `Descriptor` column. 
 ```{python}
 # return season based off month of created date
 def get_season(month): 
@@ -361,6 +372,11 @@ freq_table_2.rename(columns = {'Condition Attracting Rodents': 'Condition',
 
 freq_table_2.T.plot(kind = 'bar', stacked = True) 
 ``` 
+At an alpha level of $0.05$, the p-value allows us to reject the null hypothesis
+and conclude that the `Season` and `Descriptor` columns are indeed dependent for 
+Brooklyn. This is also confirmed by the bar chart, which shows that the ranking of
+each Season by number of rodent sightings is consistent across all five types of 
+rodent sightings.  
 
 ## Nonparametric Hypothesis Tests   
 ### Mann-Whitney U Test  
