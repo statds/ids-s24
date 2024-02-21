@@ -1,0 +1,330 @@
+## Grammar of Graphics with `Plotnine`
+
+This section was written by Olivia Massad.
+
+
+### Introduction
+
+Hello everyone! My name is Olivia Massad and I am a junior Statistical
+Data Science Major. I am very interested in sports statistics and analytics,
+especially involving football, and am very excited to learn more about coding 
+and data science in this class. Today I will be talking about grammar of 
+graphics for python, using `Plotnine`. This is a new topic for me so I am very
+excited to show you all what we can do with it.
+
+
+### What is Grammar of Graphics?
+
+Similarly to how languages have grammar in order to structure language and create
+a standard for how sentences and words should be arranged, grammar of graphics 
+provides the framework for a consistent way to structure and create statistical 
+visualizations. This framework helps us to create graphs and visualizations which 
+can be widely understood due to the consistent structure. The major components 
+of grammar of graphics are:
+
+- Data: our datasets and the what components you want to visualize.
+
+- Aesthetics: axes, position of data points, color, shape, size.
+
+- Scale: scale values or use specific scales depending on multiple values
+and ranges.
+
+- Geometric objects: how data points are depicted, whether they're points,
+lines, bars, etc.
+
+- Statistics: statistical measures of the data included in the graphic, 
+including mean, spread, confidence intervals, etc.
+
+- Facets: subplots for specific data dimensions.
+
+- Coordinate system: cartesian or polar.
+
+
+### What can you do with `Plotnine`?
+
+`Plotnine` is a program which implements grammar of graphics in order to 
+create data visualizations and graphs using python. It is based on `ggplot2`
+and allows for many variations within graphs. Some examples of things we can
+create with `plotnine` are:
+
+- Bar Charts
+- Histograms
+- Box Plots
+- Scatter Plots
+- Line Charts
+- Time Series
+- Density Plots
+- etc.
+
+
+### Using `Plotnine`
+
+In order to use `plotnine` we first need to install the package using 
+our command line.
+
+With `conda`:
+"conda install -c conda-forge plotnine"
+
+With `pip`:
+"pip install plotnine
+pip install plotnine[all]"
+
+Now that `plotnine` is installed, we must call the it in python.
+```{python}
+from plotnine import *
+from plotnine.data import *
+```
+
+Now that `plotnine` is installed and imported, we can begin to make
+graphs and plots. Below are different examples of visualizations we
+can make using `plotnine` and the personalizations we can add to them. 
+For these graphics I used the rodent sighting data from the NYC open data
+311 requests. We also will need pandas and numpy for some of these graphs
+so we need to import those as well. Additionally, because the data set is
+so large, we will only be lookng at the first 500 complaints.
+
+```{python}
+from plotnine import *
+from plotnine.data import *
+import pandas as pd 
+import numpy as np 
+import os
+folder = 'data'
+file = 'rodent_2022-2023.feather'
+path = os.path.join(folder, file)
+data = pd.read_feather(path)
+data_used = data.head(500)
+```
+
+#### Bar Chart
+
+One common type of visualization we can create with `plotnine` is a 
+bar chart. For this graph we will look at the data for the descriptors
+of each complaint.
+
+```{python}
+(ggplot(data_used, aes(x = 'descriptor')) 
+    + geom_bar())
+```
+
+While this code provides us with a nice simple chart, because we are using
+`plotnine`, we can make some major improvements to the visualization to
+make it easier to read and more appealing. Some simple things we can do are:
+
+- Add a title.
+- Color code the bars. 
+- Change the orientation of the graph.
+- Add titles to the axes.
+
+```{python}
+(ggplot(data_used, aes(x = 'descriptor', fill = 'descriptor')) 
+        # Color code the bars.
+    + geom_bar() # Bar Chart
+    + ggtitle('Descriptor Counts') # Add a title.
+    + coord_flip() # Change the orientation of the graph.
+    + xlab("Descriptor") # Add title to x axis.
+    + ylab("Number of Complaints") # Add titles to y axis.
+)
+```
+
+Some more complex changes we can make to our graph are:
+
+- Change the orientation of the words on the axes to make them easier to read.
+- Add color coded descriptors to each bar.
+
+```{python}
+(ggplot(data_used, aes(x = 'descriptor', fill = 'borough')) 
+        # Add color coded descriptors.
+    + geom_bar() # Bar Chart
+    + ggtitle('Descriptor Counts') # Add a title.
+    + xlab("Descriptor") # Add title to x axis.
+    + ylab("Number of Complaints") # Add titles to y axis.
+    + theme(axis_text_x=element_text(angle=45))
+     # Change the orientation of the words.
+)
+```
+
+#### Scatter Plot
+
+Another common visualization we can create is a scatterplot. When looking 
+at the data from the 311 requests, we can see that there are many data 
+points for locations of these complaints. A scatter plot would be a great 
+way to see the location of the complaints by graphing the longitudes and 
+latitudes. In order to better see the points, for this 
+graph we will only use the first 200 complaints.
+
+```{python}
+data_scatter = data.tail(200)
+(ggplot(data_scatter, aes(x = 'longitude', y = 'latitude')) 
+    + geom_point())
+```
+
+Similarly to the original code for the bar chart, this code provides a
+very simple scatter plot. `Plotnine` allows us to add many specializations 
+to the scatterplot in order to differentiate the points from each other. 
+We can:
+
+- Add color to the points.
+- Differentiate using point size.
+- Differentiate using point shape.
+
+```{python}
+(ggplot(data_scatter, aes(x = 'longitude', y = 'latitude',
+       color = 'location_type')) # Add color to the points.
+    + geom_point())
+```
+
+```{python}
+(ggplot(data_scatter, aes(x = 'longitude', y = 'latitude',
+    size = 'descriptor', # Differentiate using point size.
+    shape = 'borough')) # Differentiate using point shape.
+    + geom_point())
+```
+
+We can see that due to the close data points, filtering the data using
+size and shape can become a little congested. One thing we can do to fix
+this while still viewing the same data is through the use of "facet_grid".
+
+```{python}
+(ggplot(data_scatter, aes(x = 'longitude', y = 'latitude',
+    shape = 'borough')) # Differentiate using point shape.
+    + geom_point()
+    + facet_grid('descriptor ~ .') # Create multiple plots.
+)
+```
+
+```{python}
+(ggplot(data_scatter, aes(x = 'longitude', y = 'latitude'))
+    + geom_point()
+    + facet_grid('descriptor ~ borough') 
+        # Create multiple plots with 2 conditions.
+    + theme(strip_text_y = element_text(angle = 0), # change facet text angle
+        axis_text_x=element_text(angle=45)) # change x axis text angle
+)
+```
+
+#### Histogram
+
+The last common graph we will cover using `plotnine` is a histogram.
+Here we will use the created date data as a continuous variable. Using 
+`plotnine` we are able to make many of the same personalizations we 
+were able to do with bar charts.
+
+```{python}
+data_used['created_date']=pd.to_datetime(
+  data_used['created_date'],
+  format = "%m/%d/%Y %I:%M:%S %p", errors='coerce')
+(ggplot(data_used, aes(x='created_date'))
+    + geom_histogram())
+```
+Now that we have a simple histogram with our data we can add specializations,
+inclduing:
+
+- Change width of bins.
+- Change oreintation of graph.
+- Add color coded descriptors.
+- Change outline color.
+- Change the orientation of the words on the axes to make them easier to read.
+
+```{python}
+(ggplot(data_used, aes(x='created_date', fill = 'borough')) 
+        # Add color coded descriptors.
+    + geom_histogram(binwidth=1,  # Change width of bins
+      color = 'black') # Change outline color.
+    + theme(axis_text_x=element_text(angle=45)) 
+        # Change the orientation of the words.
+)
+```
+
+```{python}
+(ggplot(data_used, aes(x='created_date', fill = 'borough')) 
+        # Add color coded descriptors.
+    + geom_histogram(binwidth=1,  # Change width of bins
+      colour = 'black') # Change outline color.
+    + coord_flip() # Change oreintation of graph.
+)
+```
+
+While we're able to color code the histogram to show other descriptors 
+of the data, another way we can do this with `plotnine` is through the use
+of multiple graphs. Using "facet_wrap" we can create a multi facet graph with 
+the same data.
+
+```{python}
+(ggplot(data_used, aes(x='created_date')) 
+    + geom_histogram(binwidth=1) # Change width of bins
+    + facet_wrap('borough') # Create multiple graphs.
+    + theme(axis_text_x=element_text(angle=45)) 
+    # Change the orientation of the words.
+)
+```
+
+#### Density Plot
+
+The last visualization we're going to look at is density plots. While less 
+common than the graphs previously discussed, density plots show the 
+distribution of a specific variable.
+
+```{python}
+(ggplot(data_used, aes(x='created_date'))
+    + geom_density())
+```
+
+Above we can see a very simple density graph with very little description. Using
+`plotnine` we are able to:
+
+- Add color coded descriptors.
+- Scale groups by relative size.
+- Change the orientation of the words on the axes to make them easier to read.
+
+```{python}
+(ggplot(data_used, aes(x='created_date', color = 'descriptor')) 
+        #Add color coded descriptors.
+    + geom_density()
+    + theme(axis_text_x=element_text(angle=45)) 
+        # Change the orientation of the words.
+)
+```
+
+```{python}
+(ggplot(data_used, aes(x='created_date', color = 'descriptor')) 
+        #Add color coded descriptors.
+    + geom_density(aes(y=after_stat('count'))) 
+        # Scale groups by relative size.
+    + theme(axis_text_x=element_text(angle=45)) 
+        # Change the orientation of the words.
+)
+```
+
+### Resources
+
+- <https://plotnine.readthedocs.io/en/v0.12.4/gallery.html>
+
+### References
+
+- “Plotnine.Geoms.Geom_bar¶.” Plotnine.Geoms.Geom_bar - Plotnine Commit: 
+D1f7dbf Documentation, plotnine.readthedocs.io/en/stable/generated/
+plotnine.geoms.geom_bar.html. 
+Accessed 13 Feb. 2024. 
+
+- “Plotnine.Geoms.Geom_density¶.” Plotnine.Geoms.Geom_density - 
+Plotnine Commit: D1f7dbf Documentation, plotnine.readthedocs.io/en/
+stable/generated/plotnine.geoms.geom_density.html. 
+Accessed 17 Feb. 2024. 
+
+- “Plotnine.Geoms.Geom_histogram¶.” Plotnine.Geoms.Geom_histogram - 
+Plotnine Commit: D1f7dbf Documentation, plotnine.readthedocs.io/en/
+stable/generated/plotnine.geoms.geom_histogram.html#plotnine.
+geoms.geom_histogram. Accessed 17 Feb. 2024. 
+
+- “Plotnine.Geoms.Geom_point¶.” Plotnine.Geoms.Geom_point - 
+Plotnine Commit: D1f7dbf Documentation, plotnine.readthedocs.io/en/
+stable/generated/plotnine.geoms.geom_point.html. 
+Accessed 16 Feb. 2024. 
+
+- “Plotnine.” PyPI, pypi.org/project/plotnine/. Accessed 13 Feb. 2024. 
+
+- Sarkar, Dipanjan (DJ). “A Comprehensive Guide to the Grammar of Graphics 
+for Effective Visualization of Multi-Dimensional...” Medium, Towards Data 
+Science, 13 Sept. 2018, towardsdatascience.com/a-comprehensive-guide-to-the-
+grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149. 
