@@ -323,10 +323,43 @@ print('degrees of freedom:', results_chi2.dof)
 ```  
 
 ```{python}
-x = ['Condition', 'M.Sighting', 'R.Sighting', 'Bite', 'Signs of Rodents']
+# return season based off month of created date
+def get_season(month): 
+  if month in [3, 4, 5]:
+    return 'Spring'
+  elif month in [6, 7, 8]: 
+    return 'Summer'
+  elif month in [9, 10, 11]: 
+    return 'Fall'
+  elif month in [12, 1, 2]:
+    return 'Winter' 
 
-for i in range(5): 
-  plt.bar(x, freq_table.iloc[i][:-1])
+# add column for season 
+df['Season'] = df['Created Date'].dt.month.apply(get_season)
+
+# create df for Brooklyn 
+df_brklyn = df[df['Borough'] == 'BROOKLYN'] 
+
+freq_table_2 = pd.crosstab(df_brklyn.Season, df_brklyn.Descriptor) 
+
+freq_table_2
+``` 
+
+```{python}
+results_chi2_2 = scipy.stats.chi2_contingency(freq_table_2)
+
+print('test statistic:', results_chi2_2.statistic)
+print('p-value:', results_chi2_2.pvalue)
+print('degrees of freedom:', results_chi2_2.dof) 
+
+x_labels = ['Condition', 'M.Sighting', 'R.Sighting', 'Bite', 'Signs of Rodents']
+
+freq_table_2.rename(columns = {'Condition Attracting Rodents': 'Condition', 
+                      'Rat Sighting': 'R.Sighting', 'Mouse Sighting': 'M.Sighting', 
+                      'Rodent Bite - PCS Only': 'Bite'},
+                      inplace = True)
+
+freq_table_2.T.plot(kind = 'bar', stacked = True) 
 ``` 
 
 ## Nonparametric Hypothesis Tests   
