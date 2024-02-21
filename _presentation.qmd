@@ -35,6 +35,7 @@ for all occupations”
 - The median annual pay for Data Scientists in May 2022 was around $103,500, 
 showing its high demand in a monetary light 
 
+![Data Science](0_POjH5vv_7t8s8loG.png){width=300}
 
 ### Why does Communication Matter?
 
@@ -59,7 +60,7 @@ gather all the necessary information, clarify needs and expectations of
 stakeholders, and align their work with broader business goals.” 
 
 
-
+![Communication](04-communication_16x9.png){width=300}
 
 
 ### Inherent Communication Skills
@@ -73,6 +74,7 @@ stakeholders, and align their work with broader business goals.”
 - Respect
 - Cues 
 
+![Inherent Communication](communi.png){width=300}
 
 
 ### Identify your audience
@@ -93,10 +95,9 @@ from Harvard Business Review
 Data Scientists are treated in the field, communicating creates cooperation 
 that can lead to the avoidance of these issues found. 
 
+![Audience](web_ready_audience-needs_v01.png){width=300}
 
-
-
-### Data Fields
+### Data Applictions
 
 - Data scientists have their hands full as many different fields and 
 professions can use data analytics and information to 
@@ -113,6 +114,7 @@ facilitate their operations
 - Data science communication skills vary in these fields, as some may prefer
 verbal information or visual information. 
 
+![Applications](applications.png){width=300}
 
 ### Storytelling
 
@@ -136,6 +138,7 @@ Data scientists must remember that, and not just when presenting to people
 with a non-technical background. It’s important to find common ground with
 everyone you work with to build trust and move forward effectively.
 
+![Storytelling](story.png){width=300}
 
 ### Data Visualization
 
@@ -145,6 +148,7 @@ vital step for Data Scientists in the field
     + Many of these forms of visualization can be combined with other
 learned skill sets that will be mentioned in the next topic 
 
+![Visuals](visuals.png){width=300}
 
 ### Usable Skill Sets for Data Communication
 
@@ -170,6 +174,7 @@ in data
 data to ensure that it is accurate and accessible to those who need it reliably
 throughout the data science project lifecycle
 
+![skillsets](skillsets.png){width=300}
 
 ### Gather questions and Feedback
 
@@ -183,3 +188,28 @@ successful career as a data scientist.”
 - Being able to interact with your audience gives them a better
 understanding of the topic at hand, and can help avoid ambiguity that 
 would occur if communication was not present 
+
+![Feedback](feedback.png){width=300}
+
+
+### Sources
+
+https://towardsdatascience.com/tell-stories-with-data-communication-in-data-science-5266f7671d7\
+https://hbr.org/2019/01/data-science-and-the-art-of-persuasion\
+https://towardsdatascience.com/communicating-as-a-data-scientist-why-it-matters-and-how-to-do-it-well-f1c34d28c7c4\
+https://www.thedataincubator.com/blog/2022/10/13/improve-your-data-science-communication/\
+https://emeritus.org/in/learn/why-communication-skills-are-important-for-a-data-analyst/\
+https://medium.com/intercom-rad/the-most-underrated-skill-in-data-science-communication-7ed2fab82801\
+https://www.ibm.com/topics/data-science\
+https://www.bls.gov/ooh/math/data-scientists.htm\
+https://medium.com/analytics-vidhya/introduction-to-data-science-28deb32878e7\
+https://blog.jostle.me/customerresources/3-actionable-communication-tips\
+https://www.breathehr.com/en-gb/blog/topic/employee-performance/effective-communication-is-key-to-your-business-success\
+https://ideas.ted.com/before-your-next-presentation-or-speech-heres-the-first-thing-you-must-think-about/\
+https://d1jnx9ba8s6j9r.cloudfront.net/blog/wp-content/uploads/2018/12/Data-Science-Applications-Edureka.jpg\ 
+https://lectera.com/info/storage/img/20210805/fa586bb6c04bf0989d70_808xFull.jpg\
+https://thenewstack.io/7-best-practices-for-data-visualization/\
+https://www.learningtree.com/blog/the-6-major-skill-areas-of-data-science/\
+https://www.poynter.org/reporting-editing/2019/cohort4/\
+
+
