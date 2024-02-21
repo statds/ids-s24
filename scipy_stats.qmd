@@ -227,7 +227,7 @@ and $k$ is from the `kurtosistest`, and a corresponding p-value
 This test is based on D'Agostino and Pearson's test which combines skew
 and kurtosis (heaviness of the tail or how much data resides in the tails). 
 The test compares the skewness and kurtosis of the sample to that of a normal 
-distribution, which are $0$ and $3$, respectively. 
+distribution, which are $0$ and $3$, respectively. [4]
 
 ### Example: Distribution of Response Times 
 It can be useful to identify the distribution of a population because it gives
@@ -302,7 +302,7 @@ has the `confidence_interval` method.
 **Code:** `scipy.stats.chi2_contingency(table)` 
 
 **Assumptions:** The cells in the table contain frequencies, the levels of each
-variable are mutually exclusive, and observations are independent.  
+variable are mutually exclusive, and observations are independent. [3]
 
 **Returns:** The test statistic, a corresponding p-value, the degrees of freedom, 
 and an array of expected frequencies from the table. 
@@ -419,14 +419,15 @@ and a corresponding p-value.
 be calculated as `sample_1.shape * sample_2.shape - U1` where `U1` is the 
 test statistic associated with `sample_1`. 
 * For large sample sizes, the distribution can be assumed to be approximately
-normal, so the statisic can be measured as $z = \frac{U-\mu_{U}}{\sigma_{U}}$.
+normal, so the statisic can be measured as $z = \frac{U-\mu_{U}}{\sigma_{U}}$. [5]
 * To adjust for ties, the standard deviation is calculated as follows: 
 
 $\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - \frac{\sum_{k = 1}^{K}(t^{3}_{k} - t_{k})}{n(n - 1)})}$, where $t_{k}$ is the number of ties. 
 ::: 
 
 ## References 
-<https://docs.scipy.org/doc/scipy/reference/stats.html>
-<https://neuraldatascience.io/5-eda/ttests.html> 
-<https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/>
-<https://www.graphpad.com/guides/prism/latest/statistics/stat_choosing_a_normality_test.htm>
+1. [`scipy.stats` documentation]<https://docs.scipy.org/doc/scipy/reference/stats.html>
+2. [National Library of Medicine - Normality Tests]<https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/>
+3. [National Library of Medicine - Chi-square test]<https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/> 
+4. [scribbr.com - Kurtosis]<https://www.scribbr.com/statistics/kurtosis/>
+5. [datatab.net - Mann-Whitney U-Test]<https://datatab.net/tutorial/mann-whitney-u-test>
