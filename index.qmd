@@ -190,6 +190,8 @@ Here are some example tasks:
 + Handling spatial data
 + Visualize spatial data in a Google map
 + Animation
++ Classification and regression trees
++ Support vector machine
 + Random forest
 + Naive Bayes
 + Bagging vs boosting
@@ -210,18 +212,18 @@ Please use the following table to sign up.
   02/07  | Matt Elliott           | Data science communication skills
   02/07  | Weijia Wu              | 
   02/12  | Dr. Haim Bar           | Database management
-  02/14  | Willam Taki            |
+  02/19  | Willam Taki            |
   02/19  | Joshua Lee             | Descriptive Statistics
   02/21  | Pratham Patel          | Handling spatial data with `geopandas`
   02/21  | Olivia Massad          | Grammar of Graphics `plotnine`
-  02/26  | Ge Li                  |
+  02/26  | Ge Li                  | Animation
   02/26  | Xingye Zhang           | Data visualizing NYC rodent dataset
   02/28  | Jack Dennison          | Geographic Data Analysis
   02/28  | Isabelle Perez         | Statistical hypothesis tests `scypy.stats`
-  03/02  | Emmanuel Yankson       | Random Forest
-  03/02  | David Li               |
-  03/04  | Abigail Mori           | Handling spatial data with `geopandas`
-  03/04  | Leon Nguyen            | Statistical Modeling with `statsmodels`
+  03/04  | Emmanuel Yankson       | Random Forest
+  03/04  | David Li               |
+  03/06  | Abigail Mori           | Handling spatial data with `geopandas`
+  03/06  | Leon Nguyen            | Statistical Modeling with `statsmodels`
   03/25  | Alex Pugh              |
   03/25  | Charitath Chugh        | PyTorch
   03/27  | Vincent Xie            | Database Operations with SQL
@@ -232,6 +234,8 @@ Please use the following table to sign up.
   04/03  |                        |
   04/08  |                        |
   04/08  |                        |
+  04/10  |                        |
+  04/10  |                        |
 
 ### Final Project Presentation Schedule
 

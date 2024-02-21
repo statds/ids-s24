@@ -1,5 +1,509 @@
+# Data Visualization
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+```
+
+```{python}
+url = 'https://raw.githubusercontent.com/JoannaWuWeijia/Data_Store_WWJ/main/cleaning_data_rodent3.csv'
+
+df = pd.read_csv(url)
+```
+
+## Introduction
+Hi Class, my name is Weijia Wu and I'm a senior double majored in Applied Math and Statistics. 
+The following shows a basic concepts of data visulization in python.
+
+
 ## Matplotlib
+Matplotlib is a desktop plotting package designed for plotting and arranging data visually in Python, 
+usually in two-dimensional. It was created by Dr. John Hunter in 2003 as an alternative to Matlab to facilitate 
+scientific computation and data visualization in Python.
 
-### Introduction
+Matplotlib is widely used because of its simplicity and effectiveness.
 
-Please use rodent sighting data for illustrations
+### Installation of `Matplotlib`
+The library can be installed by typing `pip install matplotlib` in your terminal
+
+```
+pip install matplotlib
+```
+
+### Line Plot 
+
+#### Single plot with `pyplot` submodule
+
+Let's Start with an sample Line Plot example: 
+```{python}
+t = range(0, 10) 
+r = [i**2 for i in t]
+
+plt.figure(figsize=(4, 4)) 
+# Width and height in inches
+plt.plot(t, r)
+plt.title('Line Plot Example')
+
+plt.show()
+```
+
+#### x-label, y-label, and grid:
+```{python}
+plt.figure(figsize=(4, 4)) 
+
+plt.plot(t, r)
+plt.title('Line Plot Example2')
+plt.xlabel('t value')
+plt.ylabel('r value')
+plt.grid(True)
+```
+
+
+#### Add legend:
+```{python}
+plt.figure(figsize=(4, 4)) 
+
+plt.plot(t, r)
+plt.title('Line Plot Example3')
+plt.xlabel('t value')
+plt.ylabel('r value')
+plt.grid(True)
+plt.legend()
+```
+
+To add a legend to a plot in Matplotlib, you can use the `legend()` function. 
+
+A legend is a small area on the plot that describes each element of the graph. 
+
+To effectively use the legend, you typically need to label the elements of the plot that you want to appear in the legend using the label parameter when plotting them. 
+```{python}
+plt.legend(loc='lower right', title='Legend Title', fontsize='small')
+```
+
+The `help(plt.legend)` command in Python is used to display the documentation for the legend function from the Matplotlib library. This documentation includes a description of what the function does, the parameters it accepts, and other relevant information such as return values and examples of how to use the function.
+
+```{python}
+help(plt.legend)
+```
+
+#### Colors, Markers, and Line Styles
+
+If we want two plots in the same, we need to find a way to make the distinction between them.
+```{python}
+r2 = [i**3 for i in t]
+
+plt.figure(figsize=(4, 4)) 
+
+plt.plot(t, r, linestyle = '--', color = 'r', marker = 'o', label = 'r')
+plt.plot(t, r2, linestyle = '-', color = 'b', marker = 'v', label = 'r2')
+
+plt.title('Line Plot Example2')
+plt.xlabel('t value')
+plt.ylabel('r value')
+plt.grid(True)
+
+plt.show()
+```
+
+Use  `linestyle`, `color`, and `Markers` to set linestyles:
+
+```{python}
+help(plt.plot)
+```
+
+## Example with rodent data: 
+
+Let's use our rodent data to demonstrate the Monthly Reported data: 
+
+```{python}
+df['Created Date'] = pd.to_datetime(df['Created Date'])
+
+df['Month'] = df['Created Date'].dt.to_period('M')
+monthly_counts = df.groupby('Month').size()
+
+plt.figure(figsize=(10, 8))
+monthly_counts.plot(kind='line')
+plt.title('Monthly Report Count')
+plt.xlabel('Month')
+plt.ylabel('Number of Reports')
+plt.grid(True)
+plt.xticks(rotation=45)
+
+plt.show()
+```
+
+This plot shows the number of rodents in each month's report, and we can draw the following conclusions: rodent sights occur mostly in the spring and summer, and they fall dramatically after the start of autumn (post-August).
+
+
+### Scatter plot
+
+```{python}
+np.random.seed(8465);
+
+x = np.random.uniform(0, 3, 10);
+y = np.random.uniform(0, 3, 10);
+z = np.random.uniform(0, 3, 10);
+
+plt.scatter(x, y)
+plt.xlabel('X')
+plt.ylabel('Y')
+
+plt.show()
+```
+
+### Bar Plot
+```{python}
+borough_counts = df['Borough'].value_counts()
+
+plt.figure(figsize=(10, 8))  
+plt.bar(borough_counts.index, borough_counts.values, color='green')
+plt.xlabel('Borough')  
+plt.ylabel('Number of Rodent Sightings')  
+plt.title('Rodent Sightings by Borough') 
+plt.xticks(rotation=45)  # Rotate the X axis by 45 degrees to show the long labels
+
+plt.show()
+```
+
+### Multiple plots using `subplots` submodule
+```{python}
+df['Created Date'] = pd.to_datetime(df['Created Date'])
+df['Date'] = df['Created Date'].dt.date
+daily_reports = df.groupby(['Date', 'Incident Zip']).size().reset_index(name='Counts')
+sample_zip = daily_reports['Incident Zip'].dropna().iloc[0]
+sample_data = daily_reports[daily_reports['Incident Zip'] == sample_zip]
+
+# 2x2 Plot
+fig, axs = plt.subplots(2, 2, figsize=(10, 10))
+
+# Line Plot
+axs[0, 0].plot(sample_data['Date'], sample_data['Counts'], '-o', color='green')
+axs[0, 0].set_title(f'Linear Plot of Reports for Zip {sample_zip}')
+axs[0, 0].tick_params(labelrotation=45)
+
+# Box Plot
+axs[0, 1].boxplot(df['Y Coordinate (State Plane)'].dropna())
+axs[0, 1].set_title('Boxplot of Y Coordinate')
+
+# barplot
+status_counts = df['Status'].value_counts()
+axs[1, 0].bar(status_counts.index, status_counts.values, color='skyblue')
+axs[1, 0].set_title('Barplot of Status Counts')
+axs[1, 0].tick_params(labelrotation=45)
+
+# histogram
+axs[1, 1].hist(df['Latitude'].dropna(), bins=30, color='orange')
+axs[1, 1].set_title('Histogram of Latitude')
+
+plt.tight_layout()
+plt.show()
+```
+
+### Save the files
+
+`help(plt.savefig)`allows you to save the current figure created by Matplotlib to a file. You can specify the filename and various options to control the format, quality, and layout of the output file.
+
+
+```{python}
+help(plt.savefig)
+```
+
+## Pandas
+
+Pandas plotting is built on top of Matplotlib, 
+and one of its main benefits is that it allows you to generate plots with fewer lines of 
+code directly from Pandas data structures like DataFrames and Series. This integration 
+simplifies the process of visualizing data for analysis.
+
+
+### Line Plot
+
+#### Single plot
+```{python}
+monthly_counts.plot(kind='line')
+```
+
+Because the line plot is default in pandas plots, you can omit the (kind='line')
+
+When plotting with the .plot() method in Pandas, it is true that you can generate
+basic plots with fewer lines of code, due to the fact that Pandas automatically handles
+some of the basic settings, such as setting the x-axis labels automatically. 
+However, for more detailed chart customization, such as setting gridlines, 
+rotating x-axis labels, and so on, you may need additional Matplotlib commands to implement them.
+
+
+```{python}
+plt.figure(figsize=(10, 8))
+monthly_counts.plot(kind='line')
+
+plt.title('Monthly Report Count')
+plt.xlabel('Month')
+plt.ylabel('Number of Reports')
+plt.grid(True)
+plt.xticks(rotation=45)
+# For longer tags, avoid overlapping
+
+plt.show()
+```
+
+#### Multi-Lineplot
+The following is showing several line plots in the same figure. 
+
+```{python}
+community_counts = df['Community Districts'].value_counts().sort_index()
+city_council_counts = df['City Council Districts'].value_counts().sort_index()
+police_precincts_counts = df['Police Precincts'].value_counts().sort_index()
+
+counts_df = pd.DataFrame({
+    'Community Districts': community_counts,
+    'City Council Districts': city_council_counts,
+    'Police Precincts': police_precincts_counts
+})
+counts_df = counts_df.fillna(0) 
+#Fill missing values to 0
+
+counts_df[['Community Districts', 'City Council Districts', 'Police Precincts']].plot() 
+```
+
+When you use the .plot() method on a Pandas DataFrame to create a multi-line plot, 
+each line in the plot is automatically assigned a different color to help
+distinguish between the different data columns visually. The colors are chosen 
+from a default color cycle provided by Matplotlib. 
+
+If you want to customize the color: 
+```{python}
+counts_df[['Community Districts', 'City Council Districts', 'Police Precincts']].plot(
+    color=['red', 'green', 'blue']  # Custom colors for each line
+)
+```
+
+
+### Additional arguments
+
+For more info pleased check:
+
+```{python}
+![additional arguments](https://drive.google.com/file/d/1j5T7_VMT1Nt4myukcmar0UMcZOHqurCk/view?usp=sharing)
+```
+
+```{python}
+help(plt.plot)
+```
+
+### Bar Plot
+
+For categorical data, one of common visualization is the barplot.
+
++ Generated using `df.plot.bar()` method,
+for horizontal version `df.plot.barh()`.
+
+#### Side-by-side Bar Plot:
+
+Let's use Borough and Location Type to generate a side-by-side bar plot, one horizontal and one vertical:
+
+```{python}
+fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(15, 8))
+
+# Vertical bar plot for Borough counts
+df.groupby(['Borough']).size().plot.bar(ax=axs[0], color='skyblue', rot=0)
+axs[0].set_title('Bar plot for Borough')
+
+# Horizontal bar plot for Location Type counts
+df.groupby(['Location Type']).size().plot.barh(ax=axs[1], color='lightgreen')
+axs[1].set_title('Bar plot for Location Type')
+
+
+plt.tight_layout()
+plt.show()
+```
+
+Similiar with `axs` in matplotlib:
+
++ `nrows=1` means there will be 1 row of subplots.
++ `ncols=2 `means there will be 2 columns of subplots.
+
+#### Grouped Bar Plot
+This type of plot is useful for comparing the distribution within each class side by side.
+
+```{python}
+class_Borough = pd.crosstab(df["Borough"], df["Status"])
+
+class_Borough.plot.bar(rot=45, figsize=(10, 6))
+
+```
+
+#### Stacked Bar Plot
+This plot is useful for comparing the total counts across borough while
+still being able to see the proportion of each borough within each class.
+
+```{python}
+class_Borough.plot.bar(stacked=True)
+```
+
+### Histogram and Density Plots
+
+For numeric data, histogram allows us to see the distribution (center shape, skewness) of the data.
+
+Histogram can be generated using `df.plot.hist()`
+method
+
+Since we have limited numeric data in our rodent data,
+I used another data to present it:
+
+```{python}
+url2 = 'https://raw.githubusercontent.com/JoannaWuWeijia/Data_Store_WWJ/main/grades_example.csv'
+df2 = pd.read_csv(url2)
+```
+
+```{python}
+df2["Grade"].plot.hist(bins = 10, figsize=(10, 8))
+```
+
+As can be seen from the plot, the students' scores show a normal distribution, 
+with most of them clustered in the 70-80 range
+
+```{python}
+df2["Grade"].plot.density()
+```
+
+### Scatter Plots
+When dealing with two variables, 
+scatter plot allow us to examine if there is any correlation between them.
+
+Scatter can be generated using `df.plot.scatter(x = col1, y = col2)` method.
+
+```{python}
+url3 = 'https://raw.githubusercontent.com/JoannaWuWeijia/Data_Store_WWJ/main/student_example3.csv'
+df3 = pd.read_csv(url3)
+```
+
+```{python}
+df3.plot.scatter(x="Weight", y="Height", figsize=(10,8))
+```
+
+As you can see it's roughly a linear regression, 
+and I'll cover how to add a regression line in the next sns section.
+
+
+## Seaborn
++ Seaborn is designed to work directly with pandas DataFrames, 
+making plotting more convenient by allowing direct use of DataFrame 
+columns for specifying data in plots.
+
++ Seaborn makes it easy to add linear regression lines and other 
+statistical models to your charts, simplifying the process of statistical data visualization.
+
++ Seaborn's default styles and color are more aesthetically pleasing 
+and modern compared to Matplotlib.
+
+### Installation of `Seaborn`
+
+```
+pip install seaborn
+```
+
+### Histogram and Density Plots
+
+```{python}
+help(sns.histplot) 
+```
+
+
+```{python}
+plt.figure(figsize=(10,8))
+sns.histplot(df2['Grade'], bins=10, kde = True)
+```
+
+`bins`: The number of bars in the histogram. 
+More bins can make the data distribution more detailed, 
+but too many may cause the chart to be difficult to understand;
+fewer bins may not be able to show the data distribution accurately.
+`kde `: (Kernel Density Estimate Line) a density curve will be added to the histogram, 
+which is generated by kernel density estimation and can help understand the shape of the data distribution
+
+### Scatter plot with Regression line
+
+I used an example with less data to be able to show it. 
+We can see that the height and weight of the students are directly proportional.
+
+```{python}
+df4 = pd.DataFrame({
+    'Student': ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Fiona', 'George', 'Hannah', 'Ian', 'Julia'],
+    'Height': [160, 172, 158, 165, 170, 162, 175, 168, 180, 155],
+    'Weight': [55, 72, 60, 68, 62, 56, 80, 65, 75, 50]})
+
+plt.figure(figsize = (10, 8))
+sns.regplot(x='Weight', y='Height', data=df4)
+```
+
+### Categorical Data
+
+#### barplot
+```{python }
+np.random.seed(0) 
+genders = np.random.choice(['Male', 'Female'], size=500)
+classes = np.random.choice(['A', 'B', 'C', 'D'], size=500)
+grades = np.random.choice(['Excellent', 'Good', 'Average', 'Poor'], size=500)
+df4 = pd.DataFrame({'Gender': genders, 'Class': classes, 'Grades': grades})
+```
+
+
+```{python}
+sns.catplot(x='Class', hue='Gender', col='Grades', kind='count', data=df4, height=5, col_wrap=2)
+plt.show()
+```
+
++ `x='Class'`: This sets the x-axis to represent different classes, 
+so each class will have its own set of bars in the plot.
+
++ `hue='Gender'`: This parameter adds a color coding (hue) based on the 'Gender' column
+
++ `col='Grades'`: This creates separate subplots (columns) 
+for each unique value in the 'Grades' column (e.g., Excellent, Good, Average, Poor), effectively grouping the data by grades.
+
++ `col_wrap=2`: Limits the number of these subplots to 2 per row. 
+If there are more than 2 unique grades, additional rows will be created to accommodate all the subplots.
+
++ `kind='count'`: Specifies the kind of plot to draw. 
+In this case, `'count' `means it will count the occurrences of each category combination and display this as bars in the plot.
+
++ `height`=5: Sets the height of each subplot to 5 inches.
+
+#### Box Plot
+
+```{python}
+sns.catplot(x='Gender', y='Grades', col='Class', data=df4, kind='box', height = 10, col_wrap=2)
+```
+
++ `x='Gender'`:  x-axis variable
+
++ `y='Grades'`: y-axis variable, which in this case is 'Grades'. 
+Since 'Grades' is a categorical variable with values like 'Excellent', 'Good', 'Average', 'Poor'
+
++ `col='Class'`: Creates separate subplots for each unique value in the 'Class' column, 
+effectively grouping the data by class.
+
+
+#### Categorical Data Help
+```{python}
+help(sns.catplot)
+```
+
+## Conclusion
+
+`Matplotlib` is the foundation for making plots in Python.
+`pandas` uses Matplotlib for its plotting features but is mainly for handling data.
+`Seaborn` makes Matplotlib prettier and easier to use, especially with pandas data.
+
+
+
+## Citation
++ https://matplotlib.org/stable/users/project/history.html
++ https://matplotlib.org/stable/gallery/lines_bars_and_markers/simple_plot.html
++ https://www.simplilearn.com/tutorials/python-tutorial/matplotlib
++ https://www.w3schools.com/python/pandas/pandas_plotting.asp
++ https://github.com/mwaskom/seaborn/tree/master/seaborn
++ https://seaborn.pydata.org/installing.html
++ https://ritza.co/articles/matplotlib-vs-seaborn-vs-plotly-vs-MATLAB-vs-ggplot2-vs-pandas/

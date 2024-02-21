@@ -18,6 +18,8 @@ book:
     - python.qmd
     - import.qmd
     - communication.qmd
+    - eda.qmd
+    - statsmod.qmd
     - visualization.qmd
     - exercises.qmd
     - references.qmd
