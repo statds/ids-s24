@@ -216,7 +216,7 @@ Please use the following table to sign up.
   02/19  | Joshua Lee             | Descriptive Statistics
   02/21  | Pratham Patel          | Handling spatial data with `geopandas`
   02/21  | Olivia Massad          | Grammar of Graphics `plotnine`
-  02/26  | Ge Li                  |
+  02/26  | Ge Li                  | Animation
   02/26  | Xingye Zhang           | Data visualizing NYC rodent dataset
   02/28  | Jack Dennison          | Geographic Data Analysis
   02/28  | Isabelle Perez         | Statistical hypothesis tests `scypy.stats`
