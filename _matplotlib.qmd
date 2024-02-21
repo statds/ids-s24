@@ -474,6 +474,7 @@ In this case, `'count' `means it will count the occurrences of each category com
 #### Box Plot
 
 ```{python}
+# This chunk does not work
 sns.catplot(x='Gender', y='Grades', col='Class', data=df4, kind='box', height = 10, col_wrap=2)
 ```
 
