@@ -98,13 +98,15 @@ gdf3.centroid
 
 * `contains()`: returns True if the shape contains a specific geometry or Series.
     + parameters `other` and `align`
-```{python}
-gdf3.contains(gdf1)
-```
 
 ```{python}
 gdf3.contains(Point((0.5, 1.5)))
 ```
+
+```{python}
+gdf3.contains(gdf1)
+```
+
 
 * `intersects()` returns true if shape intersects another geometry of series
     + parameters `other` and `align`
@@ -126,20 +128,24 @@ from shapely.geometry import Point
 # To create GeoDataFrame
 import geopandas as gpd 
 
+#read in the feather file as a generic pandas DataFrame
 rat_22_23 = pd.read_feather('data/rodent_2022-2023.feather')
 
-# creating geometry using shapely (removing missing points)
+# creating geometry using shapely (removing missing points) for the already built in longitude and latitude coordinates
 geometry = [Point(xy) for xy in zip(rat_22_23["longitude"], rat_22_23["latitude"]) if not Point(xy).is_empty]
 
-# creating geometry column to be used by geopandas
+# creating geometry column to be used by geopandas using the points_from_xy method
 geo = gpd.points_from_xy(rat_22_23["longitude"], rat_22_23["latitude"])
 
 # coordinate reference system (epsg:4326 implies geographic coordinates)
 crs = {'init': 'epsg:4326'}
 
-# create GeoDataFrame (taking care of missing coordinates)
+# create GeoDataFrame (takes care of the missing coordinates) 
 rodent_gdf = gpd.GeoDataFrame(rat_22_23.loc[~pd.isna(rat_22_23["longitude"]) & ~pd.isna(rat_22_23["latitude"])], crs=crs, geometry=geometry)
+```
 
+Here, we can take a view at the new GeoDataFrame:
+```{python}
 rodent_gdf.head()
 ```
 
@@ -147,14 +153,28 @@ rodent_gdf.head()
 ### Plotting
 The new geometry allows us to plot the data easily.
 ```{python}
+#standard plot of every single rodent incident
 rodent_gdf.plot()
 
-#color by borough
+#color the plot by borough
 rodent_gdf.plot(column = 'borough', legend=True)
 
-#Plot the missing information
+#color by the descriptor of the incident
+rodent_gdf.plot(column = 'descriptor', legend=True)
+
+#Plot the missing information for borough
 rodent_gdf.plot(column='borough', missing_kwds={'color':'red'})
+
+#color the plot by zipcode
+rodent_gdf.plot(column = 'incident_zip', legend=True)
 ```
+Note that if an integer column is passed, the legend will present the key as a gradient by default.
+
+You can individualize each zipcode using categorical=True, though be sure the list 
+of unique values is not too large.
+`rodent_gdf.plot(column = 'incident_zip', legend=True, categorical=True)`
+
+
 
 ### Interactive Maps
 A very interesting aspect is the ability to create interactive graphs using the `.explore()` method.
@@ -168,7 +188,7 @@ rodent_gdf.explore(column='borough', legend=True)
 
 
 ### Setting and Changing Projections
-In the code, a Coordinate Reference System(CRS) was set using `crs = {'init':'epsg:4326'}`. CRS can be set on on initialized GeoDataFrame using the `.set_crs` function. We can do this for our previous example `gdf3`
+In the code, a Coordinate Reference System(CRS) was set using `crs = {'init':'epsg:4326'}`. CRS can be set on on initialized GeoDataFrame using the `.set_crs` function. We can do this for our previous example `gdf3`:
 
 ```{python}
 gdf3 = gdf3.set_crs("EPSG:4326")
