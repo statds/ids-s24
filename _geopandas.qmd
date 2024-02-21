@@ -159,6 +159,9 @@ rodent_gdf.plot()
 #color the plot by borough
 rodent_gdf.plot(column = 'borough', legend=True)
 
+#color the plot by borough, with more transparent markers
+rodent_gdf.plot(column = 'borough', alpha = 0.01)
+
 #color by the descriptor of the incident
 rodent_gdf.plot(column = 'descriptor', legend=True)
 
@@ -170,11 +173,13 @@ rodent_gdf.plot(column = 'incident_zip', legend=True)
 ```
 Note that if an integer column is passed, the legend will present the key as a gradient by default.
 
+
 You can individualize each zipcode using categorical=True, though be sure the list 
-of unique values is not too large.
+of unique integers is not too large.
+
 `rodent_gdf.plot(column = 'incident_zip', legend=True, categorical=True)`
 
-
+The geographic visualizations allow us to try to observe some trends amongst the reported rodent incident we see.
 
 ### Interactive Maps
 A very interesting aspect is the ability to create interactive graphs using the `.explore()` method.
@@ -186,9 +191,13 @@ Note that `folium`, `matplotlib`, and `mapclassify` are necessary for the `.expl
 rodent_gdf.explore(column='borough', legend=True)
 ```
 
+This map lets us specifically find various points and examine them and their surroudings.
+
 
 ### Setting and Changing Projections
-In the code, a Coordinate Reference System(CRS) was set using `crs = {'init':'epsg:4326'}`. CRS can be set on on initialized GeoDataFrame using the `.set_crs` function. We can do this for our previous example `gdf3`:
+In the code, a Coordinate Reference System(CRS) was set using `crs = {'init':'epsg:4326'}`. 
+CRS can be set on on initialized GeoDataFrame using the `.set_crs` function. We can do this 
+for our previous example `gdf3`:
 
 ```{python}
 gdf3 = gdf3.set_crs("EPSG:4326")
