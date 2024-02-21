@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science - 8&nbsp; Visualization</title>
+<title>Introduction to Data Science - 9&nbsp; Visualization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -81,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./visualization.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualization</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./visualization.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualization</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -153,20 +187,26 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./statsmod.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualization.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -185,9 +225,47 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#matplotlib" id="toc-matplotlib" class="nav-link active" data-scroll-target="#matplotlib"><span class="header-section-number">8.1</span> Matplotlib</a>
+  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link active" data-scroll-target="#data-visualization"><span class="header-section-number">10</span> Data Visualization</a>
   <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">8.1.1</span> Introduction</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">10.1</span> Introduction</a></li>
+  <li><a href="#matplotlib" id="toc-matplotlib" class="nav-link" data-scroll-target="#matplotlib"><span class="header-section-number">10.2</span> Matplotlib</a>
+  <ul class="collapse">
+  <li><a href="#installation-of-matplotlib" id="toc-installation-of-matplotlib" class="nav-link" data-scroll-target="#installation-of-matplotlib"><span class="header-section-number">10.2.1</span> Installation of <code>Matplotlib</code></a></li>
+  <li><a href="#line-plot" id="toc-line-plot" class="nav-link" data-scroll-target="#line-plot"><span class="header-section-number">10.2.2</span> Line Plot</a></li>
+  </ul></li>
+  <li><a href="#example-with-rodent-data" id="toc-example-with-rodent-data" class="nav-link" data-scroll-target="#example-with-rodent-data"><span class="header-section-number">10.3</span> Example with rodent data:</a>
+  <ul class="collapse">
+  <li><a href="#scatter-plot" id="toc-scatter-plot" class="nav-link" data-scroll-target="#scatter-plot"><span class="header-section-number">10.3.1</span> Scatter plot</a></li>
+  <li><a href="#bar-plot" id="toc-bar-plot" class="nav-link" data-scroll-target="#bar-plot"><span class="header-section-number">10.3.2</span> Bar Plot</a></li>
+  <li><a href="#multiple-plots-using-subplots-submodule" id="toc-multiple-plots-using-subplots-submodule" class="nav-link" data-scroll-target="#multiple-plots-using-subplots-submodule"><span class="header-section-number">10.3.3</span> Multiple plots using <code>subplots</code> submodule</a></li>
+  <li><a href="#save-the-files" id="toc-save-the-files" class="nav-link" data-scroll-target="#save-the-files"><span class="header-section-number">10.3.4</span> Save the files</a></li>
+  </ul></li>
+  <li><a href="#pandas" id="toc-pandas" class="nav-link" data-scroll-target="#pandas"><span class="header-section-number">10.4</span> Pandas</a>
+  <ul class="collapse">
+  <li><a href="#line-plot-1" id="toc-line-plot-1" class="nav-link" data-scroll-target="#line-plot-1"><span class="header-section-number">10.4.1</span> Line Plot</a></li>
+  <li><a href="#additional-arguments" id="toc-additional-arguments" class="nav-link" data-scroll-target="#additional-arguments"><span class="header-section-number">10.4.2</span> Additional arguments</a></li>
+  <li><a href="#bar-plot-1" id="toc-bar-plot-1" class="nav-link" data-scroll-target="#bar-plot-1"><span class="header-section-number">10.4.3</span> Bar Plot</a></li>
+  <li><a href="#histogram-and-density-plots" id="toc-histogram-and-density-plots" class="nav-link" data-scroll-target="#histogram-and-density-plots"><span class="header-section-number">10.4.4</span> Histogram and Density Plots</a></li>
+  <li><a href="#scatter-plots" id="toc-scatter-plots" class="nav-link" data-scroll-target="#scatter-plots"><span class="header-section-number">10.4.5</span> Scatter Plots</a></li>
+  </ul></li>
+  <li><a href="#seaborn" id="toc-seaborn" class="nav-link" data-scroll-target="#seaborn"><span class="header-section-number">10.5</span> Seaborn</a>
+  <ul class="collapse">
+  <li><a href="#installation-of-seaborn" id="toc-installation-of-seaborn" class="nav-link" data-scroll-target="#installation-of-seaborn"><span class="header-section-number">10.5.1</span> Installation of <code>Seaborn</code></a></li>
+  <li><a href="#histogram-and-density-plots-1" id="toc-histogram-and-density-plots-1" class="nav-link" data-scroll-target="#histogram-and-density-plots-1"><span class="header-section-number">10.5.2</span> Histogram and Density Plots</a></li>
+  <li><a href="#scatter-plot-with-regression-line" id="toc-scatter-plot-with-regression-line" class="nav-link" data-scroll-target="#scatter-plot-with-regression-line"><span class="header-section-number">10.5.3</span> Scatter plot with Regression line</a></li>
+  <li><a href="#categorical-data" id="toc-categorical-data" class="nav-link" data-scroll-target="#categorical-data"><span class="header-section-number">10.5.4</span> Categorical Data</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">10.6</span> Conclusion</a></li>
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation"><span class="header-section-number">10.7</span> Citation</a></li>
+  <li><a href="#grammar-of-graphics-with-plotnine" id="toc-grammar-of-graphics-with-plotnine" class="nav-link" data-scroll-target="#grammar-of-graphics-with-plotnine"><span class="header-section-number">10.8</span> Grammar of Graphics with <code>Plotnine</code></a>
+  <ul class="collapse">
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1"><span class="header-section-number">10.8.1</span> Introduction</a></li>
+  <li><a href="#what-is-grammar-of-graphics" id="toc-what-is-grammar-of-graphics" class="nav-link" data-scroll-target="#what-is-grammar-of-graphics"><span class="header-section-number">10.8.2</span> What is Grammar of Graphics?</a></li>
+  <li><a href="#what-can-you-do-with-plotnine" id="toc-what-can-you-do-with-plotnine" class="nav-link" data-scroll-target="#what-can-you-do-with-plotnine"><span class="header-section-number">10.8.3</span> What can you do with <code>Plotnine</code>?</a></li>
+  <li><a href="#using-plotnine" id="toc-using-plotnine" class="nav-link" data-scroll-target="#using-plotnine"><span class="header-section-number">10.8.4</span> Using <code>Plotnine</code></a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">10.8.5</span> Resources</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">10.8.6</span> References</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -197,7 +275,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualization</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualization</span></h1>
 </div>
 
 
@@ -214,13 +292,2279 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="matplotlib" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="matplotlib"><span class="header-section-number">8.1</span> Matplotlib</h2>
-<section id="introduction" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">8.1.1</span> Introduction</h3>
-<p>Please use rodent sighting data for illustrations</p>
+<section id="data-visualization" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Data Visualization</h1>
+<div id="cbb7db99" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b1901ccb" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/JoannaWuWeijia/Data_Store_WWJ/main/cleaning_data_rodent3.csv'</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="introduction" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">10.1</span> Introduction</h2>
+<p>Hi Class, my name is Weijia Wu and I’m a senior double majored in Applied Math and Statistics. The following shows a basic concepts of data visulization in python.</p>
+</section>
+<section id="matplotlib" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="matplotlib"><span class="header-section-number">10.2</span> Matplotlib</h2>
+<p>Matplotlib is a desktop plotting package designed for plotting and arranging data visually in Python, usually in two-dimensional. It was created by Dr.&nbsp;John Hunter in 2003 as an alternative to Matlab to facilitate scientific computation and data visualization in Python.</p>
+<p>Matplotlib is widely used because of its simplicity and effectiveness.</p>
+<section id="installation-of-matplotlib" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="installation-of-matplotlib"><span class="header-section-number">10.2.1</span> Installation of <code>Matplotlib</code></h3>
+<p>The library can be installed by typing <code>pip install matplotlib</code> in your terminal</p>
+<pre><code>pip install matplotlib</code></pre>
+</section>
+<section id="line-plot" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="line-plot"><span class="header-section-number">10.2.2</span> Line Plot</h3>
+<section id="single-plot-with-pyplot-submodule" class="level4" data-number="10.2.2.1">
+<h4 data-number="10.2.2.1" class="anchored" data-anchor-id="single-plot-with-pyplot-submodule"><span class="header-section-number">10.2.2.1</span> Single plot with <code>pyplot</code> submodule</h4>
+<p>Let’s Start with an sample Line Plot example:</p>
+<div id="3c4aedb0" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">10</span>) </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> [i<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> t]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>)) </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Width and height in inches</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.plot(t, r)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Line Plot Example'</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-4-output-1.png" width="343" height="357" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="x-label-y-label-and-grid" class="level4" data-number="10.2.2.2">
+<h4 data-number="10.2.2.2" class="anchored" data-anchor-id="x-label-y-label-and-grid"><span class="header-section-number">10.2.2.2</span> x-label, y-label, and grid:</h4>
+<div id="e216e5fd" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>)) </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.plot(t, r)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Line Plot Example2'</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'t value'</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'r value'</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-5-output-1.png" width="361" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="add-legend" class="level4" data-number="10.2.2.3">
+<h4 data-number="10.2.2.3" class="anchored" data-anchor-id="add-legend"><span class="header-section-number">10.2.2.3</span> Add legend:</h4>
+<div id="8402b8e4" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>)) </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.plot(t, r)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Line Plot Example3'</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'t value'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'r value'</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-6-output-2.png" width="361" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To add a legend to a plot in Matplotlib, you can use the <code>legend()</code> function.</p>
+<p>A legend is a small area on the plot that describes each element of the graph.</p>
+<p>To effectively use the legend, you typically need to label the elements of the plot that you want to appear in the legend using the label parameter when plotting them.</p>
+<div id="a2ab2529" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'lower right'</span>, title<span class="op">=</span><span class="st">'Legend Title'</span>, fontsize<span class="op">=</span><span class="st">'small'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-7-output-2.png" width="581" height="416" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The <code>help(plt.legend)</code> command in Python is used to display the documentation for the legend function from the Matplotlib library. This documentation includes a description of what the function does, the parameters it accepts, and other relevant information such as return values and examples of how to use the function.</p>
+<div id="a08b6a4b" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(plt.legend)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on function legend in module matplotlib.pyplot:
+
+legend(*args, **kwargs)
+    Place a legend on the Axes.
+    
+    Call signatures::
+    
+        legend()
+        legend(handles, labels)
+        legend(handles=handles)
+        legend(labels)
+    
+    The call signatures correspond to the following different ways to use
+    this method:
+    
+    **1. Automatic detection of elements to be shown in the legend**
+    
+    The elements to be added to the legend are automatically determined,
+    when you do not pass in any extra arguments.
+    
+    In this case, the labels are taken from the artist. You can specify
+    them either at artist creation or by calling the
+    :meth:`~.Artist.set_label` method on the artist::
+    
+        ax.plot([1, 2, 3], label='Inline label')
+        ax.legend()
+    
+    or::
+    
+        line, = ax.plot([1, 2, 3])
+        line.set_label('Label via method')
+        ax.legend()
+    
+    .. note::
+        Specific artists can be excluded from the automatic legend element
+        selection by using a label starting with an underscore, "_".
+        A string starting with an underscore is the default label for all
+        artists, so calling `.Axes.legend` without any arguments and
+        without setting the labels manually will result in no legend being
+        drawn.
+    
+    
+    **2. Explicitly listing the artists and labels in the legend**
+    
+    For full control of which artists have a legend entry, it is possible
+    to pass an iterable of legend artists followed by an iterable of
+    legend labels respectively::
+    
+        ax.legend([line1, line2, line3], ['label1', 'label2', 'label3'])
+    
+    
+    **3. Explicitly listing the artists in the legend**
+    
+    This is similar to 2, but the labels are taken from the artists'
+    label properties. Example::
+    
+        line1, = ax.plot([1, 2, 3], label='label1')
+        line2, = ax.plot([1, 2, 3], label='label2')
+        ax.legend(handles=[line1, line2])
+    
+    
+    **4. Labeling existing plot elements**
+    
+    .. admonition:: Discouraged
+    
+        This call signature is discouraged, because the relation between
+        plot elements and labels is only implicit by their order and can
+        easily be mixed up.
+    
+    To make a legend for all artists on an Axes, call this function with
+    an iterable of strings, one for each legend item. For example::
+    
+        ax.plot([1, 2, 3])
+        ax.plot([5, 6, 7])
+        ax.legend(['First line', 'Second line'])
+    
+    
+    Parameters
+    ----------
+    handles : sequence of `.Artist`, optional
+        A list of Artists (lines, patches) to be added to the legend.
+        Use this together with *labels*, if you need full control on what
+        is shown in the legend and the automatic mechanism described above
+        is not sufficient.
+    
+        The length of handles and labels should be the same in this
+        case. If they are not, they are truncated to the smaller length.
+    
+    labels : list of str, optional
+        A list of labels to show next to the artists.
+        Use this together with *handles*, if you need full control on what
+        is shown in the legend and the automatic mechanism described above
+        is not sufficient.
+    
+    Returns
+    -------
+    `~matplotlib.legend.Legend`
+    
+    Other Parameters
+    ----------------
+    
+    loc : str or pair of floats, default: :rc:`legend.loc` ('best' for axes, 'upper right' for figures)
+        The location of the legend.
+    
+        The strings
+        ``'upper left', 'upper right', 'lower left', 'lower right'``
+        place the legend at the corresponding corner of the axes/figure.
+    
+        The strings
+        ``'upper center', 'lower center', 'center left', 'center right'``
+        place the legend at the center of the corresponding edge of the
+        axes/figure.
+    
+        The string ``'center'`` places the legend at the center of the axes/figure.
+    
+        The string ``'best'`` places the legend at the location, among the nine
+        locations defined so far, with the minimum overlap with other drawn
+        artists.  This option can be quite slow for plots with large amounts of
+        data; your plotting speed may benefit from providing a specific location.
+    
+        The location can also be a 2-tuple giving the coordinates of the lower-left
+        corner of the legend in axes coordinates (in which case *bbox_to_anchor*
+        will be ignored).
+    
+        For back-compatibility, ``'center right'`` (but no other location) can also
+        be spelled ``'right'``, and each "string" locations can also be given as a
+        numeric value:
+    
+            ===============   =============
+            Location String   Location Code
+            ===============   =============
+            'best'            0
+            'upper right'     1
+            'upper left'      2
+            'lower left'      3
+            'lower right'     4
+            'right'           5
+            'center left'     6
+            'center right'    7
+            'lower center'    8
+            'upper center'    9
+            'center'          10
+            ===============   =============
+    
+    bbox_to_anchor : `.BboxBase`, 2-tuple, or 4-tuple of floats
+        Box that is used to position the legend in conjunction with *loc*.
+        Defaults to `axes.bbox` (if called as a method to `.Axes.legend`) or
+        `figure.bbox` (if `.Figure.legend`).  This argument allows arbitrary
+        placement of the legend.
+    
+        Bbox coordinates are interpreted in the coordinate system given by
+        *bbox_transform*, with the default transform
+        Axes or Figure coordinates, depending on which ``legend`` is called.
+    
+        If a 4-tuple or `.BboxBase` is given, then it specifies the bbox
+        ``(x, y, width, height)`` that the legend is placed in.
+        To put the legend in the best location in the bottom right
+        quadrant of the axes (or figure)::
+    
+            loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5)
+    
+        A 2-tuple ``(x, y)`` places the corner of the legend specified by *loc* at
+        x, y.  For example, to put the legend's upper right-hand corner in the
+        center of the axes (or figure) the following keywords can be used::
+    
+            loc='upper right', bbox_to_anchor=(0.5, 0.5)
+    
+    ncols : int, default: 1
+        The number of columns that the legend has.
+    
+        For backward compatibility, the spelling *ncol* is also supported
+        but it is discouraged. If both are given, *ncols* takes precedence.
+    
+    prop : None or `matplotlib.font_manager.FontProperties` or dict
+        The font properties of the legend. If None (default), the current
+        :data:`matplotlib.rcParams` will be used.
+    
+    fontsize : int or {'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'}
+        The font size of the legend. If the value is numeric the size will be the
+        absolute font size in points. String values are relative to the current
+        default font size. This argument is only used if *prop* is not specified.
+    
+    labelcolor : str or list, default: :rc:`legend.labelcolor`
+        The color of the text in the legend. Either a valid color string
+        (for example, 'red'), or a list of color strings. The labelcolor can
+        also be made to match the color of the line or marker using 'linecolor',
+        'markerfacecolor' (or 'mfc'), or 'markeredgecolor' (or 'mec').
+    
+        Labelcolor can be set globally using :rc:`legend.labelcolor`. If None,
+        use :rc:`text.color`.
+    
+    numpoints : int, default: :rc:`legend.numpoints`
+        The number of marker points in the legend when creating a legend
+        entry for a `.Line2D` (line).
+    
+    scatterpoints : int, default: :rc:`legend.scatterpoints`
+        The number of marker points in the legend when creating
+        a legend entry for a `.PathCollection` (scatter plot).
+    
+    scatteryoffsets : iterable of floats, default: ``[0.375, 0.5, 0.3125]``
+        The vertical offset (relative to the font size) for the markers
+        created for a scatter plot legend entry. 0.0 is at the base the
+        legend text, and 1.0 is at the top. To draw all markers at the
+        same height, set to ``[0.5]``.
+    
+    markerscale : float, default: :rc:`legend.markerscale`
+        The relative size of legend markers compared with the originally
+        drawn ones.
+    
+    markerfirst : bool, default: True
+        If *True*, legend marker is placed to the left of the legend label.
+        If *False*, legend marker is placed to the right of the legend label.
+    
+    frameon : bool, default: :rc:`legend.frameon`
+        Whether the legend should be drawn on a patch (frame).
+    
+    fancybox : bool, default: :rc:`legend.fancybox`
+        Whether round edges should be enabled around the `.FancyBboxPatch` which
+        makes up the legend's background.
+    
+    shadow : bool, default: :rc:`legend.shadow`
+        Whether to draw a shadow behind the legend.
+    
+    framealpha : float, default: :rc:`legend.framealpha`
+        The alpha transparency of the legend's background.
+        If *shadow* is activated and *framealpha* is ``None``, the default value is
+        ignored.
+    
+    facecolor : "inherit" or color, default: :rc:`legend.facecolor`
+        The legend's background color.
+        If ``"inherit"``, use :rc:`axes.facecolor`.
+    
+    edgecolor : "inherit" or color, default: :rc:`legend.edgecolor`
+        The legend's background patch edge color.
+        If ``"inherit"``, use take :rc:`axes.edgecolor`.
+    
+    mode : {"expand", None}
+        If *mode* is set to ``"expand"`` the legend will be horizontally
+        expanded to fill the axes area (or *bbox_to_anchor* if defines
+        the legend's size).
+    
+    bbox_transform : None or `matplotlib.transforms.Transform`
+        The transform for the bounding box (*bbox_to_anchor*). For a value
+        of ``None`` (default) the Axes'
+        :data:`~matplotlib.axes.Axes.transAxes` transform will be used.
+    
+    title : str or None
+        The legend's title. Default is no title (``None``).
+    
+    title_fontproperties : None or `matplotlib.font_manager.FontProperties` or dict
+        The font properties of the legend's title. If None (default), the
+        *title_fontsize* argument will be used if present; if *title_fontsize* is
+        also None, the current :rc:`legend.title_fontsize` will be used.
+    
+    title_fontsize : int or {'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'}, default: :rc:`legend.title_fontsize`
+        The font size of the legend's title.
+        Note: This cannot be combined with *title_fontproperties*. If you want
+        to set the fontsize alongside other font properties, use the *size*
+        parameter in *title_fontproperties*.
+    
+    alignment : {'center', 'left', 'right'}, default: 'center'
+        The alignment of the legend title and the box of entries. The entries
+        are aligned as a single block, so that markers always lined up.
+    
+    borderpad : float, default: :rc:`legend.borderpad`
+        The fractional whitespace inside the legend border, in font-size units.
+    
+    labelspacing : float, default: :rc:`legend.labelspacing`
+        The vertical space between the legend entries, in font-size units.
+    
+    handlelength : float, default: :rc:`legend.handlelength`
+        The length of the legend handles, in font-size units.
+    
+    handleheight : float, default: :rc:`legend.handleheight`
+        The height of the legend handles, in font-size units.
+    
+    handletextpad : float, default: :rc:`legend.handletextpad`
+        The pad between the legend handle and text, in font-size units.
+    
+    borderaxespad : float, default: :rc:`legend.borderaxespad`
+        The pad between the axes and legend border, in font-size units.
+    
+    columnspacing : float, default: :rc:`legend.columnspacing`
+        The spacing between columns, in font-size units.
+    
+    handler_map : dict or None
+        The custom dictionary mapping instances or types to a legend
+        handler. This *handler_map* updates the default handler map
+        found at `matplotlib.legend.Legend.get_legend_handler_map`.
+    
+    
+    See Also
+    --------
+    .Figure.legend
+    
+    Notes
+    -----
+    Some artists are not supported by this function.  See
+    :doc:`/tutorials/intermediate/legend_guide` for details.
+    
+    Examples
+    --------
+    .. plot:: gallery/text_labels_and_annotations/legend.py
+</code></pre>
+</div>
+</div>
+</section>
+<section id="colors-markers-and-line-styles" class="level4" data-number="10.2.2.4">
+<h4 data-number="10.2.2.4" class="anchored" data-anchor-id="colors-markers-and-line-styles"><span class="header-section-number">10.2.2.4</span> Colors, Markers, and Line Styles</h4>
+<p>If we want two plots in the same, we need to find a way to make the distinction between them.</p>
+<div id="2106b64e" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> [i<span class="op">**</span><span class="dv">3</span> <span class="cf">for</span> i <span class="kw">in</span> t]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>)) </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plt.plot(t, r, linestyle <span class="op">=</span> <span class="st">'--'</span>, color <span class="op">=</span> <span class="st">'r'</span>, marker <span class="op">=</span> <span class="st">'o'</span>, label <span class="op">=</span> <span class="st">'r'</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>plt.plot(t, r2, linestyle <span class="op">=</span> <span class="st">'-'</span>, color <span class="op">=</span> <span class="st">'b'</span>, marker <span class="op">=</span> <span class="st">'v'</span>, label <span class="op">=</span> <span class="st">'r2'</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Line Plot Example2'</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'t value'</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'r value'</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-9-output-1.png" width="370" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Use <code>linestyle</code>, <code>color</code>, and <code>Markers</code> to set linestyles:</p>
+<div id="5505549b" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(plt.plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on function plot in module matplotlib.pyplot:
+
+plot(*args, scalex=True, scaley=True, data=None, **kwargs)
+    Plot y versus x as lines and/or markers.
+    
+    Call signatures::
+    
+        plot([x], y, [fmt], *, data=None, **kwargs)
+        plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
+    
+    The coordinates of the points or line nodes are given by *x*, *y*.
+    
+    The optional parameter *fmt* is a convenient way for defining basic
+    formatting like color, marker and linestyle. It's a shortcut string
+    notation described in the *Notes* section below.
+    
+    &gt;&gt;&gt; plot(x, y)        # plot x and y using default line style and color
+    &gt;&gt;&gt; plot(x, y, 'bo')  # plot x and y using blue circle markers
+    &gt;&gt;&gt; plot(y)           # plot y using x as index array 0..N-1
+    &gt;&gt;&gt; plot(y, 'r+')     # ditto, but with red plusses
+    
+    You can use `.Line2D` properties as keyword arguments for more
+    control on the appearance. Line properties and *fmt* can be mixed.
+    The following two calls yield identical results:
+    
+    &gt;&gt;&gt; plot(x, y, 'go--', linewidth=2, markersize=12)
+    &gt;&gt;&gt; plot(x, y, color='green', marker='o', linestyle='dashed',
+    ...      linewidth=2, markersize=12)
+    
+    When conflicting with *fmt*, keyword arguments take precedence.
+    
+    
+    **Plotting labelled data**
+    
+    There's a convenient way for plotting objects with labelled data (i.e.
+    data that can be accessed by index ``obj['y']``). Instead of giving
+    the data in *x* and *y*, you can provide the object in the *data*
+    parameter and just give the labels for *x* and *y*::
+    
+    &gt;&gt;&gt; plot('xlabel', 'ylabel', data=obj)
+    
+    All indexable objects are supported. This could e.g. be a `dict`, a
+    `pandas.DataFrame` or a structured numpy array.
+    
+    
+    **Plotting multiple sets of data**
+    
+    There are various ways to plot multiple sets of data.
+    
+    - The most straight forward way is just to call `plot` multiple times.
+      Example:
+    
+      &gt;&gt;&gt; plot(x1, y1, 'bo')
+      &gt;&gt;&gt; plot(x2, y2, 'go')
+    
+    - If *x* and/or *y* are 2D arrays a separate data set will be drawn
+      for every column. If both *x* and *y* are 2D, they must have the
+      same shape. If only one of them is 2D with shape (N, m) the other
+      must have length N and will be used for every data set m.
+    
+      Example:
+    
+      &gt;&gt;&gt; x = [1, 2, 3]
+      &gt;&gt;&gt; y = np.array([[1, 2], [3, 4], [5, 6]])
+      &gt;&gt;&gt; plot(x, y)
+    
+      is equivalent to:
+    
+      &gt;&gt;&gt; for col in range(y.shape[1]):
+      ...     plot(x, y[:, col])
+    
+    - The third way is to specify multiple sets of *[x]*, *y*, *[fmt]*
+      groups::
+    
+      &gt;&gt;&gt; plot(x1, y1, 'g^', x2, y2, 'g-')
+    
+      In this case, any additional keyword argument applies to all
+      datasets. Also this syntax cannot be combined with the *data*
+      parameter.
+    
+    By default, each line is assigned a different style specified by a
+    'style cycle'. The *fmt* and line property parameters are only
+    necessary if you want explicit deviations from these defaults.
+    Alternatively, you can also change the style cycle using
+    :rc:`axes.prop_cycle`.
+    
+    
+    Parameters
+    ----------
+    x, y : array-like or scalar
+        The horizontal / vertical coordinates of the data points.
+        *x* values are optional and default to ``range(len(y))``.
+    
+        Commonly, these parameters are 1D arrays.
+    
+        They can also be scalars, or two-dimensional (in that case, the
+        columns represent separate data sets).
+    
+        These arguments cannot be passed as keywords.
+    
+    fmt : str, optional
+        A format string, e.g. 'ro' for red circles. See the *Notes*
+        section for a full description of the format strings.
+    
+        Format strings are just an abbreviation for quickly setting
+        basic line properties. All of these and more can also be
+        controlled by keyword arguments.
+    
+        This argument cannot be passed as keyword.
+    
+    data : indexable object, optional
+        An object with labelled data. If given, provide the label names to
+        plot in *x* and *y*.
+    
+        .. note::
+            Technically there's a slight ambiguity in calls where the
+            second label is a valid *fmt*. ``plot('n', 'o', data=obj)``
+            could be ``plt(x, y)`` or ``plt(y, fmt)``. In such cases,
+            the former interpretation is chosen, but a warning is issued.
+            You may suppress the warning by adding an empty format string
+            ``plot('n', 'o', '', data=obj)``.
+    
+    Returns
+    -------
+    list of `.Line2D`
+        A list of lines representing the plotted data.
+    
+    Other Parameters
+    ----------------
+    scalex, scaley : bool, default: True
+        These parameters determine if the view limits are adapted to the
+        data limits. The values are passed on to
+        `~.axes.Axes.autoscale_view`.
+    
+    **kwargs : `.Line2D` properties, optional
+        *kwargs* are used to specify properties like a line label (for
+        auto legends), linewidth, antialiasing, marker face color.
+        Example::
+    
+        &gt;&gt;&gt; plot([1, 2, 3], [1, 2, 3], 'go-', label='line 1', linewidth=2)
+        &gt;&gt;&gt; plot([1, 2, 3], [1, 4, 9], 'rs', label='line 2')
+    
+        If you specify multiple lines with one plot call, the kwargs apply
+        to all those lines. In case the label object is iterable, each
+        element is used as labels for each set of data.
+    
+        Here is a list of available `.Line2D` properties:
+    
+        Properties:
+        agg_filter: a filter function, which takes a (m, n, 3) float array and a dpi value, and returns a (m, n, 3) array and two offsets from the bottom left corner of the image
+        alpha: scalar or None
+        animated: bool
+        antialiased or aa: bool
+        clip_box: `.Bbox`
+        clip_on: bool
+        clip_path: Patch or (Path, Transform) or None
+        color or c: color
+        dash_capstyle: `.CapStyle` or {'butt', 'projecting', 'round'}
+        dash_joinstyle: `.JoinStyle` or {'miter', 'round', 'bevel'}
+        dashes: sequence of floats (on/off ink in points) or (None, None)
+        data: (2, N) array or two 1D arrays
+        drawstyle or ds: {'default', 'steps', 'steps-pre', 'steps-mid', 'steps-post'}, default: 'default'
+        figure: `.Figure`
+        fillstyle: {'full', 'left', 'right', 'bottom', 'top', 'none'}
+        gapcolor: color or None
+        gid: str
+        in_layout: bool
+        label: object
+        linestyle or ls: {'-', '--', '-.', ':', '', (offset, on-off-seq), ...}
+        linewidth or lw: float
+        marker: marker style string, `~.path.Path` or `~.markers.MarkerStyle`
+        markeredgecolor or mec: color
+        markeredgewidth or mew: float
+        markerfacecolor or mfc: color
+        markerfacecoloralt or mfcalt: color
+        markersize or ms: float
+        markevery: None or int or (int, int) or slice or list[int] or float or (float, float) or list[bool]
+        mouseover: bool
+        path_effects: `.AbstractPathEffect`
+        picker: float or callable[[Artist, Event], tuple[bool, dict]]
+        pickradius: unknown
+        rasterized: bool
+        sketch_params: (scale: float, length: float, randomness: float)
+        snap: bool or None
+        solid_capstyle: `.CapStyle` or {'butt', 'projecting', 'round'}
+        solid_joinstyle: `.JoinStyle` or {'miter', 'round', 'bevel'}
+        transform: unknown
+        url: str
+        visible: bool
+        xdata: 1D array
+        ydata: 1D array
+        zorder: float
+    
+    See Also
+    --------
+    scatter : XY scatter plot with markers of varying size and/or color (
+        sometimes also called bubble chart).
+    
+    Notes
+    -----
+    **Format Strings**
+    
+    A format string consists of a part for color, marker and line::
+    
+        fmt = '[marker][line][color]'
+    
+    Each of them is optional. If not provided, the value from the style
+    cycle is used. Exception: If ``line`` is given, but no ``marker``,
+    the data will be a line without markers.
+    
+    Other combinations such as ``[color][marker][line]`` are also
+    supported, but note that their parsing may be ambiguous.
+    
+    **Markers**
+    
+    =============   ===============================
+    character       description
+    =============   ===============================
+    ``'.'``         point marker
+    ``','``         pixel marker
+    ``'o'``         circle marker
+    ``'v'``         triangle_down marker
+    ``'^'``         triangle_up marker
+    ``'&lt;'``         triangle_left marker
+    ``'&gt;'``         triangle_right marker
+    ``'1'``         tri_down marker
+    ``'2'``         tri_up marker
+    ``'3'``         tri_left marker
+    ``'4'``         tri_right marker
+    ``'8'``         octagon marker
+    ``'s'``         square marker
+    ``'p'``         pentagon marker
+    ``'P'``         plus (filled) marker
+    ``'*'``         star marker
+    ``'h'``         hexagon1 marker
+    ``'H'``         hexagon2 marker
+    ``'+'``         plus marker
+    ``'x'``         x marker
+    ``'X'``         x (filled) marker
+    ``'D'``         diamond marker
+    ``'d'``         thin_diamond marker
+    ``'|'``         vline marker
+    ``'_'``         hline marker
+    =============   ===============================
+    
+    **Line Styles**
+    
+    =============    ===============================
+    character        description
+    =============    ===============================
+    ``'-'``          solid line style
+    ``'--'``         dashed line style
+    ``'-.'``         dash-dot line style
+    ``':'``          dotted line style
+    =============    ===============================
+    
+    Example format strings::
+    
+        'b'    # blue markers with default shape
+        'or'   # red circles
+        '-g'   # green solid line
+        '--'   # dashed line with default color
+        '^k:'  # black triangle_up markers connected by a dotted line
+    
+    **Colors**
+    
+    The supported color abbreviations are the single letter codes
+    
+    =============    ===============================
+    character        color
+    =============    ===============================
+    ``'b'``          blue
+    ``'g'``          green
+    ``'r'``          red
+    ``'c'``          cyan
+    ``'m'``          magenta
+    ``'y'``          yellow
+    ``'k'``          black
+    ``'w'``          white
+    =============    ===============================
+    
+    and the ``'CN'`` colors that index into the default property cycle.
+    
+    If the color is the only part of the format string, you can
+    additionally use any  `matplotlib.colors` spec, e.g. full names
+    (``'green'``) or hex strings (``'#008000'``).
+</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="example-with-rodent-data" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="example-with-rodent-data"><span class="header-section-number">10.3</span> Example with rodent data:</h2>
+<p>Let’s use our rodent data to demonstrate the Monthly Reported data:</p>
+<div id="2d8a30d2" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Created Date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Created Date'</span>])</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Month'</span>] <span class="op">=</span> df[<span class="st">'Created Date'</span>].dt.to_period(<span class="st">'M'</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>monthly_counts <span class="op">=</span> df.groupby(<span class="st">'Month'</span>).size()</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>monthly_counts.plot(kind<span class="op">=</span><span class="st">'line'</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Monthly Report Count'</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Month'</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Number of Reports'</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-11-output-1.png" width="825" height="702" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This plot shows the number of rodents in each month’s report, and we can draw the following conclusions: rodent sights occur mostly in the spring and summer, and they fall dramatically after the start of autumn (post-August).</p>
+<section id="scatter-plot" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="scatter-plot"><span class="header-section-number">10.3.1</span> Scatter plot</h3>
+<div id="9efda34e" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">8465</span>)<span class="op">;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>plt.scatter(x, y)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'X'</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Y'</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-12-output-1.png" width="589" height="429" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bar-plot" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="bar-plot"><span class="header-section-number">10.3.2</span> Bar Plot</h3>
+<div id="c9c1deae" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>borough_counts <span class="op">=</span> df[<span class="st">'Borough'</span>].value_counts()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))  </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.bar(borough_counts.index, borough_counts.values, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Borough'</span>)  </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Number of Rodent Sightings'</span>)  </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Rodent Sightings by Borough'</span>) </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)  <span class="co"># Rotate the X axis by 45 degrees to show the long labels</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-13-output-1.png" width="833" height="741" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-plots-using-subplots-submodule" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="multiple-plots-using-subplots-submodule"><span class="header-section-number">10.3.3</span> Multiple plots using <code>subplots</code> submodule</h3>
+<div id="52f1a661" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Created Date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Created Date'</span>])</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> df[<span class="st">'Created Date'</span>].dt.date</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>daily_reports <span class="op">=</span> df.groupby([<span class="st">'Date'</span>, <span class="st">'Incident Zip'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Counts'</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>sample_zip <span class="op">=</span> daily_reports[<span class="st">'Incident Zip'</span>].dropna().iloc[<span class="dv">0</span>]</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>sample_data <span class="op">=</span> daily_reports[daily_reports[<span class="st">'Incident Zip'</span>] <span class="op">==</span> sample_zip]</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2x2 Plot</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">10</span>))</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Line Plot</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>, <span class="dv">0</span>].plot(sample_data[<span class="st">'Date'</span>], sample_data[<span class="st">'Counts'</span>], <span class="st">'-o'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="ss">f'Linear Plot of Reports for Zip </span><span class="sc">{</span>sample_zip<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>, <span class="dv">0</span>].tick_params(labelrotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Box Plot</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>, <span class="dv">1</span>].boxplot(df[<span class="st">'Y Coordinate (State Plane)'</span>].dropna())</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>, <span class="dv">1</span>].set_title(<span class="st">'Boxplot of Y Coordinate'</span>)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co"># barplot</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>status_counts <span class="op">=</span> df[<span class="st">'Status'</span>].value_counts()</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>, <span class="dv">0</span>].bar(status_counts.index, status_counts.values, color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>, <span class="dv">0</span>].set_title(<span class="st">'Barplot of Status Counts'</span>)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>, <span class="dv">0</span>].tick_params(labelrotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>, <span class="dv">1</span>].hist(df[<span class="st">'Latitude'</span>].dropna(), bins<span class="op">=</span><span class="dv">30</span>, color<span class="op">=</span><span class="st">'orange'</span>)</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>, <span class="dv">1</span>].set_title(<span class="st">'Histogram of Latitude'</span>)</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-14-output-1.png" width="950" height="950" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="save-the-files" class="level3" data-number="10.3.4">
+<h3 data-number="10.3.4" class="anchored" data-anchor-id="save-the-files"><span class="header-section-number">10.3.4</span> Save the files</h3>
+<p><code>help(plt.savefig)</code>allows you to save the current figure created by Matplotlib to a file. You can specify the filename and various options to control the format, quality, and layout of the output file.</p>
+<div id="499258b9" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(plt.savefig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on function savefig in module matplotlib.pyplot:
+
+savefig(*args, **kwargs)
+    Save the current figure.
+    
+    Call signature::
+    
+      savefig(fname, *, dpi='figure', format=None, metadata=None,
+              bbox_inches=None, pad_inches=0.1,
+              facecolor='auto', edgecolor='auto',
+              backend=None, **kwargs
+             )
+    
+    The available output formats depend on the backend being used.
+    
+    Parameters
+    ----------
+    fname : str or path-like or binary file-like
+        A path, or a Python file-like object, or
+        possibly some backend-dependent object such as
+        `matplotlib.backends.backend_pdf.PdfPages`.
+    
+        If *format* is set, it determines the output format, and the file
+        is saved as *fname*.  Note that *fname* is used verbatim, and there
+        is no attempt to make the extension, if any, of *fname* match
+        *format*, and no extension is appended.
+    
+        If *format* is not set, then the format is inferred from the
+        extension of *fname*, if there is one.  If *format* is not
+        set and *fname* has no extension, then the file is saved with
+        :rc:`savefig.format` and the appropriate extension is appended to
+        *fname*.
+    
+    Other Parameters
+    ----------------
+    dpi : float or 'figure', default: :rc:`savefig.dpi`
+        The resolution in dots per inch.  If 'figure', use the figure's
+        dpi value.
+    
+    format : str
+        The file format, e.g. 'png', 'pdf', 'svg', ... The behavior when
+        this is unset is documented under *fname*.
+    
+    metadata : dict, optional
+        Key/value pairs to store in the image metadata. The supported keys
+        and defaults depend on the image format and backend:
+    
+        - 'png' with Agg backend: See the parameter ``metadata`` of
+          `~.FigureCanvasAgg.print_png`.
+        - 'pdf' with pdf backend: See the parameter ``metadata`` of
+          `~.backend_pdf.PdfPages`.
+        - 'svg' with svg backend: See the parameter ``metadata`` of
+          `~.FigureCanvasSVG.print_svg`.
+        - 'eps' and 'ps' with PS backend: Only 'Creator' is supported.
+    
+    bbox_inches : str or `.Bbox`, default: :rc:`savefig.bbox`
+        Bounding box in inches: only the given portion of the figure is
+        saved.  If 'tight', try to figure out the tight bbox of the figure.
+    
+    pad_inches : float, default: :rc:`savefig.pad_inches`
+        Amount of padding around the figure when bbox_inches is 'tight'.
+    
+    facecolor : color or 'auto', default: :rc:`savefig.facecolor`
+        The facecolor of the figure.  If 'auto', use the current figure
+        facecolor.
+    
+    edgecolor : color or 'auto', default: :rc:`savefig.edgecolor`
+        The edgecolor of the figure.  If 'auto', use the current figure
+        edgecolor.
+    
+    backend : str, optional
+        Use a non-default backend to render the file, e.g. to render a
+        png file with the "cairo" backend rather than the default "agg",
+        or a pdf file with the "pgf" backend rather than the default
+        "pdf".  Note that the default backend is normally sufficient.  See
+        :ref:`the-builtin-backends` for a list of valid backends for each
+        file format.  Custom backends can be referenced as "module://...".
+    
+    orientation : {'landscape', 'portrait'}
+        Currently only supported by the postscript backend.
+    
+    papertype : str
+        One of 'letter', 'legal', 'executive', 'ledger', 'a0' through
+        'a10', 'b0' through 'b10'. Only supported for postscript
+        output.
+    
+    transparent : bool
+        If *True*, the Axes patches will all be transparent; the
+        Figure patch will also be transparent unless *facecolor*
+        and/or *edgecolor* are specified via kwargs.
+    
+        If *False* has no effect and the color of the Axes and
+        Figure patches are unchanged (unless the Figure patch
+        is specified via the *facecolor* and/or *edgecolor* keyword
+        arguments in which case those colors are used).
+    
+        The transparency of these patches will be restored to their
+        original values upon exit of this function.
+    
+        This is useful, for example, for displaying
+        a plot on top of a colored background on a web page.
+    
+    bbox_extra_artists : list of `~matplotlib.artist.Artist`, optional
+        A list of extra artists that will be considered when the
+        tight bbox is calculated.
+    
+    pil_kwargs : dict, optional
+        Additional keyword arguments that are passed to
+        `PIL.Image.Image.save` when saving the figure.
+</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="pandas" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="pandas"><span class="header-section-number">10.4</span> Pandas</h2>
+<p>Pandas plotting is built on top of Matplotlib, and one of its main benefits is that it allows you to generate plots with fewer lines of code directly from Pandas data structures like DataFrames and Series. This integration simplifies the process of visualizing data for analysis.</p>
+<section id="line-plot-1" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="line-plot-1"><span class="header-section-number">10.4.1</span> Line Plot</h3>
+<section id="single-plot" class="level4" data-number="10.4.1.1">
+<h4 data-number="10.4.1.1" class="anchored" data-anchor-id="single-plot"><span class="header-section-number">10.4.1.1</span> Single plot</h4>
+<div id="750cae99" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>monthly_counts.plot(kind<span class="op">=</span><span class="st">'line'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-16-output-1.png" width="583" height="444" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Because the line plot is default in pandas plots, you can omit the (kind=‘line’)</p>
+<p>When plotting with the .plot() method in Pandas, it is true that you can generate basic plots with fewer lines of code, due to the fact that Pandas automatically handles some of the basic settings, such as setting the x-axis labels automatically. However, for more detailed chart customization, such as setting gridlines, rotating x-axis labels, and so on, you may need additional Matplotlib commands to implement them.</p>
+<div id="09a8ef65" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>monthly_counts.plot(kind<span class="op">=</span><span class="st">'line'</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Monthly Report Count'</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Month'</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Number of Reports'</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For longer tags, avoid overlapping</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-17-output-1.png" width="825" height="702" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="multi-lineplot" class="level4" data-number="10.4.1.2">
+<h4 data-number="10.4.1.2" class="anchored" data-anchor-id="multi-lineplot"><span class="header-section-number">10.4.1.2</span> Multi-Lineplot</h4>
+<p>The following is showing several line plots in the same figure.</p>
+<div id="49799d1f" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>community_counts <span class="op">=</span> df[<span class="st">'Community Districts'</span>].value_counts().sort_index()</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>city_council_counts <span class="op">=</span> df[<span class="st">'City Council Districts'</span>].value_counts().sort_index()</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>police_precincts_counts <span class="op">=</span> df[<span class="st">'Police Precincts'</span>].value_counts().sort_index()</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>counts_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Community Districts'</span>: community_counts,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'City Council Districts'</span>: city_council_counts,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Police Precincts'</span>: police_precincts_counts</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>counts_df <span class="op">=</span> counts_df.fillna(<span class="dv">0</span>) </span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Fill missing values to 0</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>counts_df[[<span class="st">'Community Districts'</span>, <span class="st">'City Council Districts'</span>, <span class="st">'Police Precincts'</span>]].plot() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-18-output-1.png" width="587" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>When you use the .plot() method on a Pandas DataFrame to create a multi-line plot, each line in the plot is automatically assigned a different color to help distinguish between the different data columns visually. The colors are chosen from a default color cycle provided by Matplotlib.</p>
+<p>If you want to customize the color:</p>
+<div id="35bd7c09" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>counts_df[[<span class="st">'Community Districts'</span>, <span class="st">'City Council Districts'</span>, <span class="st">'Police Precincts'</span>]].plot(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>[<span class="st">'red'</span>, <span class="st">'green'</span>, <span class="st">'blue'</span>]  <span class="co"># Custom colors for each line</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-19-output-1.png" width="587" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="additional-arguments" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="additional-arguments"><span class="header-section-number">10.4.2</span> Additional arguments</h3>
+<p>For more info pleased check:</p>
+<div id="8456634d" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>[additional arguments](https:<span class="op">//</span>drive.google.com<span class="op">/</span><span class="bu">file</span><span class="op">/</span>d<span class="op">/</span><span class="ot">1j</span><span class="er">5T7_VMT1Nt4myukcmar0UMcZOHqurCk</span><span class="op">/</span>view?usp<span class="op">=</span>sharing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>zsh:1: bad pattern: [additional</code></pre>
+</div>
+</div>
+<div id="dadbf1e4" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(plt.plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on function plot in module matplotlib.pyplot:
+
+plot(*args, scalex=True, scaley=True, data=None, **kwargs)
+    Plot y versus x as lines and/or markers.
+    
+    Call signatures::
+    
+        plot([x], y, [fmt], *, data=None, **kwargs)
+        plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
+    
+    The coordinates of the points or line nodes are given by *x*, *y*.
+    
+    The optional parameter *fmt* is a convenient way for defining basic
+    formatting like color, marker and linestyle. It's a shortcut string
+    notation described in the *Notes* section below.
+    
+    &gt;&gt;&gt; plot(x, y)        # plot x and y using default line style and color
+    &gt;&gt;&gt; plot(x, y, 'bo')  # plot x and y using blue circle markers
+    &gt;&gt;&gt; plot(y)           # plot y using x as index array 0..N-1
+    &gt;&gt;&gt; plot(y, 'r+')     # ditto, but with red plusses
+    
+    You can use `.Line2D` properties as keyword arguments for more
+    control on the appearance. Line properties and *fmt* can be mixed.
+    The following two calls yield identical results:
+    
+    &gt;&gt;&gt; plot(x, y, 'go--', linewidth=2, markersize=12)
+    &gt;&gt;&gt; plot(x, y, color='green', marker='o', linestyle='dashed',
+    ...      linewidth=2, markersize=12)
+    
+    When conflicting with *fmt*, keyword arguments take precedence.
+    
+    
+    **Plotting labelled data**
+    
+    There's a convenient way for plotting objects with labelled data (i.e.
+    data that can be accessed by index ``obj['y']``). Instead of giving
+    the data in *x* and *y*, you can provide the object in the *data*
+    parameter and just give the labels for *x* and *y*::
+    
+    &gt;&gt;&gt; plot('xlabel', 'ylabel', data=obj)
+    
+    All indexable objects are supported. This could e.g. be a `dict`, a
+    `pandas.DataFrame` or a structured numpy array.
+    
+    
+    **Plotting multiple sets of data**
+    
+    There are various ways to plot multiple sets of data.
+    
+    - The most straight forward way is just to call `plot` multiple times.
+      Example:
+    
+      &gt;&gt;&gt; plot(x1, y1, 'bo')
+      &gt;&gt;&gt; plot(x2, y2, 'go')
+    
+    - If *x* and/or *y* are 2D arrays a separate data set will be drawn
+      for every column. If both *x* and *y* are 2D, they must have the
+      same shape. If only one of them is 2D with shape (N, m) the other
+      must have length N and will be used for every data set m.
+    
+      Example:
+    
+      &gt;&gt;&gt; x = [1, 2, 3]
+      &gt;&gt;&gt; y = np.array([[1, 2], [3, 4], [5, 6]])
+      &gt;&gt;&gt; plot(x, y)
+    
+      is equivalent to:
+    
+      &gt;&gt;&gt; for col in range(y.shape[1]):
+      ...     plot(x, y[:, col])
+    
+    - The third way is to specify multiple sets of *[x]*, *y*, *[fmt]*
+      groups::
+    
+      &gt;&gt;&gt; plot(x1, y1, 'g^', x2, y2, 'g-')
+    
+      In this case, any additional keyword argument applies to all
+      datasets. Also this syntax cannot be combined with the *data*
+      parameter.
+    
+    By default, each line is assigned a different style specified by a
+    'style cycle'. The *fmt* and line property parameters are only
+    necessary if you want explicit deviations from these defaults.
+    Alternatively, you can also change the style cycle using
+    :rc:`axes.prop_cycle`.
+    
+    
+    Parameters
+    ----------
+    x, y : array-like or scalar
+        The horizontal / vertical coordinates of the data points.
+        *x* values are optional and default to ``range(len(y))``.
+    
+        Commonly, these parameters are 1D arrays.
+    
+        They can also be scalars, or two-dimensional (in that case, the
+        columns represent separate data sets).
+    
+        These arguments cannot be passed as keywords.
+    
+    fmt : str, optional
+        A format string, e.g. 'ro' for red circles. See the *Notes*
+        section for a full description of the format strings.
+    
+        Format strings are just an abbreviation for quickly setting
+        basic line properties. All of these and more can also be
+        controlled by keyword arguments.
+    
+        This argument cannot be passed as keyword.
+    
+    data : indexable object, optional
+        An object with labelled data. If given, provide the label names to
+        plot in *x* and *y*.
+    
+        .. note::
+            Technically there's a slight ambiguity in calls where the
+            second label is a valid *fmt*. ``plot('n', 'o', data=obj)``
+            could be ``plt(x, y)`` or ``plt(y, fmt)``. In such cases,
+            the former interpretation is chosen, but a warning is issued.
+            You may suppress the warning by adding an empty format string
+            ``plot('n', 'o', '', data=obj)``.
+    
+    Returns
+    -------
+    list of `.Line2D`
+        A list of lines representing the plotted data.
+    
+    Other Parameters
+    ----------------
+    scalex, scaley : bool, default: True
+        These parameters determine if the view limits are adapted to the
+        data limits. The values are passed on to
+        `~.axes.Axes.autoscale_view`.
+    
+    **kwargs : `.Line2D` properties, optional
+        *kwargs* are used to specify properties like a line label (for
+        auto legends), linewidth, antialiasing, marker face color.
+        Example::
+    
+        &gt;&gt;&gt; plot([1, 2, 3], [1, 2, 3], 'go-', label='line 1', linewidth=2)
+        &gt;&gt;&gt; plot([1, 2, 3], [1, 4, 9], 'rs', label='line 2')
+    
+        If you specify multiple lines with one plot call, the kwargs apply
+        to all those lines. In case the label object is iterable, each
+        element is used as labels for each set of data.
+    
+        Here is a list of available `.Line2D` properties:
+    
+        Properties:
+        agg_filter: a filter function, which takes a (m, n, 3) float array and a dpi value, and returns a (m, n, 3) array and two offsets from the bottom left corner of the image
+        alpha: scalar or None
+        animated: bool
+        antialiased or aa: bool
+        clip_box: `.Bbox`
+        clip_on: bool
+        clip_path: Patch or (Path, Transform) or None
+        color or c: color
+        dash_capstyle: `.CapStyle` or {'butt', 'projecting', 'round'}
+        dash_joinstyle: `.JoinStyle` or {'miter', 'round', 'bevel'}
+        dashes: sequence of floats (on/off ink in points) or (None, None)
+        data: (2, N) array or two 1D arrays
+        drawstyle or ds: {'default', 'steps', 'steps-pre', 'steps-mid', 'steps-post'}, default: 'default'
+        figure: `.Figure`
+        fillstyle: {'full', 'left', 'right', 'bottom', 'top', 'none'}
+        gapcolor: color or None
+        gid: str
+        in_layout: bool
+        label: object
+        linestyle or ls: {'-', '--', '-.', ':', '', (offset, on-off-seq), ...}
+        linewidth or lw: float
+        marker: marker style string, `~.path.Path` or `~.markers.MarkerStyle`
+        markeredgecolor or mec: color
+        markeredgewidth or mew: float
+        markerfacecolor or mfc: color
+        markerfacecoloralt or mfcalt: color
+        markersize or ms: float
+        markevery: None or int or (int, int) or slice or list[int] or float or (float, float) or list[bool]
+        mouseover: bool
+        path_effects: `.AbstractPathEffect`
+        picker: float or callable[[Artist, Event], tuple[bool, dict]]
+        pickradius: unknown
+        rasterized: bool
+        sketch_params: (scale: float, length: float, randomness: float)
+        snap: bool or None
+        solid_capstyle: `.CapStyle` or {'butt', 'projecting', 'round'}
+        solid_joinstyle: `.JoinStyle` or {'miter', 'round', 'bevel'}
+        transform: unknown
+        url: str
+        visible: bool
+        xdata: 1D array
+        ydata: 1D array
+        zorder: float
+    
+    See Also
+    --------
+    scatter : XY scatter plot with markers of varying size and/or color (
+        sometimes also called bubble chart).
+    
+    Notes
+    -----
+    **Format Strings**
+    
+    A format string consists of a part for color, marker and line::
+    
+        fmt = '[marker][line][color]'
+    
+    Each of them is optional. If not provided, the value from the style
+    cycle is used. Exception: If ``line`` is given, but no ``marker``,
+    the data will be a line without markers.
+    
+    Other combinations such as ``[color][marker][line]`` are also
+    supported, but note that their parsing may be ambiguous.
+    
+    **Markers**
+    
+    =============   ===============================
+    character       description
+    =============   ===============================
+    ``'.'``         point marker
+    ``','``         pixel marker
+    ``'o'``         circle marker
+    ``'v'``         triangle_down marker
+    ``'^'``         triangle_up marker
+    ``'&lt;'``         triangle_left marker
+    ``'&gt;'``         triangle_right marker
+    ``'1'``         tri_down marker
+    ``'2'``         tri_up marker
+    ``'3'``         tri_left marker
+    ``'4'``         tri_right marker
+    ``'8'``         octagon marker
+    ``'s'``         square marker
+    ``'p'``         pentagon marker
+    ``'P'``         plus (filled) marker
+    ``'*'``         star marker
+    ``'h'``         hexagon1 marker
+    ``'H'``         hexagon2 marker
+    ``'+'``         plus marker
+    ``'x'``         x marker
+    ``'X'``         x (filled) marker
+    ``'D'``         diamond marker
+    ``'d'``         thin_diamond marker
+    ``'|'``         vline marker
+    ``'_'``         hline marker
+    =============   ===============================
+    
+    **Line Styles**
+    
+    =============    ===============================
+    character        description
+    =============    ===============================
+    ``'-'``          solid line style
+    ``'--'``         dashed line style
+    ``'-.'``         dash-dot line style
+    ``':'``          dotted line style
+    =============    ===============================
+    
+    Example format strings::
+    
+        'b'    # blue markers with default shape
+        'or'   # red circles
+        '-g'   # green solid line
+        '--'   # dashed line with default color
+        '^k:'  # black triangle_up markers connected by a dotted line
+    
+    **Colors**
+    
+    The supported color abbreviations are the single letter codes
+    
+    =============    ===============================
+    character        color
+    =============    ===============================
+    ``'b'``          blue
+    ``'g'``          green
+    ``'r'``          red
+    ``'c'``          cyan
+    ``'m'``          magenta
+    ``'y'``          yellow
+    ``'k'``          black
+    ``'w'``          white
+    =============    ===============================
+    
+    and the ``'CN'`` colors that index into the default property cycle.
+    
+    If the color is the only part of the format string, you can
+    additionally use any  `matplotlib.colors` spec, e.g. full names
+    (``'green'``) or hex strings (``'#008000'``).
+</code></pre>
+</div>
+</div>
+</section>
+<section id="bar-plot-1" class="level3" data-number="10.4.3">
+<h3 data-number="10.4.3" class="anchored" data-anchor-id="bar-plot-1"><span class="header-section-number">10.4.3</span> Bar Plot</h3>
+<p>For categorical data, one of common visualization is the barplot.</p>
+<ul>
+<li>Generated using <code>df.plot.bar()</code> method, for horizontal version <code>df.plot.barh()</code>.</li>
+</ul>
+<section id="side-by-side-bar-plot" class="level4" data-number="10.4.3.1">
+<h4 data-number="10.4.3.1" class="anchored" data-anchor-id="side-by-side-bar-plot"><span class="header-section-number">10.4.3.1</span> Side-by-side Bar Plot:</h4>
+<p>Let’s use Borough and Location Type to generate a side-by-side bar plot, one horizontal and one vertical:</p>
+<div id="715e9917" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">8</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Vertical bar plot for Borough counts</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>df.groupby([<span class="st">'Borough'</span>]).size().plot.bar(ax<span class="op">=</span>axs[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'skyblue'</span>, rot<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_title(<span class="st">'Bar plot for Borough'</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Horizontal bar plot for Location Type counts</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>df.groupby([<span class="st">'Location Type'</span>]).size().plot.barh(ax<span class="op">=</span>axs[<span class="dv">1</span>], color<span class="op">=</span><span class="st">'lightgreen'</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_title(<span class="st">'Bar plot for Location Type'</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-22-output-1.png" width="1430" height="758" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Similiar with <code>axs</code> in matplotlib:</p>
+<ul>
+<li><code>nrows=1</code> means there will be 1 row of subplots.</li>
+<li><code>ncols=2</code>means there will be 2 columns of subplots.</li>
+</ul>
+</section>
+<section id="grouped-bar-plot" class="level4" data-number="10.4.3.2">
+<h4 data-number="10.4.3.2" class="anchored" data-anchor-id="grouped-bar-plot"><span class="header-section-number">10.4.3.2</span> Grouped Bar Plot</h4>
+<p>This type of plot is useful for comparing the distribution within each class side by side.</p>
+<div id="9972cd32" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>class_Borough <span class="op">=</span> pd.crosstab(df[<span class="st">"Borough"</span>], df[<span class="st">"Status"</span>])</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>class_Borough.plot.bar(rot<span class="op">=</span><span class="dv">45</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-23-output-1.png" width="815" height="573" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="stacked-bar-plot" class="level4" data-number="10.4.3.3">
+<h4 data-number="10.4.3.3" class="anchored" data-anchor-id="stacked-bar-plot"><span class="header-section-number">10.4.3.3</span> Stacked Bar Plot</h4>
+<p>This plot is useful for comparing the total counts across borough while still being able to see the proportion of each borough within each class.</p>
+<div id="80de6421" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>class_Borough.plot.bar(stacked<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-24-output-1.png" width="592" height="520" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="histogram-and-density-plots" class="level3" data-number="10.4.4">
+<h3 data-number="10.4.4" class="anchored" data-anchor-id="histogram-and-density-plots"><span class="header-section-number">10.4.4</span> Histogram and Density Plots</h3>
+<p>For numeric data, histogram allows us to see the distribution (center shape, skewness) of the data.</p>
+<p>Histogram can be generated using <code>df.plot.hist()</code> method</p>
+<p>Since we have limited numeric data in our rodent data, I used another data to present it:</p>
+<div id="05b99089" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>url2 <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/JoannaWuWeijia/Data_Store_WWJ/main/grades_example.csv'</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.read_csv(url2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="324b0054" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df2[<span class="st">"Grade"</span>].plot.hist(bins <span class="op">=</span> <span class="dv">10</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-26-output-1.png" width="816" height="633" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As can be seen from the plot, the students’ scores show a normal distribution, with most of them clustered in the 70-80 range</p>
+<div id="c9b19d85" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df2[<span class="st">"Grade"</span>].plot.density()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-27-output-1.png" width="606" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="scatter-plots" class="level3" data-number="10.4.5">
+<h3 data-number="10.4.5" class="anchored" data-anchor-id="scatter-plots"><span class="header-section-number">10.4.5</span> Scatter Plots</h3>
+<p>When dealing with two variables, scatter plot allow us to examine if there is any correlation between them.</p>
+<p>Scatter can be generated using <code>df.plot.scatter(x = col1, y = col2)</code> method.</p>
+<div id="f1b56a5d" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>url3 <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/JoannaWuWeijia/Data_Store_WWJ/main/student_example3.csv'</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>df3 <span class="op">=</span> pd.read_csv(url3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="eee302a9" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df3.plot.scatter(x<span class="op">=</span><span class="st">"Weight"</span>, y<span class="op">=</span><span class="st">"Height"</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-29-output-1.png" width="816" height="652" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As you can see it’s roughly a linear regression, and I’ll cover how to add a regression line in the next sns section.</p>
+</section>
+</section>
+<section id="seaborn" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="seaborn"><span class="header-section-number">10.5</span> Seaborn</h2>
+<ul>
+<li><p>Seaborn is designed to work directly with pandas DataFrames, making plotting more convenient by allowing direct use of DataFrame columns for specifying data in plots.</p></li>
+<li><p>Seaborn makes it easy to add linear regression lines and other statistical models to your charts, simplifying the process of statistical data visualization.</p></li>
+<li><p>Seaborn’s default styles and color are more aesthetically pleasing and modern compared to Matplotlib.</p></li>
+</ul>
+<section id="installation-of-seaborn" class="level3" data-number="10.5.1">
+<h3 data-number="10.5.1" class="anchored" data-anchor-id="installation-of-seaborn"><span class="header-section-number">10.5.1</span> Installation of <code>Seaborn</code></h3>
+<pre><code>pip install seaborn</code></pre>
+</section>
+<section id="histogram-and-density-plots-1" class="level3" data-number="10.5.2">
+<h3 data-number="10.5.2" class="anchored" data-anchor-id="histogram-and-density-plots-1"><span class="header-section-number">10.5.2</span> Histogram and Density Plots</h3>
+<div id="b7dfb8b8" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(sns.histplot) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on function histplot in module seaborn.distributions:
+
+histplot(data=None, *, x=None, y=None, hue=None, weights=None, stat='count', bins='auto', binwidth=None, binrange=None, discrete=None, cumulative=False, common_bins=True, common_norm=True, multiple='layer', element='bars', fill=True, shrink=1, kde=False, kde_kws=None, line_kws=None, thresh=0, pthresh=None, pmax=None, cbar=False, cbar_ax=None, cbar_kws=None, palette=None, hue_order=None, hue_norm=None, color=None, log_scale=None, legend=True, ax=None, **kwargs)
+    Plot univariate or bivariate histograms to show distributions of datasets.
+    
+    A histogram is a classic visualization tool that represents the distribution
+    of one or more variables by counting the number of observations that fall within
+    discrete bins.
+    
+    This function can normalize the statistic computed within each bin to estimate
+    frequency, density or probability mass, and it can add a smooth curve obtained
+    using a kernel density estimate, similar to :func:`kdeplot`.
+    
+    More information is provided in the :ref:`user guide &lt;tutorial_hist&gt;`.
+    
+    Parameters
+    ----------
+    data : :class:`pandas.DataFrame`, :class:`numpy.ndarray`, mapping, or sequence
+        Input data structure. Either a long-form collection of vectors that can be
+        assigned to named variables or a wide-form dataset that will be internally
+        reshaped.
+    x, y : vectors or keys in ``data``
+        Variables that specify positions on the x and y axes.
+    hue : vector or key in ``data``
+        Semantic variable that is mapped to determine the color of plot elements.
+    weights : vector or key in ``data``
+        If provided, weight the contribution of the corresponding data points
+        towards the count in each bin by these factors.
+    stat : str
+        Aggregate statistic to compute in each bin.
+        
+        - `count`: show the number of observations in each bin
+        - `frequency`: show the number of observations divided by the bin width
+        - `probability` or `proportion`: normalize such that bar heights sum to 1
+        - `percent`: normalize such that bar heights sum to 100
+        - `density`: normalize such that the total area of the histogram equals 1
+    bins : str, number, vector, or a pair of such values
+        Generic bin parameter that can be the name of a reference rule,
+        the number of bins, or the breaks of the bins.
+        Passed to :func:`numpy.histogram_bin_edges`.
+    binwidth : number or pair of numbers
+        Width of each bin, overrides ``bins`` but can be used with
+        ``binrange``.
+    binrange : pair of numbers or a pair of pairs
+        Lowest and highest value for bin edges; can be used either
+        with ``bins`` or ``binwidth``. Defaults to data extremes.
+    discrete : bool
+        If True, default to ``binwidth=1`` and draw the bars so that they are
+        centered on their corresponding data points. This avoids "gaps" that may
+        otherwise appear when using discrete (integer) data.
+    cumulative : bool
+        If True, plot the cumulative counts as bins increase.
+    common_bins : bool
+        If True, use the same bins when semantic variables produce multiple
+        plots. If using a reference rule to determine the bins, it will be computed
+        with the full dataset.
+    common_norm : bool
+        If True and using a normalized statistic, the normalization will apply over
+        the full dataset. Otherwise, normalize each histogram independently.
+    multiple : {"layer", "dodge", "stack", "fill"}
+        Approach to resolving multiple elements when semantic mapping creates subsets.
+        Only relevant with univariate data.
+    element : {"bars", "step", "poly"}
+        Visual representation of the histogram statistic.
+        Only relevant with univariate data.
+    fill : bool
+        If True, fill in the space under the histogram.
+        Only relevant with univariate data.
+    shrink : number
+        Scale the width of each bar relative to the binwidth by this factor.
+        Only relevant with univariate data.
+    kde : bool
+        If True, compute a kernel density estimate to smooth the distribution
+        and show on the plot as (one or more) line(s).
+        Only relevant with univariate data.
+    kde_kws : dict
+        Parameters that control the KDE computation, as in :func:`kdeplot`.
+    line_kws : dict
+        Parameters that control the KDE visualization, passed to
+        :meth:`matplotlib.axes.Axes.plot`.
+    thresh : number or None
+        Cells with a statistic less than or equal to this value will be transparent.
+        Only relevant with bivariate data.
+    pthresh : number or None
+        Like ``thresh``, but a value in [0, 1] such that cells with aggregate counts
+        (or other statistics, when used) up to this proportion of the total will be
+        transparent.
+    pmax : number or None
+        A value in [0, 1] that sets that saturation point for the colormap at a value
+        such that cells below constitute this proportion of the total count (or
+        other statistic, when used).
+    cbar : bool
+        If True, add a colorbar to annotate the color mapping in a bivariate plot.
+        Note: Does not currently support plots with a ``hue`` variable well.
+    cbar_ax : :class:`matplotlib.axes.Axes`
+        Pre-existing axes for the colorbar.
+    cbar_kws : dict
+        Additional parameters passed to :meth:`matplotlib.figure.Figure.colorbar`.
+    palette : string, list, dict, or :class:`matplotlib.colors.Colormap`
+        Method for choosing the colors to use when mapping the ``hue`` semantic.
+        String values are passed to :func:`color_palette`. List or dict values
+        imply categorical mapping, while a colormap object implies numeric mapping.
+    hue_order : vector of strings
+        Specify the order of processing and plotting for categorical levels of the
+        ``hue`` semantic.
+    hue_norm : tuple or :class:`matplotlib.colors.Normalize`
+        Either a pair of values that set the normalization range in data units
+        or an object that will map from data units into a [0, 1] interval. Usage
+        implies numeric mapping.
+    color : :mod:`matplotlib color &lt;matplotlib.colors&gt;`
+        Single color specification for when hue mapping is not used. Otherwise, the
+        plot will try to hook into the matplotlib property cycle.
+    log_scale : bool or number, or pair of bools or numbers
+        Set axis scale(s) to log. A single value sets the data axis for any numeric
+        axes in the plot. A pair of values sets each axis independently.
+        Numeric values are interpreted as the desired base (default 10).
+        When `None` or `False`, seaborn defers to the existing Axes scale.
+    legend : bool
+        If False, suppress the legend for semantic variables.
+    ax : :class:`matplotlib.axes.Axes`
+        Pre-existing axes for the plot. Otherwise, call :func:`matplotlib.pyplot.gca`
+        internally.
+    kwargs
+        Other keyword arguments are passed to one of the following matplotlib
+        functions:
+    
+        - :meth:`matplotlib.axes.Axes.bar` (univariate, element="bars")
+        - :meth:`matplotlib.axes.Axes.fill_between` (univariate, other element, fill=True)
+        - :meth:`matplotlib.axes.Axes.plot` (univariate, other element, fill=False)
+        - :meth:`matplotlib.axes.Axes.pcolormesh` (bivariate)
+    
+    Returns
+    -------
+    :class:`matplotlib.axes.Axes`
+        The matplotlib axes containing the plot.
+    
+    See Also
+    --------
+    displot : Figure-level interface to distribution plot functions.
+    kdeplot : Plot univariate or bivariate distributions using kernel density estimation.
+    rugplot : Plot a tick at each observation value along the x and/or y axes.
+    ecdfplot : Plot empirical cumulative distribution functions.
+    jointplot : Draw a bivariate plot with univariate marginal distributions.
+    
+    Notes
+    -----
+    
+    The choice of bins for computing and plotting a histogram can exert
+    substantial influence on the insights that one is able to draw from the
+    visualization. If the bins are too large, they may erase important features.
+    On the other hand, bins that are too small may be dominated by random
+    variability, obscuring the shape of the true underlying distribution. The
+    default bin size is determined using a reference rule that depends on the
+    sample size and variance. This works well in many cases, (i.e., with
+    "well-behaved" data) but it fails in others. It is always a good to try
+    different bin sizes to be sure that you are not missing something important.
+    This function allows you to specify bins in several different ways, such as
+    by setting the total number of bins to use, the width of each bin, or the
+    specific locations where the bins should break.
+    
+    Examples
+    --------
+    
+    .. include:: ../docstrings/histplot.rst
+</code></pre>
+</div>
+</div>
+<div id="d7eb6750" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">8</span>))</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(df2[<span class="st">'Grade'</span>], bins<span class="op">=</span><span class="dv">10</span>, kde <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-31-output-1.png" width="816" height="651" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>bins</code>: The number of bars in the histogram. More bins can make the data distribution more detailed, but too many may cause the chart to be difficult to understand; fewer bins may not be able to show the data distribution accurately. <code>kde</code>: (Kernel Density Estimate Line) a density curve will be added to the histogram, which is generated by kernel density estimation and can help understand the shape of the data distribution</p>
+</section>
+<section id="scatter-plot-with-regression-line" class="level3" data-number="10.5.3">
+<h3 data-number="10.5.3" class="anchored" data-anchor-id="scatter-plot-with-regression-line"><span class="header-section-number">10.5.3</span> Scatter plot with Regression line</h3>
+<p>I used an example with less data to be able to show it. We can see that the height and weight of the students are directly proportional.</p>
+<div id="8d7f2000" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df4 <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Student'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>, <span class="st">'David'</span>, <span class="st">'Eva'</span>, <span class="st">'Fiona'</span>, <span class="st">'George'</span>, <span class="st">'Hannah'</span>, <span class="st">'Ian'</span>, <span class="st">'Julia'</span>],</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Height'</span>: [<span class="dv">160</span>, <span class="dv">172</span>, <span class="dv">158</span>, <span class="dv">165</span>, <span class="dv">170</span>, <span class="dv">162</span>, <span class="dv">175</span>, <span class="dv">168</span>, <span class="dv">180</span>, <span class="dv">155</span>],</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Weight'</span>: [<span class="dv">55</span>, <span class="dv">72</span>, <span class="dv">60</span>, <span class="dv">68</span>, <span class="dv">62</span>, <span class="dv">56</span>, <span class="dv">80</span>, <span class="dv">65</span>, <span class="dv">75</span>, <span class="dv">50</span>]})</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>sns.regplot(x<span class="op">=</span><span class="st">'Weight'</span>, y<span class="op">=</span><span class="st">'Height'</span>, data<span class="op">=</span>df4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-32-output-1.png" width="816" height="654" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="categorical-data" class="level3" data-number="10.5.4">
+<h3 data-number="10.5.4" class="anchored" data-anchor-id="categorical-data"><span class="header-section-number">10.5.4</span> Categorical Data</h3>
+<section id="barplot" class="level4" data-number="10.5.4.1">
+<h4 data-number="10.5.4.1" class="anchored" data-anchor-id="barplot"><span class="header-section-number">10.5.4.1</span> barplot</h4>
+<div id="7f7b5657" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">0</span>) </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>genders <span class="op">=</span> np.random.choice([<span class="st">'Male'</span>, <span class="st">'Female'</span>], size<span class="op">=</span><span class="dv">500</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> np.random.choice([<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>], size<span class="op">=</span><span class="dv">500</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>grades <span class="op">=</span> np.random.choice([<span class="st">'Excellent'</span>, <span class="st">'Good'</span>, <span class="st">'Average'</span>, <span class="st">'Poor'</span>], size<span class="op">=</span><span class="dv">500</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>df4 <span class="op">=</span> pd.DataFrame({<span class="st">'Gender'</span>: genders, <span class="st">'Class'</span>: classes, <span class="st">'Grades'</span>: grades})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="3fc040ee" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(x<span class="op">=</span><span class="st">'Class'</span>, hue<span class="op">=</span><span class="st">'Gender'</span>, col<span class="op">=</span><span class="st">'Grades'</span>, kind<span class="op">=</span><span class="st">'count'</span>, data<span class="op">=</span>df4, height<span class="op">=</span><span class="dv">5</span>, col_wrap<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-34-output-1.png" width="1049" height="950" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p><code>x='Class'</code>: This sets the x-axis to represent different classes, so each class will have its own set of bars in the plot.</p></li>
+<li><p><code>hue='Gender'</code>: This parameter adds a color coding (hue) based on the ‘Gender’ column</p></li>
+<li><p><code>col='Grades'</code>: This creates separate subplots (columns) for each unique value in the ‘Grades’ column (e.g., Excellent, Good, Average, Poor), effectively grouping the data by grades.</p></li>
+<li><p><code>col_wrap=2</code>: Limits the number of these subplots to 2 per row. If there are more than 2 unique grades, additional rows will be created to accommodate all the subplots.</p></li>
+<li><p><code>kind='count'</code>: Specifies the kind of plot to draw. In this case, <code>'count'</code>means it will count the occurrences of each category combination and display this as bars in the plot.</p></li>
+<li><p><code>height</code>=5: Sets the height of each subplot to 5 inches.</p></li>
+</ul>
+</section>
+<section id="box-plot" class="level4" data-number="10.5.4.2">
+<h4 data-number="10.5.4.2" class="anchored" data-anchor-id="box-plot"><span class="header-section-number">10.5.4.2</span> Box Plot</h4>
+<div id="3a73d80a" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This chunk does not work</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>sns.catplot(x<span class="op">=</span><span class="st">'Gender'</span>, y<span class="op">=</span><span class="st">'Grades'</span>, col<span class="op">=</span><span class="st">'Class'</span>, data<span class="op">=</span>df4, kind<span class="op">=</span><span class="st">'box'</span>, height <span class="op">=</span> <span class="dv">10</span>, col_wrap<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-35-output-1.png" width="1928" height="1910" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p><code>x='Gender'</code>: x-axis variable</p></li>
+<li><p><code>y='Grades'</code>: y-axis variable, which in this case is ‘Grades’. Since ‘Grades’ is a categorical variable with values like ‘Excellent’, ‘Good’, ‘Average’, ‘Poor’</p></li>
+<li><p><code>col='Class'</code>: Creates separate subplots for each unique value in the ‘Class’ column, effectively grouping the data by class.</p></li>
+</ul>
+</section>
+<section id="categorical-data-help" class="level4" data-number="10.5.4.3">
+<h4 data-number="10.5.4.3" class="anchored" data-anchor-id="categorical-data-help"><span class="header-section-number">10.5.4.3</span> Categorical Data Help</h4>
+<div id="9d94aeda" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(sns.catplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on function catplot in module seaborn.categorical:
+
+catplot(data=None, *, x=None, y=None, hue=None, row=None, col=None, kind='strip', estimator='mean', errorbar=('ci', 95), n_boot=1000, seed=None, units=None, weights=None, order=None, hue_order=None, row_order=None, col_order=None, col_wrap=None, height=5, aspect=1, log_scale=None, native_scale=False, formatter=None, orient=None, color=None, palette=None, hue_norm=None, legend='auto', legend_out=True, sharex=True, sharey=True, margin_titles=False, facet_kws=None, ci=&lt;deprecated&gt;, **kwargs)
+    Figure-level interface for drawing categorical plots onto a FacetGrid.
+    
+    This function provides access to several axes-level functions that
+    show the relationship between a numerical and one or more categorical
+    variables using one of several visual representations. The `kind`
+    parameter selects the underlying axes-level function to use.
+    
+    Categorical scatterplots:
+    
+    - :func:`stripplot` (with `kind="strip"`; the default)
+    - :func:`swarmplot` (with `kind="swarm"`)
+    
+    Categorical distribution plots:
+    
+    - :func:`boxplot` (with `kind="box"`)
+    - :func:`violinplot` (with `kind="violin"`)
+    - :func:`boxenplot` (with `kind="boxen"`)
+    
+    Categorical estimate plots:
+    
+    - :func:`pointplot` (with `kind="point"`)
+    - :func:`barplot` (with `kind="bar"`)
+    - :func:`countplot` (with `kind="count"`)
+    
+    Extra keyword arguments are passed to the underlying function, so you
+    should refer to the documentation for each to see kind-specific options.
+    
+    See the :ref:`tutorial &lt;categorical_tutorial&gt;` for more information.
+    
+    .. note::
+        By default, this function treats one of the variables as categorical
+        and draws data at ordinal positions (0, 1, ... n) on the relevant axis.
+        As of version 0.13.0, this can be disabled by setting `native_scale=True`.
+    
+    
+    After plotting, the :class:`FacetGrid` with the plot is returned and can
+    be used directly to tweak supporting plot details or add other layers.
+    
+    Parameters
+    ----------
+    data : DataFrame, Series, dict, array, or list of arrays
+        Dataset for plotting. If `x` and `y` are absent, this is
+        interpreted as wide-form. Otherwise it is expected to be long-form.    
+    x, y, hue : names of variables in `data` or vector data
+        Inputs for plotting long-form data. See examples for interpretation.    
+    row, col : names of variables in `data` or vector data
+        Categorical variables that will determine the faceting of the grid.
+    kind : str
+        The kind of plot to draw, corresponds to the name of a categorical
+        axes-level plotting function. Options are: "strip", "swarm", "box", "violin",
+        "boxen", "point", "bar", or "count".
+    estimator : string or callable that maps vector -&gt; scalar
+        Statistical function to estimate within each categorical bin.
+    errorbar : string, (string, number) tuple, callable or None
+        Name of errorbar method (either "ci", "pi", "se", or "sd"), or a tuple
+        with a method name and a level parameter, or a function that maps from a
+        vector to a (min, max) interval, or None to hide errorbar. See the
+        :doc:`errorbar tutorial &lt;/tutorial/error_bars&gt;` for more information.
+    
+        .. versionadded:: v0.12.0
+    n_boot : int
+        Number of bootstrap samples used to compute confidence intervals.
+    seed : int, `numpy.random.Generator`, or `numpy.random.RandomState`
+        Seed or random number generator for reproducible bootstrapping.
+    units : name of variable in `data` or vector data
+        Identifier of sampling units; used by the errorbar function to
+        perform a multilevel bootstrap and account for repeated measures
+    weights : name of variable in `data` or vector data
+        Data values or column used to compute weighted statistics.
+        Note that the use of weights may limit other statistical options.
+    
+        .. versionadded:: v0.13.1    
+    order, hue_order : lists of strings
+        Order to plot the categorical levels in; otherwise the levels are
+        inferred from the data objects.    
+    row_order, col_order : lists of strings
+        Order to organize the rows and/or columns of the grid in; otherwise the
+        orders are inferred from the data objects.
+    col_wrap : int
+        "Wrap" the column variable at this width, so that the column facets
+        span multiple rows. Incompatible with a ``row`` facet.    
+    height : scalar
+        Height (in inches) of each facet. See also: ``aspect``.    
+    aspect : scalar
+        Aspect ratio of each facet, so that ``aspect * height`` gives the width
+        of each facet in inches.    
+    native_scale : bool
+        When True, numeric or datetime values on the categorical axis will maintain
+        their original scaling rather than being converted to fixed indices.
+    
+        .. versionadded:: v0.13.0    
+    formatter : callable
+        Function for converting categorical data into strings. Affects both grouping
+        and tick labels.
+    
+        .. versionadded:: v0.13.0    
+    orient : "v" | "h" | "x" | "y"
+        Orientation of the plot (vertical or horizontal). This is usually
+        inferred based on the type of the input variables, but it can be used
+        to resolve ambiguity when both `x` and `y` are numeric or when
+        plotting wide-form data.
+    
+        .. versionchanged:: v0.13.0
+            Added 'x'/'y' as options, equivalent to 'v'/'h'.    
+    color : matplotlib color
+        Single color for the elements in the plot.    
+    palette : palette name, list, or dict
+        Colors to use for the different levels of the ``hue`` variable. Should
+        be something that can be interpreted by :func:`color_palette`, or a
+        dictionary mapping hue levels to matplotlib colors.    
+    hue_norm : tuple or :class:`matplotlib.colors.Normalize` object
+        Normalization in data units for colormap applied to the `hue`
+        variable when it is numeric. Not relevant if `hue` is categorical.
+    
+        .. versionadded:: v0.12.0    
+    legend : "auto", "brief", "full", or False
+        How to draw the legend. If "brief", numeric `hue` and `size`
+        variables will be represented with a sample of evenly spaced values.
+        If "full", every group will get an entry in the legend. If "auto",
+        choose between brief or full representation based on number of levels.
+        If `False`, no legend data is added and no legend is drawn.
+    
+        .. versionadded:: v0.13.0    
+    legend_out : bool
+        If ``True``, the figure size will be extended, and the legend will be
+        drawn outside the plot on the center right.    
+    share{x,y} : bool, 'col', or 'row' optional
+        If true, the facets will share y axes across columns and/or x axes
+        across rows.    
+    margin_titles : bool
+        If ``True``, the titles for the row variable are drawn to the right of
+        the last column. This option is experimental and may not work in all
+        cases.    
+    facet_kws : dict
+        Dictionary of other keyword arguments to pass to :class:`FacetGrid`.
+    kwargs : key, value pairings
+        Other keyword arguments are passed through to the underlying plotting
+        function.
+    
+    Returns
+    -------
+    :class:`FacetGrid`
+        Returns the :class:`FacetGrid` object with the plot on it for further
+        tweaking.
+    
+    Examples
+    --------
+    .. include:: ../docstrings/catplot.rst
+</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">10.6</span> Conclusion</h2>
+<p><code>Matplotlib</code> is the foundation for making plots in Python. <code>pandas</code> uses Matplotlib for its plotting features but is mainly for handling data. <code>Seaborn</code> makes Matplotlib prettier and easier to use, especially with pandas data.</p>
+</section>
+<section id="citation" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="citation"><span class="header-section-number">10.7</span> Citation</h2>
+<ul>
+<li>https://matplotlib.org/stable/users/project/history.html</li>
+<li>https://matplotlib.org/stable/gallery/lines_bars_and_markers/simple_plot.html</li>
+<li>https://www.simplilearn.com/tutorials/python-tutorial/matplotlib</li>
+<li>https://www.w3schools.com/python/pandas/pandas_plotting.asp</li>
+<li>https://github.com/mwaskom/seaborn/tree/master/seaborn</li>
+<li>https://seaborn.pydata.org/installing.html</li>
+<li>https://ritza.co/articles/matplotlib-vs-seaborn-vs-plotly-vs-MATLAB-vs-ggplot2-vs-pandas/</li>
+</ul>
+</section>
+<section id="grammar-of-graphics-with-plotnine" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="grammar-of-graphics-with-plotnine"><span class="header-section-number">10.8</span> Grammar of Graphics with <code>Plotnine</code></h2>
+<p>This section was written by Olivia Massad.</p>
+<section id="introduction-1" class="level3" data-number="10.8.1">
+<h3 data-number="10.8.1" class="anchored" data-anchor-id="introduction-1"><span class="header-section-number">10.8.1</span> Introduction</h3>
+<p>Hello everyone! My name is Olivia Massad and I am a junior Statistical Data Science Major. I am very interested in sports statistics and analytics, especially involving football, and am very excited to learn more about coding and data science in this class. Today I will be talking about grammar of graphics for python, using <code>Plotnine</code>. This is a new topic for me so I am very excited to show you all what we can do with it.</p>
+</section>
+<section id="what-is-grammar-of-graphics" class="level3" data-number="10.8.2">
+<h3 data-number="10.8.2" class="anchored" data-anchor-id="what-is-grammar-of-graphics"><span class="header-section-number">10.8.2</span> What is Grammar of Graphics?</h3>
+<p>Similarly to how languages have grammar in order to structure language and create a standard for how sentences and words should be arranged, grammar of graphics provides the framework for a consistent way to structure and create statistical visualizations. This framework helps us to create graphs and visualizations which can be widely understood due to the consistent structure. The major components of grammar of graphics are:</p>
+<ul>
+<li><p>Data: our datasets and the what components you want to visualize.</p></li>
+<li><p>Aesthetics: axes, position of data points, color, shape, size.</p></li>
+<li><p>Scale: scale values or use specific scales depending on multiple values and ranges.</p></li>
+<li><p>Geometric objects: how data points are depicted, whether they’re points, lines, bars, etc.</p></li>
+<li><p>Statistics: statistical measures of the data included in the graphic, including mean, spread, confidence intervals, etc.</p></li>
+<li><p>Facets: subplots for specific data dimensions.</p></li>
+<li><p>Coordinate system: cartesian or polar.</p></li>
+</ul>
+</section>
+<section id="what-can-you-do-with-plotnine" class="level3" data-number="10.8.3">
+<h3 data-number="10.8.3" class="anchored" data-anchor-id="what-can-you-do-with-plotnine"><span class="header-section-number">10.8.3</span> What can you do with <code>Plotnine</code>?</h3>
+<p><code>Plotnine</code> is a program which implements grammar of graphics in order to create data visualizations and graphs using python. It is based on <code>ggplot2</code> and allows for many variations within graphs. Some examples of things we can create with <code>plotnine</code> are:</p>
+<ul>
+<li>Bar Charts</li>
+<li>Histograms</li>
+<li>Box Plots</li>
+<li>Scatter Plots</li>
+<li>Line Charts</li>
+<li>Time Series</li>
+<li>Density Plots</li>
+<li>etc.</li>
+</ul>
+</section>
+<section id="using-plotnine" class="level3" data-number="10.8.4">
+<h3 data-number="10.8.4" class="anchored" data-anchor-id="using-plotnine"><span class="header-section-number">10.8.4</span> Using <code>Plotnine</code></h3>
+<p>In order to use <code>plotnine</code> we first need to install the package using our command line.</p>
+<p>With <code>conda</code>: “conda install -c conda-forge plotnine”</p>
+<p>With <code>pip</code>: “pip install plotnine pip install plotnine[all]”</p>
+<p>Now that <code>plotnine</code> is installed, we must call the it in python.</p>
+<div id="37eafbc4" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine.data <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that <code>plotnine</code> is installed and imported, we can begin to make graphs and plots. Below are different examples of visualizations we can make using <code>plotnine</code> and the personalizations we can add to them. For these graphics I used the rodent sighting data from the NYC open data 311 requests. We also will need pandas and numpy for some of these graphs so we need to import those as well. Additionally, because the data set is so large, we will only be lookng at the first 500 complaints.</p>
+<div id="b7a21514" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine.data <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>folder <span class="op">=</span> <span class="st">'data'</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="bu">file</span> <span class="op">=</span> <span class="st">'rodent_2022-2023.feather'</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> os.path.join(folder, <span class="bu">file</span>)</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_feather(path)</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>data_used <span class="op">=</span> data.head(<span class="dv">500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="bar-chart" class="level4" data-number="10.8.4.1">
+<h4 data-number="10.8.4.1" class="anchored" data-anchor-id="bar-chart"><span class="header-section-number">10.8.4.1</span> Bar Chart</h4>
+<p>One common type of visualization we can create with <code>plotnine</code> is a bar chart. For this graph we will look at the data for the descriptors of each complaint.</p>
+<div id="2fb9ba99" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x <span class="op">=</span> <span class="st">'descriptor'</span>)) </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_bar())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-39-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>While this code provides us with a nice simple chart, because we are using <code>plotnine</code>, we can make some major improvements to the visualization to make it easier to read and more appealing. Some simple things we can do are:</p>
+<ul>
+<li>Add a title.</li>
+<li>Color code the bars.</li>
+<li>Change the orientation of the graph.</li>
+<li>Add titles to the axes.</li>
+</ul>
+<div id="52fffd91" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x <span class="op">=</span> <span class="st">'descriptor'</span>, fill <span class="op">=</span> <span class="st">'descriptor'</span>)) </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Color code the bars.</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_bar() <span class="co"># Bar Chart</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> ggtitle(<span class="st">'Descriptor Counts'</span>) <span class="co"># Add a title.</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> coord_flip() <span class="co"># Change the orientation of the graph.</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> xlab(<span class="st">"Descriptor"</span>) <span class="co"># Add title to x axis.</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> ylab(<span class="st">"Number of Complaints"</span>) <span class="co"># Add titles to y axis.</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-40-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Some more complex changes we can make to our graph are:</p>
+<ul>
+<li>Change the orientation of the words on the axes to make them easier to read.</li>
+<li>Add color coded descriptors to each bar.</li>
+</ul>
+<div id="d1ec53e7" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x <span class="op">=</span> <span class="st">'descriptor'</span>, fill <span class="op">=</span> <span class="st">'borough'</span>)) </span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add color coded descriptors.</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_bar() <span class="co"># Bar Chart</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> ggtitle(<span class="st">'Descriptor Counts'</span>) <span class="co"># Add a title.</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> xlab(<span class="st">"Descriptor"</span>) <span class="co"># Add title to x axis.</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> ylab(<span class="st">"Number of Complaints"</span>) <span class="co"># Add titles to y axis.</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(axis_text_x<span class="op">=</span>element_text(angle<span class="op">=</span><span class="dv">45</span>))</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Change the orientation of the words.</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-41-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="scatter-plot-1" class="level4" data-number="10.8.4.2">
+<h4 data-number="10.8.4.2" class="anchored" data-anchor-id="scatter-plot-1"><span class="header-section-number">10.8.4.2</span> Scatter Plot</h4>
+<p>Another common visualization we can create is a scatterplot. When looking at the data from the 311 requests, we can see that there are many data points for locations of these complaints. A scatter plot would be a great way to see the location of the complaints by graphing the longitudes and latitudes. In order to better see the points, for this graph we will only use the first 200 complaints.</p>
+<div id="93385c76" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>data_scatter <span class="op">=</span> data.tail(<span class="dv">200</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>(ggplot(data_scatter, aes(x <span class="op">=</span> <span class="st">'longitude'</span>, y <span class="op">=</span> <span class="st">'latitude'</span>)) </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-42-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Similarly to the original code for the bar chart, this code provides a very simple scatter plot. <code>Plotnine</code> allows us to add many specializations to the scatterplot in order to differentiate the points from each other. We can:</p>
+<ul>
+<li>Add color to the points.</li>
+<li>Differentiate using point size.</li>
+<li>Differentiate using point shape.</li>
+</ul>
+<div id="485bba7e" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_scatter, aes(x <span class="op">=</span> <span class="st">'longitude'</span>, y <span class="op">=</span> <span class="st">'latitude'</span>,</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>       color <span class="op">=</span> <span class="st">'location_type'</span>)) <span class="co"># Add color to the points.</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-43-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="d690a996" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_scatter, aes(x <span class="op">=</span> <span class="st">'longitude'</span>, y <span class="op">=</span> <span class="st">'latitude'</span>,</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    size <span class="op">=</span> <span class="st">'descriptor'</span>, <span class="co"># Differentiate using point size.</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>    shape <span class="op">=</span> <span class="st">'borough'</span>)) <span class="co"># Differentiate using point shape.</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/usr/local/lib/python3.11/site-packages/plotnine/scales/scale_size.py:48: PlotnineWarning: Using size for a discrete variable is not advised.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-44-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see that due to the close data points, filtering the data using size and shape can become a little congested. One thing we can do to fix this while still viewing the same data is through the use of “facet_grid”.</p>
+<div id="eac758ba" class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_scatter, aes(x <span class="op">=</span> <span class="st">'longitude'</span>, y <span class="op">=</span> <span class="st">'latitude'</span>,</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    shape <span class="op">=</span> <span class="st">'borough'</span>)) <span class="co"># Differentiate using point shape.</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point()</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> facet_grid(<span class="st">'descriptor ~ .'</span>) <span class="co"># Create multiple plots.</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-45-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="9c4d14b5" class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_scatter, aes(x <span class="op">=</span> <span class="st">'longitude'</span>, y <span class="op">=</span> <span class="st">'latitude'</span>))</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point()</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> facet_grid(<span class="st">'descriptor ~ borough'</span>) </span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create multiple plots with 2 conditions.</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(strip_text_y <span class="op">=</span> element_text(angle <span class="op">=</span> <span class="dv">0</span>), <span class="co"># change facet text angle</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>        axis_text_x<span class="op">=</span>element_text(angle<span class="op">=</span><span class="dv">45</span>)) <span class="co"># change x axis text angle</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-46-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="histogram" class="level4" data-number="10.8.4.3">
+<h4 data-number="10.8.4.3" class="anchored" data-anchor-id="histogram"><span class="header-section-number">10.8.4.3</span> Histogram</h4>
+<p>The last common graph we will cover using <code>plotnine</code> is a histogram. Here we will use the created date data as a continuous variable. Using <code>plotnine</code> we are able to make many of the same personalizations we were able to do with bar charts.</p>
+<div id="41e1d10b" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>data_used[<span class="st">'created_date'</span>]<span class="op">=</span>pd.to_datetime(</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  data_used[<span class="st">'created_date'</span>],</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">format</span> <span class="op">=</span> <span class="st">"%m/</span><span class="sc">%d</span><span class="st">/%Y %I:%M:%S %p"</span>, errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>))</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_histogram())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/cq/5ysgnwfn7c3g0h46xyzvpj800000gn/T/ipykernel_57881/966048317.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+/usr/local/lib/python3.11/site-packages/plotnine/stats/stat_bin.py:95: PlotnineWarning: 'stat_bin()' using 'bins = 10'. Pick better value with 'binwidth'.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-47-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now that we have a simple histogram with our data we can add specializations, inclduing:</p>
+<ul>
+<li>Change width of bins.</li>
+<li>Change oreintation of graph.</li>
+<li>Add color coded descriptors.</li>
+<li>Change outline color.</li>
+<li>Change the orientation of the words on the axes to make them easier to read.</li>
+</ul>
+<div id="5b1d5d0e" class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>, fill <span class="op">=</span> <span class="st">'borough'</span>)) </span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add color coded descriptors.</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_histogram(binwidth<span class="op">=</span><span class="dv">1</span>,  <span class="co"># Change width of bins</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>      color <span class="op">=</span> <span class="st">'black'</span>) <span class="co"># Change outline color.</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(axis_text_x<span class="op">=</span>element_text(angle<span class="op">=</span><span class="dv">45</span>)) </span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Change the orientation of the words.</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-48-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="46cc0448" class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>, fill <span class="op">=</span> <span class="st">'borough'</span>)) </span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add color coded descriptors.</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_histogram(binwidth<span class="op">=</span><span class="dv">1</span>,  <span class="co"># Change width of bins</span></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>      colour <span class="op">=</span> <span class="st">'black'</span>) <span class="co"># Change outline color.</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> coord_flip() <span class="co"># Change oreintation of graph.</span></span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-49-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>While we’re able to color code the histogram to show other descriptors of the data, another way we can do this with <code>plotnine</code> is through the use of multiple graphs. Using “facet_wrap” we can create a multi facet graph with the same data.</p>
+<div id="8c73dc46" class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>)) </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_histogram(binwidth<span class="op">=</span><span class="dv">1</span>) <span class="co"># Change width of bins</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> facet_wrap(<span class="st">'borough'</span>) <span class="co"># Create multiple graphs.</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(axis_text_x<span class="op">=</span>element_text(angle<span class="op">=</span><span class="dv">45</span>)) </span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Change the orientation of the words.</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-50-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="density-plot" class="level4" data-number="10.8.4.4">
+<h4 data-number="10.8.4.4" class="anchored" data-anchor-id="density-plot"><span class="header-section-number">10.8.4.4</span> Density Plot</h4>
+<p>The last visualization we’re going to look at is density plots. While less common than the graphs previously discussed, density plots show the distribution of a specific variable.</p>
+<div id="4dd7ffa1" class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>))</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_density())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-51-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Above we can see a very simple density graph with very little description. Using <code>plotnine</code> we are able to:</p>
+<ul>
+<li>Add color coded descriptors.</li>
+<li>Scale groups by relative size.</li>
+<li>Change the orientation of the words on the axes to make them easier to read.</li>
+</ul>
+<div id="528fd796" class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>, color <span class="op">=</span> <span class="st">'descriptor'</span>)) </span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">#Add color coded descriptors.</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_density()</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(axis_text_x<span class="op">=</span>element_text(angle<span class="op">=</span><span class="dv">45</span>)) </span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Change the orientation of the words.</span></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-52-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="92e4ab4f" class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>, color <span class="op">=</span> <span class="st">'descriptor'</span>)) </span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">#Add color coded descriptors.</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_density(aes(y<span class="op">=</span>after_stat(<span class="st">'count'</span>))) </span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Scale groups by relative size.</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(axis_text_x<span class="op">=</span>element_text(angle<span class="op">=</span><span class="dv">45</span>)) </span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Change the orientation of the words.</span></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-53-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="resources" class="level3" data-number="10.8.5">
+<h3 data-number="10.8.5" class="anchored" data-anchor-id="resources"><span class="header-section-number">10.8.5</span> Resources</h3>
+<ul>
+<li><a href="https://plotnine.readthedocs.io/en/v0.12.4/gallery.html" class="uri">https://plotnine.readthedocs.io/en/v0.12.4/gallery.html</a></li>
+</ul>
+</section>
+<section id="references" class="level3" data-number="10.8.6">
+<h3 data-number="10.8.6" class="anchored" data-anchor-id="references"><span class="header-section-number">10.8.6</span> References</h3>
+<ul>
+<li><p>“Plotnine.Geoms.Geom_bar¶.” Plotnine.Geoms.Geom_bar - Plotnine Commit: D1f7dbf Documentation, plotnine.readthedocs.io/en/stable/generated/ plotnine.geoms.geom_bar.html. Accessed 13 Feb.&nbsp;2024.</p></li>
+<li><p>“Plotnine.Geoms.Geom_density¶.” Plotnine.Geoms.Geom_density - Plotnine Commit: D1f7dbf Documentation, plotnine.readthedocs.io/en/ stable/generated/plotnine.geoms.geom_density.html. Accessed 17 Feb.&nbsp;2024.</p></li>
+<li><p>“Plotnine.Geoms.Geom_histogram¶.” Plotnine.Geoms.Geom_histogram - Plotnine Commit: D1f7dbf Documentation, plotnine.readthedocs.io/en/ stable/generated/plotnine.geoms.geom_histogram.html#plotnine. geoms.geom_histogram. Accessed 17 Feb.&nbsp;2024.</p></li>
+<li><p>“Plotnine.Geoms.Geom_point¶.” Plotnine.Geoms.Geom_point - Plotnine Commit: D1f7dbf Documentation, plotnine.readthedocs.io/en/ stable/generated/plotnine.geoms.geom_point.html. Accessed 16 Feb.&nbsp;2024.</p></li>
+<li><p>“Plotnine.” PyPI, pypi.org/project/plotnine/. Accessed 13 Feb.&nbsp;2024.</p></li>
+<li><p>Sarkar, Dipanjan (DJ). “A Comprehensive Guide to the Grammar of Graphics for Effective Visualization of Multi-Dimensional…” Medium, Towards Data Science, 13 Sept.&nbsp;2018, towardsdatascience.com/a-comprehensive-guide-to-the- grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149.</p></li>
+</ul>
 
 
+</section>
 </section>
 </section>
 
@@ -615,12 +2959,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./statsmod.html" class="pagination-link  aria-label=" &lt;span="" models&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical Models</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical Models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./exercises.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>Exercises</span>">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Exercises</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./exercises.html" class="pagination-link" aria-label="<span class='chapter-number'>10</span>&nbsp; <span class='chapter-title'>Exercises</span>">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exercises</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
