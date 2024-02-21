@@ -14,7 +14,7 @@ Statistical modeling is one of the fundamental skills required for data science,
 
 ### What is `statsmodels`?
 
-Put materials on topic 1 here
+The `statsmodels` package is
 
 Python examples can be put into `python` code chunks:
 
