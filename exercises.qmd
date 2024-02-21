@@ -206,4 +206,22 @@ you exported from the last problem.
     1. Come up with a scheme for the two tables that allows
     even more efficient storage of the `agency` column
     in the `rodent` table. _Hint: use an integer to code the
-    agencies._
+    agencies.
+
+1. **Logistic Modeling**
+The response time to 311 service requests is a measure of civic
+service quality. Let us model the response time to 311 requests
+with complain type `Rodent`.
+    1. Compute the response time in hours. Note that some response
+    will be missing because of unavailable closed date.
+    1. Compute a binary variable `over3d`, which is one if the
+    response time is greater than 3 days, and zero otherwise. Note
+    that this variable should have no missing values.
+    1. Use the package `uszipcode` to obtain the zip code level
+    covaraites such as median house income and median home value.
+    Merge these variables to the rodent data.
+    1. Split the data at random into training (80%) and testing (20%).
+    Build a logistic model to predict `over3d` on the training data,
+    and validate the performance on the testing data.
+    1. Build a lasso logistic model to predict `over3d`, and justify
+    your choice of the tuning parameter. Validate on the testing data.
