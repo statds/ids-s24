@@ -209,7 +209,7 @@ it is for Queens.
 
 * More appropriate for smaller sample sizes ($<50$). 
 * The closer the test statistic is to $1$, the closer it is to a normal 
-distribution, with $1$ being a perfect match. [2]   
+distribution, with $1$ being a perfect match.   
 
 ### NormalTest 
 
@@ -230,7 +230,7 @@ and $k$ is from the `kurtosistest`, and a corresponding p-value
 This test is based on D'Agostino and Pearson's test which combines skew
 and kurtosis (heaviness of the tail or how much data resides in the tails). 
 The test compares the skewness and kurtosis of the sample to that of a normal 
-distribution, which are $0$ and $3$, respectively. [4]
+distribution, which are $0$ and $3$, respectively.
 
 ### Example: Distribution of Response Times 
 It can be useful to identify the distribution of a population because it gives
@@ -305,39 +305,20 @@ has the `confidence_interval` method.
 **Code:** `scipy.stats.chi2_contingency(table)` 
 
 **Assumptions:** The cells in the table contain frequencies, the levels of each
-variable are mutually exclusive, and observations are independent. [3]
+variable are mutually exclusive, and observations are independent.
 
 **Returns:** The test statistic, a corresponding p-value, the degrees of freedom, 
 and an array of expected frequencies from the table. 
 
 * `dof = table.size - sum(table.shape) + table.ndim - 1` 
 
-### Example: Analyzing the Relationship Between Borough and Response Time 
+### Example: Analyzing the Relationship Between Season and Response Time 
 
 One way in which the chi-squared test may prove useful with the 2022-2023 311 Service
 Request rodent sighting data is by allowing us to identify dependencies between 
-different variables, categorical ones in particular. For example, we can create
-a frequency table showing the relative frequencies of rodent sighting per Borough, 
-where the rodent sightings are split into categories by their descriptor. 
-```{python}
-# create frequency table 
-freq_table = pd.crosstab(df.Borough, df.Descriptor, margins = True) 
-
-freq_table
-```
-```{python}
-results_chi2 = scipy.stats.chi2_contingency(freq_table)
-
-print('test statistic:', results_chi2.statistic)
-print('p-value:', results_chi2.pvalue)
-print('degrees of freedom:', results_chi2.dof) 
-```  
-At an alpha level of $0.05$, the p-value allows us to reject the null hypothesis
-and conclude that the `Borough` and `Descriptor` columns are indeed dependent. 
-
-We can further explore this data by now choosing the Borough with the most rodent
-sightings and testing whether the season in which the request was created is independent
-of the type of sighting, using the `Descriptor` column. 
+different variables, categorical ones in particular. For example, we can choose a borough
+and test whether the season in which the request was created is independent of the 
+type of sighting, using the `Descriptor` column. 
 ```{python}
 # return season based off month of created date
 def get_season(month): 
@@ -388,7 +369,7 @@ sightings is consistent across all five types of rodent sightings. This further 
 that there exists dependency between season and rodent sighting in Brooklyn. 
 
 ## Nonparametric Hypothesis Tests   
-### Mann-Whitney U Test  
+### Mann-Whitney U (Wilcoxon Rank-Sum) Test  
 
 | H~0~: distribution of population 1 $=$ distribution of population 2
 | H~1~: distribution of population 1 $\neq$ or $>$ or $<$ distribution of population 2   
@@ -397,7 +378,7 @@ that there exists dependency between season and rodent sighting in Brooklyn.
 
 **Code:** `scipy.stats.mannwhitneyu(sample_1, sample_2)` 
 
-**Assumptions:** Observations are independen and ordinal.  
+**Assumptions:** Observations are independent and ordinal.  
 
 **Optional Parameters:** 
 
@@ -422,10 +403,13 @@ and a corresponding p-value.
 be calculated as `sample_1.shape * sample_2.shape - U1` where `U1` is the 
 test statistic associated with `sample_1`. 
 * For large sample sizes, the distribution can be assumed to be approximately
-normal, so the statisic can be measured as $z = \frac{U-\mu_{U}}{\sigma_{U}}$. [5]
+normal, so the statisic can be measured as $z = \frac{U-\mu_{U}}{\sigma_{U}}$. 
 * To adjust for ties, the standard deviation is calculated as follows: 
 
-$\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - \frac{\sum_{k = 1}^{K}(t^{3}_{k} - t_{k})}{n(n - 1)})}$, where $t_{k}$ is the number of ties. 
+$\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - 
+\frac{\sum_{k = 1}^{K}(t^{3}_{k} - t_{k})}{n(n - 1)})}$, where $t_{k}$ is the number of ties.$ 
+
+* Non-parametric version of the two-sample t-test. 
 ::: 
 
 ### Wilcoxon Signed-Rank test
@@ -438,7 +422,7 @@ $\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - \frac{\sum_{k = 1}^{K}(t^{3}
 **Code:** `scipy.stats.wilcoxon(sample_1, sample_2)` or  
 `scipy.statss.wilcoxon(sample_diff, None)` 
 
-**Assumptions:** Observations are independen, ordinal, and the samples are paired.
+**Assumptions:** Observations are independent, ordinal, and the samples are paired.
 
 **Optional Parameters:** 
 
@@ -459,6 +443,7 @@ is stochastically greater than or less than a distribution symmetric about $0$.
 **Returns:** The test statistic, a corresponding p-value, and the calculated
 z-score when the `method` is `approx`. 
 
+* Non-parametric version of the paired t-test. 
 
 ### Example: Distribution of Response Times for 2022 vs. 2023 
 
@@ -467,7 +452,7 @@ from our rodent data. For example, we can split the data into two groups, one fo
 and the other for 2023, to compare their distributions. 
 ```{python}
 # create dfs for 2022 and 2023
-df_2022 = df[df['Created Date'].dt.year == 2022]['Response Time']
+df_2022 = df[df['Created Date'].dt.year == 2022]['Response Time'] 
 df_2023 = df[df['Created Date'].dt.year == 2023]['Response Time']
 
 # perform test with H_0 df_2022 > df_2023
@@ -490,6 +475,19 @@ stochastically greater than that for 2023. But when we set the alternative to `l
 p-value is small enough to conclude that the distribution of response times for 2022
 is stochastically greater than the distribution of response times for 2023. 
 
+```{python}
+bins = [i for i in range(5, 500, 50)]
+plt.hist(df_2022, label = 2022, bins = bins, color = 'red') 
+plt.hist(df_2023, label = 2023, bins = bins, color = 'blue', 
+                                                  alpha = 0.5)
+
+plt.legend()
+plt.show()  
+``` 
+This small subset of data confirms the results of the one-sided hypothesis test, showing 
+that in general, the counts of response times for 2022 are greater than those for 2023, 
+suggesting the distribution for 2022 is stochastically larger than that of 2023 data. 
+
 ### Kruskal-Wallis H-Test 
 
 | H~0~: all populations have the same distribution 
@@ -509,10 +507,7 @@ corresponding p-value.
 
 * If the underlying distributions have similar shapes, the test is 
 essentially a comparison of their medians. 
+* Non-parametric version of ANOVA. 
 
 ## References 
-1. [`scipy.stats` documentation]<https://docs.scipy.org/doc/scipy/reference/stats.html>
-2. [National Library of Medicine - Normality Tests]<https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/>
-3. [National Library of Medicine - Chi-square test]<https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/> 
-4. [scribbr.com - Kurtosis]<https://www.scribbr.com/statistics/kurtosis/>
-5. [datatab.net - Mann-Whitney U-Test]<https://datatab.net/tutorial/mann-whitney-u-test>
+1. [scipy.stats documentation](https://docs.scipy.org/doc/scipy/reference/stats.html)
