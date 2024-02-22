@@ -407,9 +407,11 @@ normal, so the statisic can be measured as $z = \frac{U-\mu_{U}}{\sigma_{U}}$.
 * To adjust for ties, the standard deviation is calculated as follows: 
 
 $\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - 
-\frac{\sum_{k = 1}^{K}(t^{3}_{k} - t_{k})}{n(n - 1)})}$, where $t_{k}$ is the number of ties.$ 
+\frac{\sum_{k = 1}^{K}(t^{3}_{k} - t_{k})}{n(n - 1)})}$, where $t_{k}$ is the number of ties. 
 
 * Non-parametric version of the two-sample t-test. 
+* If the underlying distributions have similar shapes, the test is 
+essentially a comparison of medians. 
 ::: 
 
 ### Wilcoxon Signed-Rank test
@@ -443,7 +445,26 @@ is stochastically greater than or less than a distribution symmetric about $0$.
 **Returns:** The test statistic, a corresponding p-value, and the calculated
 z-score when the `method` is `approx`. 
 
-* Non-parametric version of the paired t-test. 
+* Non-parametric version of the paired t-test.  
+
+### Kruskal-Wallis H-Test 
+
+| H~0~: all populations have the same distribution 
+| H~1~: $>=2$ populations are distributed differently  
+
+&NewLine; 
+
+**Code:** `scipy.stats.kruskal(sample_1, ..., sample_n)`
+
+**Assumptions:** Observations are independent, ordinal, and each sample has 
+$>=5$ observations. 
+
+**Optional Parameters:** Can use `nan_policy`.
+
+**Returns:** The Kruskal-Wallis H-statisic (corrected for ties) and a 
+corresponding p-value. 
+
+* Non-parametric version of ANOVA. 
 
 ### Example: Distribution of Response Times for 2022 vs. 2023 
 
@@ -486,28 +507,7 @@ plt.show()
 ``` 
 This small subset of data confirms the results of the one-sided hypothesis test, showing 
 that in general, the counts of response times for 2022 are greater than those for 2023, 
-suggesting the distribution for 2022 is stochastically larger than that of 2023 data. 
-
-### Kruskal-Wallis H-Test 
-
-| H~0~: all populations have the same distribution 
-| H~1~: $>=2$ populations are distributed differently  
-
-&NewLine; 
-
-**Code:** `scipy.stats.kruskal(sample_1, ..., sample_n)`
-
-**Assumptions:** Observations are independent, ordinal, and each sample has 
-$>=5$ observations. 
-
-**Optional Parameters:** Can use `nan_policy`.
-
-**Returns:** The Kruskal-Wallis H-statisic (corrected for ties) and a 
-corresponding p-value. 
-
-* If the underlying distributions have similar shapes, the test is 
-essentially a comparison of their medians. 
-* Non-parametric version of ANOVA. 
+suggesting the distribution for 2022 is stochastically larger than that of 2023 data.
 
 ## References 
 1. [scipy.stats documentation](https://docs.scipy.org/doc/scipy/reference/stats.html)
