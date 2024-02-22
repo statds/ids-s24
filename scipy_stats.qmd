@@ -17,17 +17,23 @@ format:
 
 This section was written by Isabelle Perez. 
 
+## Introduction 
+Hello! My name is Isabelle Perez and I am a junior Mathematics-Statistics major and 
+Computer Science minor. I am interested in learning about data science topics and 
+have an interest in how modeling can improve sports analytics, specifically in 
+baseball. Today's topic is the `scipy.stats` package and the many hypothesis tests 
+that we can perform using it. 
 
-## Introduction  
+## `Scipy.stats` 
 The package `scipy.stats` is a subpackage of `Scipy` and contains many methods useful
 for statistics such as probability distributions, summary statistics, statistical tests,
 etc. The focus of this presentation will be on some of the many hypothesis tests that can 
 be easily conducted using `scipy.stats` and will provide examples of situations in 
 which they may be useful.  
 
-Firstly, ensure `scipy.stats`
-is installed by using `pip install scipy.stats` or   
-`pip3 install scipy.stats`, depending on what version of python you are using. 
+Firstly, ensure `scipy.stats` 
+is installed by using `pip install scipy` or  
+`conda install -c anaconda scipy`. 
 
 ## Basic Statistical Hypothesis Tests 
 ### Two-sample t-test 
@@ -507,7 +513,10 @@ plt.show()
 ``` 
 This small subset of data confirms the results of the one-sided hypothesis test, showing 
 that in general, the counts of response times for 2022 are greater than those for 2023, 
-suggesting the distribution for 2022 is stochastically larger than that of 2023 data.
+suggesting the distribution for 2022 is stochastically larger than that of 2023 data. 
 
 ## References 
-1. [scipy.stats documentation](https://docs.scipy.org/doc/scipy/reference/stats.html)
+1. <https://docs.scipy.org/doc/scipy/reference/stats.html> (`scipy.stats` documentation)
+2. <https://libguides.library.kent.edu/SPSS/ChiSquare> 
+3. <https://library.virginia.edu/data/articles/getting-started-with-the-kruskal-wallis-test>
+4. <https://machinelearningmastery.com/statistical-hypothesis-tests-in-python-cheat-sheet/>
