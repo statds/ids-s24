@@ -13,40 +13,56 @@ data visualization, and design. Statistical modeling is one of the most
 fundamental skills required for data science, and it's important to have a solid 
 understanding of how models work to communicate effectively with collaborators. 
 
-
-### What is `statsmodels`?
-
 The `statsmodels` Python package offers a diverse range of classes and functions 
 tailored for estimating various statistical models, conducting statistical tests, 
 and exploring statistical data. Each estimator provides an extensive array of 
 result statistics, rigorously tested against established statistical packages to 
-ensure accuracy. 
-
-Python examples can be put into `python` code chunks:
-
-```{python}
-import pandas as pd
-
-# do something
-```
+ensure accuracy. This presentation will focus on the statistical modeling aspect.
 
 ### Key Features and Capabilities
 
-Put materials on topic 2 here.
+Some of the most important key features and capabilities of `statsmodels` are:
+
++ Statistical Analysis
++ Linear Regression Models
++ Generalized Linear Models
++ Multi-level models 
++ Time Series Analysis
++ Nonparametric models
+
+In this presentation, we will work with practical applications of statistical 
+modeling in `statsmodels`. We will start with simple linear regression  
+models and gradually move on to more complex models. By the end of this  
+presentation, you should be able to understand and utilize these tools when 
+applicable to analyze your own datasets. 
 
 ### Installation and Setup
 
-Put matreials on topic 3 here.
+To install `statsmodels`, use the following code, depending on whether you use 
+pip or conda:
+```{python}
+%pip install statsmodels
+```
 
+```{python}
+%conda install statsmodels
+```
 
 ### Basic Statistical Analysis
 
-### Time Series Analysis
+### Linear Regression Models
 
 ### Generalized Linear Models
 
-### Real World Applications
+### Multi-level Models
+
+### Time Series Analysis
+
+### Nonparametric Models
 
 ### Conclusion
 
 Put summaries
+
+### References
+
