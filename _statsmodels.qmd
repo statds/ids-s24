@@ -7,11 +7,11 @@ This section was written by Leon Nguyen.
 Hello! My name is Leon Nguyen (they/she) and I am a second-year undergraduate 
 student studying Statistical Data Science and Mathematics at the University 
 of Connecticut, aiming to graduate in Fall 2025. One of my long-term goals is to 
-make the field of data science more accessible to marginalized communities. My 
-research interests include statistical modeling, data visualization, and design. 
-Statistical modeling is one of the fundamental skills required for data science, 
-and it's important to have a solid understanding of how models work to 
-communicate effectively with stakeholders and collaborators. 
+make the field of data science more accessible to marginalized communities and 
+minority demographics. My research interests include statistical modeling, 
+data visualization, and design. Statistical modeling is one of the most 
+fundamental skills required for data science, and it's important to have a solid 
+understanding of how models work to communicate effectively with collaborators. 
 
 
 ### What is `statsmodels`?
