@@ -8,13 +8,19 @@ Hello! My name is Leon Nguyen (they/she) and I am a second-year undergraduate
 student studying Statistical Data Science and Mathematics at the University 
 of Connecticut, aiming to graduate in Fall 2025. One of my long-term goals is to 
 make the field of data science more accessible to marginalized communities. My 
-research interests include statistical modeling, data visualization and design. 
+research interests include statistical modeling, data visualization, and design. 
 Statistical modeling is one of the fundamental skills required for data science, 
+and it's important to have a solid understanding of how models work to 
+communicate effectively with stakeholders and collaborators. 
 
 
 ### What is `statsmodels`?
 
-The `statsmodels` package is
+The `statsmodels` Python package offers a diverse range of classes and functions 
+tailored for estimating various statistical models, conducting statistical tests, 
+and exploring statistical data. Each estimator provides an extensive array of 
+result statistics, rigorously tested against established statistical packages to 
+ensure accuracy. 
 
 Python examples can be put into `python` code chunks:
 
