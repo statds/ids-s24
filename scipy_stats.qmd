@@ -523,7 +523,20 @@ Similar to the previous, example, we can use a non-parametric test to compare th
 of response times by season. Because in this case we have four samples to compare, we need
 to use the Kruskal Wallis H-Test. 
 ```{python}
+df_summer = df[df['Season'] == 'Summer']['Response Time']
+df_spring = df[df['Season'] == 'Spring']['Response Time']
+df_fall = df[df['Season'] == 'Fall']['Response Time']
+df_winter = df[df['Season'] == 'Winter']['Response Time']
+
+results_kw = scipy.stats.kruskal(df_summer, df_spring, df_fall, df_winter,
+                                                                nan_policy = 'omit')
+
+print('test statistic:', results_kw.statistic) 
+print('p-value:', results_kw.pvalue)
 ```
+At an alpha level of $0.05$, the p-value of $0.0496$ is just small enough to reject the 
+null hypothesis, suggesting that the distribution of response times differs by season, 
+but not by much.   
 
 ## References 
 1. <https://docs.scipy.org/doc/scipy/reference/stats.html> (`scipy.stats` documentation)
