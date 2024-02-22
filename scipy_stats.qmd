@@ -364,9 +364,9 @@ freq_table_2
 ```{python}
 results_4 = scipy.stats.chi2_contingency(freq_table_2)
 
-print('test statistic:', results_4_2.statistic)
+print('test statistic:', results_4.statistic)
 print('p-value:', results_4.pvalue)
-print('degrees of freedom:', results_4_2.dof) 
+print('degrees of freedom:', results_4.dof) 
 ``` 
 At an alpha level of $0.05$, the p-value allows us to reject the null hypothesis
 and conclude that the `Season` and `Descriptor` columns are indeed dependent for 
@@ -397,7 +397,7 @@ that there exists dependency between season and rodent sighting in Brooklyn.
 
 **Code:** `scipy.stats.mannwhitneyu(sample_1, sample_2)` 
 
-**Assumptions:** Observations are i.i.d. and are ordinal.  
+**Assumptions:** Observations are independen and ordinal.  
 
 **Optional Parameters:** 
 
@@ -438,7 +438,7 @@ $\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - \frac{\sum_{k = 1}^{K}(t^{3}
 **Code:** `scipy.stats.wilcoxon(sample_1, sample_2)` or  
 `scipy.statss.wilcoxon(sample_diff, None)` 
 
-**Assumptions:** Observations are i.i.d., ordinal, and the samples are paired.
+**Assumptions:** Observations are independen, ordinal, and the samples are paired.
 
 **Optional Parameters:** 
 
@@ -488,7 +488,27 @@ At an alpha level of $0.05$, the p-value of $1$ is too large to reject the null 
 therefore we cannot conclude that the distribution of response times for 2022 is 
 stochastically greater than that for 2023. But when we set the alternative to `less`, our
 p-value is small enough to conclude that the distribution of response times for 2022
-is stochasitcally greater than the distribution of response times for 2023. 
+is stochastically greater than the distribution of response times for 2023. 
+
+### Kruskal-Wallis H-Test 
+
+| H~0~: all populations have the same distribution 
+| H~1~: $>=2$ populations are distributed differently  
+
+&NewLine; 
+
+**Code:** `scipy.stats.kruskal(sample_1, ..., sample_n)`
+
+**Assumptions:** Observations are independent, ordinal, and each sample has 
+$>=5$ observations. 
+
+**Optional Parameters:** Can use `nan_policy`.
+
+**Returns:** The Kruskal-Wallis H-statisic (corrected for ties) and a 
+corresponding p-value. 
+
+* If the underlying distributions have similar shapes, the test is 
+essentially a comparison of their medians. 
 
 ## References 
 1. [`scipy.stats` documentation]<https://docs.scipy.org/doc/scipy/reference/stats.html>
