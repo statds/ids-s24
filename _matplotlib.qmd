@@ -114,7 +114,7 @@ plt.show()
 Use  `linestyle`, `color`, and `Markers` to set linestyles:
 
 ```{python}
-help(plt.plot)
+# help(plt.plot)
 ```
 
 ## Example with rodent data: 
@@ -163,7 +163,7 @@ plt.show()
 ```{python}
 borough_counts = df['Borough'].value_counts()
 
-plt.figure(figsize=(10, 8))  
+plt.figure(figsize=(8, 6))  
 plt.bar(borough_counts.index, borough_counts.values, color='green')
 plt.xlabel('Borough')  
 plt.ylabel('Number of Rodent Sightings')  
@@ -182,7 +182,7 @@ sample_zip = daily_reports['Incident Zip'].dropna().iloc[0]
 sample_data = daily_reports[daily_reports['Incident Zip'] == sample_zip]
 
 # 2x2 Plot
-fig, axs = plt.subplots(2, 2, figsize=(10, 10))
+fig, axs = plt.subplots(2, 2, figsize=(8, 8))
 
 # Line Plot
 axs[0, 0].plot(sample_data['Date'], sample_data['Counts'], '-o', color='green')
@@ -215,7 +215,7 @@ plt.show()
 
 
 ```{python}
-help(plt.savefig)
+# help(plt.savefig)
 ```
 
 ## Pandas
@@ -244,7 +244,7 @@ generate basic plots with fewer lines of code, due to the fact that Pandas
 
 
 ```{python}
-plt.figure(figsize=(10, 8))
+plt.figure(figsize=(8, 6))
 monthly_counts.plot(kind='line')
 
 plt.title('Monthly Report Count')
@@ -299,7 +299,7 @@ For more info pleased check:
 ```
 
 ```{python}
-help(plt.plot)
+# help(plt.plot)
 ```
 
 ### Bar Plot
@@ -314,7 +314,7 @@ for horizontal version `df.plot.barh()`.
 Let's use Borough and Location Type to generate a side-by-side bar plot, one horizontal and one vertical:
 
 ```{python}
-fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(15, 8))
+fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(8, 6))
 
 # Vertical bar plot for Borough counts
 df.groupby(['Borough']).size().plot.bar(ax=axs[0], color='skyblue', rot=0)
@@ -340,7 +340,7 @@ This type of plot is useful for comparing the distribution within each class sid
 ```{python}
 class_Borough = pd.crosstab(df["Borough"], df["Status"])
 
-class_Borough.plot.bar(rot=45, figsize=(10, 6))
+class_Borough.plot.bar(rot=45, figsize=(8, 6))
 
 ```
 
@@ -367,7 +367,7 @@ df2 = pd.read_csv(url2)
 ```
 
 ```{python}
-df2["Grade"].plot.hist(bins = 10, figsize=(10, 8))
+df2["Grade"].plot.hist(bins = 10, figsize=(8, 6))
 ```
 
 As can be seen from the plot, the students' scores show a normal distribution, 
@@ -389,7 +389,7 @@ df3 = pd.read_csv(url3)
 ```
 
 ```{python}
-df3.plot.scatter(x="Weight", y="Height", figsize=(10,8))
+df3.plot.scatter(x="Weight", y="Height", figsize=(8, 6))
 ```
 
 As you can see it's roughly a linear regression, 
@@ -415,12 +415,12 @@ pip install seaborn
 ### Histogram and Density Plots
 
 ```{python}
-help(sns.histplot) 
+# help(sns.histplot) 
 ```
 
 
 ```{python}
-plt.figure(figsize=(10,8))
+plt.figure(figsize=(8, 6))
 sns.histplot(df2['Grade'], bins=10, kde = True)
 ```
 
@@ -444,7 +444,7 @@ df4 = pd.DataFrame({
     'Height': [160, 172, 158, 165, 170, 162, 175, 168, 180, 155],
     'Weight': [55, 72, 60, 68, 62, 56, 80, 65, 75, 50]})
 
-plt.figure(figsize = (10, 8))
+plt.figure(figsize = (8, 6))
 sns.regplot(x='Weight', y='Height', data=df4)
 ```
 
@@ -503,7 +503,7 @@ in the 'Class' column, effectively grouping the data by class.
 
 #### Categorical Data Help
 ```{python}
-help(sns.catplot)
+#help(sns.catplot)
 ```
 
 ## Conclusion
