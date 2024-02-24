@@ -88,15 +88,27 @@ documentation demonstrates how to importing from a CSV file hosted online from
 the [Rdatasets repository](https://github.com/vincentarelbundock/Rdatasets/):
 
 ```{python}
-df = sm.datasets.get_rdataset("Guerry", "HistData").data
 # Reads the 'Guerry' dataset from the HistData package into df
+df = sm.datasets.get_rdataset("Guerry", "HistData").data
+
+# Print out the first five rows of our dataframe
+print(df.head())
 ```
 
 We can also read directly from a local CSV file with `pandas`. We will be using 
 the NYC 311 rodent data:
 ```{python}
-df = pd.read_csv('data\\rodent_2022-2023.csv')
 # Reads the csv file into df
+df = pd.read_csv('data\\rodent_2022-2023.csv')
+
+# Brief data pre-processing
+df['Created Date'] = pd.to_datetime(df['Created Date'])
+df['Closed Date'] = pd.to_datetime(df['Closed Date'])
+df['Created Year'] = df['Created Date'].dt.year
+df['Created Month'] = df['Created Date'].dt.month
+
+# Print out the first five rows of our dataframe
+print(df.head())
 ```
 
 ### Troubleshooting
@@ -146,7 +158,9 @@ Here's an example of fitting a simple linear regression model to the NYC rodent 
 
 
 ```{python}
-model = sm.OLS(df['count'], sm.add_constant(df['year']))
+
+### TO-DO: fix df['count']
+model = sm.OLS(df['count'], sm.add_constant(df['Created Year']))
 results = model.fit()
 print(results.summary())
 # Fits a linear regression model between count and year, with a constant term
@@ -167,6 +181,10 @@ print(results.summary())
 #### Generalized Linear Models
 
 #### Time Series Analysis
+
+```{python}
+pd.crosstab(df['Created Month'], columns = 'count')
+```
 
 #### Nonparametric Models
 
