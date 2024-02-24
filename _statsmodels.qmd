@@ -98,7 +98,11 @@ sm.webdoc(sm.GLS, stable=True)
 # *Searching via string has presented issues?
 ```
 
+
+
 ### Basic Statistical Analysis
+
+
 
 ### Linear Regression Models
 
@@ -120,8 +124,11 @@ Put summaries
 * Getting help with `statsmodels`:
     + https://www.statsmodels.org/stable/generated/statsmodels.tools.web.webdoc.html#statsmodels.tools.web.webdoc
 
-* Loading data into `statsmodels`:
+* Loading data, model fit, and summary procedure:
     + https://www.statsmodels.org/stable/gettingstarted.html
+
+* Diagnostic tests:
+    + https://www.statsmodels.org/stable/stats.html#residual-diagnostics-and-specification-tests
 
 * NYC 311 Service Request Data:
     + https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9/about_data
