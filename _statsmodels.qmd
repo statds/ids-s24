@@ -68,7 +68,11 @@ Here are some minimum dependencies:
 + Pandas >= 1.0
 + Patsy >= 0.5.2
 
-Patsy is [[[[[[[[[[[[[[[[[[[[
+The last item listed above, `patsy`, is a Python library that provides a simple 
+and expressive syntax for specifying statistical models in Python. It allows 
+users to define linear models using a formula syntax similar to the formulas 
+used in R and other statistical software. More `patsy` documentation can be 
+found [here](https://patsy.readthedocs.io/en/latest/).
 
 Cython is required to build from a git checkout but not to run or install from 
 PyPI. The documentation states this required to build the code from github but 
@@ -79,8 +83,7 @@ not from a source distribution:
 ### Troubleshooting
 
 Whenever you are having problems with `statsmodels`, you can access the  
-official documentation by visiting [https://www.statsmodels.org/stable/index.html](https://www.statsmodels.org/stable/index.html). If you are working in a code editor, you can also run 
-the following:
+official documentation by visiting [this link](https://www.statsmodels.org/stable/index.html). If you are working in a code editor, you can also run the following in a code cell:
 ```{python}
 sm.webdoc() 
 # Opens the official documentation page in your browser
@@ -89,8 +92,10 @@ sm.webdoc()
 To look for specific documentation, for example `sm.GLS`, you can run the following:
 ```{python}
 sm.webdoc(sm.GLS, stable=True)
-# First argument (func) : string or function to search for documentation
+# First argument (func) : string* or function to search for documentation 
 # Second argument (stable) : (True) or development (False) documentation, default is stable
+
+# *Searching via string has presented issues?
 ```
 
 ### Basic Statistical Analysis
