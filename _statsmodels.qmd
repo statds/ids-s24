@@ -80,6 +80,24 @@ not from a source distribution:
 
 + Cython >= 0.29.33 
 
+### Importing Data
+
+There are a few different options to import data. For example, `statsmodels` 
+documentation demonstrates how to importing from a CSV file hosted online from 
+the [Rdatasets repository](https://github.com/vincentarelbundock/Rdatasets/):
+
+```{python}
+df = sm.datasets.get_rdataset("Guerry", "HistData").data
+# Reads the 'Guerry' dataset from the HistData package into df
+```
+
+We can also read directly from a local CSV file with `pandas`. We will be using 
+the NYC 311 rodent data:
+```{python}
+df = pd.read_csv('data\\rodent_2022-2023.csv')
+# Reads the csv file into df
+```
+
 ### Troubleshooting
 
 Whenever you are having problems with `statsmodels`, you can access the  
@@ -98,19 +116,21 @@ sm.webdoc(sm.GLS, stable=True)
 # *Searching via string has presented issues?
 ```
 
+### Statistical Modeling and Analysis
 
 
-### Basic Statistical Analysis
+{python}
 
 
+#### Basic Statistical Analysis
 
-### Linear Regression Models
+#### Linear Regression Models
 
-### Generalized Linear Models
+#### Generalized Linear Models
 
-### Time Series Analysis
+#### Time Series Analysis
 
-### Nonparametric Models
+#### Nonparametric Models
 
 ### Conclusion
 
@@ -120,6 +140,9 @@ Put summaries
 
 * Installing `statsmodels`:
     + https://www.statsmodels.org/stable/install.html
+
+* `Rdatasets` repository:
+    + https://github.com/vincentarelbundock/Rdatasets/
 
 * Getting help with `statsmodels`:
     + https://www.statsmodels.org/stable/generated/statsmodels.tools.web.webdoc.html#statsmodels.tools.web.webdoc
