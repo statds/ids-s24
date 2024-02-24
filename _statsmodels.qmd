@@ -17,7 +17,8 @@ The `statsmodels` Python package offers a diverse range of classes and functions
 tailored for estimating various statistical models, conducting statistical tests, 
 and exploring statistical data. Each estimator provides an extensive array of 
 result statistics, rigorously tested against established statistical packages to 
-ensure accuracy. This presentation will focus on the statistical modeling aspect.
+ensure accuracy. This presentation will focus on the practical applications of the 
+statistical modeling aspect.
 
 ### Key Features and Capabilities
 
@@ -118,19 +119,63 @@ sm.webdoc(sm.GLS, stable=True)
 
 ### Statistical Modeling and Analysis
 
+Constructing statistical models with `statsmodels` generally follows step-by-step 
+process: 
 
-{python}
+1. **Import necessary libraries**: This includes both `numpy` and `pandas`, as well  
+as `statsmodels.api` itself (`sm`).
 
+1. **Load** the data: 
 
-#### Basic Statistical Analysis
+1. **Define** our model: what model is the appropriate representation of our 
+   research question? This could be an OLS regression (`sm.OLS`), logistic 
+   regression (`sm.Logit`), or any number of other models depending on the 
+   nature of our data.
+   
+1. **Fit** the model to our data: we use the `.fit()` method which takes as input 
+   our dependent variable and independent variables.
+   
+1. **Analyze** the results of the model: this is where we can get things like 
+   parameter estimates, standard errors, p-values, etc. We use the 
+   `.summary()` method to print out these statistics.
 
 #### Linear Regression Models
+
+Here's an example of fitting a simple linear regression model to the NYC rodent data:
+
+
+
+```{python}
+model = sm.OLS(df['count'], sm.add_constant(df['year']))
+results = model.fit()
+print(results.summary())
+# Fits a linear regression model between count and year, with a constant term
+```
+
+This will give us a summary of the regression coefficients including their standard error, t-statistics, and p-values. The output also includes
+
+Note that in addition to 'year', there's also a constant term included by           
+default. The `add_constant()` function from statsmodels helps us add this. 
+
+Let's demonstrate with an example using the Generalized Least Squares (GLS)      estimator:
+```{python}
+model = sm.GLS.from_formula('mpg ~ cyl + hp', data=auto)
+results = model.fit()
+print(results.summary())
+```
 
 #### Generalized Linear Models
 
 #### Time Series Analysis
 
 #### Nonparametric Models
+
+#### Diagnostic Tests
+
+The diagnostics tests allow us to check if our model assumptions hold true. One 
+of the most important assumption of linear regression models is that residuals 
+are normally distributed.
+
 
 ### Conclusion
 
