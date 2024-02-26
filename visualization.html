@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science - 9&nbsp; Visualization</title>
+<title>Introduction to Data Science - 8&nbsp; Visualization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./exercises.html" rel="next">
-<link href="./statsmod.html" rel="prev">
+<link href="./statsmod.html" rel="next">
+<link href="./eda.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./visualization.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualization</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./visualization.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualization</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -193,20 +193,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./statsmod.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical Models</span></span></a>
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
+  <a href="./statsmod.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistical Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./supervised.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -225,46 +231,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link active" data-scroll-target="#data-visualization"><span class="header-section-number">10</span> Data Visualization</a>
+  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link active" data-scroll-target="#data-visualization"><span class="header-section-number">9</span> Data Visualization</a>
   <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">10.1</span> Introduction</a></li>
-  <li><a href="#matplotlib" id="toc-matplotlib" class="nav-link" data-scroll-target="#matplotlib"><span class="header-section-number">10.2</span> Matplotlib</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">9.1</span> Introduction</a></li>
+  <li><a href="#matplotlib" id="toc-matplotlib" class="nav-link" data-scroll-target="#matplotlib"><span class="header-section-number">9.2</span> Matplotlib</a>
   <ul class="collapse">
-  <li><a href="#installation-of-matplotlib" id="toc-installation-of-matplotlib" class="nav-link" data-scroll-target="#installation-of-matplotlib"><span class="header-section-number">10.2.1</span> Installation of <code>Matplotlib</code></a></li>
-  <li><a href="#line-plot" id="toc-line-plot" class="nav-link" data-scroll-target="#line-plot"><span class="header-section-number">10.2.2</span> Line Plot</a></li>
+  <li><a href="#installation-of-matplotlib" id="toc-installation-of-matplotlib" class="nav-link" data-scroll-target="#installation-of-matplotlib"><span class="header-section-number">9.2.1</span> Installation of <code>Matplotlib</code></a></li>
+  <li><a href="#line-plot" id="toc-line-plot" class="nav-link" data-scroll-target="#line-plot"><span class="header-section-number">9.2.2</span> Line Plot</a></li>
   </ul></li>
-  <li><a href="#example-with-rodent-data" id="toc-example-with-rodent-data" class="nav-link" data-scroll-target="#example-with-rodent-data"><span class="header-section-number">10.3</span> Example with rodent data:</a>
+  <li><a href="#example-with-rodent-data" id="toc-example-with-rodent-data" class="nav-link" data-scroll-target="#example-with-rodent-data"><span class="header-section-number">9.3</span> Example with rodent data:</a>
   <ul class="collapse">
-  <li><a href="#scatter-plot" id="toc-scatter-plot" class="nav-link" data-scroll-target="#scatter-plot"><span class="header-section-number">10.3.1</span> Scatter plot</a></li>
-  <li><a href="#bar-plot" id="toc-bar-plot" class="nav-link" data-scroll-target="#bar-plot"><span class="header-section-number">10.3.2</span> Bar Plot</a></li>
-  <li><a href="#multiple-plots-using-subplots-submodule" id="toc-multiple-plots-using-subplots-submodule" class="nav-link" data-scroll-target="#multiple-plots-using-subplots-submodule"><span class="header-section-number">10.3.3</span> Multiple plots using <code>subplots</code> submodule</a></li>
-  <li><a href="#save-the-files" id="toc-save-the-files" class="nav-link" data-scroll-target="#save-the-files"><span class="header-section-number">10.3.4</span> Save the files</a></li>
+  <li><a href="#scatter-plot" id="toc-scatter-plot" class="nav-link" data-scroll-target="#scatter-plot"><span class="header-section-number">9.3.1</span> Scatter plot</a></li>
+  <li><a href="#bar-plot" id="toc-bar-plot" class="nav-link" data-scroll-target="#bar-plot"><span class="header-section-number">9.3.2</span> Bar Plot</a></li>
+  <li><a href="#multiple-plots-using-subplots-submodule" id="toc-multiple-plots-using-subplots-submodule" class="nav-link" data-scroll-target="#multiple-plots-using-subplots-submodule"><span class="header-section-number">9.3.3</span> Multiple plots using <code>subplots</code> submodule</a></li>
+  <li><a href="#save-the-files" id="toc-save-the-files" class="nav-link" data-scroll-target="#save-the-files"><span class="header-section-number">9.3.4</span> Save the files</a></li>
   </ul></li>
-  <li><a href="#pandas" id="toc-pandas" class="nav-link" data-scroll-target="#pandas"><span class="header-section-number">10.4</span> Pandas</a>
+  <li><a href="#pandas" id="toc-pandas" class="nav-link" data-scroll-target="#pandas"><span class="header-section-number">9.4</span> Pandas</a>
   <ul class="collapse">
-  <li><a href="#line-plot-1" id="toc-line-plot-1" class="nav-link" data-scroll-target="#line-plot-1"><span class="header-section-number">10.4.1</span> Line Plot</a></li>
-  <li><a href="#additional-arguments" id="toc-additional-arguments" class="nav-link" data-scroll-target="#additional-arguments"><span class="header-section-number">10.4.2</span> Additional arguments</a></li>
-  <li><a href="#bar-plot-1" id="toc-bar-plot-1" class="nav-link" data-scroll-target="#bar-plot-1"><span class="header-section-number">10.4.3</span> Bar Plot</a></li>
-  <li><a href="#histogram-and-density-plots" id="toc-histogram-and-density-plots" class="nav-link" data-scroll-target="#histogram-and-density-plots"><span class="header-section-number">10.4.4</span> Histogram and Density Plots</a></li>
-  <li><a href="#scatter-plots" id="toc-scatter-plots" class="nav-link" data-scroll-target="#scatter-plots"><span class="header-section-number">10.4.5</span> Scatter Plots</a></li>
+  <li><a href="#line-plot-1" id="toc-line-plot-1" class="nav-link" data-scroll-target="#line-plot-1"><span class="header-section-number">9.4.1</span> Line Plot</a></li>
+  <li><a href="#additional-arguments" id="toc-additional-arguments" class="nav-link" data-scroll-target="#additional-arguments"><span class="header-section-number">9.4.2</span> Additional arguments</a></li>
+  <li><a href="#bar-plot-1" id="toc-bar-plot-1" class="nav-link" data-scroll-target="#bar-plot-1"><span class="header-section-number">9.4.3</span> Bar Plot</a></li>
+  <li><a href="#histogram-and-density-plots" id="toc-histogram-and-density-plots" class="nav-link" data-scroll-target="#histogram-and-density-plots"><span class="header-section-number">9.4.4</span> Histogram and Density Plots</a></li>
+  <li><a href="#scatter-plots" id="toc-scatter-plots" class="nav-link" data-scroll-target="#scatter-plots"><span class="header-section-number">9.4.5</span> Scatter Plots</a></li>
   </ul></li>
-  <li><a href="#seaborn" id="toc-seaborn" class="nav-link" data-scroll-target="#seaborn"><span class="header-section-number">10.5</span> Seaborn</a>
+  <li><a href="#seaborn" id="toc-seaborn" class="nav-link" data-scroll-target="#seaborn"><span class="header-section-number">9.5</span> Seaborn</a>
   <ul class="collapse">
-  <li><a href="#installation-of-seaborn" id="toc-installation-of-seaborn" class="nav-link" data-scroll-target="#installation-of-seaborn"><span class="header-section-number">10.5.1</span> Installation of <code>Seaborn</code></a></li>
-  <li><a href="#histogram-and-density-plots-1" id="toc-histogram-and-density-plots-1" class="nav-link" data-scroll-target="#histogram-and-density-plots-1"><span class="header-section-number">10.5.2</span> Histogram and Density Plots</a></li>
-  <li><a href="#scatter-plot-with-regression-line" id="toc-scatter-plot-with-regression-line" class="nav-link" data-scroll-target="#scatter-plot-with-regression-line"><span class="header-section-number">10.5.3</span> Scatter plot with Regression line</a></li>
-  <li><a href="#categorical-data" id="toc-categorical-data" class="nav-link" data-scroll-target="#categorical-data"><span class="header-section-number">10.5.4</span> Categorical Data</a></li>
+  <li><a href="#installation-of-seaborn" id="toc-installation-of-seaborn" class="nav-link" data-scroll-target="#installation-of-seaborn"><span class="header-section-number">9.5.1</span> Installation of <code>Seaborn</code></a></li>
+  <li><a href="#histogram-and-density-plots-1" id="toc-histogram-and-density-plots-1" class="nav-link" data-scroll-target="#histogram-and-density-plots-1"><span class="header-section-number">9.5.2</span> Histogram and Density Plots</a></li>
+  <li><a href="#scatter-plot-with-regression-line" id="toc-scatter-plot-with-regression-line" class="nav-link" data-scroll-target="#scatter-plot-with-regression-line"><span class="header-section-number">9.5.3</span> Scatter plot with Regression line</a></li>
+  <li><a href="#categorical-data" id="toc-categorical-data" class="nav-link" data-scroll-target="#categorical-data"><span class="header-section-number">9.5.4</span> Categorical Data</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">10.6</span> Conclusion</a></li>
-  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation"><span class="header-section-number">10.7</span> Citation</a></li>
-  <li><a href="#grammar-of-graphics-with-plotnine" id="toc-grammar-of-graphics-with-plotnine" class="nav-link" data-scroll-target="#grammar-of-graphics-with-plotnine"><span class="header-section-number">10.8</span> Grammar of Graphics with <code>Plotnine</code></a>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">9.6</span> Conclusion</a></li>
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation"><span class="header-section-number">9.7</span> Citation</a></li>
+  <li><a href="#grammar-of-graphics-with-plotnine" id="toc-grammar-of-graphics-with-plotnine" class="nav-link" data-scroll-target="#grammar-of-graphics-with-plotnine"><span class="header-section-number">9.8</span> Grammar of Graphics with <code>Plotnine</code></a>
   <ul class="collapse">
-  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1"><span class="header-section-number">10.8.1</span> Introduction</a></li>
-  <li><a href="#what-is-grammar-of-graphics" id="toc-what-is-grammar-of-graphics" class="nav-link" data-scroll-target="#what-is-grammar-of-graphics"><span class="header-section-number">10.8.2</span> What is Grammar of Graphics?</a></li>
-  <li><a href="#what-can-you-do-with-plotnine" id="toc-what-can-you-do-with-plotnine" class="nav-link" data-scroll-target="#what-can-you-do-with-plotnine"><span class="header-section-number">10.8.3</span> What can you do with <code>Plotnine</code>?</a></li>
-  <li><a href="#using-plotnine" id="toc-using-plotnine" class="nav-link" data-scroll-target="#using-plotnine"><span class="header-section-number">10.8.4</span> Using <code>Plotnine</code></a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">10.8.5</span> Resources</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">10.8.6</span> References</a></li>
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1"><span class="header-section-number">9.8.1</span> Introduction</a></li>
+  <li><a href="#what-is-grammar-of-graphics" id="toc-what-is-grammar-of-graphics" class="nav-link" data-scroll-target="#what-is-grammar-of-graphics"><span class="header-section-number">9.8.2</span> What is Grammar of Graphics?</a></li>
+  <li><a href="#what-can-you-do-with-plotnine" id="toc-what-can-you-do-with-plotnine" class="nav-link" data-scroll-target="#what-can-you-do-with-plotnine"><span class="header-section-number">9.8.3</span> What can you do with <code>Plotnine</code>?</a></li>
+  <li><a href="#using-plotnine" id="toc-using-plotnine" class="nav-link" data-scroll-target="#using-plotnine"><span class="header-section-number">9.8.4</span> Using <code>Plotnine</code></a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">9.8.5</span> Resources</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">9.8.6</span> References</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -275,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualization</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualization</span></h1>
 </div>
 
 
@@ -292,8 +298,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="data-visualization" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Data Visualization</h1>
+<section id="data-visualization" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Data Visualization</h1>
 <div id="cbb7db99" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -305,23 +311,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">10.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">9.1</span> Introduction</h2>
 <p>Hi Class, my name is Weijia Wu and I’m a senior double majored in Applied Math and Statistics. The following shows a basic concepts of data visulization in python.</p>
 </section>
-<section id="matplotlib" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="matplotlib"><span class="header-section-number">10.2</span> Matplotlib</h2>
+<section id="matplotlib" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="matplotlib"><span class="header-section-number">9.2</span> Matplotlib</h2>
 <p>Matplotlib is a desktop plotting package designed for plotting and arranging data visually in Python, usually in two-dimensional. It was created by Dr.&nbsp;John Hunter in 2003 as an alternative to Matlab to facilitate scientific computation and data visualization in Python.</p>
 <p>Matplotlib is widely used because of its simplicity and effectiveness.</p>
-<section id="installation-of-matplotlib" class="level3" data-number="10.2.1">
-<h3 data-number="10.2.1" class="anchored" data-anchor-id="installation-of-matplotlib"><span class="header-section-number">10.2.1</span> Installation of <code>Matplotlib</code></h3>
+<section id="installation-of-matplotlib" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="installation-of-matplotlib"><span class="header-section-number">9.2.1</span> Installation of <code>Matplotlib</code></h3>
 <p>The library can be installed by typing <code>pip install matplotlib</code> in your terminal</p>
 <pre><code>pip install matplotlib</code></pre>
 </section>
-<section id="line-plot" class="level3" data-number="10.2.2">
-<h3 data-number="10.2.2" class="anchored" data-anchor-id="line-plot"><span class="header-section-number">10.2.2</span> Line Plot</h3>
-<section id="single-plot-with-pyplot-submodule" class="level4" data-number="10.2.2.1">
-<h4 data-number="10.2.2.1" class="anchored" data-anchor-id="single-plot-with-pyplot-submodule"><span class="header-section-number">10.2.2.1</span> Single plot with <code>pyplot</code> submodule</h4>
+<section id="line-plot" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="line-plot"><span class="header-section-number">9.2.2</span> Line Plot</h3>
+<section id="single-plot-with-pyplot-submodule" class="level4" data-number="9.2.2.1">
+<h4 data-number="9.2.2.1" class="anchored" data-anchor-id="single-plot-with-pyplot-submodule"><span class="header-section-number">9.2.2.1</span> Single plot with <code>pyplot</code> submodule</h4>
 <p>Let’s Start with an sample Line Plot example:</p>
 <div id="3c4aedb0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">10</span>) </span>
@@ -342,8 +348,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="x-label-y-label-and-grid" class="level4" data-number="10.2.2.2">
-<h4 data-number="10.2.2.2" class="anchored" data-anchor-id="x-label-y-label-and-grid"><span class="header-section-number">10.2.2.2</span> x-label, y-label, and grid:</h4>
+<section id="x-label-y-label-and-grid" class="level4" data-number="9.2.2.2">
+<h4 data-number="9.2.2.2" class="anchored" data-anchor-id="x-label-y-label-and-grid"><span class="header-section-number">9.2.2.2</span> x-label, y-label, and grid:</h4>
 <div id="e216e5fd" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>)) </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -361,8 +367,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="add-legend" class="level4" data-number="10.2.2.3">
-<h4 data-number="10.2.2.3" class="anchored" data-anchor-id="add-legend"><span class="header-section-number">10.2.2.3</span> Add legend:</h4>
+<section id="add-legend" class="level4" data-number="9.2.2.3">
+<h4 data-number="9.2.2.3" class="anchored" data-anchor-id="add-legend"><span class="header-section-number">9.2.2.3</span> Add legend:</h4>
 <div id="8402b8e4" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>)) </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -710,8 +716,8 @@ legend(*args, **kwargs)
 </div>
 </div>
 </section>
-<section id="colors-markers-and-line-styles" class="level4" data-number="10.2.2.4">
-<h4 data-number="10.2.2.4" class="anchored" data-anchor-id="colors-markers-and-line-styles"><span class="header-section-number">10.2.2.4</span> Colors, Markers, and Line Styles</h4>
+<section id="colors-markers-and-line-styles" class="level4" data-number="9.2.2.4">
+<h4 data-number="9.2.2.4" class="anchored" data-anchor-id="colors-markers-and-line-styles"><span class="header-section-number">9.2.2.4</span> Colors, Markers, and Line Styles</h4>
 <p>If we want two plots in the same, we need to find a way to make the distinction between them.</p>
 <div id="2106b64e" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> [i<span class="op">**</span><span class="dv">3</span> <span class="cf">for</span> i <span class="kw">in</span> t]</span>
@@ -1031,8 +1037,8 @@ plot(*args, scalex=True, scaley=True, data=None, **kwargs)
 </section>
 </section>
 </section>
-<section id="example-with-rodent-data" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="example-with-rodent-data"><span class="header-section-number">10.3</span> Example with rodent data:</h2>
+<section id="example-with-rodent-data" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="example-with-rodent-data"><span class="header-section-number">9.3</span> Example with rodent data:</h2>
 <p>Let’s use our rodent data to demonstrate the Monthly Reported data:</p>
 <div id="2d8a30d2" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Created Date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Created Date'</span>])</span>
@@ -1058,8 +1064,8 @@ plot(*args, scalex=True, scaley=True, data=None, **kwargs)
 </div>
 </div>
 <p>This plot shows the number of rodents in each month’s report, and we can draw the following conclusions: rodent sights occur mostly in the spring and summer, and they fall dramatically after the start of autumn (post-August).</p>
-<section id="scatter-plot" class="level3" data-number="10.3.1">
-<h3 data-number="10.3.1" class="anchored" data-anchor-id="scatter-plot"><span class="header-section-number">10.3.1</span> Scatter plot</h3>
+<section id="scatter-plot" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="scatter-plot"><span class="header-section-number">9.3.1</span> Scatter plot</h3>
 <div id="9efda34e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">8465</span>)<span class="op">;</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1081,8 +1087,8 @@ plot(*args, scalex=True, scaley=True, data=None, **kwargs)
 </div>
 </div>
 </section>
-<section id="bar-plot" class="level3" data-number="10.3.2">
-<h3 data-number="10.3.2" class="anchored" data-anchor-id="bar-plot"><span class="header-section-number">10.3.2</span> Bar Plot</h3>
+<section id="bar-plot" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="bar-plot"><span class="header-section-number">9.3.2</span> Bar Plot</h3>
 <div id="c9c1deae" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>borough_counts <span class="op">=</span> df[<span class="st">'Borough'</span>].value_counts()</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1103,8 +1109,8 @@ plot(*args, scalex=True, scaley=True, data=None, **kwargs)
 </div>
 </div>
 </section>
-<section id="multiple-plots-using-subplots-submodule" class="level3" data-number="10.3.3">
-<h3 data-number="10.3.3" class="anchored" data-anchor-id="multiple-plots-using-subplots-submodule"><span class="header-section-number">10.3.3</span> Multiple plots using <code>subplots</code> submodule</h3>
+<section id="multiple-plots-using-subplots-submodule" class="level3" data-number="9.3.3">
+<h3 data-number="9.3.3" class="anchored" data-anchor-id="multiple-plots-using-subplots-submodule"><span class="header-section-number">9.3.3</span> Multiple plots using <code>subplots</code> submodule</h3>
 <div id="52f1a661" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Created Date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Created Date'</span>])</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> df[<span class="st">'Created Date'</span>].dt.date</span>
@@ -1145,8 +1151,8 @@ plot(*args, scalex=True, scaley=True, data=None, **kwargs)
 </div>
 </div>
 </section>
-<section id="save-the-files" class="level3" data-number="10.3.4">
-<h3 data-number="10.3.4" class="anchored" data-anchor-id="save-the-files"><span class="header-section-number">10.3.4</span> Save the files</h3>
+<section id="save-the-files" class="level3" data-number="9.3.4">
+<h3 data-number="9.3.4" class="anchored" data-anchor-id="save-the-files"><span class="header-section-number">9.3.4</span> Save the files</h3>
 <p><code>help(plt.savefig)</code>allows you to save the current figure created by Matplotlib to a file. You can specify the filename and various options to control the format, quality, and layout of the output file.</p>
 <div id="499258b9" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(plt.savefig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1265,13 +1271,13 @@ savefig(*args, **kwargs)
 </div>
 </section>
 </section>
-<section id="pandas" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="pandas"><span class="header-section-number">10.4</span> Pandas</h2>
+<section id="pandas" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="pandas"><span class="header-section-number">9.4</span> Pandas</h2>
 <p>Pandas plotting is built on top of Matplotlib, and one of its main benefits is that it allows you to generate plots with fewer lines of code directly from Pandas data structures like DataFrames and Series. This integration simplifies the process of visualizing data for analysis.</p>
-<section id="line-plot-1" class="level3" data-number="10.4.1">
-<h3 data-number="10.4.1" class="anchored" data-anchor-id="line-plot-1"><span class="header-section-number">10.4.1</span> Line Plot</h3>
-<section id="single-plot" class="level4" data-number="10.4.1.1">
-<h4 data-number="10.4.1.1" class="anchored" data-anchor-id="single-plot"><span class="header-section-number">10.4.1.1</span> Single plot</h4>
+<section id="line-plot-1" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="line-plot-1"><span class="header-section-number">9.4.1</span> Line Plot</h3>
+<section id="single-plot" class="level4" data-number="9.4.1.1">
+<h4 data-number="9.4.1.1" class="anchored" data-anchor-id="single-plot"><span class="header-section-number">9.4.1.1</span> Single plot</h4>
 <div id="750cae99" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>monthly_counts.plot(kind<span class="op">=</span><span class="st">'line'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1305,8 +1311,8 @@ savefig(*args, **kwargs)
 </div>
 </div>
 </section>
-<section id="multi-lineplot" class="level4" data-number="10.4.1.2">
-<h4 data-number="10.4.1.2" class="anchored" data-anchor-id="multi-lineplot"><span class="header-section-number">10.4.1.2</span> Multi-Lineplot</h4>
+<section id="multi-lineplot" class="level4" data-number="9.4.1.2">
+<h4 data-number="9.4.1.2" class="anchored" data-anchor-id="multi-lineplot"><span class="header-section-number">9.4.1.2</span> Multi-Lineplot</h4>
 <p>The following is showing several line plots in the same figure.</p>
 <div id="49799d1f" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>community_counts <span class="op">=</span> df[<span class="st">'Community Districts'</span>].value_counts().sort_index()</span>
@@ -1346,8 +1352,8 @@ savefig(*args, **kwargs)
 </div>
 </section>
 </section>
-<section id="additional-arguments" class="level3" data-number="10.4.2">
-<h3 data-number="10.4.2" class="anchored" data-anchor-id="additional-arguments"><span class="header-section-number">10.4.2</span> Additional arguments</h3>
+<section id="additional-arguments" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="additional-arguments"><span class="header-section-number">9.4.2</span> Additional arguments</h3>
 <p>For more info pleased check:</p>
 <div id="8456634d" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>[additional arguments](https:<span class="op">//</span>drive.google.com<span class="op">/</span><span class="bu">file</span><span class="op">/</span>d<span class="op">/</span><span class="ot">1j</span><span class="er">5T7_VMT1Nt4myukcmar0UMcZOHqurCk</span><span class="op">/</span>view?usp<span class="op">=</span>sharing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1648,14 +1654,14 @@ plot(*args, scalex=True, scaley=True, data=None, **kwargs)
 </div>
 </div>
 </section>
-<section id="bar-plot-1" class="level3" data-number="10.4.3">
-<h3 data-number="10.4.3" class="anchored" data-anchor-id="bar-plot-1"><span class="header-section-number">10.4.3</span> Bar Plot</h3>
+<section id="bar-plot-1" class="level3" data-number="9.4.3">
+<h3 data-number="9.4.3" class="anchored" data-anchor-id="bar-plot-1"><span class="header-section-number">9.4.3</span> Bar Plot</h3>
 <p>For categorical data, one of common visualization is the barplot.</p>
 <ul>
 <li>Generated using <code>df.plot.bar()</code> method, for horizontal version <code>df.plot.barh()</code>.</li>
 </ul>
-<section id="side-by-side-bar-plot" class="level4" data-number="10.4.3.1">
-<h4 data-number="10.4.3.1" class="anchored" data-anchor-id="side-by-side-bar-plot"><span class="header-section-number">10.4.3.1</span> Side-by-side Bar Plot:</h4>
+<section id="side-by-side-bar-plot" class="level4" data-number="9.4.3.1">
+<h4 data-number="9.4.3.1" class="anchored" data-anchor-id="side-by-side-bar-plot"><span class="header-section-number">9.4.3.1</span> Side-by-side Bar Plot:</h4>
 <p>Let’s use Borough and Location Type to generate a side-by-side bar plot, one horizontal and one vertical:</p>
 <div id="715e9917" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">8</span>))</span>
@@ -1685,8 +1691,8 @@ plot(*args, scalex=True, scaley=True, data=None, **kwargs)
 <li><code>ncols=2</code>means there will be 2 columns of subplots.</li>
 </ul>
 </section>
-<section id="grouped-bar-plot" class="level4" data-number="10.4.3.2">
-<h4 data-number="10.4.3.2" class="anchored" data-anchor-id="grouped-bar-plot"><span class="header-section-number">10.4.3.2</span> Grouped Bar Plot</h4>
+<section id="grouped-bar-plot" class="level4" data-number="9.4.3.2">
+<h4 data-number="9.4.3.2" class="anchored" data-anchor-id="grouped-bar-plot"><span class="header-section-number">9.4.3.2</span> Grouped Bar Plot</h4>
 <p>This type of plot is useful for comparing the distribution within each class side by side.</p>
 <div id="9972cd32" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>class_Borough <span class="op">=</span> pd.crosstab(df[<span class="st">"Borough"</span>], df[<span class="st">"Status"</span>])</span>
@@ -1701,8 +1707,8 @@ plot(*args, scalex=True, scaley=True, data=None, **kwargs)
 </div>
 </div>
 </section>
-<section id="stacked-bar-plot" class="level4" data-number="10.4.3.3">
-<h4 data-number="10.4.3.3" class="anchored" data-anchor-id="stacked-bar-plot"><span class="header-section-number">10.4.3.3</span> Stacked Bar Plot</h4>
+<section id="stacked-bar-plot" class="level4" data-number="9.4.3.3">
+<h4 data-number="9.4.3.3" class="anchored" data-anchor-id="stacked-bar-plot"><span class="header-section-number">9.4.3.3</span> Stacked Bar Plot</h4>
 <p>This plot is useful for comparing the total counts across borough while still being able to see the proportion of each borough within each class.</p>
 <div id="80de6421" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>class_Borough.plot.bar(stacked<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1716,8 +1722,8 @@ plot(*args, scalex=True, scaley=True, data=None, **kwargs)
 </div>
 </section>
 </section>
-<section id="histogram-and-density-plots" class="level3" data-number="10.4.4">
-<h3 data-number="10.4.4" class="anchored" data-anchor-id="histogram-and-density-plots"><span class="header-section-number">10.4.4</span> Histogram and Density Plots</h3>
+<section id="histogram-and-density-plots" class="level3" data-number="9.4.4">
+<h3 data-number="9.4.4" class="anchored" data-anchor-id="histogram-and-density-plots"><span class="header-section-number">9.4.4</span> Histogram and Density Plots</h3>
 <p>For numeric data, histogram allows us to see the distribution (center shape, skewness) of the data.</p>
 <p>Histogram can be generated using <code>df.plot.hist()</code> method</p>
 <p>Since we have limited numeric data in our rodent data, I used another data to present it:</p>
@@ -1747,8 +1753,8 @@ plot(*args, scalex=True, scaley=True, data=None, **kwargs)
 </div>
 </div>
 </section>
-<section id="scatter-plots" class="level3" data-number="10.4.5">
-<h3 data-number="10.4.5" class="anchored" data-anchor-id="scatter-plots"><span class="header-section-number">10.4.5</span> Scatter Plots</h3>
+<section id="scatter-plots" class="level3" data-number="9.4.5">
+<h3 data-number="9.4.5" class="anchored" data-anchor-id="scatter-plots"><span class="header-section-number">9.4.5</span> Scatter Plots</h3>
 <p>When dealing with two variables, scatter plot allow us to examine if there is any correlation between them.</p>
 <p>Scatter can be generated using <code>df.plot.scatter(x = col1, y = col2)</code> method.</p>
 <div id="f1b56a5d" class="cell" data-execution_count="27">
@@ -1768,19 +1774,19 @@ plot(*args, scalex=True, scaley=True, data=None, **kwargs)
 <p>As you can see it’s roughly a linear regression, and I’ll cover how to add a regression line in the next sns section.</p>
 </section>
 </section>
-<section id="seaborn" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="seaborn"><span class="header-section-number">10.5</span> Seaborn</h2>
+<section id="seaborn" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="seaborn"><span class="header-section-number">9.5</span> Seaborn</h2>
 <ul>
 <li><p>Seaborn is designed to work directly with pandas DataFrames, making plotting more convenient by allowing direct use of DataFrame columns for specifying data in plots.</p></li>
 <li><p>Seaborn makes it easy to add linear regression lines and other statistical models to your charts, simplifying the process of statistical data visualization.</p></li>
 <li><p>Seaborn’s default styles and color are more aesthetically pleasing and modern compared to Matplotlib.</p></li>
 </ul>
-<section id="installation-of-seaborn" class="level3" data-number="10.5.1">
-<h3 data-number="10.5.1" class="anchored" data-anchor-id="installation-of-seaborn"><span class="header-section-number">10.5.1</span> Installation of <code>Seaborn</code></h3>
+<section id="installation-of-seaborn" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="installation-of-seaborn"><span class="header-section-number">9.5.1</span> Installation of <code>Seaborn</code></h3>
 <pre><code>pip install seaborn</code></pre>
 </section>
-<section id="histogram-and-density-plots-1" class="level3" data-number="10.5.2">
-<h3 data-number="10.5.2" class="anchored" data-anchor-id="histogram-and-density-plots-1"><span class="header-section-number">10.5.2</span> Histogram and Density Plots</h3>
+<section id="histogram-and-density-plots-1" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="histogram-and-density-plots-1"><span class="header-section-number">9.5.2</span> Histogram and Density Plots</h3>
 <div id="b7dfb8b8" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(sns.histplot) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1964,8 +1970,8 @@ histplot(data=None, *, x=None, y=None, hue=None, weights=None, stat='count', bin
 </div>
 <p><code>bins</code>: The number of bars in the histogram. More bins can make the data distribution more detailed, but too many may cause the chart to be difficult to understand; fewer bins may not be able to show the data distribution accurately. <code>kde</code>: (Kernel Density Estimate Line) a density curve will be added to the histogram, which is generated by kernel density estimation and can help understand the shape of the data distribution</p>
 </section>
-<section id="scatter-plot-with-regression-line" class="level3" data-number="10.5.3">
-<h3 data-number="10.5.3" class="anchored" data-anchor-id="scatter-plot-with-regression-line"><span class="header-section-number">10.5.3</span> Scatter plot with Regression line</h3>
+<section id="scatter-plot-with-regression-line" class="level3" data-number="9.5.3">
+<h3 data-number="9.5.3" class="anchored" data-anchor-id="scatter-plot-with-regression-line"><span class="header-section-number">9.5.3</span> Scatter plot with Regression line</h3>
 <p>I used an example with less data to be able to show it. We can see that the height and weight of the students are directly proportional.</p>
 <div id="8d7f2000" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df4 <span class="op">=</span> pd.DataFrame({</span>
@@ -1984,10 +1990,10 @@ histplot(data=None, *, x=None, y=None, hue=None, weights=None, stat='count', bin
 </div>
 </div>
 </section>
-<section id="categorical-data" class="level3" data-number="10.5.4">
-<h3 data-number="10.5.4" class="anchored" data-anchor-id="categorical-data"><span class="header-section-number">10.5.4</span> Categorical Data</h3>
-<section id="barplot" class="level4" data-number="10.5.4.1">
-<h4 data-number="10.5.4.1" class="anchored" data-anchor-id="barplot"><span class="header-section-number">10.5.4.1</span> barplot</h4>
+<section id="categorical-data" class="level3" data-number="9.5.4">
+<h3 data-number="9.5.4" class="anchored" data-anchor-id="categorical-data"><span class="header-section-number">9.5.4</span> Categorical Data</h3>
+<section id="barplot" class="level4" data-number="9.5.4.1">
+<h4 data-number="9.5.4.1" class="anchored" data-anchor-id="barplot"><span class="header-section-number">9.5.4.1</span> barplot</h4>
 <div id="7f7b5657" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">0</span>) </span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>genders <span class="op">=</span> np.random.choice([<span class="st">'Male'</span>, <span class="st">'Female'</span>], size<span class="op">=</span><span class="dv">500</span>)</span>
@@ -2015,8 +2021,8 @@ histplot(data=None, *, x=None, y=None, hue=None, weights=None, stat='count', bin
 <li><p><code>height</code>=5: Sets the height of each subplot to 5 inches.</p></li>
 </ul>
 </section>
-<section id="box-plot" class="level4" data-number="10.5.4.2">
-<h4 data-number="10.5.4.2" class="anchored" data-anchor-id="box-plot"><span class="header-section-number">10.5.4.2</span> Box Plot</h4>
+<section id="box-plot" class="level4" data-number="9.5.4.2">
+<h4 data-number="9.5.4.2" class="anchored" data-anchor-id="box-plot"><span class="header-section-number">9.5.4.2</span> Box Plot</h4>
 <div id="3a73d80a" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This chunk does not work</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>sns.catplot(x<span class="op">=</span><span class="st">'Gender'</span>, y<span class="op">=</span><span class="st">'Grades'</span>, col<span class="op">=</span><span class="st">'Class'</span>, data<span class="op">=</span>df4, kind<span class="op">=</span><span class="st">'box'</span>, height <span class="op">=</span> <span class="dv">10</span>, col_wrap<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2034,8 +2040,8 @@ histplot(data=None, *, x=None, y=None, hue=None, weights=None, stat='count', bin
 <li><p><code>col='Class'</code>: Creates separate subplots for each unique value in the ‘Class’ column, effectively grouping the data by class.</p></li>
 </ul>
 </section>
-<section id="categorical-data-help" class="level4" data-number="10.5.4.3">
-<h4 data-number="10.5.4.3" class="anchored" data-anchor-id="categorical-data-help"><span class="header-section-number">10.5.4.3</span> Categorical Data Help</h4>
+<section id="categorical-data-help" class="level4" data-number="9.5.4.3">
+<h4 data-number="9.5.4.3" class="anchored" data-anchor-id="categorical-data-help"><span class="header-section-number">9.5.4.3</span> Categorical Data Help</h4>
 <div id="9d94aeda" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(sns.catplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2196,12 +2202,12 @@ catplot(data=None, *, x=None, y=None, hue=None, row=None, col=None, kind='strip'
 </section>
 </section>
 </section>
-<section id="conclusion" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">10.6</span> Conclusion</h2>
+<section id="conclusion" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">9.6</span> Conclusion</h2>
 <p><code>Matplotlib</code> is the foundation for making plots in Python. <code>pandas</code> uses Matplotlib for its plotting features but is mainly for handling data. <code>Seaborn</code> makes Matplotlib prettier and easier to use, especially with pandas data.</p>
 </section>
-<section id="citation" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="citation"><span class="header-section-number">10.7</span> Citation</h2>
+<section id="citation" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="citation"><span class="header-section-number">9.7</span> Citation</h2>
 <ul>
 <li>https://matplotlib.org/stable/users/project/history.html</li>
 <li>https://matplotlib.org/stable/gallery/lines_bars_and_markers/simple_plot.html</li>
@@ -2212,15 +2218,15 @@ catplot(data=None, *, x=None, y=None, hue=None, row=None, col=None, kind='strip'
 <li>https://ritza.co/articles/matplotlib-vs-seaborn-vs-plotly-vs-MATLAB-vs-ggplot2-vs-pandas/</li>
 </ul>
 </section>
-<section id="grammar-of-graphics-with-plotnine" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="grammar-of-graphics-with-plotnine"><span class="header-section-number">10.8</span> Grammar of Graphics with <code>Plotnine</code></h2>
+<section id="grammar-of-graphics-with-plotnine" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="grammar-of-graphics-with-plotnine"><span class="header-section-number">9.8</span> Grammar of Graphics with <code>Plotnine</code></h2>
 <p>This section was written by Olivia Massad.</p>
-<section id="introduction-1" class="level3" data-number="10.8.1">
-<h3 data-number="10.8.1" class="anchored" data-anchor-id="introduction-1"><span class="header-section-number">10.8.1</span> Introduction</h3>
+<section id="introduction-1" class="level3" data-number="9.8.1">
+<h3 data-number="9.8.1" class="anchored" data-anchor-id="introduction-1"><span class="header-section-number">9.8.1</span> Introduction</h3>
 <p>Hello everyone! My name is Olivia Massad and I am a junior Statistical Data Science Major. I am very interested in sports statistics and analytics, especially involving football, and am very excited to learn more about coding and data science in this class. Today I will be talking about grammar of graphics for python, using <code>Plotnine</code>. This is a new topic for me so I am very excited to show you all what we can do with it.</p>
 </section>
-<section id="what-is-grammar-of-graphics" class="level3" data-number="10.8.2">
-<h3 data-number="10.8.2" class="anchored" data-anchor-id="what-is-grammar-of-graphics"><span class="header-section-number">10.8.2</span> What is Grammar of Graphics?</h3>
+<section id="what-is-grammar-of-graphics" class="level3" data-number="9.8.2">
+<h3 data-number="9.8.2" class="anchored" data-anchor-id="what-is-grammar-of-graphics"><span class="header-section-number">9.8.2</span> What is Grammar of Graphics?</h3>
 <p>Similarly to how languages have grammar in order to structure language and create a standard for how sentences and words should be arranged, grammar of graphics provides the framework for a consistent way to structure and create statistical visualizations. This framework helps us to create graphs and visualizations which can be widely understood due to the consistent structure. The major components of grammar of graphics are:</p>
 <ul>
 <li><p>Data: our datasets and the what components you want to visualize.</p></li>
@@ -2232,8 +2238,8 @@ catplot(data=None, *, x=None, y=None, hue=None, row=None, col=None, kind='strip'
 <li><p>Coordinate system: cartesian or polar.</p></li>
 </ul>
 </section>
-<section id="what-can-you-do-with-plotnine" class="level3" data-number="10.8.3">
-<h3 data-number="10.8.3" class="anchored" data-anchor-id="what-can-you-do-with-plotnine"><span class="header-section-number">10.8.3</span> What can you do with <code>Plotnine</code>?</h3>
+<section id="what-can-you-do-with-plotnine" class="level3" data-number="9.8.3">
+<h3 data-number="9.8.3" class="anchored" data-anchor-id="what-can-you-do-with-plotnine"><span class="header-section-number">9.8.3</span> What can you do with <code>Plotnine</code>?</h3>
 <p><code>Plotnine</code> is a program which implements grammar of graphics in order to create data visualizations and graphs using python. It is based on <code>ggplot2</code> and allows for many variations within graphs. Some examples of things we can create with <code>plotnine</code> are:</p>
 <ul>
 <li>Bar Charts</li>
@@ -2246,8 +2252,8 @@ catplot(data=None, *, x=None, y=None, hue=None, row=None, col=None, kind='strip'
 <li>etc.</li>
 </ul>
 </section>
-<section id="using-plotnine" class="level3" data-number="10.8.4">
-<h3 data-number="10.8.4" class="anchored" data-anchor-id="using-plotnine"><span class="header-section-number">10.8.4</span> Using <code>Plotnine</code></h3>
+<section id="using-plotnine" class="level3" data-number="9.8.4">
+<h3 data-number="9.8.4" class="anchored" data-anchor-id="using-plotnine"><span class="header-section-number">9.8.4</span> Using <code>Plotnine</code></h3>
 <p>In order to use <code>plotnine</code> we first need to install the package using our command line.</p>
 <p>With <code>conda</code>: “conda install -c conda-forge plotnine”</p>
 <p>With <code>pip</code>: “pip install plotnine pip install plotnine[all]”</p>
@@ -2269,8 +2275,8 @@ catplot(data=None, *, x=None, y=None, hue=None, row=None, col=None, kind='strip'
 <span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_feather(path)</span>
 <span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>data_used <span class="op">=</span> data.head(<span class="dv">500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="bar-chart" class="level4" data-number="10.8.4.1">
-<h4 data-number="10.8.4.1" class="anchored" data-anchor-id="bar-chart"><span class="header-section-number">10.8.4.1</span> Bar Chart</h4>
+<section id="bar-chart" class="level4" data-number="9.8.4.1">
+<h4 data-number="9.8.4.1" class="anchored" data-anchor-id="bar-chart"><span class="header-section-number">9.8.4.1</span> Bar Chart</h4>
 <p>One common type of visualization we can create with <code>plotnine</code> is a bar chart. For this graph we will look at the data for the descriptors of each complaint.</p>
 <div id="2fb9ba99" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x <span class="op">=</span> <span class="st">'descriptor'</span>)) </span>
@@ -2331,8 +2337,8 @@ catplot(data=None, *, x=None, y=None, hue=None, row=None, col=None, kind='strip'
 </div>
 </div>
 </section>
-<section id="scatter-plot-1" class="level4" data-number="10.8.4.2">
-<h4 data-number="10.8.4.2" class="anchored" data-anchor-id="scatter-plot-1"><span class="header-section-number">10.8.4.2</span> Scatter Plot</h4>
+<section id="scatter-plot-1" class="level4" data-number="9.8.4.2">
+<h4 data-number="9.8.4.2" class="anchored" data-anchor-id="scatter-plot-1"><span class="header-section-number">9.8.4.2</span> Scatter Plot</h4>
 <p>Another common visualization we can create is a scatterplot. When looking at the data from the 311 requests, we can see that there are many data points for locations of these complaints. A scatter plot would be a great way to see the location of the complaints by graphing the longitudes and latitudes. In order to better see the points, for this graph we will only use the first 200 complaints.</p>
 <div id="93385c76" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>data_scatter <span class="op">=</span> data.tail(<span class="dv">200</span>)</span>
@@ -2412,8 +2418,8 @@ catplot(data=None, *, x=None, y=None, hue=None, row=None, col=None, kind='strip'
 </div>
 </div>
 </section>
-<section id="histogram" class="level4" data-number="10.8.4.3">
-<h4 data-number="10.8.4.3" class="anchored" data-anchor-id="histogram"><span class="header-section-number">10.8.4.3</span> Histogram</h4>
+<section id="histogram" class="level4" data-number="9.8.4.3">
+<h4 data-number="9.8.4.3" class="anchored" data-anchor-id="histogram"><span class="header-section-number">9.8.4.3</span> Histogram</h4>
 <p>The last common graph we will cover using <code>plotnine</code> is a histogram. Here we will use the created date data as a continuous variable. Using <code>plotnine</code> we are able to make many of the same personalizations we were able to do with bar charts.</p>
 <div id="41e1d10b" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>data_used[<span class="st">'created_date'</span>]<span class="op">=</span>pd.to_datetime(</span>
@@ -2493,8 +2499,8 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 </section>
-<section id="density-plot" class="level4" data-number="10.8.4.4">
-<h4 data-number="10.8.4.4" class="anchored" data-anchor-id="density-plot"><span class="header-section-number">10.8.4.4</span> Density Plot</h4>
+<section id="density-plot" class="level4" data-number="9.8.4.4">
+<h4 data-number="9.8.4.4" class="anchored" data-anchor-id="density-plot"><span class="header-section-number">9.8.4.4</span> Density Plot</h4>
 <p>The last visualization we’re going to look at is density plots. While less common than the graphs previously discussed, density plots show the distribution of a specific variable.</p>
 <div id="4dd7ffa1" class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>))</span>
@@ -2546,14 +2552,14 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </section>
 </section>
-<section id="resources" class="level3" data-number="10.8.5">
-<h3 data-number="10.8.5" class="anchored" data-anchor-id="resources"><span class="header-section-number">10.8.5</span> Resources</h3>
+<section id="resources" class="level3" data-number="9.8.5">
+<h3 data-number="9.8.5" class="anchored" data-anchor-id="resources"><span class="header-section-number">9.8.5</span> Resources</h3>
 <ul>
 <li><a href="https://plotnine.readthedocs.io/en/v0.12.4/gallery.html" class="uri">https://plotnine.readthedocs.io/en/v0.12.4/gallery.html</a></li>
 </ul>
 </section>
-<section id="references" class="level3" data-number="10.8.6">
-<h3 data-number="10.8.6" class="anchored" data-anchor-id="references"><span class="header-section-number">10.8.6</span> References</h3>
+<section id="references" class="level3" data-number="9.8.6">
+<h3 data-number="9.8.6" class="anchored" data-anchor-id="references"><span class="header-section-number">9.8.6</span> References</h3>
 <ul>
 <li><p>“Plotnine.Geoms.Geom_bar¶.” Plotnine.Geoms.Geom_bar - Plotnine Commit: D1f7dbf Documentation, plotnine.readthedocs.io/en/stable/generated/ plotnine.geoms.geom_bar.html. Accessed 13 Feb.&nbsp;2024.</p></li>
 <li><p>“Plotnine.Geoms.Geom_density¶.” Plotnine.Geoms.Geom_density - Plotnine Commit: D1f7dbf Documentation, plotnine.readthedocs.io/en/ stable/generated/plotnine.geoms.geom_density.html. Accessed 17 Feb.&nbsp;2024.</p></li>
@@ -2958,13 +2964,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./statsmod.html" class="pagination-link  aria-label=" &lt;span="" models&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical Models</span></span>
+      <a href="./eda.html" class="pagination-link  aria-label=" &lt;span="" data="" analysis&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./exercises.html" class="pagination-link" aria-label="<span class='chapter-number'>10</span>&nbsp; <span class='chapter-title'>Exercises</span>">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exercises</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./statsmod.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>Statistical Models</span>">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistical Models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

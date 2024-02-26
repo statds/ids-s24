@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science - 2&nbsp; Project Management</title>
+<title>Introduction to Data Science - 10&nbsp; Supervised Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./quarto.html" rel="next">
-<link href="./intro.html" rel="prev">
+<link href="./exercises.html" rel="next">
+<link href="./statsmod.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./git.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project Management</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./supervised.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised Learning</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -123,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git.html" class="sidebar-item-text sidebar-link active">
+  <a href="./git.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project Management</span></span></a>
   </div>
 </li>
@@ -171,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./supervised.html" class="sidebar-item-text sidebar-link">
+  <a href="./supervised.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
@@ -197,10 +197,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#set-up" id="toc-set-up" class="nav-link active" data-scroll-target="#set-up"><span class="header-section-number">2.1</span> Set Up</a></li>
-  <li><a href="#most-frequently-used-git-commands" id="toc-most-frequently-used-git-commands" class="nav-link" data-scroll-target="#most-frequently-used-git-commands"><span class="header-section-number">2.2</span> Most Frequently Used Git Commands</a></li>
-  <li><a href="#tips-on-using-git" id="toc-tips-on-using-git" class="nav-link" data-scroll-target="#tips-on-using-git"><span class="header-section-number">2.3</span> Tips on using Git:</a></li>
-  <li><a href="#pull-request" id="toc-pull-request" class="nav-link" data-scroll-target="#pull-request"><span class="header-section-number">2.4</span> Pull Request</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">10.1</span> Introduction</a></li>
+  <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="header-section-number">10.2</span> Decision Trees</a></li>
   </ul>
 </nav>
     </div>
@@ -209,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-git" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project Management</span></span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised Learning</span></h1>
 </div>
 
 
@@ -226,49 +224,25 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Many tutorials are available in different formats. Here is a <a href="https://www.youtube.com/watch?v=RGOj5yH7evk">YouTube video ``Git and GitHub for Beginners — Crash Course’’</a>. The video also covers GitHub, a cloud service for Git which provides a cloud back up of your work and makes collaboration with co-workers easy. Similar services are, for example, <a href="bitbucket.org">bitbucket</a> and <a href="gitlab.com">GitLab</a>.</p>
-<p>Here is a collection of <a href="https://gitexercises.fracz.com">online Git exersices</a> that I used for Git training in other courses that I taught.</p>
-<section id="set-up" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="set-up"><span class="header-section-number">2.1</span> Set Up</h2>
-<p>To set up GitHub (other services like Bitbucket or GitLab are similar), you need to</p>
+<section id="introduction" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">10.1</span> Introduction</h2>
+<p>Supervised and unsupervised learning represent two core approaches in the field of machine learning, each with distinct methodologies, applications, and goals. Understanding the differences and applicabilities of these learning paradigms is fundamental for anyone venturing into data science and machine learning.</p>
 <ul>
-<li>Generate an SSH key if you don’t have one already.</li>
-<li>Sign up an GitHub account.</li>
-<li>Add the SSH key to your GitHub account</li>
+<li><p><strong>Supervised Learning</strong> Supervised learning is characterized by its use of labeled datasets to train algorithms. In this paradigm, the model is trained on a pre-defined set of training examples, which include an input and the corresponding output. The goal of supervised learning is to learn a mapping from inputs to outputs, enabling the model to make predictions or decisions based on new, unseen data. This approach is widely used in applications such as spam detection, image recognition, and predicting consumer behavior. Supervised learning is further divided into two main categories: regression, where the output is continuous, and classification, where the output is categorical.</p></li>
+<li><p><strong>Unsupervised Learning</strong> In contrast, unsupervised learning involves working with datasets without labeled responses. The aim here is to uncover hidden patterns, correlations, or structures from input data without the guidance of an explicit output variable. Unsupervised learning algorithms are adept at clustering, dimensionality reduction, and association tasks. They are invaluable in exploratory data analysis, customer segmentation, and anomaly detection, where the structure of the data is unknown, and the goal is to derive insights directly from the data itself.</p></li>
 </ul>
-</section>
-<section id="most-frequently-used-git-commands" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="most-frequently-used-git-commands"><span class="header-section-number">2.2</span> Most Frequently Used Git Commands</h2>
+<p>The key difference between supervised and unsupervised learning lies in the presence or absence of labeled output data. Supervised learning depends on known outputs to train the model, making it suitable for predictive tasks where the relationship between the input and output is clear. Unsupervised learning, however, thrives on discovering the intrinsic structure of data, making it ideal for exploratory analysis and understanding complex data dynamics without predefined labels.</p>
+<p>Both supervised and unsupervised learning have their place in the machine learning ecosystem, often complementing each other in comprehensive data analysis and modeling projects. While supervised learning allows for precise predictions and classifications, unsupervised learning offers deep insights and uncovers underlying patterns that might not be immediately apparent.</p>
+<p>The main tasks in supervised learning can broadly be categorized into two types: classification and regression. Each task utilizes algorithms to interpret the input data and make predictions or decisions based on that data.</p>
 <ul>
-<li><code>git clone</code></li>
-<li><code>git pull</code></li>
-<li><code>git status</code></li>
-<li><code>git add</code></li>
-<li><code>git remove</code></li>
-<li><code>git commit</code></li>
-<li><code>git push</code></li>
+<li><p><strong>Classification</strong> Classification tasks involve categorizing data into predefined classes or groups. In these tasks, the output variable is categorical, such as “spam” or “not spam” in email filtering, or “malignant” or “benign” in tumor diagnosis. The aim is to accurately assign new, unseen instances to one of the categories based on the learning from the training dataset. Classification can be binary, involving two classes, or multiclass, involving more than two classes. Common algorithms used for classification include Logistic Regression, Decision Trees, Support Vector Machines, and Neural Networks.</p></li>
+<li><p><strong>Regression</strong> Regression tasks predict a continuous quantity. Unlike classification, where the outcomes are discrete labels, regression models predict a numeric value. Examples of regression tasks include predicting the price of a house based on its features, forecasting stock prices, or estimating the age of a person from a photograph. The goal is to find the relationship or correlation between the input features and the continuous output variable. Linear regression is the most basic form of regression, but there are more complex models like Polynomial Regression, Ridge Regression, Lasso Regression, and Regression Trees.</p></li>
 </ul>
+<p>Both classification and regression are foundational to supervised learning, addressing different types of predictive modeling problems. Classification is used when the output is a category, while regression is used when the output is a numeric value. The choice between classification and regression depends on the nature of the target variable you are trying to predict. Supervised learning algorithms learn from labeled data, refining their models to minimize error and improve prediction accuracy on new, unseen data.</p>
+<!-- ## Decision Tree -->
 </section>
-<section id="tips-on-using-git" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="tips-on-using-git"><span class="header-section-number">2.3</span> Tips on using Git:</h2>
-<ul>
-<li>Use the command line interface instead of the web interface (e.g., upload on GitHub)</li>
-<li>Make frequent small commits instead of rare large commits.</li>
-<li>Make commit messages informative and meaningful.</li>
-<li>Name your files/folders by some reasonable convention.
-<ul>
-<li>Lower cases are better than upper cases.</li>
-<li>No blanks in file/folder names.</li>
-</ul></li>
-<li>Keep the repo clean by not tracking generated files.</li>
-<li>Creat a <code>.gitignore</code> file for better output from <code>git status</code>.</li>
-<li>Keep the linewidth of sources to under 80 for better <code>git diff</code> view.</li>
-</ul>
-</section>
-<section id="pull-request" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="pull-request"><span class="header-section-number">2.4</span> Pull Request</h2>
-<p>To contribute to an open source project (e.g., our classnotes), use pull requests. <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests">Pull requests</a> “let you tell others about changes you’ve pushed to a branch in a repository on GitHub. Once a pull request is opened, you can discuss and review the potential changes with collaborators and add follow-up commits before your changes are merged into the base branch.”</p>
-<p>Watch this YouTube video: <a href="https://youtu.be/8lGpZkjnkt4">GitHub pull requests in 100 seconds</a>.</p>
+<section id="decision-trees" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="decision-trees"><span class="header-section-number">10.2</span> Decision Trees</h2>
 
 
 </section>
@@ -663,13 +637,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./intro.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      <a href="./statsmod.html" class="pagination-link  aria-label=" &lt;span="" models&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistical Models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./quarto.html" class="pagination-link" aria-label="<span class='chapter-number'>3</span>&nbsp; <span class='chapter-title'>Reproducibile Data Science</span>">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reproducibile Data Science</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./exercises.html" class="pagination-link" aria-label="<span class='chapter-number'>11</span>&nbsp; <span class='chapter-title'>Exercises</span>">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Exercises</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science - 8&nbsp; Statistical Models</title>
+<title>Introduction to Data Science - 9&nbsp; Statistical Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./visualization.html" rel="next">
-<link href="./eda.html" rel="prev">
+<link href="./supervised.html" rel="next">
+<link href="./visualization.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -144,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./statsmod.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical Models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./statsmod.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistical Models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -222,20 +222,26 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./statsmod.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical Models</span></span></a>
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
+  <a href="./statsmod.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistical Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./supervised.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -254,14 +260,14 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">8.1</span> Introduction</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">9.1</span> Introduction</a>
   <ul class="collapse">
-  <li><a href="#installation-of-statsmodels" id="toc-installation-of-statsmodels" class="nav-link" data-scroll-target="#installation-of-statsmodels"><span class="header-section-number">8.1.1</span> Installation of <code>statsmodels</code></a></li>
-  <li><a href="#features-of-statsmodels" id="toc-features-of-statsmodels" class="nav-link" data-scroll-target="#features-of-statsmodels"><span class="header-section-number">8.1.2</span> Features of <code>statsmodels</code></a></li>
+  <li><a href="#installation-of-statsmodels" id="toc-installation-of-statsmodels" class="nav-link" data-scroll-target="#installation-of-statsmodels"><span class="header-section-number">9.1.1</span> Installation of <code>statsmodels</code></a></li>
+  <li><a href="#features-of-statsmodels" id="toc-features-of-statsmodels" class="nav-link" data-scroll-target="#features-of-statsmodels"><span class="header-section-number">9.1.2</span> Features of <code>statsmodels</code></a></li>
   </ul></li>
-  <li><a href="#generalized-linear-models" id="toc-generalized-linear-models" class="nav-link" data-scroll-target="#generalized-linear-models"><span class="header-section-number">8.2</span> Generalized Linear Models</a>
+  <li><a href="#generalized-linear-models" id="toc-generalized-linear-models" class="nav-link" data-scroll-target="#generalized-linear-models"><span class="header-section-number">9.2</span> Generalized Linear Models</a>
   <ul class="collapse">
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">8.2.1</span> Examples</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">9.2.1</span> Examples</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -271,7 +277,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical Models</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistical Models</span></h1>
 </div>
 
 
@@ -288,17 +294,17 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">8.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">9.1</span> Introduction</h2>
 <p>Statistical modeling is a cornerstone of data science, offering tools to understand complex relationships within data and to make predictions. Python, with its rich ecosystem for data analysis, features the <code>statsmodels</code> package— a comprehensive library designed for statistical modeling, tests, and data exploration. <code>statsmodels</code> stands out for its focus on classical statistical models and compatibility with the Python scientific stack (<code>numpy</code>, <code>scipy</code>, <code>pandas</code>).</p>
-<section id="installation-of-statsmodels" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="installation-of-statsmodels"><span class="header-section-number">8.1.1</span> Installation of <code>statsmodels</code></h3>
+<section id="installation-of-statsmodels" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="installation-of-statsmodels"><span class="header-section-number">9.1.1</span> Installation of <code>statsmodels</code></h3>
 <p>To start with statistical modeling, ensure <code>statsmodels</code> is installed:</p>
 <p>Using pip:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install statsmodels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="features-of-statsmodels" class="level3" data-number="8.1.2">
-<h3 data-number="8.1.2" class="anchored" data-anchor-id="features-of-statsmodels"><span class="header-section-number">8.1.2</span> Features of <code>statsmodels</code></h3>
+<section id="features-of-statsmodels" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="features-of-statsmodels"><span class="header-section-number">9.1.2</span> Features of <code>statsmodels</code></h3>
 <p>Package <code>statsmodels</code> offers a comprehensive range of statistical models and tests, making it a powerful tool for a wide array of data analysis tasks:</p>
 <ul>
 <li><p><strong>Linear Regression Models</strong>: Essential for predicting quantitative responses, these models form the backbone of many statistical analysis operations.</p></li>
@@ -310,8 +316,8 @@ window.Quarto = {
 <p>Integrating <code>statsmodels</code> into your data science workflow enriches your analytical capabilities, allowing for both exploratory data analysis and complex statistical modeling.</p>
 </section>
 </section>
-<section id="generalized-linear-models" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="generalized-linear-models"><span class="header-section-number">8.2</span> Generalized Linear Models</h2>
+<section id="generalized-linear-models" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="generalized-linear-models"><span class="header-section-number">9.2</span> Generalized Linear Models</h2>
 <p>Generalized Linear Models (GLM) extend the classical linear regression to accommodate response variables, that follow distributions other than the normal distribution. GLMs consist of three main components:</p>
 <ul>
 <li><strong>Random Component</strong>: This specifies the distribution of the response variable <span class="math inline">\(Y\)</span>. It is assumed to be from the exponential family of distributions, such as Binomial for binary data and Poisson for count data.</li>
@@ -346,8 +352,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 <p>Each GLM variant addresses specific types of data and research questions, enabling precise modeling and inference based on the underlying data distribution.</p>
-<section id="examples" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="examples"><span class="header-section-number">8.2.1</span> Examples</h3>
+<section id="examples" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="examples"><span class="header-section-number">9.2.1</span> Examples</h3>
 
 
 </section>
@@ -743,13 +749,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./eda.html" class="pagination-link  aria-label=" &lt;span="" data="" analysis&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span>
+      <a href="./visualization.html" class="pagination-link  aria-label=" &lt;span="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualization</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./visualization.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>Visualization</span>">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualization</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./supervised.html" class="pagination-link" aria-label="<span class='chapter-number'>10</span>&nbsp; <span class='chapter-title'>Supervised Learning</span>">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

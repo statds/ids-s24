@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jun Yan and Students in Spring 2024">
-<meta name="dcterms.date" content="2024-02-21">
+<meta name="dcterms.date" content="2024-02-26">
 
 <title>Introduction to Data Science</title>
 <style>
@@ -214,20 +214,26 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./statsmod.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical Models</span></span></a>
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
+  <a href="./statsmod.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistical Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./supervised.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -301,7 +307,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 21, 2024</p>
+      <p class="date">February 26, 2024</p>
     </div>
   </div>
   
@@ -450,7 +456,7 @@ div.csl-indent {
 <section id="presentation-orders" class="level2">
 <h2 class="anchored" data-anchor-id="presentation-orders">Presentation Orders</h2>
 <p>The topic presentation order is set up in class.</p>
-<div id="ffa8c2e2" class="cell" data-execution_count="1">
+<div id="2590b5cb" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'rosters/3255.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    ug <span class="op">=</span> [line.strip() <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'rosters/5255.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
@@ -546,74 +552,24 @@ div.csl-indent {
 <td>Data science communication skills</td>
 </tr>
 <tr class="even">
-<td>02/07</td>
-<td>Weijia Wu</td>
-<td></td>
-</tr>
-<tr class="odd">
 <td>02/12</td>
 <td>Dr.&nbsp;Haim Bar</td>
 <td>Database management</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>02/19</td>
 <td>Willam Taki</td>
-<td></td>
+<td>Visualization with MatPlotlib</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>02/19</td>
 <td>Joshua Lee</td>
 <td>Descriptive Statistics</td>
 </tr>
-<tr class="even">
-<td>02/21</td>
-<td>Pratham Patel</td>
-<td>Handling spatial data with <code>geopandas</code></td>
-</tr>
 <tr class="odd">
-<td>02/21</td>
-<td>Olivia Massad</td>
-<td>Grammar of Graphics <code>plotnine</code></td>
-</tr>
-<tr class="even">
-<td>02/26</td>
-<td>Ge Li</td>
-<td>Animation</td>
-</tr>
-<tr class="odd">
-<td>02/26</td>
-<td>Xingye Zhang</td>
-<td>Data visualizing NYC rodent dataset</td>
-</tr>
-<tr class="even">
-<td>02/28</td>
-<td>Jack Dennison</td>
-<td>Geographic Data Analysis</td>
-</tr>
-<tr class="odd">
-<td>02/28</td>
-<td>Isabelle Perez</td>
-<td>Statistical hypothesis tests <code>scypy.stats</code></td>
-</tr>
-<tr class="even">
-<td>03/04</td>
-<td>Emmanuel Yankson</td>
-<td>Random Forest</td>
-</tr>
-<tr class="odd">
-<td>03/04</td>
-<td>David Li</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>03/06</td>
-<td>Abigail Mori</td>
-<td>Handling spatial data with <code>geopandas</code></td>
-</tr>
-<tr class="odd">
-<td>03/06</td>
-<td>Leon Nguyen</td>
-<td>Statistical Modeling with <code>statsmodels</code></td>
+<td>02/07</td>
+<td>Weijia Wu</td>
+<td>Visualizaiton with <code>matplotlib</code> and ’seaborn<code>02/21  | Pratham Patel          | Handling spatial data with</code>geopandas<code>02/21  | Olivia Massad          | Grammar of Graphics</code>plotnine<code>02/26  | Ge Li                  | Animation   02/26  | Xingye Zhang           | Data visualizing NYC rodent dataset   02/28  | Jack Dennison          | Geographic Data Analysis   02/28  | Isabelle Perez         | Statistical hypothesis tests</code>scypy.stats<code>03/04  | Emmanuel Yankson       | Random Forest   03/04  | David Li               |   03/06  | Abigail Mori           | Handling spatial data with</code>geopandas<code>03/06  | Leon Nguyen            | Statistical Modeling with</code>statsmodels`</td>
 </tr>
 <tr class="even">
 <td>03/25</td>
@@ -772,7 +728,7 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="sub-topic-1">Sub Topic 1</h3>
 <p>Put materials on topic 1 here</p>
 <p>Python examples can be put into <code>python</code> code chunks:</p>
-<div id="6da41a6d" class="cell" data-execution_count="2">
+<div id="bfd25200" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># do something</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
