@@ -210,10 +210,10 @@ Please use the following table to sign up.
    Date  | Presenter              | Topic
   ------ | ---------------------- | ------
   02/07  | Matt Elliott           | Data science communication skills
-  02/07  | Weijia Wu              | 
   02/12  | Dr. Haim Bar           | Database management
-  02/19  | Willam Taki            |
+  02/19  | Willam Taki            | Visualization with MatPlotlib
   02/19  | Joshua Lee             | Descriptive Statistics
+  02/07  | Weijia Wu              | Visualizaiton with `matplotlib` and 'seaborn`
   02/21  | Pratham Patel          | Handling spatial data with `geopandas`
   02/21  | Olivia Massad          | Grammar of Graphics `plotnine`
   02/26  | Ge Li                  | Animation
