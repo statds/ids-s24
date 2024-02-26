@@ -158,20 +158,22 @@ Here's an example of fitting a simple linear regression model to the NYC rodent 
 
 
 ```{python}
+month_count_df = pd.crosstab(df['Created Month'], columns = 'count')
 
-### TO-DO: fix df['count']
-model = sm.OLS(df['count'], sm.add_constant(df['Created Year']))
-results = model.fit()
-print(results.summary())
+model = sm.OLS(month_count_df['count'], sm.add_constant(month_count_df['Created Month']))
+# results = model.fit()
+# print(results.summary())
 # Fits a linear regression model between count and year, with a constant term
 ```
 
-This will give us a summary of the regression coefficients including their standard error, t-statistics, and p-values. The output also includes
+This will give us a summary of the regression coefficients including their 
+standard error, t-statistics, and p-values. The output also includes
 
 Note that in addition to 'year', there's also a constant term included by           
 default. The `add_constant()` function from statsmodels helps us add this. 
 
-Let's demonstrate with an example using the Generalized Least Squares (GLS)      estimator:
+Let's demonstrate with an example using the Generalized Least Squares (GLS) 
+estimator:
 ```{python}
 model = sm.GLS.from_formula('mpg ~ cyl + hp', data=auto)
 results = model.fit()
@@ -179,6 +181,9 @@ print(results.summary())
 ```
 
 #### Generalized Linear Models
+
+We can use GLM when our response variable isn't continuous or when it's        
+binomially distributed. Using our NYC rodent dataset, we
 
 #### Time Series Analysis
 
