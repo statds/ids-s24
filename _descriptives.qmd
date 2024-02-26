@@ -1,0 +1,509 @@
+## Descriptive Statistics
+
+> Presented by Joshua Lee
+
+When you first begin working with a new dataset, it is important 
+to develop an understanding of the data's overall behavior. This
+is important for both understanding numerical and categorical 
+data. 
+
+For numeric data, we can develop this understanding through the use
+of **descriptive statistics**. The goal of descriptive statistics
+is to understand three primary elements of a given variable [2]:
+
++ **distribution**
++ **central tendency**
++ **variability**
+
+### Variable Distributions
+
+Every random variable is given by a **probability distribution**, 
+which is "a mathematical function that describes the probability of 
+different possible values of a variable" [3]. 
+
+There are a few common types of distributions which appear 
+frequently in real-world data [3]:
+
++ **Uniform**: 
++ **Poisson**:
++ **Binomial**:
++ **Normal and Standard Normal**:
++ **Gamma**: 
++ **Chi-squared**:
++ **Exponential**
++ **Beta**
++ **T-distribution**
++ **F-distribution**
+
+Understanding the distribution of different variables in a given 
+dataset can inform how we may decide to transform that data. 
+For example, in the context of the `rodent` data, we are interested
+in the patterns which are associated with "rodent" complaints which 
+occur. 
+
+```{python}
+import pandas as pd
+import numpy as np
+import plotly.express as px
+
+data = pd.read_feather("data/rodent_2022-2023.feather")
+```
+
+Now that we have read in the data, we can examine the distributions of 
+several important variables. Namely, let us examine a numerical 
+variable which is associated with rodent sightings: 
+
+```{python}
+data.head(2).T
+```
+
+In this dataset, the most relevant numerical data to consider is the 
+time between the opening of a rodent complaint and its closing. All
+of the other relevant variables are either geospatial or categorical:
+
+```{python}
+# convert strings into datetime objects
+data["closed_date"] =  pd.to_datetime(data["closed_date"],
+                                     format="%m/%d/%Y %I:%M:%S %p")
+data["created_date"] = pd.to_datetime(data["created_date"],
+                                      format="%m/%d/%Y %I:%M:%S %p")
+
+data["time_dif"] = data["closed_date"] - data["created_date"]
+
+# set the time delta as the number of hours difference
+data["time_dif"] = data["time_dif"].dt.total_seconds()/3600
+data["time_dif"]
+```
+
+Now we have a column describing the time difference between when 
+a complaint is opened and closed. We can plot this distribution 
+with `plotly` to provide a better visual representation of the 
+distribution: 
+
+> Note, every value in the data is shifted up 1 for plotting 
+purposes. Fitting an exponential distribution with parameter 
+$\lambda=0$ exactly is not possible to fit precisely due to 
+divide by $0$ errors. Additionally, this plot ignores the location 
+parameter provided by output from `stats.expon.fit()` since 
+the mean brought up significantly by outliers at the 
+asbolute extremes of the distribution (the higher end).
+
+```{python}
+import plotly.graph_objects as go
+from scipy import stats
+
+# add a 1 to avoid weird zero errors
+response_dat2 = data["time_dif"].dropna() + 1
+
+hist2 = go.Histogram(x=response_dat2, 
+                    nbinsx=2500, 
+                    opacity=0.75, 
+                    name='response time', 
+                    histnorm='probability density')
+
+# Calculate KDE
+scale, loc = stats.expon.fit(response_dat2.values)
+x_range = np.linspace(min(response_dat2), max(response_dat2), 10000)
+fitted_vals = stats.expon.pdf(x_range, loc=0.2, scale=scale)
+fitted_dist = go.Scatter(x=x_range, y=fitted_vals, mode="lines", 
+                         name="Fitted Exponential Distribution")
+
+# Create a layout
+layout = go.Layout(title='Complaint Response Time Histogram and Density',
+                   xaxis=dict(title='Complaint Response Time (hours)', range=[0,100]),
+                   yaxis=dict(title='Density', range=[0,0.2]),
+                   bargap=0.1
+                  )
+
+# Create a figure and add both the histogram and KDE
+fig = go.Figure(data=[hist2, fitted_dist], layout=layout)
+
+# Show the figure
+fig.show()
+```
+
+As you can see, there is a strong right skew (the majority of observations
+are concentrated at the lower end of the distribution, but there 
+are a few observations at the extreme right end).
+
+Here, we use pandas plotting to generate a density estimation 
+curve.
+
+```{python}
+x_range = np.linspace(response_dat2.min(), response_dat2.max(), 1000)
+response_dat2.plot.kde(ind=x_range)
+```
+
+We can compare this density curve to plots of the exponential 
+distribution, and see that this variable (complaint response times)
+closely match an exponential distribution with a very high $\lambda$
+parameter value. Below is a figure displaying a series of 
+exponential distributions for different values of $\lambda$:
+
+```{python}
+import matplotlib.pyplot as plt
+
+# Define the lambda parameters
+lambdas = [0.5, 1, 2, 4, 8]
+
+# Define the x range
+x = np.linspace(0, 2*np.pi, 1000)
+
+# Create the plot
+plt.figure(figsize=(10, 6))
+
+# Plot the exponential distribution for each lambda
+for lam in lambdas:
+    y = lam * np.exp(-lam * x)
+    plt.plot(x, y, label=f'λ = {lam}')
+
+# Set the x-axis labels
+plt.xticks([np.pi/2, np.pi, 3*np.pi/2, 2*np.pi], ['π/2', 'π', '3π/2', '2π'])
+
+# Add a legend
+plt.legend()
+
+# Show the plot
+plt.show()
+```
+
+### Central Tendency Measures
+
+Now that we have examined the distribution of the 
+response time, it is appropriate to investigate the 
+important measures of central tendency for the data.
+
+There are three main measures of central tendency which are 
+used: 
+
++ **Mean**: The average or expected value of a random variable
+  + $\overline{X} = (1/n)\sum_{i=1}^{n} X_{i}$
+  (where $X_{i}\text{s}$ are independent random samples from 
+  the same distribution)
++ **Median**: exact middle value of a random variable [5]
+  + For even $n$, $\overset{\sim}{X} = (1/2)[X_{(n/2+1)} + X_{(n/2)}]$
+  + For odd $n$, $\overset{\sim}{X} = X_{([n+1]/2)}$
++ **Mode**: the most frequently occurring value of a random variable
+
+For the given variable (complaint response time), we can find 
+each of the respective statistics using pandas: 
+
+> NOTE: `pandas.Series.mode()` returns the most commonly occurring
+value in the `Series`, or a `Series` of the most commonly occurring
+*values* if there is a tie between multiple values. It does not 
+calculate multiple modes in the case of a multi-modal distribution.
+Here, `Series.mode()` returns $0$ and $0.000\dots$ so I elected to 
+choose the first element of that series for display. 
+
+```{python}
+central_tendency = pd.Series(
+    {"Mean": response_dat2.mean(), 
+     "Median": response_dat2.median(), 
+     "Mode": response_dat2.mode().iloc[0]}
+)
+central_tendency
+```
+
+As you can see, the most commonly occurring value (as is obvious from
+the density plot) is 0. This means that the time between when a 
+rodent sighting complaint is filed and responded to (or closed) is most
+likely to be 0. Additionally, it implies that more than half of all 
+data points have a complaint response time of zero since the median is 
+zero as well. 
+
+It makes sense that the mean is greater than the median in this case since
+the distribution is exponential and skewed to the right. 
+
+### Variability Measures
+
+As with central tendency, there are also several relevant measures of 
+variance [2]. These include: 
+
++ **range**: $X_{(n)} - X_{(1)}$ - the difference between the greatest
+  observed value and the smallest one.
++ **standard deviation**: 
+  $S = \sqrt{(1/[n-1])\sum_{i=1}^{n}(X_{i} - \overline{X})^{2}}$ - 
+  the average difference of values from the observed mean of a sample.
++ **variance**: Square of the standard deviation of a sample
+  $S^{2} = (1/[n-1])\sum_{i=1}^{n}(X_{i} - \overline{X})^{2}$
++ **Interquartile Range**: $X_{[3/4]} - X_{[1/4]}$ where 
+  $X_{[p]}$ is the $p\text{th}$ sample quantile - 
+  A measure of the difference between the 1st 
+  and third quantiles of a distribution
+
+ We can easily calculate all of these values using pandas in python [6]
+
+```{python}
+quartiles = response_dat2.quantile([0.25, 0.75])
+iqr = quartiles[0.75] - quartiles[0.25]
+
+variability = pd.Series(
+    {"range": response_dat2.max() - response_dat2.min(), 
+     "standard deviation": response_dat2.std(), 
+     "variance": response_dat2.std()**2, 
+     "IQR": iqr}
+)
+variability
+```
+
+We can also use the interquartile range as a means to obtain 
+a rudimentary measure of outliers in the data. Specifically, 
+any observations which are a distance of $1.5 * IQR$ beyond the 
+third or first quartiles. 
+
+Seeing as the first quartile is also the minimum in this, case
+we only need to be concerned with outliers at the higher end 
+of the spectrum. We calculate the upper fence for outliers
+as follows [5]:
+
+$\text{upper fence } = X_{[0.75]} + 1.5\cdot IQR$
+
+```{python}
+upper_lim = quartiles[0.75] + 1.5*iqr
+
+outliers = response_dat2[response_dat2 > upper_lim]
+outliers
+```
+
+Given the exponential nature of the distribution, it would 
+be interesting to examine the patterns which occur in 
+categorical variables to see if there may be any connections between
+those variables and the response time. It may also be useful to 
+examine relationships between geospatial data and the response time.
+
+## Univariate Categorical Descriptive Statistics
+
+Descriptive statistics for categorical data are primarily aimed at 
+understanding the rates of occurrence for different categorical 
+variables. These include the following measures [7]:
+
++ **frequencies**: number of occurrences
++ **percentages / relative frequencies**: the percentage of observations 
+  which have a given value for a categorical variable
+
+These sorts of metrics are often best represented by frequency 
+distribution tables, pie-charts, and bar charts:
+
+For example, let us examine the categorical variable "Borough"
+from the rodent data:
+
+```{python}
+# create a frequency distribution table
+counts = data["borough"].value_counts()
+proportions = counts/len(data)
+cumulative_proportions = proportions.cumsum()
+
+frequency_table = pd.DataFrame(
+                    {"Counts": counts, 
+                    "Proportions": proportions, 
+                    "Cumulative Proportion": cumulative_proportions}
+)
+frequency_table
+```
+
+This table demonstrates that the most significant proportion of 
+rodent sightings occurred in the borough of Brooklyn. Additionally, 
+it indicates that Manhattan and Brooklyn collectively represent more
+than half of all rodent sightings which occur, while Staten Island
+in particular represents a relatively small proportion. 
+
+We can also use bar chart to represent this data: 
+
+```{python}
+# Create a bar chart
+fig = go.Figure(data=[go.Bar(x=counts.index, y=counts.values)])
+
+# Show the figure
+fig.show()
+```
+
+A pie-chart also serves as a good representation of the relative
+frequencies of categories:
+
+```{python}
+fig = go.Figure(data=[go.Pie(labels=counts.index, values=counts.values, hole=.2)])
+
+# Show the figure
+fig.show()
+```
+
+## Chi-Squared Significance Tests (Contingency Table Testing)
+
+In order to determine whether there exists a dependence between 
+several categorical variables, we can use chi-squared contingency
+table testing. This is also referred to as the chi-squared test
+of independence [8]. We will examine this topic by investigating
+the relationship between the borough and the complaint descriptor
+variables in the rodents data.
+
+The first step in conducting a Chi-squared significance test is
+to construct a **contingency table**. 
+
+> contingency tables are *frequency tables* of two variables
+which are presented simultaneously [8].
+
+This can be accomplished in python by utilizing the `pd.crosstab()`
+function
+
+```{python}
+# produce a contingency table for viewing
+contingency_table_view = pd.crosstab(data["borough"], 
+                                     data["descriptor"], 
+                                     margins=True)
+
+# produce a contingency table for calculations
+contingency_table = pd.crosstab(data["borough"], 
+                                     data["descriptor"], 
+                                     margins=False)
+
+contingency_table_view
+```
+
+Now that we have constructed the contingency table, we are ready to 
+begin conducting the signficance tests (for independence of
+Borough and Descriptor). This requires that we compute the 
+chi-squared statistic. 
+
+There are multiple steps to computing the chi-squared statistic
+for this test, but the general test-statistic is computed 
+as follows:
+
+$$\chi_{rows-1 * cols-1}^{2} = \sum_{cells} \frac{(O - E)^{2}}{E}$$
+
+Here, $E = \text{row sum} * \text{col sum}/N$ stands for the expected 
+value of each cell, and $O$ refers to the observed values. Note that 
+$N$ refers to the total observations (the right and lower-most 
+cell value in the contingency table above)
+
+First, let's calculate the expected values. This can be accomplished
+by performing the outer product of row sums and column sums for
+the contingency table: 
+
+$$
+\begin{align}
+\text{row\_margins} = \langle r_{1}, r_{2}, \dots, r_{n}\rangle \\
+\text{col\_margins} = \langle c_{1}, c_{2}, \dots, c_{m}\rangle \\
+\text{row\_margins} \otimes \text{col\_margins} = \left[\begin{array}{cccc}
+    r_{1}c_{1} & r_{1}c_{2} & \dots & r_{1}c_{m} \\
+    r_{2}c_{1} & r_{2}c_{2} & \dots & r_{2}c_{m} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    r_{n}c_{1} & r_{n}c_{2} & \dots & r_{n}c_{m}
+\end{array}\right]
+\end{align}
+$$
+
+In python this is calculated as: 
+
+```{python}
+row_margins = contingency_table_view["All"]
+col_margins = contingency_table_view.T["All"]
+total = contingency_table_view["All"]["All"]
+
+expected = np.outer(row_margins, col_margins)/total
+pd.DataFrame(expected, columns=contingency_table_view.columns).set_index(
+    contingency_table_view.index
+)
+```
+
+The chi-squared statistic can be calculated directly from the 
+(component-wise) squared difference between the original contingency
+table and the expected values presented above divided by the 
+total number of observations. However, we can also use the `scipy.stats` package to perform the contingency test automatically. 
+
+Before performing this test, let us also examine the relavent 
+hypotheses to this significance test. 
+
+$$
+\begin{align}
+& H_{0}: \text{Rodent complaint type reported and Borough are independent} \\
+& H_{1}: H_{0} \text{ is false.}
+\end{align}
+$$
+
+We assume a significance level of $\alpha=0.05$ for this test:
+
+> NOTE: the contingency table **without row margins** is used for 
+calculating the chi-squared test.
+
+```{python}
+from scipy.stats import chi2_contingency
+
+chi2_val, p, dof, expected = chi2_contingency(contingency_table)
+
+pd.Series({
+    "Chi-Squared Statistic": chi2_val, 
+    "P-value": p, 
+    "degrees of freedom": dof
+})
+```
+
+Now we can create a plot to demonstrate the location of the chi-squared
+statistic with respect to the chi-squared distribution
+
+```{python}
+x = np.arange(0, 45, 0.001)
+# x2 = np.arange(59, 60, 0.001)
+
+plt.plot(x, stats.chi2.pdf(x, df=20), label="df: 20", color="red")
+# plt.fill_between(x, x**4, color="red", alpha=0.5)
+plt.xlabel("x")
+plt.ylabel("Density")
+plt.show()
+```
+
+<!-- 
+```{python}
+from scipy.stats import chi2
+
+max_chi_val = 59.0
+x_range = np.arange(0, 60, 0.001)
+fig = px.histogram(x=x_range, 
+                   y=chi2.pdf(x_range, df=dof), 
+                   labels={"x":"Chi-Squared Value", 
+                           "y":"Density"}, 
+                   title="Chi-Squared Distribution (df = {})".format(dof))
+# create a a scatter plot of values from chi2 to chi2 (a single point)
+# and going from 0 to the y value at the critical point - a vertical
+# line
+fig.add_trace(go.Scatter(x=[max_chi_val, max_chi_val],
+                         y=[0,chi2.pdf(max_chi_val, df=dof)], 
+              mode="lines", 
+              name="Critical Value", 
+              line=dict(color="red", dash="dash")))
+fig.update_layout(shapes=[dict(type="rect", 
+                               x0=max_chi_val, 
+                               x1=20, 
+                               y0=0,
+                               y1=chi2.pdf(max_chi_val, df=dof), 
+                          fillcolor="rgba(0, 100, 80, 0.2)", 
+                          line=dict(width=0))], 
+                  annotations=[dict(x=max_chi_val + 0.5, 
+                                    y=0.02, 
+                                    text="Area of Interest", 
+                                    showarrow=False, 
+                                    font=dict(size=10, color="black"))])
+fig.show()
+``` -->
+
+As you can see from the figure, the critical value we obtain (2034)
+is exceptionally far beyond the bounds of the distribution, that 
+there must be a significant dependence relationship between the 
+borough and the rodent incident type which is reported. 
+
+Moreover, the p-value returned for this test is 0.00000, meaning that
+there is virtually 0 probability that such observations would be 
+made given that the borough and rodent incident type reported were 
+independent.
+
+## Sources
+
+1. [towardsdatascience.com - Exploratory data analysis](https://towardsdatascience.com/a-data-scientists-essential-guide-to-exploratory-data-analysis-25637eee0cf6)
+2. [scribbr.com - Descriptive statistics](https://www.scribbr.com/statistics/descriptive-statistics/)
+3. [scribbr.com - Probability Distributions](https://www.scribbr.com/statistics/probability-distributions/)
+4. [mathisfun.com - Median definition](https://www.mathsisfun.com/definitions/median.html)
+5. [stats.libretexts - outliers and sample quantiles](https://stats.libretexts.org/Bookshelves/Probability_Theory/Probability_Mathematical_Statistics_and_Stochastic_Processes_(Siegrist)/06%3A_Random_Samples/6.06%3A_Order_Statistics#:~:text=The%20sample%20quantile%20of%20order%20p%20%3D%201,the%20third%20quartile%20and%20is%20frequently%20denoted%20q3.)
+6. [datagy.io - calculating IQR in python](https://datagy.io/pandas-iqr/#:~:text=To%20calculate%20the%20interquartile%20range%20for%20a%20Pandas,a%20look%20at%20what%20this%20looks%20like%20below%3A)
+7. [curtin university - descriptive statistics for categorical data](https://uniskills.library.curtin.edu.au/numeracy/statistics/descriptive/#:~:text=Descriptive%20statistics%20used%20to%20analyse%20data%20for%20a,size%29%20obtained%20from%20the%20variable%E2%80%99s%20frequency%20distribution%20table.)
+8. [dwstockburger.com - hypothesis testing with contingency tables](https://www.dwstockburger.com/Introbook/sbk22.htm#:~:text=Hypothesis%20tests%20may%20be%20performed%20on%20contingency%20tables,differentially%20distributed%20over%20levels%20of%20the%20column%20variables%3F)
+9. [askpython.com - chi-squared testing in python](https://www.askpython.com/python/examples/chi-square-test)
+10. [sphweb - Hypotheses for chi-squared tests](https://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_hypothesistesting-chisquare/bs704_hypothesistesting-chisquare_print.html)

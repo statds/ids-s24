@@ -156,7 +156,7 @@
        interest that can be answered by the data, which could be analytics or
        visualizations. Perform the needed analyses and answer your question.
 
-1. **NYC Rats**
+1. **NYC Rodents**
 Rats in NYC are widespread, as they are in many densely populated
 areas (https://en.wikipedia.org/wiki/Rats_in_New_York_City). As of 
 October 2023, NYC dropped from the 2nd to the 3rd places in the 
@@ -171,9 +171,57 @@ csv file named `rodent_2022-2023.csv`.
     created date?
     1. How many agencies were this complain type reported to?
     1. Summarize the missingess for each variable.
-    1. Summarize a frequency table for the `DESCRIPTOR` variable, 
+    1. Summarize a frequency table for the `descriptor` variable, 
     and summarize a cross table by year.
     1. Which types of 'DESCRIPTOR' do you think should be included
     if our interest is rodent sighting?
     1. Take a subset of the data with the descriptors you chose and
     summarize the response time by borough.
+
+
+1. **NYC rodent sightings data cleaning**
+The data appears to need some cleaning before any further analysis.
+Some missing values could be filled based on other columns.
+    1. Checking all 47 column names suggests that some columns 
+    might be redundant. Identify them and demonstrate the redundancy.
+    2. Are zip code and borough always missing together? If geocodes
+    are available, use reverse geocoding to fill the zip code.
+    3. Export the cleaned data in both csv and feather format. 
+    Comment on the file sizes. 
+
+
+1. **SQL Practice on NYC rodent sightings**
+The NYC rodent sightings data that we prepared could be stored
+more efficiently using a database. Let us start from the csv file
+you exported from the last problem.
+    1. Create a table called `rodent` from the csv file.
+    1. The `agency` and `agency_name` columns are redundant in
+    the table. Create a table called `agency`, which contains
+    only these two columns, one agency a row.
+    1. Drop the `agency_name` name from the `rodent` table.
+    Justify why we do not need it here.
+    1. Comment on the sizes of the table (or exported csv file)
+    of `rodent` before and after dropping the `agency_name`
+    column.
+    1. Come up with a scheme for the two tables that allows
+    even more efficient storage of the `agency` column
+    in the `rodent` table. _Hint: use an integer to code the
+    agencies.
+
+1. **Logistic Modeling**
+The response time to 311 service requests is a measure of civic
+service quality. Let us model the response time to 311 requests
+with complain type `Rodent`.
+    1. Compute the response time in hours. Note that some response
+    will be missing because of unavailable closed date.
+    1. Compute a binary variable `over3d`, which is one if the
+    response time is greater than 3 days, and zero otherwise. Note
+    that this variable should have no missing values.
+    1. Use the package `uszipcode` to obtain the zip code level
+    covaraites such as median house income and median home value.
+    Merge these variables to the rodent data.
+    1. Split the data at random into training (80%) and testing (20%).
+    Build a logistic model to predict `over3d` on the training data,
+    and validate the performance on the testing data.
+    1. Build a lasso logistic model to predict `over3d`, and justify
+    your choice of the tuning parameter. Validate on the testing data.

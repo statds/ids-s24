@@ -1,6 +1,6 @@
 # Preliminaries {.unnumbered}
 
-The notets were developed with Quarto; for details about Quarto, visit
+The notes were developed with Quarto; for details about Quarto, visit
 <https://quarto.org/docs/books>.
 
 
@@ -9,20 +9,20 @@ These lecture notes for STAT 3255/5255 in Spring 2024 represent a
 collaborative effort between Professor Jun Yan and the students
 enrolled in the course. This cooperative approach to education was
 facilitated through the use of GitHub, a platform that encourages
-collaborative coding and content development.
+collaborative coding and content development. To view
+these contributions and the lecture notes in their entirety, please
+visit our Spring 2024 repository at <https://github.com/statds/ids-s24>.
 
 
 Students contributed to the lecture notes by submitting pull requests
 to our dedicated GitHub repository. This method not only enriched the
 course material but also provided students with practical experience
-in collaborative software development and version control. To view
-these contributions and the lecture notes in their entirety, please
-visit our Spring 2024 repository at <https://github.com/statds/ids-s24>.
+in collaborative software development and version control. 
 
 
 For those interested in exploring the lecture notes from the previous
-years, the [Spring 2023](https://github.com/statds/ids-s23) and
-[Spring 2024](https://github.com/statds/ids-s22)
+years, the [Spring 2023](https://statds.github.io/ids-s23) and
+[Spring 2022](https://statds.github.io/ids-s22/)
 are both publicly accessible. These archives offer
 valuable insights into the evolution of the course content and the
 different perspectives brought by successive student cohorts.
@@ -83,6 +83,9 @@ Markdown.
 + Chugh, Charitarth
     - Get better at analyzing data/features
     - Learn about more xgboost & gradient boosted trees. 
++ Dennison, Jack
+    - Learn how to use Git and GitHub
+    - Be able to apply my skills in Python and Git to data analytics tasks
 + Elliott, Matt
     - Faciliate myself into becoming a Data Scientist
     - Learn new skills such as Quarto and GitHub
@@ -182,10 +185,13 @@ Here are some example tasks:
 + Statistical hypothesis tests
 + Statistical modeling
 + Data visualization
++ Accessing census and ACS data
 + Grammer of graphics
 + Handling spatial data
 + Visualize spatial data in a Google map
 + Animation
++ Classification and regression trees
++ Support vector machine
 + Random forest
 + Naive Bayes
 + Bagging vs boosting
@@ -204,30 +210,32 @@ Please use the following table to sign up.
    Date  | Presenter              | Topic
   ------ | ---------------------- | ------
   02/07  | Matt Elliott           | Data science communication skills
-  02/07  | Weijia Wu              | 
   02/12  | Dr. Haim Bar           | Database management
-  02/14  | Willam Taki            |
-  02/19  | Joshua Lee             |
-  02/21  | Pratham Patel          |
-  02/21  | Olivia Massad          |
-  02/26  | Ge Li                  |
-  02/26  | Xingye Zhang           |
-  02/28  | Jack Dennison          |
+  02/19  | Willam Taki            | Visualization with MatPlotlib
+  02/19  | Joshua Lee             | Descriptive Statistics
+  02/07  | Weijia Wu              | Visualizaiton with `matplotlib` and `seaborn` 
+  02/21  | Pratham Patel          | Handling spatial data with `geopandas`
+  02/21  | Olivia Massad          | Grammar of Graphics `plotnine`
+  02/26  | Ge Li                  | Animation
+  02/26  | Xingye Zhang           | Data visualizing NYC rodent dataset
+  02/28  | Jack Dennison          | Geographic Data Analysis
   02/28  | Isabelle Perez         | Statistical hypothesis tests `scypy.stats`
-  03/02  | Emmanuel Yankson       | Random Forest
-  03/02  | David Li               |
-  03/04  | Abigail Mori           |
-  03/04  | Leon Nguyen            | Statistical Modeling with statsmodels
+  03/04  | Emmanuel Yankson       | Random Forest
+  03/04  | David Li               |
+  03/06  | Abigail Mori           | Handling spatial data with `geopandas`
+  03/06  | Leon Nguyen            | Statistical Modeling with `statsmodels`
   03/25  | Alex Pugh              |
   03/25  | Charitath Chugh        | PyTorch
   03/27  | Vincent Xie            | Database Operations with SQL
   03/27  |                        |
-  04/01  | William Qualls         |
+  04/01  | William Qualls         | Web Scraping
   04/01  | Madison Woo            | Data Science Ethics 
   04/03  | Braedon Hook           |
   04/03  |                        |
   04/08  |                        |
   04/08  |                        |
+  04/10  |                        |
+  04/10  |                        |
 
 ### Final Project Presentation Schedule
 
@@ -290,11 +298,10 @@ code chunks, it would be hard to plagiarize.
 
 ### Presentation
 
-+ Don't forget to introduce yourself if there is no moderator
-+ Highlight your research questions and results, not code
-+ Give an outline, carry it out, and summarize
-+ Use your own examples to reduce the risk of plagiarism
-\item
++ Don't forget to introduce yourself if there is no moderator.
++ Highlight your research questions and results, not code.
++ Give an outline, carry it out, and summarize.
++ Use your own examples to reduce the risk of plagiarism.
 
 
 <!-- Topic presentation template -->
