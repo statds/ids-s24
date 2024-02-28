@@ -19,8 +19,9 @@ book:
     - import.qmd
     - communication.qmd
     - eda.qmd
-    - statsmod.qmd
     - visualization.qmd
+    - statsmod.qmd
+    - supervised.qmd
     - exercises.qmd
     - references.qmd
 bibliography: references.bib
