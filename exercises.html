@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -342,6 +342,23 @@ window.Quarto = {
 <li>Use the package <code>uszipcode</code> to obtain the zip code level covaraites such as median house income and median home value. Merge these variables to the rodent data.</li>
 <li>Split the data at random into training (80%) and testing (20%). Build a logistic model to predict <code>over3d</code> on the training data, and validate the performance on the testing data.</li>
 <li>Build a lasso logistic model to predict <code>over3d</code>, and justify your choice of the tuning parameter. Validate on the testing data.</li>
+</ol></li>
+<li><p><strong>Midterm Project: Rodents in NYC</strong> <a href="https://en.wikipedia.org/wiki/Rats_in_New_York_City">Rodents in NYC</a> are widespread, as they are in many densely populated areas. As of October 2023, NYC dropped from the 2nd to the 3rd places in the annual <a href="https://www.orkin.com/press-room/top-rodent-infested-cities-2023#">“rattiest city” list</a> released by a pest control company. Rat sightings in NYC was analyzed by Dr.&nbsp;Michael Walsh in a <a href="https://peerj.com/articles/533/">2014 PeerJ article</a>. We investigate this problem from a different angle with the <a href="https://data.cityofnewyork.us/Health/Rodent-Inspection/p937-wjvj/about_data">NYC Rodent Inspection data</a>, provided by the Department of Health and Mental Hygiene (DOHMH). Download the 2022-2023 data by filtering the <code>INSPECTION_DATE</code> to between 11:59:59 pm of 12/31/2021 and 12:00:00 am of 01/01/2024 and <code>INSPECTION_TYPE</code> is either <code>Initial</code> or <code>Compliance</code> (which should be about 108 MB). Read the meta data information to understand the data.</p>
+<ol type="1">
+<li>Data cleaning.
+<ul>
+<li>There are two zipcode columns: <code>ZIP_CODE</code> and <code>Zipcodes</code>. Which one represent the zipcode of the inspection site? Comment on the data dictionary.</li>
+<li>Summarize the missing information. Are their missing values that can be filled using other columns? Fill</li>
+<li>Are their redundant information in the data? Try storing the data using <code>arrow</code> and comment on the efficiency gain.</li>
+<li>Are there invalid zipcode or borough? Justify and clean them up if yes.</li>
+</ul></li>
+<li>Data manipulation.
+<ul>
+<li>Aggregate the inspections by zip code to create a dataset with five columns. The first three columns are <code>zipcode</code>; <code>n_initial</code>, the count of the initial inspections in that zipcode; and <code>n_initpass</code>, the number of initial inspections with a passing result in that zipcode. The other two variables are <code>n_compliance</code> and <code>n_comppass</code>, the counterpart for compliance inspections.</li>
+<li>Merge your dataset with the simple zipcode table in package <code>uszipcode</code> by zipcode to obtain demographic and socioeconomic variables at the zipcode level.</li>
+<li></li>
+</ul></li>
+<li>Now you know the data quite well. Come up with a research question of interest that can be answered by the data, which could be analytics or visualizations. Perform the needed analyses and answer your question.</li>
 </ol></li>
 </ol>
 
@@ -737,7 +754,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./supervised.html" class="pagination-link  aria-label=" &lt;span="" learning&lt;="" span&gt;"="">
+      <a href="./supervised.html" class="pagination-link" aria-label="Supervised Learning">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span>
       </a>          
   </div>
