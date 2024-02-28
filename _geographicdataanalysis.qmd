@@ -27,8 +27,9 @@ This section was written by Jack Dennison.
  ## Downloading the Necessary Packages
  In order to download GeoPy, you can simply install it using either Conda or pip commands.
  Using Conda:
+ ```bash
  `conda install geopy`
- 
+ ```
  Using pip:
  ```bash
  `pip install geopy`
@@ -38,12 +39,16 @@ This section was written by Jack Dennison.
  pandas, shapely, and Fiona. After that, you can use Conda or pip to install GeoPandas.
 
  Using Conda:
+ ```bash
  `conda install numpy pandas shapely Fiona`
  `conda install geopandas`
+ ```
 
  Using pip:
+ ```bash
  `pip install numpy pandas shapely Fiona`
  `pip install geopandas`
+ ```
 
  ## GeoPy Overview
  GeoPy is a powerful Python library that provides geocoding capabilities and various geospatial 
@@ -51,13 +56,16 @@ This section was written by Jack Dennison.
  geocoding, reverse geocoding, distance calculations, and more.
 
  ### Geocoding
- GeoPy can be used to geocode, which is to turn addresses into locations on the coordinate system plane. For 
- example, take an address from the Rodent Data Spreadsheet.
+ GeoPy can be used to geocode, which is to turn addresses into locations on the coordinate system plane. 
+ For example, take an address from the Rodent Data Spreadsheet.
 
  * 265 Putnam Avenue, Brooklyn, New York
 
  Using the Nominatim encoder from OpenStreetMap, we can geocode to find the lattitude and longitude of 
- this address, as follows.
+ this address. Before going through with this, it should be noted that the rodent data file does give
+ the latitude and longitude of every rodent incident, so this will be used to check work. The coordinates
+ given by the data are as follows: (40.683855196486164, -73.95164557951071). Let's see if we can 
+ replicate this with geopy.
 
  ```{python}
  from geopy.geocoders import Nominatim
@@ -86,6 +94,9 @@ except Exception as e:
 Address: 265 Putnam Avenue, Brooklyn, NY
 Latitude: 40.68404835
 Longitude: -73.95149699550375
+
+ This is remarkably similar to the coordinates given by the rodent data file, meaning that we can 
+ confirm that that data is accurate.
 
  ### Reverse Geocoding
  Similarly to how we can use GeoPy to geocode a coordinate based off of an address, we can also do this
