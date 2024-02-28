@@ -239,3 +239,41 @@ buffered.plot()
 plt.show()
 distances
 ```
+The buffer creates a small circle around each point in the data. The plot reflects this, as the circles 
+are slightly larger than the initial plot. Meanwhile, distances are listed as miles from one point to 
+another. Both of these operations can be useful for various spatial data analytics topics.
+
+### Exporting Data
+Another feature of GeoPandas is that GeoDataFrames can be exported to various file types, such as 
+shapefiles, GeoJSON, CSV, and other formats. This can be done using this code:
+
+```{python}
+gdf.to_file('output.shp')
+```
+This shapefile can be used with ArcGIS Pro and ArcPy to do further data analysis on it.
+
+### Other Features
+There are several other features that GeoPandas has. Its seamless integration with Pandas allows users 
+to leverage the familiar DataFrame and Series data structures for geospatial data analysis. It can do 
+operations such as joins and Geocoding which are improved versions of commands from Pandas and Geopy 
+respectively. GeoPandas seamlessly integrates with other Python libraries commonly used in the 
+geospatial ecosystem, such as Shapely, Fiona, Pyproj, Cartopy, and more. This interoperability allows 
+users to leverage the functionalities of these libraries in conjunction with GeoPandas for advanced 
+geospatial analysis and visualization tasks. These features make GeoPandas a valuable tool for 
+geospatial data analysis, manipulation, and visualization in Python, suitable for a wide range of 
+applications and domains.
+
+## ArcPy
+ArcPy is another very effective way to conduct geographic data analysis queries. This package is unique,
+because it's unique to ESRI's ArcGIS software, which is geographic information system (GIS) software 
+platform. This provides a comprehensive set of tools and functions for automating, customizing, and 
+extending the capabilities of ArcGIS Desktop, including ArcMap, ArcCatalog, and ArcGIS Pro.
+
+ArcPy allows users to manage and manipulate geospatial data within ArcGIS, provides access to a wide 
+range of geoprocessing tools and spatial analysis functions available in ArcGIS, allows users to 
+automate map creation and layout design, provides tools for converting between different geospatial data 
+formats and data sources, and provides many more resources for optimizing the creation of maps. 
+Unfortunately, due to the service requiring ArcGIS pro to function, the capabilities of ArcPy can not be 
+demonstrated in class, but the usefulness of the program cannot be understated.
+
+## Conclusion
