@@ -352,11 +352,19 @@ window.Quarto = {
 <li>Are their redundant information in the data? Try storing the data using <code>arrow</code> and comment on the efficiency gain.</li>
 <li>Are there invalid zipcode or borough? Justify and clean them up if yes.</li>
 </ul></li>
-<li>Data manipulation.
+<li>Data exploration.
+<ul>
+<li>Create binary variable <code>passing</code> indicating passing or not for the inspection result. Does <code>passing</code> depend on whether the inspection is initial or compliance? State your hypothesis and summarize your test result.</li>
+<li>Are the passing pattern different across different boroughs for initial inspections? How about compliance inspections? State your hypothesis and summarize your test results.</li>
+<li>If we suspect that the passing rate may depends on the time of a day of the inspection, we may compare the passting rates for inspections done in the mornings and inspections one in the afternoons. Visualize the comparison by borough and inspection type.</li>
+<li>Perform a formal hypothesis test to confirm the observations from your visualization.</li>
+</ul></li>
+<li>Data analytics.
 <ul>
 <li>Aggregate the inspections by zip code to create a dataset with five columns. The first three columns are <code>zipcode</code>; <code>n_initial</code>, the count of the initial inspections in that zipcode; and <code>n_initpass</code>, the number of initial inspections with a passing result in that zipcode. The other two variables are <code>n_compliance</code> and <code>n_comppass</code>, the counterpart for compliance inspections.</li>
+<li>Add a variable to your dataset, <code>n_sighting</code>, which represent the number of rodent sightings from the 311 service request data in the same 2022-2023 period.</li>
 <li>Merge your dataset with the simple zipcode table in package <code>uszipcode</code> by zipcode to obtain demographic and socioeconomic variables at the zipcode level.</li>
-<li></li>
+<li>Build a binomial regression for the passing rate of initial inspections at the zipcode level. Assess the goodness-of-fit of your model. Summarize your results to a New Yorker who is not data science savvy.</li>
 </ul></li>
 <li>Now you know the data quite well. Come up with a research question of interest that can be answered by the data, which could be analytics or visualizations. Perform the needed analyses and answer your question.</li>
 </ol></li>
