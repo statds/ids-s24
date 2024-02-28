@@ -154,15 +154,21 @@ point1 = (40.683855196486164, -73.95164557951071)  # Point from geocoding exampl
 point2 = (40.77924175816874, -73.95368859796383)  # Point from reverse geocoding example
 
 # Calculate the distance between the two points using the Haversine formula
-distance_haversine = distance(point1, point2).miles  # You can also use kilometers by calling .kilometers
+distance_haversine = distance(point1, point2).miles  # You can also use kilometers by using .kilometers
 
 # Print the result
-print("Distance between New York City and Los Angeles (Haversine formula): {:.2f} miles".format(distance_haversine))
+print("Distance between the two listed points: {:.2f} miles".format(distance_haversine))
 ```
  Here is the output: 
- Distance between New York City and Los Angeles (Haversine formula): 6.58 miles
+ Distance between the two listed points: 6.58 miles
 
  This is an effective method to look at the distance between two points on earth. While the two locations
- in New York are rather close to each other, this method works regardless of the locations of the points.
+ in New York are rather close to each other, this method works regardless of the whereabouts of the points.
 
- ### Other features
+ ### Other Features
+ In addition to these features, geopy can be used for a variety of other tasks. For instance, it can work
+ with GeoPandas, Shapely, and Fiona to manipulate geospatial data. It allows users to easily switch 
+ between different geocoding providers and customize their geocoding workflow based on their specific 
+ needs. Because of the ease of use of the software and its open-source code, it's accessible to both 
+ beginners and experienced developers and encourages collaboration and innovation, allowing users to 
+ contribute enhancements, report issues, and share their experiences with the community.
