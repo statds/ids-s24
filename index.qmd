@@ -224,7 +224,7 @@ Please use the following table to sign up.
   03/04  | David Li               |
   03/06  | Abigail Mori           | Handling spatial data with `geopandas`
   03/06  | Leon Nguyen            | Statistical Modeling with `statsmodels`
-  03/25  | Alex Pugh              |
+  03/25  | Alex Pugh              | Time Series Analysis
   03/25  | Charitath Chugh        | PyTorch
   03/27  | Vincent Xie            | Database Operations with SQL
   03/27  |                        |
