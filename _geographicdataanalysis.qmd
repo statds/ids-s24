@@ -22,4 +22,23 @@ This section was written by Jack Dennison.
  Hello! My name is Jack Dennison and I am a junior dual Applied Data Analysis and Geographic Information 
  systems major. I am interested in the intersection of geography and statistics, so this presentation 
  reflects that. Therefore, I'm going to talk about the various ways that Geographic Data Analysis can be 
- done using python. Some examples things that will be disussed are `geopandas` and `geopy`.
+ done using python. Some examples of things that will be disussed are `geopy`, `geopandas`, and `arcpy`.
+
+ ## Downloading the Necessary Packages
+ In order to download GeoPy, you can simply install it using either Conda or pip commands.
+ Using Conda:
+ `conda install geopy`
+ 
+ Using pip:
+ `pip install geopy`
+ 
+ To install GeoPandas, it's recommended that you first download prerequisite packages, such as NumPy, 
+ pandas, shapely, and Fiona. After that, you can use Conda or pip to install GeoPandas.
+
+ Using Conda:
+ `conda install numpy pandas shapely Fiona`
+ `conda install geopandas`
+
+ Using pip:
+ `pip install numpy pandas shapely Fiona`
+ `pip install geopandas`
