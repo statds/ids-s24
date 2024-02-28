@@ -30,7 +30,9 @@ This section was written by Jack Dennison.
  `conda install geopy`
  
  Using pip:
+ ```bash
  `pip install geopy`
+ ```
  
  To install GeoPandas, it's recommended that you first download prerequisite packages, such as NumPy, 
  pandas, shapely, and Fiona. After that, you can use Conda or pip to install GeoPandas.
@@ -42,3 +44,45 @@ This section was written by Jack Dennison.
  Using pip:
  `pip install numpy pandas shapely Fiona`
  `pip install geopandas`
+
+ ## GeoPy Overview
+ GeoPy is a powerful Python library that provides geocoding capabilities and various geospatial 
+ utilities. It allows users to perform various tasks related to geographical information, including 
+ geocoding, reverse geocoding, distance calculations, and more.
+
+ ### Geocoding
+ GeoPy can be used to geocode, which is to turn addresses into locations on the coordinate system plane. For 
+ example, take an address from the Rodent Data Spreadsheet.
+
+ * 265 Putnam Avenue, Brooklyn, New York
+
+ Using the Nominatim encoder from OpenStreetMap, we can geocode to find the lattitude and longitude of 
+ this address, as follows.
+
+ ```{python}
+ from geopy.geocoders import Nominatim
+
+# Initialize the Nominatim geocoder
+geolocator = Nominatim(user_agent="geopy_example")
+
+# Address to be geocoded
+address = "265 Putnam Avenue, Brooklyn, NY"
+
+try:
+    # Perform geocoding
+    location = geolocator.geocode(address)
+
+    if location:
+        # Print the results
+        print("Address:", address)
+        print("Latitude:", location.latitude)
+        print("Longitude:", location.longitude)
+    else:
+        print("Location not found.")
+except Exception as e:
+    print("Error:", e)
+```
+And the output is as follows:
+Address: 265 Putnam Avenue, Brooklyn, NY
+Latitude: 40.68404835
+Longitude: -73.95149699550375
