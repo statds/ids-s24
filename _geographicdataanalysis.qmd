@@ -22,7 +22,7 @@ This section was written by Jack Dennison.
  Hello! My name is Jack Dennison and I am a junior dual Applied Data Analysis and Geographic Information 
  systems major. I am interested in the intersection of geography and statistics, so this presentation 
  reflects that. Therefore, I'm going to talk about the various ways that Geographic Data Analysis can be 
- done using python. Some examples of things that will be disussed are `geopy`, `geopandas`, and `arcpy`.
+ done using python. Some examples of things that will be discussed are `geopy`, `geopandas`, and `arcpy`.
 
  ## Downloading the Necessary Packages
  In order to download GeoPy, you can simply install it using either Conda or pip commands.
@@ -61,7 +61,7 @@ This section was written by Jack Dennison.
 
  * 265 Putnam Avenue, Brooklyn, New York
 
- Using the Nominatim encoder from OpenStreetMap, we can geocode to find the lattitude and longitude of 
+ Using the Nominatim encoder from OpenStreetMap, we can geocode to find the latitude and longitude of 
  this address. Before going through with this, it should be noted that the rodent data file does give
  the latitude and longitude of every rodent incident, so this will be used to check work. The coordinates
  given by the data are as follows: (40.683855196486164, -73.95164557951071). Let's see if we can 
@@ -205,11 +205,11 @@ gdf['geometry'] = gpd.points_from_xy(gdf['Longitude'], gdf['Latitude'])
 
 ```
 
-### Visuallizing Geographic Data
+ ### Visuallizing Geographic Data
 
-Once you have imported the data into a GeoDataFrame, you can visualize it using GeoPandas plotting 
-capabilities. There are a variety of plots to be used, but I'm going to use the simple matplotlib
-scatterplot.
+ Once you have imported the data into a GeoDataFrame, you can visualize it using GeoPandas plotting 
+ capabilities. There are a variety of plots to be used, but I'm going to use the simple matplotlib
+ scatterplot.
 
 ```{python}
 import matplotlib.pyplot as plt
@@ -218,14 +218,13 @@ import matplotlib.pyplot as plt
 gdf.plot()
 plt.show()
 ```
-This plot creates what almost looks like an outline of New York City, which is not only interesting in 
-its own right, but also highlights the extent of the rodent problem in the city. Using geopandas can 
-fully highlight the scope of the issue by showing the data on a visual scale.
+ This plot creates what almost looks like an outline of New York City, which is not only interesting in  
+ its own right, but also highlights the extent of the rodent problem in the city. Using geopandas can 
+ fully highlight the scope of the issue by showing the data on a visual scale.
 
-### Geometric Operations
+ ### Geometric Operations
 
-GeoPandas allows you to perform geometric operations on the GeoDataFrame. For example, you can buffer 
-the points and calculate distances between points. Here's how these operations are done:
+ GeoPandas allows you to perform geometric operations on the GeoDataFrame. For example, you can buffer the points and calculate distances between points. Here's how these operations are done:
 
 ```{python}
 import matplotlib.pyplot as plt
@@ -239,77 +238,77 @@ buffered.plot()
 plt.show()
 distances
 ```
-The buffer creates a small circle around each point in the data. The plot reflects this, as the circles 
-are slightly larger than the initial plot. Meanwhile, distances are listed as miles from one point to 
-another. Both of these operations can be useful for various spatial data analytics topics.
+ The buffer creates a small circle around each point in the data. The plot reflects this, as the circles 
+ are slightly larger than the initial plot. Meanwhile, distances are listed as miles from one point to 
+ another. Both of these operations can be useful for various spatial data analytics topics.
 
-### Exporting Data
-Another feature of GeoPandas is that GeoDataFrames can be exported to various file types, such as 
-shapefiles, GeoJSON, CSV, and other formats. This can be done using this code:
+ ### Exporting Data
+ Another feature of GeoPandas is that GeoDataFrames can be exported to various file types, such as 
+ shapefiles, GeoJSON, CSV, and other formats. This can be done using this code:
 
 ```{python}
 gdf.to_file('output.shp')
 ```
-This shapefile can be used with ArcGIS Pro and ArcPy to do further data analysis on it.
+ This shapefile can be used with ArcGIS Pro and ArcPy to do further data analysis on it.
 
-### Other Features
-There are several other features that GeoPandas has. Its seamless integration with Pandas allows users 
-to leverage the familiar DataFrame and Series data structures for geospatial data analysis. It can do 
-operations such as joins and Geocoding which are improved versions of commands from Pandas and Geopy 
-respectively. GeoPandas seamlessly integrates with other Python libraries commonly used in the 
-geospatial ecosystem, such as Shapely, Fiona, Pyproj, Cartopy, and more. This interoperability allows 
-users to leverage the functionalities of these libraries in conjunction with GeoPandas for advanced 
-geospatial analysis and visualization tasks. These features make GeoPandas a valuable tool for 
-geospatial data analysis, manipulation, and visualization in Python, suitable for a wide range of 
-applications and domains.
+ ### Other Features
+ There are several other features that GeoPandas has. Its seamless integration with Pandas allows users 
+ to leverage the familiar DataFrame and Series data structures for geospatial data analysis. It can do 
+ operations such as joins and Geocoding which are improved versions of commands from Pandas and Geopy 
+ respectively. GeoPandas seamlessly integrates with other Python libraries commonly used in the 
+ geospatial ecosystem, such as Shapely, Fiona, Pyproj, Cartopy, and more. This interoperability allows 
+ users to leverage the functionalities of these libraries in conjunction with GeoPandas for advanced 
+ geospatial analysis and visualization tasks. These features make GeoPandas a valuable tool for 
+ geospatial data analysis, manipulation, and visualization in Python, suitable for a wide range of 
+ applications and domains.
 
-## ArcPy
-ArcPy is another very effective way to conduct geographic data analysis queries. This package is unique,
-because it's unique to ESRI's ArcGIS software, which is geographic information system (GIS) software 
-platform. This provides a comprehensive set of tools and functions for automating, customizing, and 
-extending the capabilities of ArcGIS Desktop, including ArcMap, ArcCatalog, and ArcGIS Pro.
+ ## ArcPy
+ ArcPy is another very effective way to conduct geographic data analysis queries. This package is unique,
+ because it's unique to ESRI's ArcGIS software, which is geographic information system (GIS) software 
+ platform. This provides a comprehensive set of tools and functions for automating, customizing, and 
+ extending the capabilities of ArcGIS Desktop, including ArcMap, ArcCatalog, and ArcGIS Pro.
 
-ArcPy allows users to manage and manipulate geospatial data within ArcGIS, provides access to a wide 
-range of geoprocessing tools and spatial analysis functions available in ArcGIS, allows users to 
-automate map creation and layout design, provides tools for converting between different geospatial data 
-formats and data sources, and provides many more resources for optimizing the creation of maps. 
-Unfortunately, due to the service requiring ArcGIS pro to function, the capabilities of ArcPy can not be 
-demonstrated in class, but the usefulness of the program cannot be understated.
+ ArcPy allows users to manage and manipulate geospatial data within ArcGIS, provides access to a wide 
+ range of geoprocessing tools and spatial analysis functions available in ArcGIS, allows users to 
+ automate map creation and layout design, provides tools for converting between different geospatial 
+ data formats and data sources, and provides many more resources for optimizing the creation of maps. 
+ Unfortunately, due to the service requiring ArcGIS pro to function, the capabilities of ArcPy can not 
+ be demonstrated in class, but the usefulness of the program cannot be understated.
 
-## Conclusion
+ ## Conclusion
 
-In conclusion, Geographic Data Analysis offers a multitude of possibilities for exploring, visualizing, 
-and understanding spatial relationships and patterns. Through the exploration of tools like GeoPy, 
-GeoPandas, and ArcPy, we've uncovered a plethora of capabilities for geospatial data manipulation, 
-analysis, and visualization using Python.
+ In conclusion, Geographic Data Analysis offers a multitude of possibilities for exploring, visualizing, 
+ and understanding spatial relationships and patterns. Through the exploration of tools like GeoPy, 
+ GeoPandas, and ArcPy, we've uncovered a plethora of capabilities for geospatial data manipulation, 
+ analysis, and visualization using Python.
 
-GeoPy, with its geocoding and reverse geocoding functionalities, provides valuable tools for translating 
-addresses to coordinates and vice versa, enabling precise spatial analysis. Its distance calculation 
-capabilities further enhance our ability to quantify spatial relationships and distances between 
-locations.
+ GeoPy, with its geocoding and reverse geocoding functionalities, provides valuable tools for 
+ translating addresses to coordinates and vice versa, enabling precise spatial analysis. Its distance 
+ calculation capabilities further enhance our ability to quantify spatial relationships and distances 
+ between locations.
 
-GeoPandas extends the power of Pandas to spatial data analysis, allowing seamless integration of 
-geometric operations and spatial data types into our workflows. From importing CSV data to performing 
-geometric operations and visualizing geographic data, GeoPandas offers a comprehensive toolkit for 
-geospatial analysis and visualization.
+ GeoPandas extends the power of Pandas to spatial data analysis, allowing seamless integration of 
+ geometric operations and spatial data types into our workflows. From importing CSV data to performing 
+ geometric operations and visualizing geographic data, GeoPandas offers a comprehensive toolkit for 
+ geospatial analysis and visualization.
 
-While ArcPy offers similar functionalities, it is uniquely tailored to the ArcGIS software platform, 
-providing a robust set of tools for managing and analyzing geospatial data within ArcGIS Desktop 
-environments. Although not directly demonstrated in this report, ArcPy serves as a powerful resource for 
-GIS professionals, offering automation, customization, and extensibility capabilities.
+ While ArcPy offers similar functionalities, it is uniquely tailored to the ArcGIS software platform, 
+ providing a robust set of tools for managing and analyzing geospatial data within ArcGIS Desktop 
+ environments. Although not directly demonstrated in this report, ArcPy serves as a powerful resource 
+ for GIS professionals, offering automation, customization, and extensibility capabilities.
 
-Overall, the combination of GeoPy, GeoPandas, and ArcPy empowers users to explore, analyze, and 
-visualize geospatial data with ease and precision. Whether it's exploring spatial relationships, 
-conducting spatial analysis, or creating insightful visualizations, Geographic Data Analysis with Python 
-opens up endless possibilities for understanding our world through spatial data.
+ Overall, the combination of GeoPy, GeoPandas, and ArcPy empowers users to explore, analyze, and 
+ visualize geospatial data with ease and precision. Whether it's exploring spatial relationships, 
+ conducting spatial analysis, or creating insightful visualizations, Geographic Data Analysis with 
+ Python opens up endless possibilities for understanding our world through spatial data.
 
-## References
+ ## References
 
-* GeoPy Documentation 
+ * GeoPy Documentation 
     + https://geopy.readthedocs.io/en/stable/
-* GeoPandas Documentation: 
+ * GeoPandas Documentation: 
     + https://geopandas.org/en/stable/index.html
-* ArcPy Info
+ * ArcPy Info
     + https://pro.arcgis.com/en/pro-app/3.1/arcpy/get-started/what-is-arcpy-.htm
-* NYC Rodent Data
+ * NYC Rodent Data
     + https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9/about_data
