@@ -172,3 +172,70 @@ print("Distance between the two listed points: {:.2f} miles".format(distance_hav
  needs. Because of the ease of use of the software and its open-source code, it's accessible to both 
  beginners and experienced developers and encourages collaboration and innovation, allowing users to 
  contribute enhancements, report issues, and share their experiences with the community.
+
+ ## Geopandas
+ Geopandas is another spatially related Python package, which allows a lot more operations to work with
+ geospatial data. It extends the capabilities of the popular data manipulation library, pandas, by 
+ adding support for geometric operations and spatial data types. GeoPandas combines the functionality of 
+ pandas with the capabilities of other geospatial libraries such as Shapely, Fiona, and Matplotlib, 
+ making it a powerful tool for geospatial analysis, manipulation, and visualization.
+
+ ### Importing CSV Data
+ To work with the rodent data with geopandas, the data first needs to imported into a GeoDataFrame. This 
+ can be done easily, but it's important specify geometry column as the coordinate columns. Here is how
+ it's done.
+
+ ```{python}
+import geopandas as gpd
+import pandas as pd
+
+# Read CSV file into a GeoDataFrame
+gdf = gpd.read_file('/Users/jackdennison/rodent-sighting-data-cleaning-RockinJack/HW4_rodents.csv', 
+                    crs='EPSG:4326')  # Specify the coordinate reference system (CRS)
+
+# Drop rows with missing or invalid coordinates
+gdf = gdf.dropna(subset=['Longitude', 'Latitude'])
+
+# Convert 'Longitude' and 'Latitude' columns to numeric type
+gdf['Longitude'] = pd.to_numeric(gdf['Longitude'], errors='coerce')
+gdf['Latitude'] = pd.to_numeric(gdf['Latitude'], errors='coerce')
+
+# Create geometry column from Latitude and Longitude
+gdf['geometry'] = gpd.points_from_xy(gdf['Longitude'], gdf['Latitude'])
+
+```
+
+### Visuallizing Geographic Data
+
+Once you have imported the data into a GeoDataFrame, you can visualize it using GeoPandas plotting 
+capabilities. There are a variety of plots to be used, but I'm going to use the simple matplotlib
+scatterplot.
+
+```{python}
+import matplotlib.pyplot as plt
+
+# Plot the GeoDataFrame
+gdf.plot()
+plt.show()
+```
+This plot creates what almost looks like an outline of New York City, which is not only interesting in 
+its own right, but also highlights the extent of the rodent problem in the city. Using geopandas can 
+fully highlight the scope of the issue by showing the data on a visual scale.
+
+### Geometric Operations
+
+GeoPandas allows you to perform geometric operations on the GeoDataFrame. For example, you can buffer 
+the points and calculate distances between points. Here's how these operations are done:
+
+```{python}
+import matplotlib.pyplot as plt
+# Buffer the points by a certain distance
+buffered = gdf.buffer(distance=0.01)
+
+# Calculate distances between points
+distances = gdf.distance(gdf.shift())
+
+buffered.plot()
+plt.show()
+distances
+```
