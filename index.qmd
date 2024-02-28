@@ -211,12 +211,11 @@ Please use the following table to sign up.
   ------ | ---------------------- | ------
   02/07  | Matt Elliott           | Data science communication skills
   02/12  | Dr. Haim Bar           | Database management
-  02/19  | Willam Taki            | Visualization with MatPlotlib
+  02/19  | Willam Taki            | Visualization with `matplotlib`
   02/19  | Joshua Lee             | Descriptive Statistics
   02/07  | Weijia Wu              | Visualizaiton with `matplotlib` and `seaborn` 
   02/21  | Pratham Patel          | Handling spatial data with `geopandas`
   02/21  | Olivia Massad          | Grammar of Graphics `plotnine`
-  02/26  | Ge Li                  | Animation
   02/26  | Xingye Zhang           | Data visualizing NYC rodent dataset
   02/28  | Jack Dennison          | Geographic Data Analysis
   02/28  | Isabelle Perez         | Statistical hypothesis tests `scypy.stats`
@@ -227,7 +226,7 @@ Please use the following table to sign up.
   03/25  | Alex Pugh              |
   03/25  | Charitath Chugh        | PyTorch
   03/27  | Vincent Xie            | Database Operations with SQL
-  03/27  |                        |
+  03/27  | Ge Li                  | Animation                       |
   04/01  | William Qualls         | Web Scraping
   04/01  | Madison Woo            | Data Science Ethics 
   04/03  | Braedon Hook           |
