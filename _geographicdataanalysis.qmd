@@ -135,8 +135,34 @@ except Exception as e:
  And here is the output:
  Latitude: 40.77924175816874
  Longitude: -73.95368859796383
- Address: 1538, 3rd Avenue, Carnegie Hill, 
- Manhattan, New York County, City of New York, New York, 10028, United States
+ Address: 1538, 3rd Avenue, Carnegie Hill, Manhattan, New York County, City of New York, New York, 
+ 10028, United States
 
  This matches up exactly with the address that is given in the spreadsheet. This demonstrates how useful
  reverse geo-coding can be with Python and GeoPy.
+
+ ### Distance Mapping
+ Geopy can also be used to map distances between locations. To exemplify this, let's use the two 
+ coordinates from the previous two examples. We will be calculating the distance using the Haversine 
+ formula, which is a method to compute distances between two points on a sphere.
+
+ ```{python}
+from geopy.distance import distance
+
+# Coordinates of two points (latitude and longitude)
+point1 = (40.683855196486164, -73.95164557951071)  # Point from geocoding example
+point2 = (40.77924175816874, -73.95368859796383)  # Point from reverse geocoding example
+
+# Calculate the distance between the two points using the Haversine formula
+distance_haversine = distance(point1, point2).miles  # You can also use kilometers by calling .kilometers
+
+# Print the result
+print("Distance between New York City and Los Angeles (Haversine formula): {:.2f} miles".format(distance_haversine))
+```
+ Here is the output: 
+ Distance between New York City and Los Angeles (Haversine formula): 6.58 miles
+
+ This is an effective method to look at the distance between two points on earth. While the two locations
+ in New York are rather close to each other, this method works regardless of the locations of the points.
+
+ ### Other features
