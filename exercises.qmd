@@ -253,7 +253,23 @@ to understand the data.
         the data using `arrow` and comment on the efficiency gain.
         + Are there invalid zipcode or borough? Justify and clean
         them up if yes.
-    1. Data manipulation.
+    1. Data exploration.
+        + Create binary variable `passing` indicating passing or
+        not for the inspection result. Does `passing` depend on
+        whether the inspection is initial or compliance? State
+        your hypothesis and summarize your test result.
+        + Are the passing pattern different across different
+        boroughs for initial inspections? How about compliance
+        inspections? State your hypothesis and summarize your
+        test results.
+        + If we suspect that the passing rate may depends on
+        the time of a day of the inspection, we may compare
+        the passting rates for inspections done in the mornings
+        and inspections one in the afternoons. Visualize the
+        comparison by borough and inspection type.
+        + Perform a formal hypothesis test to confirm the
+        observations from your visualization.
+    1. Data analytics.
         + Aggregate the inspections by zip code to create
         a dataset with five columns. The first three columns are
          `zipcode`; `n_initial`, the
@@ -262,10 +278,16 @@ to understand the data.
         passing result in that zipcode. The other two variables
         are `n_compliance` and `n_comppass`, the counterpart
         for compliance inspections.
+        + Add a variable to your dataset, `n_sighting`, which
+        represent the number of rodent sightings from the 311
+        service request data in the same 2022-2023 period.
         + Merge your dataset with the simple zipcode table in
         package `uszipcode` by zipcode to obtain demographic
         and socioeconomic variables at the zipcode level.
-        + 
+        + Build a binomial regression for the passing rate of initial
+        inspections at the zipcode level. Assess the goodness-of-fit
+        of your model. Summarize your results to a New Yorker
+        who is not data science savvy.
     1. Now you know the data quite well. Come up with a research
     question of interest that can be answered by the data, which
     could be analytics or visualizations. Perform the needed
