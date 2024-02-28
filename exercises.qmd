@@ -225,3 +225,54 @@ with complain type `Rodent`.
     and validate the performance on the testing data.
     1. Build a lasso logistic model to predict `over3d`, and justify
     your choice of the tuning parameter. Validate on the testing data.
+
+1. **Midterm Project: Rodents in NYC**
+[Rodents in NYC](https://en.wikipedia.org/wiki/Rats_in_New_York_City)
+are widespread, as they are in many densely populated areas. As of
+October 2023, NYC dropped from the 2nd to the 3rd places in the annual
+["rattiest city"
+list](https://www.orkin.com/press-room/top-rodent-infested-cities-2023#)
+released by a pest control company. Rat sightings in NYC was analyzed
+by Dr. Michael Walsh in a [2014 PeerJ
+article](https://peerj.com/articles/533/). We investigate this problem
+from a different angle with the [NYC Rodent Inspection
+data](https://data.cityofnewyork.us/Health/Rodent-Inspection/p937-wjvj/about_data),
+provided by the Department of Health and Mental Hygiene (DOHMH).
+Download the 2022-2023 data by filtering the `INSPECTION_DATE` to
+between 11:59:59 pm of 12/31/2021 and 12:00:00 am of 01/01/2024
+and `INSPECTION_TYPE` is either `Initial` or `Compliance` (which
+should be about 108 MB). Read the meta data information
+to understand the data.
+    1. Data cleaning.
+        + There are two zipcode columns: `ZIP_CODE` and `Zipcodes`.
+        Which one represent the zipcode of the inspection site? 
+        Comment on the data dictionary.
+        + Summarize the missing information. Are their missing values
+        that can be filled using other columns? Fill
+        + Are their redundant information in the data? Try storing
+        the data using `arrow` and comment on the efficiency gain.
+        + Are there invalid zipcode or borough? Justify and clean
+        them up if yes.
+    1. Data manipulation.
+        + Aggregate the inspections by zip code to create
+        a dataset with five columns. The first three columns are
+         `zipcode`; `n_initial`, the
+        count of the initial inspections in that zipcode; and 
+        `n_initpass`, the number of initial inspections with a
+        passing result in that zipcode. The other two variables
+        are `n_compliance` and `n_comppass`, the counterpart
+        for compliance inspections.
+        + Merge your dataset with the simple zipcode table in
+        package `uszipcode` by zipcode to obtain demographic
+        and socioeconomic variables at the zipcode level.
+        + 
+    1. Now you know the data quite well. Come up with a research
+    question of interest that can be answered by the data, which
+    could be analytics or visualizations. Perform the needed
+    analyses and answer your question.
+	
+	
+
+
+
+
