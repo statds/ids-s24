@@ -63,7 +63,7 @@ This section was written by Jack Dennison.
  from geopy.geocoders import Nominatim
 
 # Initialize the Nominatim geocoder
-geolocator = Nominatim(user_agent="geopy_example")
+geolocator = Nominatim(user_agent="GeoCoding")
 
 # Address to be geocoded
 address = "265 Putnam Avenue, Brooklyn, NY"
@@ -82,7 +82,50 @@ try:
 except Exception as e:
     print("Error:", e)
 ```
-And the output is as follows:
+ And the output is as follows:
 Address: 265 Putnam Avenue, Brooklyn, NY
 Latitude: 40.68404835
 Longitude: -73.95149699550375
+
+ ### Reverse Geocoding
+ Similarly to how we can use GeoPy to geocode a coordinate based off of an address, we can also do this
+ in reverse: take an address from a lattitude and longitude. Let's again take two coordinates from the
+ rodent data:
+
+ * (40.77924175816874, -73.95368859796383)
+
+With this code, the latitude is the first number and the longitude is the second number.  This latitude,
+according to the spreadsheet, gives the address 1538 Third Avenue, Manhattan, New York. Let's 
+reverse-geocode to find if the address of these coordinates is accurate.
+ ```{python}
+ from geopy.geocoders import Nominatim
+
+# Initialize the Nominatim geocoder
+geolocator = Nominatim(user_agent="ReverseGeoCoding")
+
+# Coordinates to be reverse geocoded (latitude and longitude)
+latitude = 40.77924175816874
+longitude = -73.95368859796383
+
+try:
+    # Perform reverse geocoding
+    location = geolocator.reverse((latitude, longitude), exactly_one=True)
+
+    if location:
+        # Print the results
+        print("Latitude:", latitude)
+        print("Longitude:", longitude)
+        print("Address:", location.address)
+    else:
+        print("Location not found.")
+except Exception as e:
+    print("Error:", e)
+```
+ And here is the output:
+ Latitude: 40.77924175816874
+ Longitude: -73.95368859796383
+ Address: 1538, 3rd Avenue, Carnegie Hill, 
+ Manhattan, New York County, City of New York, New York, 10028, United States
+
+ This matches up exactly with the address that is given in the spreadsheet. This demonstrates how useful
+ reverse geo-coding can be with Python and GeoPy.
