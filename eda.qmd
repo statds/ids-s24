@@ -1,3 +1,5 @@
 # Exploratory Data Analysis
 
 {{< include _descriptives.qmd >}}
+
+{{< include _scipy_stats.qmd >}}

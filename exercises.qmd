@@ -248,7 +248,7 @@ to understand the data.
         Which one represent the zipcode of the inspection site? 
         Comment on the data dictionary.
         + Summarize the missing information. Are their missing values
-        that can be filled using other columns? Fill
+        that can be filled using other columns? Fill them if yes.
         + Are their redundant information in the data? Try storing
         the data using `arrow` and comment on the efficiency gain.
         + Are there invalid zipcode or borough? Justify and clean

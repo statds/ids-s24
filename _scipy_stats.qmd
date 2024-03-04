@@ -1,0 +1,546 @@
+---
+title: "Hypothesis Testing with scipy.stats"
+author: "Isabelle Perez"
+toc: true
+number-sections: true
+highlight-style: pygments
+format: 
+  html: 
+    code-fold: true
+    html-math-method: katex
+  pdf: 
+    geometry: 
+      - top=30mm
+      - left=20mm
+##  docx: default
+--- 
+
+This section was written by Isabelle Perez. 
+
+## Introduction 
+Hello! My name is Isabelle Perez and I am a junior Mathematics-Statistics major and 
+Computer Science minor. I am interested in learning about data science topics and 
+have an interest in how statistics can improve sports analytics, specifically in 
+baseball. Today's topic is the `scipy.stats` package and the many hypothesis tests 
+that we can perform using it. 
+
+## `Scipy.stats` 
+The package `scipy.stats` is a subpackage of `Scipy` and contains many methods useful
+for statistics such as probability distributions, summary statistics, statistical tests,
+etc. The focus of this presentation will be on some of the many hypothesis tests that can 
+be easily conducted using `scipy.stats` and will provide examples of situations in 
+which they may be useful.  
+
+Firstly, ensure `Scipy` 
+is installed by using `pip install scipy` or  
+`conda install -c anaconda scipy`. 
+
+To import the package, use the command `import scipy.stats`. 
+
+## Basic Statistical Hypothesis Tests 
+### Two-sample t-test 
+
+| H~0~: $\mu_1 = \mu_2$  
+| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$   
+
+&NewLine; 
+
+**Code:** `scipy.stats.ttest_ind(sample_1, sample_2)`  
+
+**Assumptions:** Observations are independent and identically distributed (i.i.d), 
+normally distributed, and the two samples have equal variances. 
+
+**Optional Parameters:**
+
+* `nan_policy` can be set to `propagate` (return `nan`), `raise` (raise `ValueError`),  
+or `omit` (ignore null values).
+* `alternative` can be `two-sided` (default), `less`, or `greater`. 
+* `equal_var` is a boolean representing whether the variances of the two samples are 
+equal  
+(default is True). 
+* `axis` defines the axis along which the statistic should be computed (default is 0). 
+
+**Returns:** The t-statisic, a corresponding p-value, and the degrees of freedom. 
+
+### Paired t-test 
+
+| H~0~: $\mu_1 = \mu_2$
+| H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$  
+ 
+&NewLine; 
+
+**Code:** `scipy.stats.ttest_rel(sample_1, sample_2)` 
+
+**Assumptions:** Observations are i.i.d, normally distributed, and related, 
+and the two samples have equal variances. The input arrays must also be 
+of the same size since the observations are paired.  
+
+**Optional Parameters:** Can use `nan_policy` or `alternative`. 
+
+**Returns:** The t-statisic, a corresponding p-value, and the degrees of freedom. 
+Also has a method called `confidence_interval` with input parameter `confidence_level`
+that returns a tuple with the confidence interval around the difference in 
+population means of the two samples.  
+
+### ANOVA 
+
+| H~0~: $\mu_1 = \mu_2 = ... = \mu_n$
+| H~1~: at least two $\mu_i$ are not equal  
+
+&NewLine; 
+
+**Code:** `scipy.stats.f_oneway(sample_1, sample_2, ..., sample_n)`
+
+**Assumptions:** Samples are i.i.d., normally distributed, and the samples have
+equal variances. 
+
+**Errors:**  
+
+* Raises `ConstantInputWarning` if all values in each of the inputs are 
+identical. 
+* Raises `DegenerateDataWarning` if any input has length $0$ or all inputs
+have length $1$. 
+
+**Returns:** The F-statistic and a corresponding p-value. 
+
+### Example: Comparison of Mean Response Times by Borough  
+Looking at the 2022-2023 rodent sighting data from the NYC 311 Service Requests,  
+there are many ways a two-sample t-test may be useful. For example, we can consider 
+samples drawn from different boroughs and perform this hypothesis test to 
+identify whether their mean response times differ. If so, this may suggest 
+that some boroughs are being underserviced.  
+```{python} 
+import pandas as pd 
+import numpy as np 
+import scipy.stats   
+
+# read in file 
+df = pd.read_csv('data/rodent_2022-2023.csv')  
+
+# data cleaning - change dates to timestamp object
+df['Created Date'] = pd.to_datetime(df['Created Date'])
+df['Closed Date'] = pd.to_datetime(df['Closed Date'])
+
+# add column Response Time 
+df['Response Time'] = df['Closed Date'] - df['Created Date']
+
+# convert data to total seconds
+df['Response Time'] = df['Response Time'].apply(lambda x: x.total_seconds() / 3600)    
+``` 
+
+Since the two-sample t-test assumes the data is drawn from a normal distribution,  
+we need to ensure the samples we are comparing are normally distributed. According 
+to the Central Limit theorem, the distribution of sample means from repeated 
+samples of a population will be roughly normal. Therefore, we can take 100 samples 
+of each borough's response times, measure the mean of each sample, and perform the 
+hypothesis test on the arrays of sample means. 
+```{python}
+import matplotlib.pyplot as plt 
+
+# select Bronx and Queens boroughs 
+df_mhtn = df[df['Borough'] == 'MANHATTAN']['Response Time'] 
+df_queens = df[df['Borough'] == 'QUEENS']['Response Time']  
+
+mhtn_means = []
+queens_means = []
+
+# create samples of sampling means 
+for i in range(100): 
+  sample1 = df_mhtn.sample(1000, replace = True)
+  mhtn_means.append(sample1.mean())
+
+  sample2 = df_queens.sample(1000, replace = True) 
+  queens_means.append(sample2.mean())  
+
+# plot distribution of sample means for Manhattan
+plt.hist(mhtn_means)
+plt.xlabel('Mean Response Times for Manhattan')
+plt.ylabel('Value Counts')
+plt.show()
+
+# plot distribution of sample means for Queens 
+plt.hist(queens_means) 
+plt.xlabel('Mean Response Times for Queens')
+plt.ylabel('Value Counts')
+plt.show() 
+```  
+
+We also need to check if the variances of the two samples are equal. 
+```{python}
+# convert to numpy array 
+mhtn_means = np.array(mhtn_means)
+queens_means = np.array(queens_means)
+
+print('Mean, variance for Manhattan', (mhtn_means.mean(), mhtn_means.std() ** 2))
+print('Mean, variance for Queens:', (queens_means.mean(), queens_means.std() ** 2))
+```
+Since the ratio of the variances is less than $2$, it is safe to assume equal variances.  
+
+```{python}
+result_ttest = scipy.stats.ttest_ind(mhtn_means, queens_means, equal_var = True)
+
+print('t-statistic:', result_ttest.statistic)
+print('p-value:', result_ttest.pvalue) 
+# print('degrees of freedom:', result_ttest.df) 
+``` 
+At an alpha level of $0.05$, the p-value allows us to reject the null hypothesis
+and conclude that there is a statistically significant difference in the mean of 
+sample means drawn from rodent sighting response times for Manhattan compared to Queens. 
+
+```{python}
+result_ttest2 = scipy.stats.ttest_ind(mhtn_means, queens_means, equal_var = True, 
+                                                            alternative = 'less') 
+
+print('t-statistic:', result_ttest2.statistic)
+print('p-value:', result_ttest2.pvalue) 
+# print('degrees of freedom:', result_ttest2.df) 
+```
+We can also set the alternative equal to `less` to test if the mean of sample means
+drawn from the Manhattan response times is less than that of sample means drawn from
+Queens response times. At the alpha level of $0.05$, we can also reject this null
+hypothesis and conclude that the mean of sample means is less for Manhattan than 
+it is for Queens. 
+
+## Normality 
+### Shapiro-Wilk Test 
+
+| H~0~: data is drawn from a normal distribution  
+| H~1~: data is not drawn from a normal distribution     
+
+&NewLine; 
+
+**Code:** `scipy.stats.shapiro(sample)` 
+
+**Assumptions:** Observations are i.i.d. 
+
+**Returns:** The test statistic and corresponding p-value. 
+
+* More appropriate for smaller sample sizes ($<50$). 
+* The closer the test statistic is to $1$, the closer it is to a normal 
+distribution, with $1$ being a perfect match.   
+
+### NormalTest 
+
+| H~0~: data is drawn from a normal distribution  
+| H~1~: data is not drawn from a normal distribution   
+
+&NewLine; 
+
+**Code:** `scipy.stats.normaltest(sample)`  
+
+**Assumptions:** Observations are i.i.d. 
+
+**Optional Parameters:** Can use `nan_policy`. 
+
+**Returns:** The test-statistic $s^2 + k^2$, where $s^2$ is from the `skewtest`
+and $k$ is from the `kurtosistest`, and a corresponding p-value
+
+This test is based on D'Agostino and Pearson's test which combines skew
+and kurtosis (heaviness of the tail or how much data resides in the tails). 
+The test compares the skewness and kurtosis of the sample to that of a normal 
+distribution, which are $0$ and $3$, respectively.
+
+### Example: Distribution of Response Times 
+It can be useful to identify the distribution of a population because it gives
+us the ability to summarize the data more efficiently. We can identify 
+whether or not the distribution of a sample of response times  
+from the rodent sighting dataset is normal by conducting a normality test using `scipy.stats`. 
+
+```{python}
+# take a sample from Response Time column 
+resp_time_samp = df['Response Time'].sample(10000, random_state = 0)  
+
+results_norm = scipy.stats.normaltest(resp_time_samp, nan_policy = 'propagate')
+
+print('test statistic:', results_norm.statistic) 
+print('p-value:', results_norm.pvalue)
+``` 
+Because there are null values in the sample data, if we set the `nan_policy` 
+to `propagate`, both the test statistic and p-value will return as `nan`. 
+If we still want to obtain results when there is missing data, we must set the
+`nan_policy` to `omit`. 
+
+```{python}
+results_norm2 = scipy.stats.normaltest(resp_time_samp, nan_policy = 'omit') 
+
+print('test statistic:', results_norm2.statistic) 
+print('p-value:', results_norm2.pvalue)
+```
+At an alpha level of $0.05$, the p-value allows us to reject the null hypothesis
+and conclude that the data is not drawn from a normal distribution. We can further
+show this by plotting the data in a histogram. 
+
+```{python}
+bins = [i for i in range(int(resp_time_samp.min()), int(resp_time_samp.max()), 300)]
+
+plt.hist(resp_time_samp, bins = bins)
+plt.xlabel('Response Times')
+plt.ylabel('Value Counts')
+plt.show()
+``` 
+
+## Correlation   
+### Pearson's Correlation     
+
+| H~0~: the correlations is $0$
+| H~1~: the correlations is $\neq$, $<$, or $> 0$ 
+
+&NewLine; 
+
+**Code:** `scipy.stats.pearsonr(sample_1, sample_2)`
+
+**Assumptions:** Observations are i.i.d, normally distributed, and the two samples
+have equal variances. 
+
+**Optional Parameters:** Can use `alternative`. 
+
+**Errors:** 
+
+* Raises `ConstantInputWarning` if either input has all constant values. 
+* Raises `NearConstantInputWarning` if 
+`np.linalg.norm(x - mean(x)) < 1e-13 * np.abs(mean(x))`. 
+
+**Returns:** The correlation coefficient and a corresponding p-value. It also 
+has the `confidence_interval` method. 
+
+### Chi-Squared Test 
+
+| H~0~: the two variables are independent of one another
+| H~1~: a dependency exists between the two variables 
+
+&NewLine; 
+
+**Code:** `scipy.stats.chi2_contingency(table)` 
+
+**Assumptions:** The cells in the table contain frequencies, the levels of each
+variable are mutually exclusive, and observations are independent. [2]
+
+**Returns:** The test statistic, a corresponding p-value, the degrees of freedom, 
+and an array of expected frequencies from the table. 
+
+* `dof = table.size - sum(table.shape) + table.ndim - 1` 
+
+### Example: Analyzing the Relationship Between Season and Response Time 
+
+One way in which the chi-squared test may prove useful with the 2022-2023 311 Service
+Request rodent sighting data is by allowing us to identify dependencies between 
+different variables, categorical ones in particular. For example, we can choose a borough
+and test whether the season in which the request was created is independent of the 
+type of sighting, using the `Descriptor` column. 
+```{python}
+# return season based off month of created date
+def get_season(month): 
+  if month in [3, 4, 5]:
+    return 'Spring'
+  elif month in [6, 7, 8]: 
+    return 'Summer'
+  elif month in [9, 10, 11]: 
+    return 'Fall'
+  elif month in [12, 1, 2]:
+    return 'Winter' 
+
+# add column for season 
+df['Season'] = df['Created Date'].dt.month.apply(get_season)
+
+# create df for Brooklyn 
+df_brklyn = df[df['Borough'] == 'BROOKLYN'] 
+
+freq_table_2 = pd.crosstab(df_brklyn.Season, df_brklyn.Descriptor) 
+
+freq_table_2
+``` 
+
+```{python}
+results_chi2 = scipy.stats.chi2_contingency(freq_table_2)
+
+print('test statistic:', results_chi2.statistic)
+print('p-value:', results_chi2.pvalue)
+print('degrees of freedom:', results_chi2.dof) 
+``` 
+At an alpha level of $0.05$, the p-value allows us to reject the null hypothesis
+and conclude that the `Season` and `Descriptor` columns are indeed dependent for 
+Brooklyn. This can also be confirmed by plotting the descriptor frequencies in a 
+stacked bar chart, where the four seasons represent different colored bars.
+
+```{python}
+x_labels = ['Condition', 'M.Sighting', 'R.Sighting', 'Bite', 'Signs of Rodents']
+
+freq_table_2.rename(columns = {'Condition Attracting Rodents': 'Condition', 
+                      'Rat Sighting': 'R.Sighting', 'Mouse Sighting': 'M.Sighting', 
+                      'Rodent Bite - PCS Only': 'Bite'},
+                      inplace = True)
+
+freq_table_2.T.plot(kind = 'bar', stacked = True) 
+``` 
+The bar chart above shows that the ranking of each season by number of rodent 
+sightings is consistent across all five types of rodent sightings. This further suggests
+that there exists dependency between season and rodent sighting in Brooklyn. 
+
+## Nonparametric Hypothesis Tests   
+### Mann-Whitney U (Wilcoxon Rank-Sum) Test  
+
+| H~0~: distribution of population 1 $=$ distribution of population 2
+| H~1~: distribution of population 1 $\neq$ or $>$ or $<$ distribution of population 2   
+
+&NewLine; 
+
+**Code:** `scipy.stats.mannwhitneyu(sample_1, sample_2)` 
+
+**Assumptions:** Observations are independent and ordinal.  
+
+**Optional Parameters:** 
+
+:::{}
+* `alternative` can allow us to test if one sample has a distribution that is 
+stochastically less than or greater than that of the second sample.   
+* Can use `nan_policy`. 
+* `method` selects how the p-value is calculated and can be set to 
+`asymptotic`, `exact`, or `auto`. 
+  + `asymptotic` corrects for ties and compares the standardized test statistic
+  to the normal distribution. 
+  + `exact` does not correct for ties and computes the exact p-value.
+  + `auto` (default) chooses `exact` when there are no ties and the 
+  size of one sample is $<=8$, `asymptotic` otherwise. 
+::: 
+
+**Returns:** The Mann-Whitney U Statistic corresponding with the first sample 
+and a corresponding p-value. 
+
+:::{}
+* The statistic corresponding to the second sample is not returned but can 
+be calculated as `sample_1.shape * sample_2.shape - U1` where `U1` is the 
+test statistic associated with `sample_1`. 
+* For large sample sizes, the distribution can be assumed to be approximately
+normal, so the statisic can be measured as $z = \frac{U-\mu_{U}}{\sigma_{U}}$. 
+* To adjust for ties, the standard deviation is calculated as follows: 
+
+$\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) - 
+\frac{\sum_{k = 1}^{K}(t^{3}_{k} - t_{k})}{n(n - 1)})}$, where $t_{k}$ is the number of ties. 
+
+* Non-parametric version of the two-sample t-test. 
+* If the underlying distributions have similar shapes, the test is 
+essentially a comparison of medians. [5]
+::: 
+
+### Wilcoxon Signed-Rank test
+
+| H~0~: distribution of population 1 $=$ distribution of population 2
+| H~1~: distribution of population 1 $\neq$ or $>$ or $<$ distribution of population 2  
+
+&NewLine;  
+
+**Code:** `scipy.stats.wilcoxon(sample_1, sample_2)` or  
+`scipy.statss.wilcoxon(sample_diff, None)` 
+
+**Assumptions:** Observations are independent, ordinal, and the samples are paired.
+
+**Optional Parameters:** 
+
+* `zero-method` chooses how to handle pairs with the same value. 
+  + `wilcox` (default) doesn't include these pairs. 
+  + `pratt` drops ranks of pairs whose difference is $0$. 
+  + `zsplit` includes pairs and assigns half the ranks into the positive
+  group and the other half in the negative group. 
+* Can use `alternative` and `nan_policy`. 
+* `alternative` allows us to identify whether the distribution of the difference
+is stochastically greater than or less than a distribution symmetric about $0$. 
+* `method` selects how the p-value is calculated. 
+  + `exact` computes the exact p-value. 
+  + `approx` finds the p-value by standardizing the test statistic. 
+  + `auto` (default) chooses `exact` when the sizes of the samples are $<=50$
+  and `approx` otherwise. 
+
+**Returns:** The test statistic, a corresponding p-value, and the calculated
+z-score when the `method` is `approx`. 
+
+* Non-parametric version of the paired t-test.  
+
+### Kruskal-Wallis H-Test 
+
+| H~0~: all populations have the same distribution 
+| H~1~: $>=2$ populations are distributed differently  
+
+&NewLine; 
+
+**Code:** `scipy.stats.kruskal(sample_1, ..., sample_n)`
+
+**Assumptions:** Observations are independent, ordinal, and each sample has 
+$>=5$ observations. [3]
+
+**Optional Parameters:** Can use `nan_policy`.
+
+**Returns:** The Kruskal-Wallis H-statisic (corrected for ties) and a 
+corresponding p-value. 
+
+* Non-parametric version of ANOVA. 
+
+### Example: Distribution of Response Times for 2022 vs. 2023 
+
+We can use the Mann-Whitney test to compare the distributions of response times
+from our rodent data. For example, we can split the data into two groups, one for 2022
+and the other for 2023, to compare their distributions. 
+```{python}
+# create dfs for 2022 and 2023
+df_2022 = df[df['Created Date'].dt.year == 2022]['Response Time'] 
+df_2023 = df[df['Created Date'].dt.year == 2023]['Response Time']
+
+# perform test with H_0 df_2022 > df_2023
+results_mw = scipy.stats.mannwhitneyu(df_2022, df_2023, nan_policy = 'omit', 
+                                                      alternative = 'greater')
+
+# perform test with H_0 df_2022 < df_2023
+results_mw2 = scipy.stats.mannwhitneyu(df_2022, df_2023, nan_policy = 'omit', 
+                                                        alternative = 'less')
+
+print('test statistic:', results_mw.statistic)
+print('p-value:', results_mw.pvalue)
+print()
+print('test statistic:', results_mw2.statistic)
+print('p-value:', results_mw2.pvalue)
+``` 
+At an alpha level of $0.05$, the p-value of $1$ is too large to reject the null hypothesis,
+therefore we cannot conclude that the distribution of response times for 2022 is 
+stochastically greater than that for 2023. But when we set the alternative to `less`, our
+p-value is small enough to conclude that the distribution of response times for 2022
+is stochastically greater than the distribution of response times for 2023. 
+
+```{python}
+bins = [i for i in range(5, 500, 50)]
+plt.hist(df_2022, label = 2022, bins = bins, color = 'red') 
+plt.hist(df_2023, label = 2023, bins = bins, color = 'blue', 
+                                                  alpha = 0.5)
+
+plt.legend()
+plt.show()  
+``` 
+This small subset of data confirms the results of the one-sided hypothesis test, showing 
+that in general, the counts of response times for 2022 are greater than those for 2023, 
+suggesting the distribution for 2022 is stochastically larger than that of 2023 data. 
+
+### Example: Distribution of Response Times by Season 
+
+Similar to the previous, example, we can use a non-parametric test to compare the distribution 
+of response times by season. Because in this case we have four samples to compare, we need
+to use the Kruskal Wallis H-Test. 
+```{python}
+df_summer = df[df['Season'] == 'Summer']['Response Time']
+df_spring = df[df['Season'] == 'Spring']['Response Time']
+df_fall = df[df['Season'] == 'Fall']['Response Time']
+df_winter = df[df['Season'] == 'Winter']['Response Time']
+
+results_kw = scipy.stats.kruskal(df_summer, df_spring, df_fall, df_winter,
+                                                                nan_policy = 'omit')
+
+print('test statistic:', results_kw.statistic) 
+print('p-value:', results_kw.pvalue)
+```
+At an alpha level of $0.05$, the p-value of $0.0496$ is just small enough to reject the 
+null hypothesis, suggesting that the distribution of response times differs by season, 
+but not by much.   
+
+## References 
+1. <https://docs.scipy.org/doc/scipy/reference/stats.html> (`scipy.stats` documentation)
+2. <https://libguides.library.kent.edu/SPSS/ChiSquare> 
+3. <https://library.virginia.edu/data/articles/getting-started-with-the-kruskal-wallis-test>
+4. <https://machinelearningmastery.com/statistical-hypothesis-tests-in-python-cheat-sheet/>
+5. <https://library.virginia.edu/data/articles/the-wilcoxon-rank-sum-test>  
