@@ -483,7 +483,7 @@ fig.update_layout(shapes=[dict(type="rect",
                                     showarrow=False, 
                                     font=dict(size=10, color="black"))])
 fig.show()
-``` -->
+```
 
 As you can see from the figure, the critical value we obtain (2034)
 is exceptionally far beyond the bounds of the distribution, that 

@@ -115,7 +115,7 @@ import numpy as np
 import scipy.stats   
 
 # read in file 
-df = pd.read_csv('rodent_2022-2023.csv')  
+df = pd.read_csv('data/rodent_2022-2023.csv')  
 
 # data cleaning - change dates to timestamp object
 df['Created Date'] = pd.to_datetime(df['Created Date'])
@@ -181,7 +181,7 @@ result_ttest = scipy.stats.ttest_ind(mhtn_means, queens_means, equal_var = True)
 
 print('t-statistic:', result_ttest.statistic)
 print('p-value:', result_ttest.pvalue) 
-print('degrees of freedom:', result_ttest.df) 
+# print('degrees of freedom:', result_ttest.df) 
 ``` 
 At an alpha level of $0.05$, the p-value allows us to reject the null hypothesis
 and conclude that there is a statistically significant difference in the mean of 
@@ -193,7 +193,7 @@ result_ttest2 = scipy.stats.ttest_ind(mhtn_means, queens_means, equal_var = True
 
 print('t-statistic:', result_ttest2.statistic)
 print('p-value:', result_ttest2.pvalue) 
-print('degrees of freedom:', result_ttest2.df) 
+# print('degrees of freedom:', result_ttest2.df) 
 ```
 We can also set the alternative equal to `less` to test if the mean of sample means
 drawn from the Manhattan response times is less than that of sample means drawn from
