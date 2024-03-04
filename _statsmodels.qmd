@@ -109,8 +109,9 @@ print(df.head())
 
 ### Troubleshooting
 
-Whenever you are having problems with `statsmodels`, you can access the  
-official documentation by visiting [this link](https://www.statsmodels.org/stable/index.html). If you are working in a code editor, you can also run the following in a code cell:
+Whenever you are having problems with `statsmodels`, you can access the 
+official documentation by visiting [this link](https://www.statsmodels.org/stable/index.html). 
+If you are working in a code editor, you can also run the following in a code cell:
 ```{python}
 sm.webdoc() 
 # Opens the official documentation page in your browser
@@ -345,7 +346,7 @@ $e^{\text{coef}}$ of each coefficient:
 ```{python}
 odds_ratios = pd.DataFrame(
     {
-        "Odds Ratio": results.params,
+        "Odds Ratio": result2.params,
         "Lower CI": result2.conf_int()[0],
         "Upper CI": result2.conf_int()[1],
     }
@@ -412,8 +413,9 @@ print(result3.summary())
 
 + **coef:** In this model, increasing the `YEAR` seems to increase the log of the expected 
 count of Sunspot activity (`SUNACTIVITY`) by a small amount. 
-+ **Deviance:** two times the difference between the log-likelihood of a fitted GLM and the log-likelihood of a perfect model where fitted responses match observed responses. A greater deviance indicates a worse fit.
-A larger deviance indicates a worse fit for the model.
++ **Deviance:** two times the difference between the log-likelihood of a fitted GLM and 
+the log-likelihood of a perfect model where fitted responses match observed responses. 
+A greater deviance indicates a worse fit.
 + **Pearson chi2:** measures the goodness-of-fit of the model based on the square deviations 
 between observed and expected values based on the model. A large value suggests that the model 
 does not fit well.
@@ -429,15 +431,13 @@ a full model against a null model (or some reduced model) similar to a
 partial F-test. 
 
 ```{python}
-result3.deviance
+print("Poisson Regression Deviance:", result3.deviance)
 ```
 
 + **Pearson's chi-square test:** This tests whether the predicted probabilities from the model differ significantly from the observed counts. The test statistic is calculated by taking the difference between the null deviance (deviance of a model with just the intercept term) and residual deviance (how well the response variable can be predicted by a model with a given number of predictors). Large Pearson’s chi-squares indicate poor fit.
 
 ```{python}
-result3.null_deviance
-result3.resid_deviance
-result3.pearson_chi2
+print("Chi Squared Stat:",result3.pearson_chi2)
 ```
 
 + **Residual Plots:** Like in linear regression, we can visually plot residuals to look for patterns that shouldn't be there. There are different types of residuals that we can look at, such as deviance residuals:
@@ -486,6 +486,8 @@ waiting_obs = df5.data['waiting']
 # Scatter plot of data samples and histogram
 fig = plt.figure(figsize=(8, 4))
 ax = fig.add_subplot()
+ax.set_ylabel("Count")
+ax.set_xlabel("Time (min)")
 
 ax.hist(
     waiting_obs,
@@ -609,65 +611,65 @@ ax1.grid(True, alpha=0.35)
 ### References
 
 * Installing `statsmodels`:
-    + [https://www.statsmodels.org/stable/install.html]
+    + <https://www.statsmodels.org/stable/install.html>
 
 * `Rdatasets` repository and `statsmodels` datasets:
-    + [https://github.com/vincentarelbundock/Rdatasets/blob/master/datasets.csv]
-    + [https://cran.r-project.org/web/packages/causaldata/causaldata.pdf]
-    + [https://hassavocadoboard.com/]
-    + [https://www.statsmodels.org/stable/datasets/index.html]
-    + [https://www.statsmodels.org/stable/datasets/generated/sunspots.html]
-    + [https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/faithful]
+    + <https://github.com/vincentarelbundock/Rdatasets/blob/master/datasets.csv>
+    + <https://cran.r-project.org/web/packages/causaldata/causaldata.pdf>
+    + <https://hassavocadoboard.com/>
+    + <https://www.statsmodels.org/stable/datasets/index.html>
+    + <https://www.statsmodels.org/stable/datasets/generated/sunspots.html>
+    + <https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/faithful>
 
 * NYC 311 Service Request Data:
-    + [https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9/about_data]
+    + <https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9/about_data>
 
 * Getting help with `statsmodels`:
-    + [https://www.statsmodels.org/stable/generated/statsmodels.tools.web.webdoc.html#statsmodels.tools.web.webdoc]
-    + [https://www.statsmodels.org/stable/endog_exog.html]
+    + <https://www.statsmodels.org/stable/generated/statsmodels.tools.web.webdoc.html#statsmodels.tools.web.webdoc>
+    + <https://www.statsmodels.org/stable/endog_exog.html>
 
 * Loading data, model fit, and summary procedure:
-    + [https://www.statsmodels.org/stable/gettingstarted.html]
+    + <https://www.statsmodels.org/stable/gettingstarted.html>
 
 * Summary Data Interpretation:
-    + [https://www.statology.org/a-simple-guide-to-understanding-the-f-test-of-overall-significance-in-regression/]
-    + [https://www.statology.org/linear-regression-p-value/]
-    + [https://www.statology.org/omnibus-test/]
-    + [https://www.statisticshowto.com/jarque-bera-test/]
-    + [https://www.statology.org/how-to-report-skewness-kurtosis/]
-    + [https://www.statology.org/interpret-log-likelihood/]
-    + [https://stackoverflow.com/questions/46700258/python-how-to-interpret-the-result-of-logistic-regression-by-sm-logit]
-    + [https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-what-are-pseudo-r-squareds/]
-    + [https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/]
-    + [https://vulstats.ucsd.edu/chi-squared.html]
-    + [https://roznn.github.io/GLM/sec-deviance.html]
+    + <https://www.statology.org/a-simple-guide-to-understanding-the-f-test-of-overall-significance-in-regression/>
+    + <https://www.statology.org/linear-regression-p-value/>
+    + <https://www.statology.org/omnibus-test/>
+    + <https://www.statisticshowto.com/jarque-bera-test/>
+    + <https://www.statology.org/how-to-report-skewness-kurtosis/>
+    + <https://www.statology.org/interpret-log-likelihood/>
+    + <https://stackoverflow.com/questions/46700258/python-how-to-interpret-the-result-of-logistic-regression-by-sm-logit>
+    + <https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-what-are-pseudo-r-squareds/>
+    + <https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/>
+    + <https://vulstats.ucsd.edu/chi-squared.html>
+    + <https://roznn.github.io/GLM/sec-deviance.html>
 
 * Generalized Linear Models:
-    + [https://sscc.wisc.edu/sscc/pubs/glm-r/]
-    + [https://online.stat.psu.edu/stat504/lesson/6/6.1]
-    + [https://www.mygreatlearning.com/blog/generalized-linear-models/]
-    + [https://www.statsmodels.org/stable/examples/notebooks/generated/glm.html]
+    + <https://sscc.wisc.edu/sscc/pubs/glm-r/>
+    + <https://online.stat.psu.edu/stat504/lesson/6/6.1>
+    + <https://www.mygreatlearning.com/blog/generalized-linear-models/>
+    + <https://www.statsmodels.org/stable/examples/notebooks/generated/glm.html>
 
 * Logistic Regression:
-    + [https://www.andrewvillazon.com/logistic-regression-python-statsmodels/]
-    + [https://towardsdatascience.com/how-to-interpret-the-odds-ratio-with-categorical-variables-in-logistic-regression-5bb38e3fc6a8]
-    + [https://towardsdatascience.com/a-simple-interpretation-of-logistic-regression-coefficients-e3a40a62e8cf]
-    + https://www.statology.org/interpret-log-likelihood/
+    + <https://www.andrewvillazon.com/logistic-regression-python-statsmodels/>
+    + <https://towardsdatascience.com/how-to-interpret-the-odds-ratio-with-categorical-variables-in-logistic-regression-5bb38e3fc6a8>
+    + <https://towardsdatascience.com/a-simple-interpretation-of-logistic-regression-coefficients-e3a40a62e8cf>
+    + <https://www.statology.org/interpret-log-likelihood/>
 
 * Poisson Regression:
-    + [https://tidypython.com/poisson-regression-in-python/]
+    + <https://tidypython.com/poisson-regression-in-python/>
 
 * Non-parametric Methods:
-    + [https://mathisonian.github.io/kde/]
-    + [https://www.statsmodels.org/stable/nonparametric.html]
-    + [https://www.statsmodels.org/dev/generated/statsmodels.nonparametric.kde.KDEUnivariate.html]
-    + [https://www.statsmodels.org/dev/generated/statsmodels.nonparametric.kernel_density.KDEMultivariate.html]
-    + [https://www.statsmodels.org/stable/examples/notebooks/generated/kernel_density.html ]
+    + <https://mathisonian.github.io/kde/>
+    + <https://www.statsmodels.org/stable/nonparametric.html>
+    + <https://www.statsmodels.org/dev/generated/statsmodels.nonparametric.kde.KDEUnivariate.html>
+    + <https://www.statsmodels.org/dev/generated/statsmodels.nonparametric.kernel_density.KDEMultivariate.html>
+    + <https://www.statsmodels.org/stable/examples/notebooks/generated/kernel_density.html>
 
 * Diagnostic tests:
-    + [https://www.statsmodels.org/stable/stats.html#residual-diagnostics-and-specification-tests]
-    + [https://bookdown.org/ltupper/340f21_notes/deviance-and-residuals.html]
-    + [https://www.statology.org/null-residual-deviance/#:~:text=The%20null%20deviance%20tells%20us%20how%20well%20the,to%20predict%20the%20value%20of%20the%20response%20variable.]
+    + <https://www.statsmodels.org/stable/stats.html#residual-diagnostics-and-specification-tests>
+    + <https://bookdown.org/ltupper/340f21_notes/deviance-and-residuals.html>
+    + <https://www.statology.org/null-residual-deviance/>
 
 * Data Visualization:
-    + [https://stackoverflow.com/questions/5484922/secondary-axis-with-twinx-how-to-add-to-legend]
+    + <https://stackoverflow.com/questions/5484922/secondary-axis-with-twinx-how-to-add-to-legend>
