@@ -247,8 +247,7 @@ standard errors.
 
 Logistic regression is used when the response variable is binary. The 
 response distribution is logistic which means it has support (input) on $(0,1)$ and  
-is invertible. The log-odds link function is defined as $\log\left(\frac{p}{1-p}\right)$,  
-where $p$ is the predicted probability.
+is invertible. The log-odds link function is defined as $\log\left(\frac{\mu}{1-\mu}\right)$, where $\mu$ is the predicted probability.
 
 Here we have an example from our `rodents` dataset, where the response variable 
 `Under 3h` indicates whether the response time for a 311 service request was under 3 
@@ -368,9 +367,9 @@ variable depends on one or more predictors.
 
 The log of the probability of success is modeled by:
 
-$\log(p) = b_0 + b_1x_1 + ... + b_kx_k$
+$\log(\mu) = b_0 + b_1x_1 + ... + b_kx_k$
 
-where p is the probability of success (the response variable). The intercept `b0` is     
+where $\mu$ is the probability of success (the response variable). The intercept `b0` is 
 assumed to be 0 if not provided in the model. We will use `.add_constant` to indicate 
 that our model includes an intercept term.
 
@@ -396,8 +395,13 @@ Y = df3['SUNACTIVITY']
 print(df3[['YEAR','YEAR2','SUNACTIVITY']].head())
 ```
 
+In the code above, we are altering our predictors a little bit from the 
+orignal dataset; we are substracting the minimum year 1700 from all `YEAR` 
+values so it is more centered. It is generally good practice to scale and 
+center your data so that the model can have better fit. In our case this also 
+aids the interpretability of the intercept coefficient we will see later. 
 We are adding the varaible `YEAR2`, which is the number of years since 
-1700 squared to see if there is some non-linear relationship that may exist.
+1700 squared to see if there is some non-linear relationship that may exist. 
 
 We can use the `.GLM` function with the `family='poisson'` argument to fit our 
 model. Some important parameters:
@@ -412,7 +416,11 @@ print(result3.summary())
 ```
 
 + **coef:** In this model, increasing the `YEAR` seems to increase the log of the expected 
-count of Sunspot activity (`SUNACTIVITY`) by a small amount. 
+count of Sunspot activity (`SUNACTIVITY`) by a small amount; the expected count of sunspot 
+activty increases by $e^{.0003}$ (note that increasing `YEAR` also increases `YEAR2` so we 
+have to be careful with interpretability!) This model also suggests that the number of 
+sunspots is for the year 1700 is estimated to be $e^{3.6781}\approx1$, while the number of 
+actual sunspots that year was 5.
 + **Deviance:** two times the difference between the log-likelihood of a fitted GLM and 
 the log-likelihood of a perfect model where fitted responses match observed responses. 
 A greater deviance indicates a worse fit.
