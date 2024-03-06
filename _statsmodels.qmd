@@ -100,7 +100,7 @@ df['Response Time'] = df['Closed Date'] - df['Created Date']
 df['Response Time'] = df['Response Time'].apply(lambda x: x.total_seconds() / 3600) # in hours
 # Remove unspecified borough rows
 df = df.drop(df[df['Borough']=='Unspecified'].index)
-# Remove 'other' borough rows
+# Remove 'other' open data channel type rows
 df = df.drop(df[df['Open Data Channel Type']=='OTHER'].index)
 
 print(df.head())
@@ -188,7 +188,7 @@ linear regression is given by:
 $$y_i = X_i\beta + \epsilon_i$$
 where $X_i$ is a vector of predictors for individual $i$, and $\beta$ is a vector of coefficients that define this linear combination.
 
-We will be working with the `avocado` dataset from the package `casualdata` 
+We will be working with the `avocado` dataset from the package `causaldata` 
 which contains information about the average price and total amount of avocados 
 that were sold in California from 2015-2018. `AveragePrice` of a single avocado 
 is our predictor, and `TotalVolume` is our outcome variable as a count of avocados. 
@@ -419,7 +419,7 @@ print(result3.summary())
 count of Sunspot activity (`SUNACTIVITY`) by a small amount; the expected count of sunspot 
 activty increases by $e^{.0003}$ (note that increasing `YEAR` also increases `YEAR2` so we 
 have to be careful with interpretability!) This model also suggests that the number of 
-sunspots is for the year 1700 is estimated to be $e^{3.6781}\approx1$, while the number of 
+sunspots is for the year 1700 is estimated to be $e^{3.6781}\approx39.57$, while the number of 
 actual sunspots that year was 5.
 + **Deviance:** two times the difference between the log-likelihood of a fitted GLM and 
 the log-likelihood of a perfect model where fitted responses match observed responses. 
@@ -484,7 +484,7 @@ multivariate data, but tends to be slower. Can use mixed types of data but requi
 
 Here we will demonstrate how to apply it to univariate data, based off of 
 examples provided in the [documentation](https://www.statsmodels.org/stable/examples/notebooks/generated/kernel_density.html#Comparing-kernel-functions). 
-We will generate a histogram of based off of [geyser waiting time](https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/faithful) data from Rdatasets. This dataset records the waiting time between "Old Faithful" geyser's eruptions in Yellowstone National Park. Our goal is to fit a KDE with a Gaussian kernal function to this data.
+We will generate a histogram of based off of [geyser waiting time](https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/faithful) data from Rdatasets. This dataset records the waiting time between "Old Faithful" geyser's eruptions in Yellowstone National Park. Our goal is to fit a KDE with a Gaussian kernel function to this data.
 
 ```{python}
 # Load data
