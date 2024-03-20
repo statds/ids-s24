@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science - 11&nbsp; Supervised Learning</title>
+<title>Introduction to Data Science - 10&nbsp; Supervised Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./supervised.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Supervised Learning</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./supervised.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised Learning</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -194,26 +194,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./_geopandas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Handling Spatial Data with <code>GeoPandas</code></span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./statsmod.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistical Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./supervised.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -232,13 +226,13 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">11.1</span> Introduction</a></li>
-  <li><a href="#classification-versus-regression" id="toc-classification-versus-regression" class="nav-link" data-scroll-target="#classification-versus-regression"><span class="header-section-number">11.2</span> Classification versus Regression</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">10.1</span> Introduction</a></li>
+  <li><a href="#classification-versus-regression" id="toc-classification-versus-regression" class="nav-link" data-scroll-target="#classification-versus-regression"><span class="header-section-number">10.2</span> Classification versus Regression</a>
   <ul class="collapse">
-  <li><a href="#classification-metrics" id="toc-classification-metrics" class="nav-link" data-scroll-target="#classification-metrics"><span class="header-section-number">11.2.1</span> Classification Metrics</a></li>
-  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">11.2.2</span> Cross-validation</a></li>
+  <li><a href="#classification-metrics" id="toc-classification-metrics" class="nav-link" data-scroll-target="#classification-metrics"><span class="header-section-number">10.2.1</span> Classification Metrics</a></li>
+  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">10.2.2</span> Cross-validation</a></li>
   </ul></li>
-  <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="header-section-number">11.3</span> Decision Trees</a></li>
+  <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="header-section-number">10.3</span> Decision Trees</a></li>
   </ul>
 </nav>
     </div>
@@ -247,7 +241,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Supervised Learning</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised Learning</span></h1>
 </div>
 
 
@@ -264,8 +258,8 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">11.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">10.1</span> Introduction</h2>
 <p>Supervised and unsupervised learning represent two core approaches in the field of machine learning, each with distinct methodologies, applications, and goals. Understanding the differences and applicabilities of these learning paradigms is fundamental for anyone venturing into data science and machine learning.</p>
 <ul>
 <li><p><strong>Supervised Learning</strong> Supervised learning is characterized by its use of labeled datasets to train algorithms. In this paradigm, the model is trained on a pre-defined set of training examples, which include an input and the corresponding output. The goal of supervised learning is to learn a mapping from inputs to outputs, enabling the model to make predictions or decisions based on new, unseen data. This approach is widely used in applications such as spam detection, image recognition, and predicting consumer behavior. Supervised learning is further divided into two main categories: regression, where the output is continuous, and classification, where the output is categorical.</p></li>
@@ -274,18 +268,18 @@ window.Quarto = {
 <p>The key difference between supervised and unsupervised learning lies in the presence or absence of labeled output data. Supervised learning depends on known outputs to train the model, making it suitable for predictive tasks where the relationship between the input and output is clear. Unsupervised learning, however, thrives on discovering the intrinsic structure of data, making it ideal for exploratory analysis and understanding complex data dynamics without predefined labels.</p>
 <p>Both supervised and unsupervised learning have their place in the machine learning ecosystem, often complementing each other in comprehensive data analysis and modeling projects. While supervised learning allows for precise predictions and classifications, unsupervised learning offers deep insights and uncovers underlying patterns that might not be immediately apparent.</p>
 </section>
-<section id="classification-versus-regression" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="classification-versus-regression"><span class="header-section-number">11.2</span> Classification versus Regression</h2>
+<section id="classification-versus-regression" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="classification-versus-regression"><span class="header-section-number">10.2</span> Classification versus Regression</h2>
 <p>The main tasks in supervised learning can broadly be categorized into two types: classification and regression. Each task utilizes algorithms to interpret the input data and make predictions or decisions based on that data.</p>
 <ul>
 <li><p><strong>Classification</strong> Classification tasks involve categorizing data into predefined classes or groups. In these tasks, the output variable is categorical, such as “spam” or “not spam” in email filtering, or “malignant” or “benign” in tumor diagnosis. The aim is to accurately assign new, unseen instances to one of the categories based on the learning from the training dataset. Classification can be binary, involving two classes, or multiclass, involving more than two classes. Common algorithms used for classification include Logistic Regression, Decision Trees, Support Vector Machines, and Neural Networks.</p></li>
 <li><p><strong>Regression</strong> Regression tasks predict a continuous quantity. Unlike classification, where the outcomes are discrete labels, regression models predict a numeric value. Examples of regression tasks include predicting the price of a house based on its features, forecasting stock prices, or estimating the age of a person from a photograph. The goal is to find the relationship or correlation between the input features and the continuous output variable. Linear regression is the most basic form of regression, but there are more complex models like Polynomial Regression, Ridge Regression, Lasso Regression, and Regression Trees.</p></li>
 </ul>
 <p>Both classification and regression are foundational to supervised learning, addressing different types of predictive modeling problems. Classification is used when the output is a category, while regression is used when the output is a numeric value. The choice between classification and regression depends on the nature of the target variable you are trying to predict. Supervised learning algorithms learn from labeled data, refining their models to minimize error and improve prediction accuracy on new, unseen data.</p>
-<section id="classification-metrics" class="level3" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored" data-anchor-id="classification-metrics"><span class="header-section-number">11.2.1</span> Classification Metrics</h3>
-<section id="confusion-matrix" class="level4" data-number="11.2.1.1">
-<h4 data-number="11.2.1.1" class="anchored" data-anchor-id="confusion-matrix"><span class="header-section-number">11.2.1.1</span> Confusion matrix</h4>
+<section id="classification-metrics" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="classification-metrics"><span class="header-section-number">10.2.1</span> Classification Metrics</h3>
+<section id="confusion-matrix" class="level4" data-number="10.2.1.1">
+<h4 data-number="10.2.1.1" class="anchored" data-anchor-id="confusion-matrix"><span class="header-section-number">10.2.1.1</span> Confusion matrix</h4>
 <p><a href="https://en.wikipedia.org/wiki/Confusion_matrix" class="uri">https://en.wikipedia.org/wiki/Confusion_matrix</a></p>
 <p>Four entries in the confusion matrix:</p>
 <ul>
@@ -310,8 +304,8 @@ window.Quarto = {
 <li>NPV: TN / (FN + TN).</li>
 </ul>
 </section>
-<section id="measure-of-classification-performance" class="level4" data-number="11.2.1.2">
-<h4 data-number="11.2.1.2" class="anchored" data-anchor-id="measure-of-classification-performance"><span class="header-section-number">11.2.1.2</span> Measure of classification performance</h4>
+<section id="measure-of-classification-performance" class="level4" data-number="10.2.1.2">
+<h4 data-number="10.2.1.2" class="anchored" data-anchor-id="measure-of-classification-performance"><span class="header-section-number">10.2.1.2</span> Measure of classification performance</h4>
 <p>Measures for a given confusion matrix:</p>
 <ul>
 <li>Accuracy: (TP + TN) / (P + N). The proportion of all corrected predictions. Not good for highly imbalanced data.</li>
@@ -332,8 +326,8 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="cross-validation" class="level3" data-number="11.2.2">
-<h3 data-number="11.2.2" class="anchored" data-anchor-id="cross-validation"><span class="header-section-number">11.2.2</span> Cross-validation</h3>
+<section id="cross-validation" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="cross-validation"><span class="header-section-number">10.2.2</span> Cross-validation</h3>
 <ul>
 <li>Goal: strike a bias-variance tradeoff.</li>
 <li>K-fold: hold out each fold as testing data.</li>
@@ -352,8 +346,8 @@ window.Quarto = {
 <!-- ## Decision Tree -->
 </section>
 </section>
-<section id="decision-trees" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="decision-trees"><span class="header-section-number">11.3</span> Decision Trees</h2>
+<section id="decision-trees" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="decision-trees"><span class="header-section-number">10.3</span> Decision Trees</h2>
 
 
 </section>
@@ -438,6 +432,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -472,7 +484,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -749,12 +765,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./statsmod.html" class="pagination-link" aria-label="Statistical Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Models</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistical Models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./exercises.html" class="pagination-link" aria-label="Exercises">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Exercises</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Exercises</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
