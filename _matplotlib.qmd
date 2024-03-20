@@ -378,7 +378,7 @@ As can be seen from the plot, the students' scores show a normal distribution,
 with most of them clustered in the 70-80 range
 
 ```{python}
-df2["Grade"].density()
+df2["Grade"].plot.density()
 ```
 
 #### Scatter Plots
