@@ -87,7 +87,7 @@ We can also read directly from a local CSV file with `pandas`. For example, we w
 be using the NYC 311 request rodent data:
 ```{python}
 # Reads the csv file into df
-df = pd.read_csv('data\\rodent_2022-2023.csv')
+df = pd.read_csv('data/rodent_2022-2023.csv')
 
 # Brief data pre-processing
 # Time reformatting

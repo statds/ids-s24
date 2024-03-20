@@ -105,4 +105,6 @@ Each GLM variant addresses specific types of data and research questions,
 enabling precise modeling and inference based on the underlying data
 distribution.
 
-### Examples
+
+{{< include _statsmodels.qmd >}}
+
