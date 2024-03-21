@@ -20,7 +20,6 @@ book:
     - communication.qmd
     - eda.qmd
     - visualization.qmd
-    - _geopandas.qmd
     - statsmod.qmd
     - supervised.qmd
     - exercises.qmd
