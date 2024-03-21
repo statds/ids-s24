@@ -1,4 +1,8 @@
-# Data Visualization
+## Data Visualization with `matplotlib`
+
+This section was written by Weijia Wu.
+
+
 ```{python}
 import matplotlib.pyplot as plt
 import numpy as np
@@ -12,12 +16,12 @@ url = 'https://raw.githubusercontent.com/JoannaWuWeijia/Data_Store_WWJ/main/clea
 df = pd.read_csv(url)
 ```
 
-## Introduction
+### Introduction
 Hi Class, my name is Weijia Wu and I'm a senior double majored in Applied Math and Statistics. 
 The following shows a basic concepts of visulization of python.
 
 
-## Matplotlib
+### Matplotlib
 Matplotlib is a desktop plotting package designed for plotting 
 and arranging data visually in Python, usually in two-dimensional. 
 It was created by Dr. John Hunter in 2003 as an alternative to Matlab to facilitate 
@@ -25,16 +29,16 @@ scientific computation and data visualization in Python.
 
 Matplotlib is widely used because of its simplicity and effectiveness.
 
-### Installation of `Matplotlib`
+#### Installation of `Matplotlib`
 The library can be installed by typing `pip install matplotlib` in your terminal
 
 ```
 pip install matplotlib
 ```
 
-### Line Plot 
+#### Line Plot 
 
-#### Single plot with `pyplot` submodule
+##### Single plot with `pyplot` submodule
 
 Let's Start with an sample Line Plot example: 
 ```{python}
@@ -42,14 +46,14 @@ t = range(0, 10)
 r = [i**2 for i in t]
 
 plt.figure(figsize=(4, 4)) 
-# Width and height in inches
+## Width and height in inches
 plt.plot(t, r)
 plt.title('Line Plot Example')
 
 plt.show()
 ```
 
-#### x-label, y-label, and grid:
+##### x-label, y-label, and grid:
 ```{python}
 plt.figure(figsize=(4, 4)) 
 
@@ -61,7 +65,7 @@ plt.grid(True)
 ```
 
 
-#### Add legend:
+##### Add legend:
 ```{python}
 plt.figure(figsize=(4, 4)) 
 
@@ -92,7 +96,7 @@ and other relevant information such as return values and examples of how to use 
 help(plt.legend)
 ```
 
-#### Colors, Markers, and Line Styles
+##### Colors, Markers, and Line Styles
 
 If we want two plots in the same, we need to find a way to make the distinction between them.
 ```{python}
@@ -114,10 +118,10 @@ plt.show()
 Use  `linestyle`, `color`, and `Markers` to set linestyles:
 
 ```{python}
-# help(plt.plot)
+## help(plt.plot)
 ```
 
-## Example with rodent data: 
+### Example with rodent data: 
 
 Let's use our rodent data to demonstrate the Monthly Reported data: 
 
@@ -143,7 +147,7 @@ This plot shows the number of rodents in each month's report,
   the spring and summer, and they fall dramatically after the start of autumn (post-August).
 
 
-### Scatter plot
+#### Scatter plot
 
 ```{python}
 np.random.seed(8465);
@@ -159,7 +163,7 @@ plt.ylabel('Y')
 plt.show()
 ```
 
-### Bar Plot
+#### Bar Plot
 ```{python}
 borough_counts = df['Borough'].value_counts()
 
@@ -173,7 +177,7 @@ plt.xticks(rotation=45)  # Rotate the X axis by 45 degrees to show the long labe
 plt.show()
 ```
 
-### Multiple plots using `subplots` submodule
+#### Multiple plots using `subplots` submodule
 ```{python}
 df['Created Date'] = pd.to_datetime(df['Created Date'])
 df['Date'] = df['Created Date'].dt.date
@@ -181,25 +185,25 @@ daily_reports = df.groupby(['Date', 'Incident Zip']).size().reset_index(name='Co
 sample_zip = daily_reports['Incident Zip'].dropna().iloc[0]
 sample_data = daily_reports[daily_reports['Incident Zip'] == sample_zip]
 
-# 2x2 Plot
+## 2x2 Plot
 fig, axs = plt.subplots(2, 2, figsize=(8, 8))
 
-# Line Plot
+## Line Plot
 axs[0, 0].plot(sample_data['Date'], sample_data['Counts'], '-o', color='green')
 axs[0, 0].set_title(f'Linear Plot of Reports for Zip {sample_zip}')
 axs[0, 0].tick_params(labelrotation=45)
 
-# Box Plot
+## Box Plot
 axs[0, 1].boxplot(df['Y Coordinate (State Plane)'].dropna())
 axs[0, 1].set_title('Boxplot of Y Coordinate')
 
-# barplot
+## barplot
 status_counts = df['Status'].value_counts()
 axs[1, 0].bar(status_counts.index, status_counts.values, color='skyblue')
 axs[1, 0].set_title('Barplot of Status Counts')
 axs[1, 0].tick_params(labelrotation=45)
 
-# histogram
+## histogram
 axs[1, 1].hist(df['Latitude'].dropna(), bins=30, color='orange')
 axs[1, 1].set_title('Histogram of Latitude')
 
@@ -207,7 +211,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-### Save the files
+#### Save the files
 
 `help(plt.savefig)`allows you to save the current figure created by
  Matplotlib to a file. You can specify the filename and various 
@@ -215,10 +219,10 @@ plt.show()
 
 
 ```{python}
-# help(plt.savefig)
+## help(plt.savefig)
 ```
 
-## Pandas
+### Pandas
 
 Pandas plotting is built on top of Matplotlib, and one of its main 
 benefits is that it allows you to generate plots with fewer lines of 
@@ -226,9 +230,9 @@ code directly from Pandas data structures like DataFrames and Series.
 This integration simplifies the process of visualizing data for analysis.
 
 
-### Line Plot
+#### Line Plot
 
-#### Single plot
+##### Single plot
 ```{python}
 monthly_counts.plot(kind='line')
 ```
@@ -252,12 +256,12 @@ plt.xlabel('Month')
 plt.ylabel('Number of Reports')
 plt.grid(True)
 plt.xticks(rotation=45)
-# For longer tags, avoid overlapping
+## For longer tags, avoid overlapping
 
 plt.show()
 ```
 
-#### Multi-Lineplot
+##### Multi-Lineplot
 The following is showing several line plots in the same figure. 
 
 ```{python}
@@ -271,7 +275,7 @@ counts_df = pd.DataFrame({
     'Police Precincts': police_precincts_counts
 })
 counts_df = counts_df.fillna(0) 
-#Fill missing values to 0
+##Fill missing values to 0
 
 counts_df[['Community Districts', 'City Council Districts', 
 'Police Precincts']].plot() 
@@ -290,7 +294,7 @@ counts_df[['Community Districts', 'City Council Districts', 'Police Precincts']]
 ```
 
 
-### Additional arguments
+#### Additional arguments
 
 For more info pleased check:
 
@@ -299,28 +303,28 @@ For more info pleased check:
 ```
 
 ```{python}
-# help(plt.plot)
+## help(plt.plot)
 ```
 
-### Bar Plot
+#### Bar Plot
 
 For categorical data, one of common visualization is the barplot.
 
 + Generated using `df.plot.bar()` method,
 for horizontal version `df.plot.barh()`.
 
-#### Side-by-side Bar Plot:
+##### Side-by-side Bar Plot:
 
 Let's use Borough and Location Type to generate a side-by-side bar plot, one horizontal and one vertical:
 
 ```{python}
 fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(8, 6))
 
-# Vertical bar plot for Borough counts
+## Vertical bar plot for Borough counts
 df.groupby(['Borough']).size().plot.bar(ax=axs[0], color='skyblue', rot=0)
 axs[0].set_title('Bar plot for Borough')
 
-# Horizontal bar plot for Location Type counts
+## Horizontal bar plot for Location Type counts
 df.groupby(['Location Type']).size().plot.barh(ax=axs[1], color='lightgreen')
 axs[1].set_title('Bar plot for Location Type')
 
@@ -334,7 +338,7 @@ Similiar with `axs` in matplotlib:
 + `nrows=1` means there will be 1 row of subplots.
 + `ncols=2 `means there will be 2 columns of subplots.
 
-#### Grouped Bar Plot
+##### Grouped Bar Plot
 This type of plot is useful for comparing the distribution within each class side by side.
 
 ```{python}
@@ -344,7 +348,7 @@ class_Borough.plot.bar(rot=45, figsize=(8, 6))
 
 ```
 
-#### Stacked Bar Plot
+##### Stacked Bar Plot
 This plot is useful for comparing the total counts across 
 borough while still being able to see the proportion of each borough within each class.
 
@@ -352,7 +356,7 @@ borough while still being able to see the proportion of each borough within each
 class_Borough.plot.bar(stacked=True)
 ```
 
-### Histogram and Density Plots
+#### Histogram and Density Plots
 
 For numeric data, histogram allows us to see the distribution (center shape, skewness) of the data.
 
@@ -374,10 +378,10 @@ As can be seen from the plot, the students' scores show a normal distribution,
 with most of them clustered in the 70-80 range
 
 ```{python}
-df2["Grade"].density()
+df2["Grade"].plot.density()
 ```
 
-### Scatter Plots
+#### Scatter Plots
 When dealing with two variables, scatter plot allow us to 
 examine if there is any correlation between them.
 
@@ -395,7 +399,7 @@ df3.plot.scatter(x="Weight", y="Height", figsize=(8, 6))
 As you can see it's roughly a linear regression, 
 and I'll cover how to add a regression line in the next sns section.
 
-## Seaborn
+### Seaborn
 + Seaborn is designed to work directly with pandas DataFrames, 
 making plotting more convenient by allowing direct use of DataFrame 
 columns for specifying data in plots.
@@ -406,16 +410,16 @@ statistical models to your charts, simplifying the process of statistical data v
 + Seaborn's default styles and color are more aesthetically 
 pleasing and modern compared to Matplotlib.
 
-### Installation of `Seaborn`
+#### Installation of `Seaborn`
 
 ```
 pip install seaborn
 ```
 
-### Histogram and Density Plots
+#### Histogram and Density Plots
 
 ```{python}
-# help(sns.histplot) 
+## help(sns.histplot) 
 ```
 
 
@@ -432,7 +436,7 @@ fewer bins may not be able to show the data distribution accurately.
 be added to the histogram, which is generated by kernel density 
 estimation and can help understand the shape of the data distribution
 
-### Scatter plot with Regression line
+#### Scatter plot with Regression line
 
 I used an example with less data to be able to show it. 
 We can see that the height and weight of the students are directly proportional.
@@ -448,9 +452,9 @@ plt.figure(figsize = (8, 6))
 sns.regplot(x='Weight', y='Height', data=df4)
 ```
 
-### Categorical Data
+#### Categorical Data
 
-#### barplot
+##### barplot
 ```{python }
 np.random.seed(0) 
 genders = np.random.choice(['Male', 'Female'], size=500)
@@ -485,7 +489,7 @@ combination and display this as bars in the plot.
 
 + `height`=5: Sets the height of each subplot to 5 inches.
 
-#### Box Plot
+##### Box Plot
 
 ```{python}
 sns.boxplot(x='Gender', y='Grades', hue='Class', data=df4)
@@ -501,12 +505,12 @@ Since 'Grades' is a categorical variable with values like 'Excellent', 'Good', '
 in the 'Class' column, effectively grouping the data by class.
 
 
-#### Categorical Data Help
+##### Categorical Data Help
 ```{python}
-#help(sns.catplot)
+##help(sns.catplot)
 ```
 
-## Conclusion
+### Conclusion
 
 `Matplotlib` is the foundation for making plots in Python.
 
@@ -517,7 +521,7 @@ in the 'Class' column, effectively grouping the data by class.
 
 
 
-## Citation
+### References
 + https://matplotlib.org/stable/users/project/history.html
 + https://matplotlib.org/stable/gallery/lines_bars_and_markers/simple_plot.html
 + https://www.simplilearn.com/tutorials/python-tutorial/matplotlib
