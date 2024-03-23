@@ -3,3 +3,5 @@
 {{< include _descriptives.qmd >}}
 
 {{< include _scipy_stats.qmd >}}
+
+{{< include _eda.qmd >}}
