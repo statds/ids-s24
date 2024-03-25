@@ -256,9 +256,10 @@ Contribution to the class notes is through a `pull request'.
 
 + Start a new branch and switch to the new branch.
 + On the new branch, add a qmd file for your presentation
++ If using Python, create and activate a virtual environment with `requirements.txt` 
 + Edit `_quarto.yml` add a line for your qmd file to include it in the notes.
 + Work on your qmd file, test with `quarto render`.
-+ When satisfied, commit and make a pull request.
++ When satisfied, commit and make a pull request with your quarto files and an updated `requirements.txt`.
 
 I have added a template file `mysection.qmd` and a new line to `_quarto.yml`
 as an example.
