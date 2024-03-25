@@ -291,13 +291,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-visualization-with-matplotlib" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="data-visualization-with-matplotlib"><span class="header-section-number">8.1</span> Data Visualization with <code>matplotlib</code></h2>
 <p>This section was written by Weijia Wu.</p>
-<div id="f448fed6" class="cell" data-execution_count="1">
+<div id="4bed3a74" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="101496b4" class="cell" data-execution_count="2">
+<div id="536721b0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/JoannaWuWeijia/Data_Store_WWJ/main/cleaning_data_rodent3.csv'</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -320,7 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="single-plot-with-pyplot-submodule" class="level5" data-number="8.1.2.2.1">
 <h5 data-number="8.1.2.2.1" class="anchored" data-anchor-id="single-plot-with-pyplot-submodule"><span class="header-section-number">8.1.2.2.1</span> Single plot with <code>pyplot</code> submodule</h5>
 <p>Let’s Start with an sample Line Plot example:</p>
-<div id="d7b92232" class="cell" data-execution_count="3">
+<div id="8bcaae6d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">10</span>) </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> [i<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> t]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -341,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="x-label-y-label-and-grid" class="level5" data-number="8.1.2.2.2">
 <h5 data-number="8.1.2.2.2" class="anchored" data-anchor-id="x-label-y-label-and-grid"><span class="header-section-number">8.1.2.2.2</span> x-label, y-label, and grid:</h5>
-<div id="4cb5cdf8" class="cell" data-execution_count="4">
+<div id="01317853" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>)) </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.plot(t, r)</span>
@@ -360,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="add-legend" class="level5" data-number="8.1.2.2.3">
 <h5 data-number="8.1.2.2.3" class="anchored" data-anchor-id="add-legend"><span class="header-section-number">8.1.2.2.3</span> Add legend:</h5>
-<div id="4be2ddd5" class="cell" data-execution_count="5">
+<div id="9d26b5bd" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>)) </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.plot(t, r)</span>
@@ -383,7 +383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To add a legend to a plot in Matplotlib, you can use the <code>legend()</code> function.</p>
 <p>A legend is a small area on the plot that describes each element of the graph.</p>
 <p>To effectively use the legend, you typically need to label the elements of the plot that you want to appear in the legend using the label parameter when plotting them.</p>
-<div id="bd65b640" class="cell" data-execution_count="6">
+<div id="2ce983a2" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'lower right'</span>, title<span class="op">=</span><span class="st">'Legend Title'</span>, fontsize<span class="op">=</span><span class="st">'small'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.</code></pre>
@@ -397,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The <code>help(plt.legend)</code> command in Python is used to display the documentation for the legend function from the Matplotlib library. This documentation includes a description of what the function does, the parameters it accepts, and other relevant information such as return values and examples of how to use the function.</p>
-<div id="f31362c4" class="cell" data-execution_count="7">
+<div id="81966e95" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(plt.legend)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Help on function legend in module matplotlib.pyplot:
@@ -722,7 +722,7 @@ legend(*args, **kwargs) -&gt; 'Legend'
 <section id="colors-markers-and-line-styles" class="level5" data-number="8.1.2.2.4">
 <h5 data-number="8.1.2.2.4" class="anchored" data-anchor-id="colors-markers-and-line-styles"><span class="header-section-number">8.1.2.2.4</span> Colors, Markers, and Line Styles</h5>
 <p>If we want two plots in the same, we need to find a way to make the distinction between them.</p>
-<div id="26aaf2f4" class="cell" data-execution_count="8">
+<div id="df331af7" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> [i<span class="op">**</span><span class="dv">3</span> <span class="cf">for</span> i <span class="kw">in</span> t]</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>)) </span>
@@ -745,7 +745,7 @@ legend(*args, **kwargs) -&gt; 'Legend'
 </div>
 </div>
 <p>Use <code>linestyle</code>, <code>color</code>, and <code>Markers</code> to set linestyles:</p>
-<div id="0146ddd1" class="cell" data-execution_count="9">
+<div id="061d8e7f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">## help(plt.plot)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -754,7 +754,7 @@ legend(*args, **kwargs) -&gt; 'Legend'
 <section id="example-with-rodent-data" class="level3" data-number="8.1.3">
 <h3 data-number="8.1.3" class="anchored" data-anchor-id="example-with-rodent-data"><span class="header-section-number">8.1.3</span> Example with rodent data:</h3>
 <p>Let’s use our rodent data to demonstrate the Monthly Reported data:</p>
-<div id="9869adc0" class="cell" data-execution_count="10">
+<div id="bbb933a0" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Created Date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Created Date'</span>])</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Month'</span>] <span class="op">=</span> df[<span class="st">'Created Date'</span>].dt.to_period(<span class="st">'M'</span>)</span>
@@ -770,7 +770,7 @@ legend(*args, **kwargs) -&gt; 'Legend'
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/cq/5ysgnwfn7c3g0h46xyzvpj800000gn/T/ipykernel_75974/3959770936.py:1: UserWarning:
+<pre><code>/var/folders/cq/5ysgnwfn7c3g0h46xyzvpj800000gn/T/ipykernel_20038/3959770936.py:1: UserWarning:
 
 Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
 </code></pre>
@@ -786,7 +786,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 <p>This plot shows the number of rodents in each month’s report, and we can draw the following conclusions: rodent sights occur mostly in the spring and summer, and they fall dramatically after the start of autumn (post-August).</p>
 <section id="scatter-plot" class="level4" data-number="8.1.3.1">
 <h4 data-number="8.1.3.1" class="anchored" data-anchor-id="scatter-plot"><span class="header-section-number">8.1.3.1</span> Scatter plot</h4>
-<div id="4038609f" class="cell" data-execution_count="11">
+<div id="852d1942" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">8465</span>)<span class="op">;</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">10</span>)<span class="op">;</span></span>
@@ -809,7 +809,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 </section>
 <section id="bar-plot" class="level4" data-number="8.1.3.2">
 <h4 data-number="8.1.3.2" class="anchored" data-anchor-id="bar-plot"><span class="header-section-number">8.1.3.2</span> Bar Plot</h4>
-<div id="8073376e" class="cell" data-execution_count="12">
+<div id="3f1e2ffa" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>borough_counts <span class="op">=</span> df[<span class="st">'Borough'</span>].value_counts()</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))  </span>
@@ -831,7 +831,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 </section>
 <section id="multiple-plots-using-subplots-submodule" class="level4" data-number="8.1.3.3">
 <h4 data-number="8.1.3.3" class="anchored" data-anchor-id="multiple-plots-using-subplots-submodule"><span class="header-section-number">8.1.3.3</span> Multiple plots using <code>subplots</code> submodule</h4>
-<div id="161c329b" class="cell" data-execution_count="13">
+<div id="451d815a" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Created Date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Created Date'</span>])</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Date'</span>] <span class="op">=</span> df[<span class="st">'Created Date'</span>].dt.date</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>daily_reports <span class="op">=</span> df.groupby([<span class="st">'Date'</span>, <span class="st">'Incident Zip'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Counts'</span>)</span>
@@ -874,7 +874,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 <section id="save-the-files" class="level4" data-number="8.1.3.4">
 <h4 data-number="8.1.3.4" class="anchored" data-anchor-id="save-the-files"><span class="header-section-number">8.1.3.4</span> Save the files</h4>
 <p><code>help(plt.savefig)</code>allows you to save the current figure created by Matplotlib to a file. You can specify the filename and various options to control the format, quality, and layout of the output file.</p>
-<div id="3c663e08" class="cell" data-execution_count="14">
+<div id="305daef6" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">## help(plt.savefig)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -886,7 +886,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 <h4 data-number="8.1.4.1" class="anchored" data-anchor-id="line-plot-1"><span class="header-section-number">8.1.4.1</span> Line Plot</h4>
 <section id="single-plot" class="level5" data-number="8.1.4.1.1">
 <h5 data-number="8.1.4.1.1" class="anchored" data-anchor-id="single-plot"><span class="header-section-number">8.1.4.1.1</span> Single plot</h5>
-<div id="7a51fc0e" class="cell" data-execution_count="15">
+<div id="083a5585" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>monthly_counts.plot(kind<span class="op">=</span><span class="st">'line'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -898,7 +898,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 </div>
 <p>Because the line plot is default in pandas plots, you can omit the (kind=‘line’)</p>
 <p>When plotting with the .plot() method in Pandas, it is true that you can generate basic plots with fewer lines of code, due to the fact that Pandas automatically handles some of the basic settings, such as setting the x-axis labels automatically. However, for more detailed chart customization, such as setting gridlines, rotating x-axis labels, and so on, you may need additional Matplotlib commands to implement them.</p>
-<div id="daf45c29" class="cell" data-execution_count="16">
+<div id="de8278b3" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>monthly_counts.plot(kind<span class="op">=</span><span class="st">'line'</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -922,7 +922,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 <section id="multi-lineplot" class="level5" data-number="8.1.4.1.2">
 <h5 data-number="8.1.4.1.2" class="anchored" data-anchor-id="multi-lineplot"><span class="header-section-number">8.1.4.1.2</span> Multi-Lineplot</h5>
 <p>The following is showing several line plots in the same figure.</p>
-<div id="ec7b81ba" class="cell" data-execution_count="17">
+<div id="f52f653d" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>community_counts <span class="op">=</span> df[<span class="st">'Community Districts'</span>].value_counts().sort_index()</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>city_council_counts <span class="op">=</span> df[<span class="st">'City Council Districts'</span>].value_counts().sort_index()</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>police_precincts_counts <span class="op">=</span> df[<span class="st">'Police Precincts'</span>].value_counts().sort_index()</span>
@@ -947,7 +947,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 </div>
 <p>When you use the .plot() method on a Pandas DataFrame to create a multi-line plot, each line in the plot is automatically assigned a different color to help distinguish between the different data columns visually. The colors are chosen from a default color cycle provided by Matplotlib.</p>
 <p>If you want to customize the color:</p>
-<div id="85fafae0" class="cell" data-execution_count="18">
+<div id="5d9c899c" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>counts_df[[<span class="st">'Community Districts'</span>, <span class="st">'City Council Districts'</span>, <span class="st">'Police Precincts'</span>]].plot(</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>[<span class="st">'red'</span>, <span class="st">'green'</span>, <span class="st">'blue'</span>]  <span class="co"># Custom colors for each line</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -964,13 +964,13 @@ Could not infer format, so each element will be parsed individually, falling bac
 <section id="additional-arguments" class="level4" data-number="8.1.4.2">
 <h4 data-number="8.1.4.2" class="anchored" data-anchor-id="additional-arguments"><span class="header-section-number">8.1.4.2</span> Additional arguments</h4>
 <p>For more info pleased check:</p>
-<div id="98cdd000" class="cell" data-execution_count="19">
+<div id="5c97a132" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>[additional arguments](https:<span class="op">//</span>drive.google.com<span class="op">/</span><span class="bu">file</span><span class="op">/</span>d<span class="op">/</span><span class="ot">1j</span><span class="er">5T7_VMT1Nt4myukcmar0UMcZOHqurCk</span><span class="op">/</span>view?usp<span class="op">=</span>sharing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>zsh:1: bad pattern: [additional</code></pre>
 </div>
 </div>
-<div id="12a7ad39" class="cell" data-execution_count="20">
+<div id="f25f3cd2" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">## help(plt.plot)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -983,7 +983,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 <section id="side-by-side-bar-plot" class="level5" data-number="8.1.4.3.1">
 <h5 data-number="8.1.4.3.1" class="anchored" data-anchor-id="side-by-side-bar-plot"><span class="header-section-number">8.1.4.3.1</span> Side-by-side Bar Plot:</h5>
 <p>Let’s use Borough and Location Type to generate a side-by-side bar plot, one horizontal and one vertical:</p>
-<div id="26f76c0c" class="cell" data-execution_count="21">
+<div id="06aa7e5b" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Vertical bar plot for Borough counts</span></span>
@@ -1014,7 +1014,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 <section id="grouped-bar-plot" class="level5" data-number="8.1.4.3.2">
 <h5 data-number="8.1.4.3.2" class="anchored" data-anchor-id="grouped-bar-plot"><span class="header-section-number">8.1.4.3.2</span> Grouped Bar Plot</h5>
 <p>This type of plot is useful for comparing the distribution within each class side by side.</p>
-<div id="48a55c27" class="cell" data-execution_count="22">
+<div id="9f0cd3bf" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>class_Borough <span class="op">=</span> pd.crosstab(df[<span class="st">"Borough"</span>], df[<span class="st">"Status"</span>])</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>class_Borough.plot.bar(rot<span class="op">=</span><span class="dv">45</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1030,7 +1030,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 <section id="stacked-bar-plot" class="level5" data-number="8.1.4.3.3">
 <h5 data-number="8.1.4.3.3" class="anchored" data-anchor-id="stacked-bar-plot"><span class="header-section-number">8.1.4.3.3</span> Stacked Bar Plot</h5>
 <p>This plot is useful for comparing the total counts across borough while still being able to see the proportion of each borough within each class.</p>
-<div id="14b7e45d" class="cell" data-execution_count="23">
+<div id="b5c4bef0" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>class_Borough.plot.bar(stacked<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1047,11 +1047,11 @@ Could not infer format, so each element will be parsed individually, falling bac
 <p>For numeric data, histogram allows us to see the distribution (center shape, skewness) of the data.</p>
 <p>Histogram can be generated using <code>df.plot.hist()</code> method</p>
 <p>Since we have limited numeric data in our rodent data, I used student achievement data to present it:</p>
-<div id="fe4287b8" class="cell" data-execution_count="24">
+<div id="d341f6d8" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>url2 <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/JoannaWuWeijia/Data_Store_WWJ/main/grades_example.csv'</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.read_csv(url2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="dfe99b21" class="cell" data-execution_count="25">
+<div id="3ae97160" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df2[<span class="st">"Grade"</span>].plot.hist(bins <span class="op">=</span> <span class="dv">10</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1062,7 +1062,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 </div>
 </div>
 <p>As can be seen from the plot, the students’ scores show a normal distribution, with most of them clustered in the 70-80 range</p>
-<div id="c6b0a468" class="cell" data-execution_count="26">
+<div id="deb9fe82" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df2[<span class="st">"Grade"</span>].plot.density()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1077,11 +1077,11 @@ Could not infer format, so each element will be parsed individually, falling bac
 <h4 data-number="8.1.4.5" class="anchored" data-anchor-id="scatter-plots"><span class="header-section-number">8.1.4.5</span> Scatter Plots</h4>
 <p>When dealing with two variables, scatter plot allow us to examine if there is any correlation between them.</p>
 <p>Scatter can be generated using <code>df.plot.scatter(x = col1, y = col2)</code> method.</p>
-<div id="14963e2f" class="cell" data-execution_count="27">
+<div id="d136c821" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>url3 <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/JoannaWuWeijia/Data_Store_WWJ/main/student_example3.csv'</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>df3 <span class="op">=</span> pd.read_csv(url3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="81481e7c" class="cell" data-execution_count="28">
+<div id="3c090f0b" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df3.plot.scatter(x<span class="op">=</span><span class="st">"Weight"</span>, y<span class="op">=</span><span class="st">"Height"</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1107,10 +1107,10 @@ Could not infer format, so each element will be parsed individually, falling bac
 </section>
 <section id="histogram-and-density-plots-1" class="level4" data-number="8.1.5.2">
 <h4 data-number="8.1.5.2" class="anchored" data-anchor-id="histogram-and-density-plots-1"><span class="header-section-number">8.1.5.2</span> Histogram and Density Plots</h4>
-<div id="8447982e" class="cell" data-execution_count="29">
+<div id="cc2d2487" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">## help(sns.histplot) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="87b44646" class="cell" data-execution_count="30">
+<div id="6b5a44cc" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(df2[<span class="st">'Grade'</span>], bins<span class="op">=</span><span class="dv">10</span>, kde <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1126,7 +1126,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 <section id="scatter-plot-with-regression-line" class="level4" data-number="8.1.5.3">
 <h4 data-number="8.1.5.3" class="anchored" data-anchor-id="scatter-plot-with-regression-line"><span class="header-section-number">8.1.5.3</span> Scatter plot with Regression line</h4>
 <p>I used an example with less data to be able to show it. We can see that the height and weight of the students are directly proportional.</p>
-<div id="cd4c44f0" class="cell" data-execution_count="31">
+<div id="4d1add8a" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df4 <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Student'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>, <span class="st">'David'</span>, </span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Eva'</span>, <span class="st">'Fiona'</span>, <span class="st">'George'</span>, <span class="st">'Hannah'</span>, <span class="st">'Ian'</span>, <span class="st">'Julia'</span>],</span>
@@ -1148,14 +1148,14 @@ Could not infer format, so each element will be parsed individually, falling bac
 <h4 data-number="8.1.5.4" class="anchored" data-anchor-id="categorical-data"><span class="header-section-number">8.1.5.4</span> Categorical Data</h4>
 <section id="barplot" class="level5" data-number="8.1.5.4.1">
 <h5 data-number="8.1.5.4.1" class="anchored" data-anchor-id="barplot"><span class="header-section-number">8.1.5.4.1</span> barplot</h5>
-<div id="89fd2a65" class="cell" data-execution_count="32">
+<div id="c0d20058" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">0</span>) </span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>genders <span class="op">=</span> np.random.choice([<span class="st">'Male'</span>, <span class="st">'Female'</span>], size<span class="op">=</span><span class="dv">500</span>)</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> np.random.choice([<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>], size<span class="op">=</span><span class="dv">500</span>)</span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>grades <span class="op">=</span> np.random.choice([<span class="st">'Excellent'</span>, <span class="st">'Good'</span>, <span class="st">'Average'</span>, <span class="st">'Poor'</span>], size<span class="op">=</span><span class="dv">500</span>)</span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>df4 <span class="op">=</span> pd.DataFrame({<span class="st">'Gender'</span>: genders, <span class="st">'Class'</span>: classes, <span class="st">'Grades'</span>: grades})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="090d09a9" class="cell" data-execution_count="33">
+<div id="973db10e" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(x<span class="op">=</span><span class="st">'Class'</span>, hue<span class="op">=</span><span class="st">'Gender'</span>, col<span class="op">=</span><span class="st">'Grades'</span>, </span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>kind<span class="op">=</span><span class="st">'count'</span>, data<span class="op">=</span>df4, height<span class="op">=</span><span class="dv">5</span>, col_wrap<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1178,7 +1178,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 </section>
 <section id="box-plot" class="level5" data-number="8.1.5.4.2">
 <h5 data-number="8.1.5.4.2" class="anchored" data-anchor-id="box-plot"><span class="header-section-number">8.1.5.4.2</span> Box Plot</h5>
-<div id="423c42fe" class="cell" data-execution_count="34">
+<div id="840a21e3" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">'Gender'</span>, y<span class="op">=</span><span class="st">'Grades'</span>, hue<span class="op">=</span><span class="st">'Class'</span>, data<span class="op">=</span>df4)</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1197,7 +1197,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 </section>
 <section id="categorical-data-help" class="level5" data-number="8.1.5.4.3">
 <h5 data-number="8.1.5.4.3" class="anchored" data-anchor-id="categorical-data-help"><span class="header-section-number">8.1.5.4.3</span> Categorical Data Help</h5>
-<div id="7699b579" class="cell" data-execution_count="35">
+<div id="4822b624" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">##help(sns.catplot)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1262,12 +1262,12 @@ Could not infer format, so each element will be parsed individually, falling bac
 <p>With <code>conda</code>: “conda install -c conda-forge plotnine”</p>
 <p>With <code>pip</code>: “pip install plotnine pip install plotnine[all]”</p>
 <p>Now that <code>plotnine</code> is installed, we must call the it in python.</p>
-<div id="6ed5c5bd" class="cell" data-execution_count="36">
+<div id="3044c70e" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine.data <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now that <code>plotnine</code> is installed and imported, we can begin to make graphs and plots. Below are different examples of visualizations we can make using <code>plotnine</code> and the personalizations we can add to them. For these graphics I used the rodent sighting data from the NYC open data 311 requests. We also will need pandas and numpy for some of these graphs so we need to import those as well. Additionally, because the data set is so large, we will only be lookng at the first 500 complaints.</p>
-<div id="0abf7c78" class="cell" data-execution_count="37">
+<div id="501221a9" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine.data <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
@@ -1282,7 +1282,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 <section id="bar-chart" class="level4" data-number="8.2.4.1">
 <h4 data-number="8.2.4.1" class="anchored" data-anchor-id="bar-chart"><span class="header-section-number">8.2.4.1</span> Bar Chart</h4>
 <p>One common type of visualization we can create with <code>plotnine</code> is a bar chart. For this graph we will look at the data for the descriptors of each complaint.</p>
-<div id="04fe6376" class="cell" data-execution_count="38">
+<div id="09cb238e" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x <span class="op">=</span> <span class="st">'descriptor'</span>)) </span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_bar())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1300,7 +1300,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 <li>Change the orientation of the graph.</li>
 <li>Add titles to the axes.</li>
 </ul>
-<div id="b37f1f95" class="cell" data-execution_count="39">
+<div id="38293ca3" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x <span class="op">=</span> <span class="st">'descriptor'</span>, fill <span class="op">=</span> <span class="st">'descriptor'</span>)) </span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Color code the bars.</span></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_bar() <span class="co"># Bar Chart</span></span>
@@ -1322,7 +1322,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 <li>Change the orientation of the words on the axes to make them easier to read.</li>
 <li>Add color coded descriptors to each bar.</li>
 </ul>
-<div id="fabce66a" class="cell" data-execution_count="40">
+<div id="0b88e0de" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x <span class="op">=</span> <span class="st">'descriptor'</span>, fill <span class="op">=</span> <span class="st">'borough'</span>)) </span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add color coded descriptors.</span></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_bar() <span class="co"># Bar Chart</span></span>
@@ -1344,7 +1344,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 <section id="scatter-plot-1" class="level4" data-number="8.2.4.2">
 <h4 data-number="8.2.4.2" class="anchored" data-anchor-id="scatter-plot-1"><span class="header-section-number">8.2.4.2</span> Scatter Plot</h4>
 <p>Another common visualization we can create is a scatterplot. When looking at the data from the 311 requests, we can see that there are many data points for locations of these complaints. A scatter plot would be a great way to see the location of the complaints by graphing the longitudes and latitudes. In order to better see the points, for this graph we will only use the first 200 complaints.</p>
-<div id="0f32765a" class="cell" data-execution_count="41">
+<div id="781bfb9a" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>data_scatter <span class="op">=</span> data.tail(<span class="dv">200</span>)</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>(ggplot(data_scatter, aes(x <span class="op">=</span> <span class="st">'longitude'</span>, y <span class="op">=</span> <span class="st">'latitude'</span>)) </span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1362,7 +1362,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 <li>Differentiate using point size.</li>
 <li>Differentiate using point shape.</li>
 </ul>
-<div id="836ff9f3" class="cell" data-execution_count="42">
+<div id="e926a2f5" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_scatter, aes(x <span class="op">=</span> <span class="st">'longitude'</span>, y <span class="op">=</span> <span class="st">'latitude'</span>,</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>       color <span class="op">=</span> <span class="st">'location_type'</span>)) <span class="co"># Add color to the points.</span></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1374,7 +1374,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 </div>
 </div>
 </div>
-<div id="53b2a113" class="cell" data-execution_count="43">
+<div id="5e8fc42a" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_scatter, aes(x <span class="op">=</span> <span class="st">'longitude'</span>, y <span class="op">=</span> <span class="st">'latitude'</span>,</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    size <span class="op">=</span> <span class="st">'descriptor'</span>, <span class="co"># Differentiate using point size.</span></span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    shape <span class="op">=</span> <span class="st">'borough'</span>)) <span class="co"># Differentiate using point shape.</span></span>
@@ -1391,7 +1391,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 </div>
 </div>
 <p>We can see that due to the close data points, filtering the data using size and shape can become a little congested. One thing we can do to fix this while still viewing the same data is through the use of “facet_grid”.</p>
-<div id="71aed4b4" class="cell" data-execution_count="44">
+<div id="e392929b" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_scatter, aes(x <span class="op">=</span> <span class="st">'longitude'</span>, y <span class="op">=</span> <span class="st">'latitude'</span>,</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    shape <span class="op">=</span> <span class="st">'borough'</span>)) <span class="co"># Differentiate using point shape.</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point()</span>
@@ -1405,7 +1405,7 @@ Could not infer format, so each element will be parsed individually, falling bac
 </div>
 </div>
 </div>
-<div id="a6e30468" class="cell" data-execution_count="45">
+<div id="d402b5c4" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_scatter, aes(x <span class="op">=</span> <span class="st">'longitude'</span>, y <span class="op">=</span> <span class="st">'latitude'</span>))</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point()</span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> facet_grid(<span class="st">'descriptor ~ borough'</span>) </span>
@@ -1425,14 +1425,14 @@ Could not infer format, so each element will be parsed individually, falling bac
 <section id="histogram" class="level4" data-number="8.2.4.3">
 <h4 data-number="8.2.4.3" class="anchored" data-anchor-id="histogram"><span class="header-section-number">8.2.4.3</span> Histogram</h4>
 <p>The last common graph we will cover using <code>plotnine</code> is a histogram. Here we will use the created date data as a continuous variable. Using <code>plotnine</code> we are able to make many of the same personalizations we were able to do with bar charts.</p>
-<div id="124b4ecd" class="cell" data-execution_count="46">
+<div id="2f2a5aea" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>data_used[<span class="st">'created_date'</span>]<span class="op">=</span>pd.to_datetime(</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  data_used[<span class="st">'created_date'</span>],</span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">format</span> <span class="op">=</span> <span class="st">"%m/</span><span class="sc">%d</span><span class="st">/%Y %I:%M:%S %p"</span>, errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
 <span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>))</span>
 <span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_histogram())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/cq/5ysgnwfn7c3g0h46xyzvpj800000gn/T/ipykernel_75974/966048317.py:1: SettingWithCopyWarning: 
+<pre><code>/var/folders/cq/5ysgnwfn7c3g0h46xyzvpj800000gn/T/ipykernel_20038/966048317.py:1: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -1455,7 +1455,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <li>Change outline color.</li>
 <li>Change the orientation of the words on the axes to make them easier to read.</li>
 </ul>
-<div id="377f97c8" class="cell" data-execution_count="47">
+<div id="ac52c2d4" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>, fill <span class="op">=</span> <span class="st">'borough'</span>)) </span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add color coded descriptors.</span></span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_histogram(binwidth<span class="op">=</span><span class="dv">1</span>,  <span class="co"># Change width of bins</span></span>
@@ -1471,7 +1471,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 </div>
-<div id="382732ed" class="cell" data-execution_count="48">
+<div id="6096f055" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>, fill <span class="op">=</span> <span class="st">'borough'</span>)) </span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add color coded descriptors.</span></span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_histogram(binwidth<span class="op">=</span><span class="dv">1</span>,  <span class="co"># Change width of bins</span></span>
@@ -1487,7 +1487,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <p>While we’re able to color code the histogram to show other descriptors of the data, another way we can do this with <code>plotnine</code> is through the use of multiple graphs. Using “facet_wrap” we can create a multi facet graph with the same data.</p>
-<div id="89aa92f1" class="cell" data-execution_count="49">
+<div id="e3b70cb1" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>)) </span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_histogram(binwidth<span class="op">=</span><span class="dv">1</span>) <span class="co"># Change width of bins</span></span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> facet_wrap(<span class="st">'borough'</span>) <span class="co"># Create multiple graphs.</span></span>
@@ -1506,7 +1506,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <section id="density-plot" class="level4" data-number="8.2.4.4">
 <h4 data-number="8.2.4.4" class="anchored" data-anchor-id="density-plot"><span class="header-section-number">8.2.4.4</span> Density Plot</h4>
 <p>The last visualization we’re going to look at is density plots. While less common than the graphs previously discussed, density plots show the distribution of a specific variable.</p>
-<div id="4065e435" class="cell" data-execution_count="50">
+<div id="69f25aec" class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>))</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_density())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1523,7 +1523,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <li>Scale groups by relative size.</li>
 <li>Change the orientation of the words on the axes to make them easier to read.</li>
 </ul>
-<div id="f8453779" class="cell" data-execution_count="51">
+<div id="82d2beb9" class="cell" data-execution_count="51">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>, color <span class="op">=</span> <span class="st">'descriptor'</span>)) </span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">#Add color coded descriptors.</span></span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_density()</span>
@@ -1538,7 +1538,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 </div>
-<div id="3e77c412" class="cell" data-execution_count="52">
+<div id="814f2602" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>(ggplot(data_used, aes(x<span class="op">=</span><span class="st">'created_date'</span>, color <span class="op">=</span> <span class="st">'descriptor'</span>)) </span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">#Add color coded descriptors.</span></span>
 <span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_density(aes(y<span class="op">=</span>after_stat(<span class="st">'count'</span>))) </span>
@@ -1590,7 +1590,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <p>GeoPandas relvolves around the <code>GeoDataFrame</code> object, which is essentially the pandas <code>DataFrame</code> object, with all the traditional capabilities in addition to the ability store and operate on geometry columns.</p>
 <p>The geometry types include points, lines and closed polygons (the first and last coordinates in the list must be the same).</p>
 <p>The objects made by <code>shapely.geometry</code> can represent these geometry types:</p>
-<div id="c0d2aaea" class="cell" data-execution_count="53">
+<div id="ad4709a4" class="cell" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely.geometry <span class="im">import</span> Point, LineString, Polygon</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
 <span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1605,7 +1605,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>polygon <span class="op">=</span> Polygon([(<span class="dv">0</span>, <span class="dv">0</span>), (<span class="dv">0</span>, <span class="dv">2</span>), (<span class="dv">2</span>, <span class="dv">2</span>), (<span class="dv">2</span>, <span class="dv">0</span>), (<span class="dv">0</span>, <span class="dv">0</span>)])</span>
 <span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>gdf3 <span class="op">=</span> gpd.GeoDataFrame(geometry<span class="op">=</span>[polygon])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e00998e0" class="cell" data-execution_count="54">
+<div id="f7e07cbe" class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>gdf1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="54">
 <div>
@@ -1632,7 +1632,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <p>Some of the basic attributes of a GeoSeries include: * <code>length</code>: returns length of a line</p>
-<div id="24c57a2b" class="cell" data-execution_count="55">
+<div id="b2eb9762" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>gdf2.length</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="55">
 <pre><code>0    1.414214
@@ -1642,7 +1642,7 @@ dtype: float64</code></pre>
 <ul>
 <li><code>area</code>: returns the area of the polygon</li>
 </ul>
-<div id="5b370293" class="cell" data-execution_count="56">
+<div id="01bd52cf" class="cell" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>gdf3.area</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="56">
 <pre><code>0    4.0
@@ -1654,7 +1654,7 @@ dtype: float64</code></pre>
 <li><p><code>total_bounds</code>: gives the bounds of a geometry series</p></li>
 <li><p><code>geom_type</code>: returns geometry type</p></li>
 </ul>
-<div id="f1156f1c" class="cell" data-execution_count="57">
+<div id="f717dd3d" class="cell" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>gdf1.geom_type</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="57">
 <pre><code>0    Point
@@ -1664,7 +1664,7 @@ dtype: object</code></pre>
 <ul>
 <li><code>is_valid</code>: return True for valid geometries and false otherwise (mostly important for polygons).</li>
 </ul>
-<div id="abec7923" class="cell" data-execution_count="58">
+<div id="5d4698e0" class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>gdf3.is_valid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="58">
 <pre><code>0    True
@@ -1678,7 +1678,7 @@ dtype: bool</code></pre>
 <li>Note: a secondary argument <code>align</code> is a boolean to align the GeoSeries by index if set to True</li>
 </ul></li>
 </ul>
-<div id="edf3cb8b" class="cell" data-execution_count="59">
+<div id="8345fc74" class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>gdf2.distance(Point((<span class="dv">1</span>,<span class="dv">0</span>)))</span>
 <span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>gdf2.distance(LineString([(<span class="dv">0</span>, <span class="dv">2</span>), (<span class="dv">1</span>, <span class="dv">2</span>)]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
@@ -1689,7 +1689,7 @@ dtype: float64</code></pre>
 <ul>
 <li><code>centroid</code>: returns a new GeoSeries with the center of each row’s geometry.</li>
 </ul>
-<div id="e3c6eb87" class="cell" data-execution_count="60">
+<div id="590c15be" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>gdf3.centroid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="60">
 <pre><code>0    POINT (1.00000 1.00000)
@@ -1702,14 +1702,14 @@ dtype: geometry</code></pre>
 <li>parameters <code>other</code> and <code>align</code></li>
 </ul></li>
 </ul>
-<div id="4bde16e6" class="cell" data-execution_count="61">
+<div id="0343380e" class="cell" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>gdf3.contains(Point((<span class="fl">0.5</span>, <span class="fl">1.5</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="61">
 <pre><code>0    True
 dtype: bool</code></pre>
 </div>
 </div>
-<div id="fe9ce2d7" class="cell" data-execution_count="62">
+<div id="6c462ab9" class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>gdf3.contains(gdf1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="62">
 <pre><code>0    False
@@ -1726,7 +1726,7 @@ dtype: bool</code></pre>
 <section id="reading-files-into-geodataframes" class="level3" data-number="8.3.3">
 <h3 data-number="8.3.3" class="anchored" data-anchor-id="reading-files-into-geodataframes"><span class="header-section-number">8.3.3</span> Reading Files into <code>GeoDataFrame</code>’s</h3>
 <p>The function <code>geopandas.read_file()</code> is the best way to read a file with both data and geometry into a <code>GeoDataFrame</code> object. From here, we will be using the nyc rodent data and visualize it. The code below converts every incident’s location into a point on the geometry.</p>
-<div id="ed50b898" class="cell" data-execution_count="63">
+<div id="72f7ab62" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading csv file </span></span>
 <span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1754,7 +1754,7 @@ dtype: bool</code></pre>
 </div>
 </div>
 <p>Here, we can take a view at the new GeoDataFrame:</p>
-<div id="b9e0dbc4" class="cell" data-execution_count="64">
+<div id="c1a16930" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>rodent_gdf.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="64">
 <div>
@@ -1921,7 +1921,7 @@ dtype: bool</code></pre>
 <section id="plotting" class="level3" data-number="8.3.4">
 <h3 data-number="8.3.4" class="anchored" data-anchor-id="plotting"><span class="header-section-number">8.3.4</span> Plotting</h3>
 <p>The new geometry allows us to plot the data easily.</p>
-<div id="a7dc3446" class="cell" data-execution_count="65">
+<div id="089e660e" class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co">#standard plot of every single rodent incident</span></span>
 <span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>rodent_gdf.plot()</span>
 <span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1991,14 +1991,14 @@ dtype: bool</code></pre>
 <h3 data-number="8.3.5" class="anchored" data-anchor-id="interactive-maps"><span class="header-section-number">8.3.5</span> Interactive Maps</h3>
 <p>A very interesting aspect is the ability to create interactive graphs using the <code>.explore()</code> method.</p>
 <p>Note that <code>folium</code>, <code>matplotlib</code>, and <code>mapclassify</code> are necessary for the <code>.explore()</code> function.</p>
-<div id="6599367b" class="cell" data-execution_count="66">
+<div id="f77e89db" class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co">#interactive map with incidents colored by borough</span></span>
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>rodent_gdf.explore(column<span class="op">=</span><span class="st">'borough'</span>, legend<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>TypeError: Object of type Timestamp is not JSON serializable</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="66">
-<pre><code>&lt;folium.folium.Map at 0x1343b2570&gt;</code></pre>
+<pre><code>&lt;folium.folium.Map at 0x12ac8e360&gt;</code></pre>
 </div>
 </div>
 <p>This map lets us specifically find various points and examine them and their surroudings.</p>
@@ -2006,7 +2006,7 @@ dtype: bool</code></pre>
 <section id="setting-and-changing-projections" class="level3" data-number="8.3.6">
 <h3 data-number="8.3.6" class="anchored" data-anchor-id="setting-and-changing-projections"><span class="header-section-number">8.3.6</span> Setting and Changing Projections</h3>
 <p>In the code, a Coordinate Reference System(CRS) was set using <code>crs = {'init':'epsg:4326'}</code>. CRS can be set on on initialized GeoDataFrame using the <code>.set_crs</code> function. We can do this for our previous example <code>gdf3</code>:</p>
-<div id="ea89fa61" class="cell" data-execution_count="67">
+<div id="80e31586" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>gdf3 <span class="op">=</span> gdf3.set_crs(<span class="st">"EPSG:4326"</span>)</span>
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>gdf3.plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">

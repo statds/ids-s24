@@ -264,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="using-the-pandas-package" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="using-the-pandas-package"><span class="header-section-number">5.1</span> Using the <code>Pandas</code> Package</h2>
 <p>The pandas library simplifies data manipulation and analysis. It’s especially handy for dealing with CSV files.</p>
-<div id="5657789c" class="cell" data-execution_count="1">
+<div id="afb2d301" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the file name</span></span>
@@ -301,14 +301,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop the 'Location' since it is redundant</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># df.drop(columns=['Location'], inplace=True)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/cq/5ysgnwfn7c3g0h46xyzvpj800000gn/T/ipykernel_32160/754040398.py:22: FutureWarning:
+<pre><code>/var/folders/cq/5ysgnwfn7c3g0h46xyzvpj800000gn/T/ipykernel_19990/754040398.py:22: FutureWarning:
 
 The argument 'date_parser' is deprecated and will be removed in a future version. Please use 'date_format' instead, or read your data in as 'object' dtype and then call 'to_datetime'.
 </code></pre>
 </div>
 </div>
 <p>The <code>pandas</code> package also provides some utility functions for quick summaries about the data frame.</p>
-<div id="d8c522c4" class="cell" data-execution_count="2">
+<div id="a7be1426" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.shape</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df.describe()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -364,7 +364,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>What are the unique values of <code>descriptor</code>?</p>
-<div id="e92836b6" class="cell" data-execution_count="3">
+<div id="32ec9b71" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.descriptor.unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>array(['Rat Sighting', 'Mouse Sighting', 'Condition Attracting Rodents',
@@ -375,7 +375,7 @@ dtype: int64</code></pre>
 <section id="filling-missing-values" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="filling-missing-values"><span class="header-section-number">5.2</span> Filling Missing Values</h2>
 <p>If geocodes are available but zip code is missing, we can use reverse geocoding to fill the zip code. This process involves querying a geocoding service with latitude and longitude to get the corresponding address details, including the ZIP code. This can be done with package <code>geopy</code>, which needs to be installed first: <code>pip install geopy</code>.</p>
-<div id="7d953ee3" class="cell" data-execution_count="4">
+<div id="c69bff22" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.geocoders <span class="im">import</span> Nominatim</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.exc <span class="im">import</span> GeocoderTimedOut, GeocoderServiceError</span>
@@ -414,11 +414,11 @@ dtype: int64</code></pre>
 <p>First, ensure you have pyarrow installed on your computer (and preferrably, in your current virtual environment):</p>
 <pre><code>pip install pyarrow</code></pre>
 <p>Feather is a fast, lightweight, and easy-to-use binary file format for storing data frames, optimized for speed and efficiency, particularly for IPC and data sharing between Python and R.</p>
-<div id="0d7866af" class="cell" data-execution_count="5">
+<div id="f3e00e2d" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.to_feather(<span class="st">'data/rodent_2022-2023.feather'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Read the feather file back in:</p>
-<div id="0d0f8892" class="cell" data-execution_count="6">
+<div id="7a7fc3d9" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dff <span class="op">=</span> pd.read_feather(<span class="st">"data/rodent_2022-2023.feather"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dff.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -436,7 +436,7 @@ dtype: int64</code></pre>
 <section id="accessing-the-census-data-with-uszipcode" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="accessing-the-census-data-with-uszipcode"><span class="header-section-number">5.4</span> Accessing the Census Data with <code>uszipcode</code></h2>
 <p>First, ensure the DataFrame (df) is ready for merging with census data. Specifically, check that the <code>incident_zip</code> column is clean and consistent.</p>
-<div id="184dbe0e" class="cell" data-execution_count="7">
+<div id="c2f1334e" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'incident_zip'</span>].isnull().<span class="bu">sum</span>())</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize to 5-digit codes, if necessary</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'incident_zip'</span>] <span class="op">=</span> df[<span class="st">'incident_zip'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -479,14 +479,14 @@ dtype: int64</code></pre>
 <p>Install the <code>uszipcode</code> package into the current virtual environment by <code>pip install uszipcode</code>.</p>
 <p>Now let’s work on the rodent sightings data.</p>
 <p>We will first clean the incident_zip column to ensure it only contains valid ZIP codes. Then, we will use a vectorized approach to fetch the required data for each unique ZIP code and merge this information back into the original <code>DataFrame</code>.</p>
-<div id="8771655d" class="cell" data-execution_count="8">
+<div id="c43f40c3" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows where 'incident_zip' is missing or not a valid ZIP code format</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>valid_zip_df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'incident_zip'</span>]).copy()</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>valid_zip_df[<span class="st">'incident_zip'</span>] <span class="op">=</span> valid_zip_df[<span class="st">'incident_zip'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>unique_zips <span class="op">=</span> valid_zip_df[<span class="st">'incident_zip'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Since <code>uszipcode</code> doesn’t inherently support vectorized operations for multiple ZIP code queries, we’ll optimize the process by querying each unique ZIP code once, then merging the results with the original <code>DataFrame</code>. This approach minimizes redundant queries for ZIP codes that appear multiple times.</p>
-<div id="a9399805" class="cell" data-execution_count="9">
+<div id="f3c7e168" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> uszipcode <span class="im">import</span> SearchEngine</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the SearchEngine</span></span>

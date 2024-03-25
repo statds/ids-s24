@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jun Yan and Students in Spring 2024">
-<meta name="dcterms.date" content="2024-03-20">
+<meta name="dcterms.date" content="2024-03-25">
 
 <title>Introduction to Data Science</title>
 <style>
@@ -307,7 +307,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 20, 2024</p>
+      <p class="date">March 25, 2024</p>
     </div>
   </div>
   
@@ -456,7 +456,7 @@ div.csl-indent {
 <section id="presentation-orders" class="level2">
 <h2 class="anchored" data-anchor-id="presentation-orders">Presentation Orders</h2>
 <p>The topic presentation order is set up in class.</p>
-<div id="05e36f6d" class="cell" data-execution_count="1">
+<div id="f2c5d761" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'rosters/3255.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    ug <span class="op">=</span> [line.strip() <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'rosters/5255.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
@@ -643,8 +643,8 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td>04/01</td>
-<td>Madison Woo</td>
-<td>Data Science Ethics</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>04/03</td>
@@ -653,8 +653,8 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td>04/03</td>
-<td></td>
-<td></td>
+<td>Madison Woo</td>
+<td>Calling C/C++ from Python</td>
 </tr>
 <tr class="odd">
 <td>04/08</td>
@@ -719,9 +719,10 @@ div.csl-indent {
 <ul>
 <li>Start a new branch and switch to the new branch.</li>
 <li>On the new branch, add a qmd file for your presentation</li>
+<li>If using Python, create and activate a virtual environment with <code>requirements.txt</code></li>
 <li>Edit <code>_quarto.yml</code> add a line for your qmd file to include it in the notes.</li>
 <li>Work on your qmd file, test with <code>quarto render</code>.</li>
-<li>When satisfied, commit and make a pull request.</li>
+<li>When satisfied, commit and make a pull request with your quarto files and an updated <code>requirements.txt</code>.</li>
 </ul>
 <p>I have added a template file <code>mysection.qmd</code> and a new line to <code>_quarto.yml</code> as an example.</p>
 <p>For more detailed style guidance, please see my notes on <a href="https://statds.github.io/stat-writing/using-the-right-tools-for-writing.html#latex-for-typesetting">statistical writing</a>.</p>
@@ -773,7 +774,7 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="sub-topic-1">Sub Topic 1</h3>
 <p>Put materials on topic 1 here</p>
 <p>Python examples can be put into <code>python</code> code chunks:</p>
-<div id="a5c88a2a" class="cell" data-execution_count="2">
+<div id="18f206f3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># do something</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
