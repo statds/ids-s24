@@ -1,0 +1,420 @@
+## Exploring NYC Rodent Dataset (by Xingye.Zhang)
+
+The main goal of my presentation is to show the process of 
+‘transforming raw dataset’ into ‘compelling insights’ using various data 
+visualizing examples. And most importantly, I wish to get you guys ‘engaged’
+and ‘come up with your insights’ about visualizing NYC dataset throughout
+the process of exploring.
+
+### Personal Introduction
+My name is Xingye Zhang, you can call me Austin, which may be easier to pronounce.
+I'm from China and currently a senior majoring in Statistics and Economics. I plan
+to graduate next semester, having taken a gap semester previously.
+
+My experience with Python is quite recent. I had my first Python course in ECON 
+prior to this course and I just started to learn how to use Github and Vs code 
+in this semester.
+
+Please feel free to interrupt if you have any questions or notice I made a mistake.
+I'm glad to answer your questions and learn from you guys!
+
+### Dataset Format Selection
+Why 'Feather'?
+
+* Speed: Feather files are faster to read and write than CSV files.
+
+* Efficiency in Storage: Feather files are often smaller in size than CSV files. 
+
+* Support for Large Datasets: Feather files can handle large datasets more 
+  efficiently.
+
+### Dataset Cleaning
+```{python}
+# Import basic packages
+import pandas as pd
+# Pyarrow is better for reading feather file
+import pyarrow.feather as pya
+
+# Load the original dataset
+rodent_data = pya.read_feather('data/rodent_2022-2023.feather')
+
+# Print columns in order to avoid 'Keyerror'
+column_names = rodent_data.columns.tolist()
+print(column_names)
+```
+
+
+**1. Checking Columns**
+
+**Conclusion:**: 
+There are no columns with identical data, but some columns are highly correlated.
+
+**Empty Columns:**  'Facility Type', 'Due Date', 'Vehicle Type',
+'Taxi Company Borough','Taxi Pick Up Location', 'Bridge Highway Name', 
+'Bridge Highway Direction', 'Road Ramp', 'Bridge Highway Segment'.
+
+**Columns we can remove to clean data:**  'Agency Name', 'Street Name', 
+'Landmark', 'Intersection Street 1', 'Intersection Street 2', 'Park Facility Name',
+'Park Borough', 'Police Precinct', 'Facility Type', 'Due Date', 'Vehicle Type',
+'Taxi Company Borough', 'Taxi Pick Up Location', 'Bridge Highway Name',
+'Bridge Highway Direction', 'Road Ramp', 'Bridge Highway Segment'.
+
+
+**2. Using reverse geocoding to fill the missing zip code**
+```{python}
+# Find the missing zip code
+missing_zip = rodent_data['zip_codes'].isnull()
+missing_borough = rodent_data['borough'].isnull()
+missing_zip_borough_correlation = (missing_zip == missing_borough).all()
+
+# Use reverse geocoding to fill the missing zip code
+geocode_available = not (rodent_data['latitude'].isnull().any() 
+                    or rodent_data['longitude'].isnull().any())
+
+missing_zip_borough_correlation, geocode_available
+```
+
+**3. Clean the Original Data**
+```{python}
+# Removing redundant columns
+columns_to_remove = ['agency_name', 'street_name', 'landmark',
+                     'intersection_street_1', 'intersection_street_2',
+                     'park_facility_name', 'park_borough',
+                     'police_precinct', 'facility_type', 'due_date',
+                     'vehicle_type', 'taxi_company_borough', 
+                     'taxi_pick_up_location', 'police_precinct',
+                     'bridge_highway_name', 'bridge_highway_direction', 
+                     'road_ramp','bridge_highway_segment']
+
+cleaned_data = rodent_data.drop(columns=columns_to_remove)
+
+#Create the file_path
+file_path = 'data/cleaned_rodent_data.feather'
+
+# Feather Export (removing non-supported types like datetime)
+cleaned_data['created_date'] = cleaned_data['created_date'].astype(str)
+cleaned_data['closed_date'] = cleaned_data['closed_date'].astype(str)
+cleaned_data.to_feather(file_path)
+
+# Check the cleaned columns
+print(cleaned_data.columns)
+```
+
+### Categorizing the Columns
+Highly suggest to use 'Chatgpt' first and then revise it yourself.
+
+* Identification Information: 'Unique Key'.
+
+* Temporal Information: 'Created Date', 'Closed Date'.
+
+* Agency Information: 'Agency'.
+
+* Complaint Details: 'Complaint Type', 'Descriptor', 
+  'Resolution Description', 'Resolution Action Updated Date'.
+
+* Location and Administrative Information: 'Location Type', 
+  'Incident Zip', 'Incident Address', 'Cross Street 1', 'Cross Street 2',
+  'City','Borough', 'Community Board', 'Community Districts',
+  'Borough Boundaries', 'BBL'. 'City Council Districts',
+  'Police Precincts'.
+
+* Geographical Coordinates: 'X Coordinate (State Plane)',
+  'Y Coordinate (State Plane)', 'Location'.
+
+* Communication Channels: 'Open Data Channel Type'.
+
+### Question based on Dataset
+**Agency:**
+1. Temporal Trends in Rodent Complaints
+2. Relationship between Rodent Complaints
+  Location Types
+3. Spatial Analysis of Rodent Complaints
+
+**Complainer:**
+1. Agency Resolution Time
+2. Impact of Rodent Complaints on City Services:
+
+### Temporal Trends in Rodent Complaints
+```{python}
+# Import basic packages
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Ensure 'created_date' is in datetime format and extract 'Year' and 'Month'
+cleaned_data['created_date'] = pd.to_datetime(cleaned_data['created_date'], 
+errors='coerce')
+cleaned_data['Year'] = cleaned_data['created_date'].dt.year
+cleaned_data['Month'] = cleaned_data['created_date'].dt.month
+
+# Use data from year 2023 as example
+data_2023 = cleaned_data[cleaned_data['Year'] == 2023]
+
+# Group by Month to get the count of complaints
+mon_complaints_23= data_2023.groupby('Month').size().reset_index(name='Counts')
+
+# Plotting
+plt.figure(figsize=(7, 3))
+sns.barplot(data=mon_complaints_23, x='Month', y='Counts')
+plt.title('Monthly Rodent Complaints in 2023')
+plt.xlabel('Month')
+plt.ylabel('Number of Complaints')
+plt.xticks(range(12), ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
+                       'Sep', 'Oct', 'Nov', 'Dec'])
+plt.tight_layout()
+```
+
+**Seasonal Trend**
+```{python}
+# Categorize month into seasons
+def categorize_season(month):
+    if month in [3, 4, 5]:
+        return 'Spring'
+    elif month in [6, 7, 8]:
+        return 'Summer'
+    elif month in [9, 10, 11]:
+        return 'Fall'
+    else:  # Months 12, 1, 2
+        return 'Winter'
+
+# Applying the function to create a 'Season' column
+data_2023 = cleaned_data[cleaned_data['Year'] == 2023].copy()
+data_2023['Season'] = data_2023['Month'].apply(categorize_season)
+
+# Grouping by Season to get the count of complaints
+season_com_2023 = data_2023.groupby('Season').size().reset_index(name='Counts')
+
+# Ordering the seasons for the plot
+season_order = ['Spring', 'Summer', 'Fall', 'Winter']
+season_com_2023['Season'] = pd.Categorical(season_com_2023['Season'],
+                            categories=season_order, ordered=True)
+season_com_2023 = season_com_2023.sort_values('Season')
+
+# Plotting
+plt.figure(figsize=(7, 3))
+sns.barplot(data=season_com_2023, x='Season', y='Counts')
+plt.title('Seasonal Rodent Complaints in 2023')
+plt.xlabel('Season')
+plt.ylabel('Number of Complaints')
+plt.tight_layout()
+
+plt.show()
+```
+
+**Comparing 2022 and 2023 Seasonal Trend**
+```{python}
+# Filter data for two specific years, e.g., 2022 and 2023
+data_filtered = cleaned_data[cleaned_data['Year'].isin([2022, 2023])]
+
+# Group by Year and Month to get the count of complaints
+mon_counts = data_filtered.groupby(['Year', 
+'Month']).size().reset_index(name='Counts')
+
+# Pivot the data for easy plotting
+mon_counts_pivot = mon_counts.pivot(index='Month', columns='Year', 
+                   values='Counts')
+
+# Plotting
+plt.figure(figsize=(7, 3))
+sns.lineplot(data=mon_counts_pivot)
+plt.title('Comparison of Monthly Rodent Complaints between 2022 and 2023')
+plt.xlabel('Month')
+plt.ylabel('Number of Complaints')
+plt.xticks(range(1, 13), ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 
+                          'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+plt.legend(title='Year', labels=mon_counts_pivot.columns)
+plt.tight_layout()
+plt.show()
+```
+
+**Comparing Temporal Trends from Boroughs in 2023**
+```{python}
+data_2023 = cleaned_data[cleaned_data['Year'] == 2023]
+
+# Group by Month and Borough to get the count of complaints
+mon_borough_counts = data_2023.groupby(['Month',
+'borough']).size().reset_index(name='Counts')
+
+# Pivot the data for easy plotting
+mon_borough_counts_pivot = mon_borough_counts.pivot(index='Month', 
+                           columns='borough', values='Counts')
+
+# Plotting
+plt.figure(figsize=(7, 3))
+sns.lineplot(data=mon_borough_counts_pivot)
+plt.title('Monthly Trend of Rodent Complaints by Borough in 2023')
+plt.xlabel('Month')
+plt.ylabel('Number of Complaints')
+plt.xticks(range(1, 13), ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 
+                          'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+plt.legend(title='Borough')
+plt.tight_layout()
+plt.show()
+```
+
+**Adding the Location Types**
+```{python}
+import warnings
+from plotnine.exceptions import PlotnineWarning
+from plotnine import (
+    ggplot, aes, geom_line, geom_point, facet_wrap,
+    labs, theme, element_text, scale_x_continuous
+)
+
+# Suppress specific Plotnine warnings
+warnings.filterwarnings('ignore', category=PlotnineWarning)
+
+# get the count of complaints per month per location type and borough
+monthly_data = (data_2023.groupby(['borough', 'location_type', 'Month'])
+                               .size()
+                               .reset_index(name='Counts'))
+
+# Create the plot with adjusted figure size and legend properties
+plot = (ggplot(monthly_data, aes(x='Month', y='Counts', color='location_type')) +
+        geom_line() +
+        geom_point() +
+        facet_wrap('~borough', scales='free_y', ncol=3) +
+        labs(x='Month', y='Number of Complaints', color='Location Type', 
+             title='Monthly Rodent Complaints by Location Type and Borough') +
+        scale_x_continuous(breaks=range(2, 13, 2)) +
+        theme(
+            figure_size=(20, 10),  # Adjusted figure size
+            text=element_text(size=10),
+            legend_position='right',
+            axis_text_x=element_text(rotation=0, hjust=0.5)
+            # Removed subplots_adjust
+        )
+)
+
+# Save the plot to a file with high resolution
+plot.save('rodent_complaints_plot.jpeg', width=20, height=10, dpi=300)
+
+# Corrected way to show the plot
+plot.show()
+```
+
+### Interactive Graph
+**Plotly Example of Monthly Rodents Complaints in Bronx**
+```{python}
+import plotly.express as px
+import pandas as pd
+
+# Load your dataset
+# Replace with the path to your dataset
+data = pya.read_feather('data/cleaned_rodent_data.feather')
+
+# Convert 'Created Date' to datetime and extract 'Year' and 'Month'
+data['created_date'] = pd.to_datetime(data['created_date'], errors='coerce')
+data['Year'] = data['created_date'].dt.year.astype(int)
+data['Month'] = data['created_date'].dt.month
+
+# Filter the dataset for the years 2022 and 2023
+data_filtered = data[(data['Year'] == 2022) | (data['Year'] == 2023)]
+
+# Further filter to only include the Bronx borough
+data_bronx = data_filtered[data_filtered['borough'] == 'BRONX'].copy()
+
+# Combine 'Year' and 'Month' to a 'Year-Month' format for more granular plotting
+data_bronx['Year-Month'] = (data_bronx['Year'].astype(str) 
+                          + '-' + data_bronx['Month'].astype(str).str.pad(2, 
+                          fillchar='0'))
+
+# Group data by 'Year-Month' and 'Location Type' and count the complaints.
+monthly_data_bronx = (data_bronx.groupby(['Year-Month', 'location_type'], 
+                    as_index=False)
+                    .size()
+                    .rename(columns={'size': 'Counts'}))
+
+# Create an interactive plot with Plotly Express
+fig = px.scatter(monthly_data_bronx, x='Year-Month', y='Counts', 
+                color='location_type',
+                size='Counts', hover_data=['location_type'],
+                title='Monthly Rodent Complaints by Location Type in Bronx')
+
+# Adjust layout for better readability
+fig.update_layout(
+    height=400, width=750,
+    legend_title='Location Type',
+    xaxis_title='Year-Month',
+    yaxis_title='Number of Complaints',
+    # Rotate the labels on the x-axis for better readability
+    xaxis=dict(tickangle=45)  
+)
+
+# Show the interactive plot
+fig.show()
+
+```
+
+### Interactive Map using Google
+
+```{python}
+# Shapely for converting latitude/longtitude to geometry
+from shapely.geometry import Point 
+# To create GeodataFrame
+import geopandas as gpd
+
+# cutting the length of dataset to avoid over-capacity
+sub_data = data.iloc[:len(data)//20] # Shorten dataset for illustration.
+
+# Drop rows with missing latitude or longitude to match the lengths
+sub_data_cleaned = sub_data.dropna(subset=['latitude', 'longitude'])
+
+# creating geometry using shapely (removing empty points)
+geometry = [Point(xy) for xy in zip(sub_data_cleaned["longitude"], \
+            sub_data_cleaned["latitude"]) if not Point(xy).is_empty]
+
+# creating geometry column to be used by geopandas
+geometry2 = gpd.points_from_xy(sub_data_cleaned["longitude"],
+            sub_data_cleaned["latitude"])
+
+# coordinate reference system.
+crs = "EPSG:4326"
+
+# Create GeoDataFrame directly using geopandas points_from_xy utility
+rodent_geo = gpd.GeoDataFrame(sub_data_cleaned,
+                              crs=crs, 
+                              geometry=gpd.points_from_xy(
+                                       sub_data_cleaned['longitude'],
+                                       sub_data_cleaned['latitude']))
+
+rodent_geo.plot(column='borough', legend=True)
+```
+```{python}
+# Converts timestamps into strings for JSON serialization
+rodent_geo['created_date'] = rodent_geo['created_date'].astype(str)
+rodent_geo['closed_date'] = rodent_geo['closed_date'].astype(str)
+
+map = rodent_geo.explore(column='borough', legend=True)
+map
+```
+
+**Tips in using this map**
+- Due to the length of information shown in 'resolution_description', and
+  the amount of total columns, the information are hard to be shown fully
+  and clearly.
+
+- Please drag the google map to keep the coordinates at the left side of 
+  the google map, so that the information could be shown on the right side. 
+
+- In this case, the information shown could be more readable and organized.
+
+
+### References
+
+For more information see the following: 
+
+* Plotly Basic Charts
+    + <https://plotly.com/python/basic-charts/>
+
+* Plotnine Tutorial
+    + <https://plotnine.org/>
+
+* GeoPandas Documentation
+    + <https://geopandas.org/en/stable/docs.html>
+
+* NYC Borough Data
+    + <https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm>
+
+* NYC Zip Code Data
+    + <https://data.beta.nyc/en/dataset/nyc-zip-code-tabulation-areas/resource/894e9162-871c-4552-a09c-c6915d8783fb>
+
