@@ -1,0 +1,683 @@
+## Statistical Modeling with `statsmodels`
+
+This section was written by Leon Nguyen.
+
+### Introduction
+
+Hello! My name is Leon Nguyen (they/she) and I am a second-year undergraduate 
+student studying Statistical Data Science and Mathematics at the University 
+of Connecticut, aiming to graduate in Fall 2025. One of my long-term goals is to 
+make the field of data science more accessible to marginalized communities and 
+minority demographics. My research interests include data visualization and 
+design. Statistical modeling is one of the most fundamental skills required 
+for data science, and it's important to have a solid understanding of how 
+models work for interpretable results. 
+
+The `statsmodels` Python package offers a diverse range of classes and functions 
+tailored for estimating various statistical models, conducting statistical tests, 
+and exploring statistical data. Each estimator provides an extensive array of 
+result statistics, rigorously tested against established statistical packages to 
+ensure accuracy. This presentation will focus on the practical applications of the 
+statistical modeling aspect.
+
+### Key Features and Capabilities
+
+Some key features and capabilities of `statsmodels` are:
+
++ Generalized Linear Models
++ Diagnostic Tests
++ Nonparametric methods
+
+In this presentation, we will work with practical applications of statistical 
+modeling in `statsmodels`. We will briefly cover how to set up linear, logistic, 
+and Poisson regression models, and touch upon kernel density estimation and 
+diagnostics. By the end of this presentation, you should be able to understand how 
+to use `statsmodels` to analyze your own datasets using these fundamental 
+techniques.
+
+### Installation and Setup
+
+To install `statsmodels`, use `pip install statsmodels` or `conda install statsmodels`, depending on whether you are using pip or conda.
+
+One of the major benefits of using `statsmodels` is their compatability with 
+other commnonly used packages, such as `NumPy`, `SciPy`, and `Pandas`. 
+These packages provide foundational scientific computing functionalities that 
+are crucial for working with `statsmodels`. To ensure everything is set up 
+correctly, import the necessary libraries at the beginning of your script:
+
+```{python}
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+import matplotlib.pyplot as plt
+```
+
+Here are some minimum dependencies:
+
++ Python >= 3.8
++ NumPy >= 1.18
++ SciPy >= 1.4
++ Pandas >= 1.0
++ Patsy >= 0.5.2
+
+The last item listed above, `patsy`, is a Python library that provides 
+simple syntax for specifying statistical models in Python. It allows 
+users to define linear models using a formula syntax similar to the formulas 
+used in R and other statistical software. More `patsy` documentation can be 
+found [here](https://patsy.readthedocs.io/en/latest/). This library is not used 
+this demonstration, but is still worth noting.
+
+### Importing Data
+
+There are a few different options to import data. For example, `statsmodels` 
+documentation demonstrates how to importing from a CSV file hosted online from 
+the [Rdatasets repository](https://github.com/vincentarelbundock/Rdatasets/):
+
+```{python}
+# Reads the 'avocado' dataset from the causaldata package into df
+df0 = sm.datasets.get_rdataset(dataname='avocado', package="causaldata").data
+# We will be using this dataset later!
+
+# Print out the first five rows of our dataframe
+print(df0.head())
+```
+
+We can also read directly from a local CSV file with `pandas`. For example, we will 
+be using the NYC 311 request rodent data:
+```{python}
+# Reads the csv file into df
+df = pd.read_csv('data/rodent_2022-2023.csv')
+
+# Brief data pre-processing
+# Time reformatting
+df['Created Date'] = pd.to_datetime(df['Created Date'], format = "%m/%d/%Y %I:%M:%S %p")
+df['Closed Date'] = pd.to_datetime(df['Closed Date'], format = "%m/%d/%Y %I:%M:%S %p")
+df['Created Year'] = df['Created Date'].dt.year
+df['Created Month'] = df['Created Date'].dt.month
+# Response time
+df['Response Time'] = df['Closed Date'] - df['Created Date'] 
+df['Response Time'] = df['Response Time'].apply(lambda x: x.total_seconds() / 3600) # in hours
+# Remove unspecified borough rows
+df = df.drop(df[df['Borough']=='Unspecified'].index)
+# Remove 'other' open data channel type rows
+df = df.drop(df[df['Open Data Channel Type']=='OTHER'].index)
+
+print(df.head())
+```
+
+
+### Troubleshooting
+
+Whenever you are having problems with `statsmodels`, you can access the 
+official documentation by visiting [this link](https://www.statsmodels.org/stable/index.html). 
+If you are working in a code editor, you can also run the following in a code cell:
+```{python}
+sm.webdoc() 
+# Opens the official documentation page in your browser
+```
+
+To look for specific documentation, for example `sm.GLS`, you can run the following:
+```{python}
+sm.webdoc(func=sm.GLS, stable=True)
+# func : string* or function to search for documentation 
+# stable : (True) or development (False) documentation, default is stable
+
+# *Searching via string has presented issues?
+```
+
+### Statistical Modeling and Analysis
+
+Constructing statistical models with `statsmodels` generally follows a step-by-step 
+process: 
+
+1. **Import necessary libraries**: This includes both `numpy` and `pandas`, as well 
+as `statsmodels.api` itself (`sm`).
+
+1. **Load** the data: This could be data from the `rdataset` repository, local 
+csv files, or other formats. In general, it's best practice to load your data 
+into a `pandas` DataFrame so that it can easily be manipulated using `pandas` 
+functions.
+
+1. **Prepare the data**: This involves converting variables into appropriate 
+types (e.g., categorical into factors), handling missing values, and creating 
+appropriate interaction terms.
+
+1. **Define** our model: what model is the appropriate representation of our 
+research question? This could be an OLS regression (`sm.OLS`), logistic 
+regression (`sm.Logit`), or any number of other models depending on the 
+nature of our data.
+   
+1. **Fit** the model to our data: we use the `.fit()` method which takes as input 
+our dependent variable and independent variables.
+   
+1. **Analyze** the results of the model: this is where we can get things like 
+parameter estimates, standard errors, p-values, etc. We use the `.summary()` 
+method to print out these statistics.
+
+
+### Generalized Linear Models
+
+GLM models allow us to construct a linear relationship between the response and 
+predictors, even if their underlying relationship is not linear. This is done via 
+a link function, which is a transformation which links the response variable to a 
+linear model. 
+
+Key points of GLMs:
+
++ Data should be independent and random.
++ The response variable $Y$ does not need to be normally distributed, but the 
+distribution is from an exponential family (e.g. binomial, Poisson, normal).
++ GLMs do not assume a linear relationship between the response variable and 
+the explanatory variables, but assume a linear relationship between 
+the transformed expected response in terms of the link function and the 
+explanatory variables.
++ GLMs are useful when the range of your response variable is constrained 
+and/or the variance is not constant or normally distributed. 
++ GLM models transform the response variable to allow the fit to be done by 
+least squares. The transformation done on the response variable is defined by 
+the link function.
+
+#### Linear Regression
+
+Simple and muliple linear regression are special cases where the expected value 
+of the dependent value is equal to a linear combination of predictors. In other 
+words, the link function is the identity function $g[E(Y)]=E(Y)$. Make sure 
+assumptions for linear regression hold before proceeding. The model for 
+linear regression is given by:
+$$y_i = X_i\beta + \epsilon_i$$
+where $X_i$ is a vector of predictors for individual $i$, and $\beta$ is a vector of coefficients that define this linear combination.
+
+We will be working with the `avocado` dataset from the package `causaldata` 
+which contains information about the average price and total amount of avocados 
+that were sold in California from 2015-2018. `AveragePrice` of a single avocado 
+is our predictor, and `TotalVolume` is our outcome variable as a count of avocados. 
+
+Here is an application of SLR with `statsmodels`:
+
+```{python}
+# We can use .get_rdataset() to load data into Python from a repositiory of R packages.
+df1 = sm.datasets.get_rdataset('avocado', package="causaldata").data
+
+# Fit regression model
+results1 = smf.ols('TotalVolume ~ AveragePrice', data=df1).fit()
+
+# Analyze results
+print(results1.summary())
+```
+
+We can interpret some values:
+
++ **coef:** the coefficient of `AveragePrice` tells us how much adding one unit of 
+`AveragePrice` changes the predicted value of `TotalVolume`. An important 
+interpretation is that if `AveragePrice` was to increase by one unit, on average 
+we could expect `TotalVolume` to change by this coefficient based on this linear 
+model. This makes sense since higher prices should result in a smaller amount of avocados 
+sold.
++ **P>|t|:** p-value to test significant effect of the predictor on the response, 
+compared to a significance level $\alpha=0.05$. When this p-value $\leq \alpha$, 
+we would reject the null hypothesis that there is no effect of `AveragePrice` on `TotalVolume`, 
+and conclude that `AveragePrice` has a statistically significant effect on `TotalVolume`. 
++ **R-squared:** indicates the proportion of variance explained by the 
+predictors (in this case just `AveragePrice`). If it's close to 1 then most 
+of the variability in `TotalVolume` is explained by `AveragePrice`, which is good! 
+However, only about 44.1% of the variability is explained, so this model could 
+use some improvement.
++ **Prob (F-statistic):** indicates whether or not the linear regression model 
+provides a better fit to a dataset than a model with no predictors. Assuming a 
+significance level of 0.05, we would reject the null hypothesis (model with just 
+the intercept does just as well with a model with predictors) since our F-value 
+probability is less than 0.05. We know that `AveragePrice` gives at least some significant 
+information about `TotalVolume`. (This makes more sense in MLR where you are considering 
+multiple predictors.)
++ **Skew:** measures asymmetry of a distribution, which can be positive, negative, or zero.
+If skewness is positive, the distribution is more skewed to the right; if negative, then 
+to the left. We ideally want a skew value of zero in a normal distribution. 
++ **Kurtosis:** a measure of whether or not a distribution is heavy-tailed or light-tailed 
+relative to a normal distribution. For a normal distribution, we expect a kurtosis of 3. 
+If our kurtosis is greater than 3, there are more outliers on the tails. If less than 3, 
+then there are less.
++ **Prob (Jarque-Bera):** indicates whether or not the residuals are normally distributed, 
+which is required for the OLS linear regression model. In this case the test 
+rejects the null hypothesis that the residuals come from a normal distribution. This 
+is concerning because non-normality can lead to misleading conclusions and incorrect 
+standard errors. 
+
+#### Logistic Regression
+
+Logistic regression is used when the response variable is binary. The 
+response distribution is logistic which means it has support (input) on $(0,1)$ and  
+is invertible. The log-odds link function is defined as $\log\left(\frac{\mu}{1-\mu}\right)$, where $\mu$ is the predicted probability.
+
+Here we have an example from our `rodents` dataset, where the response variable 
+`Under 3h` indicates whether the response time for a 311 service request was under 3 
+hours. 1 indicates that the response time is less than 3 hours, and 0 indications 
+greater than or equal to 3 hours. We are creating a logistic regression model that 
+can be used to estimate the odds ratio of 311 requests having a response time under 3 
+hours based on `Borough` and `Open Data Channel Type` (method of how 311 service request 
+was submitted) as predictors. 
+
+```{python}
+# Loaded the dataset in a previous cell as df
+# Create binary variable
+df['Under 3h'] = (df['Response Time'] < 3).astype(int)
+
+# Convert the categorical variable to dummy variables
+df = df.loc[:, ['Borough', 'Open Data Channel Type', 'Under 3h']]
+df = pd.get_dummies(df, dtype = int)
+
+# Remove reference dummy variables
+df.drop(
+  columns=['Borough_QUEENS', 'Open Data Channel Type_MOBILE'], 
+  axis=1, 
+  inplace=True
+)
+```
+
+For this regression to run properly, we needed to create $k-1$ dummy 
+variables with $k$ levels in a given predictor. Here we have two categorical 
+variables that we used `pd.get_dummies()` function to change from a categorical 
+variable into dummy variables. We then dropped one dummy variable level from each 
+category: `'Borough_QUEENS'` and `'Open Data Channel Type_MOBILE'`.
+
+```{python}
+# Drop all rows with NaN values
+df.dropna(inplace = True)
+
+# Fit the logistic regression model using statsmodels
+Y = df['Under 3h']
+X = sm.add_constant(df.drop(columns = 'Under 3h', axis=1))
+# need to consider constant manually
+
+logitmod = sm.Logit(Y, X)
+result = logitmod.fit(maxiter=30)
+# Summary of the fitted model
+print(result.summary())
+
+```
+
++ **coef:** the coefficients of the independent variables in the logistic regression equation are interpreted a little bit differently than linear regression; for example, if `borough_MANHATTAN` increases by one unit and all else is held constant, we expect the *log odds* to decrease by 0.7192 units. According to this model, we can expect it is less likely for response time to be under three hours for a 311 service request in Manhattan compared to Queens (reference level). On the other hand, if 
+`borough_BRONX` increases by one unit and all else is held constant, we expect the log odds to 
+increase by 0.1047 units. We can expect it is more likely for response time to be under three hours 
+for a 311 service request in the Bronx compared to Queens. If we want to look at comparisons between 
+`Open Data Channel Type`, from this model, we can also see that 311 requests in the dataset that were 
+submitted via phone call are more likely to have a response time under three hours compared to those 
+that were submitted via mobile. 
+
++ **Log-Likelihood:** the natural logarithm of the Maximum Likelihood Estimation(MLE) function. MLE is the optimization process of finding the set of parameters that result in the best fit. Log-likelihood on its own doesn't give us a lot of information, but comparing this value from two different models with the same number of predictors can be useful. Higher log-likelihood indicates a better fit. 
+
++ **LL-Null:** the value of log-likelihood of the null model (model with no predictors, just intercept). 
+
++ **Pseudo R-squ.:** similar but not exact equivalent to the R-squared value in Least Squares linear regression. This is also known as McFadden's R-Squared, and is computed as $1-\dfrac{L_1}{L_0}$, where $L_0$ is the log-likelihood of the null model and $L_1$ is that of the full model.
+
++ **LLR p-value:** the p-value of log-likelihood ratio test statistic comparing the full model to the null model. Assuming a significance level $\alpha$ of 0.05, if this p-value $\leq \alpha,$ then we reject the null hypothesis that the model is not significant. We reject the null hypothesis; thus we can conclude this model has predictors that are significant (non-zero coefficients).
+
+
+Another example:
+
+We will use the `macrodata` dataset directly from `statsmodels`, which contains 
+information on macroeconomic indicators in the US across different quarters from 1959 to 
+2009, such as unemployment rate, inflation rate, real gross domestic product, etc. 
+I have created a binary variable `morethan5p` that has a value of 1 when the 
+unemployment rate is more than 5% in a given quarter, and is 0 when it is equal 
+to or less than 5%. We are creating a logistic regression model that can be used to 
+estimate the odds ratio of the unemployment rate being greater than 5% based on 
+`cpi` (end-of-quarter consumer price index) and `pop` (end-of-quarter population) 
+as predictors. 
+
+```{python}
+# df2 is an instance of a statsmodels dataset class
+df2 = sm.datasets.macrodata.load_pandas()
+# add binary variable
+df2.data['morethan5p'] = (df2.data['unemp']>5).apply(lambda x:int(x))
+# Subset data
+df2 = df2.data[['morethan5p','cpi','pop']]
+# Logit regression model
+model = smf.logit("morethan5p ~ cpi + pop", df2)
+result2 = model.fit()
+summary = result2.summary()
+print(summary)
+```
+
+We can compute odds ratios and other information by calling methods on the 
+fitted result object. Below are the 95% confidence intervals of the odds ratio 
+$e^{\text{coef}}$ of each coefficient:
+```{python}
+odds_ratios = pd.DataFrame(
+    {
+        "Odds Ratio": result2.params,
+        "Lower CI": result2.conf_int()[0],
+        "Upper CI": result2.conf_int()[1],
+    }
+)
+odds_ratios = np.exp(odds_ratios)
+
+print(odds_ratios)
+```
+
+Note these are no longer *log odds* we are looking at! We estimate with 95% confidence 
+that the true odds ratio lies between the lower CI and upper CI for each coefficient. 
+A larger odds ratio is associated with a larger probability that the unemployment 
+rate is greater than 5%.
+
+#### Poisson Regression
+
+This type of regression is best suited for modeling the how the mean of a discrete 
+variable depends on one or more predictors.
+
+The log of the probability of success is modeled by:
+
+$\log(\mu) = b_0 + b_1x_1 + ... + b_kx_k$
+
+where $\mu$ is the probability of success (the response variable). The intercept `b0` is 
+assumed to be 0 if not provided in the model. We will use `.add_constant` to indicate 
+that our model includes an intercept term.
+
+Let's use the `sunspots` dataset from `statsmodels`. This is a one variable dataset that counts 
+the number of sunspots that occur in a given year (from 1700 - 2008). Note that the link function 
+for Poisson regression is a log function, which means $\log{E(Y)}=X\beta.$
+
+We first load an instance 
+of a `statsmodels` dataset class, analogous to a `pandas` dataframe:
+```{python}
+df3 = sm.datasets.sunspots.load_pandas()
+df3 = df3.data
+
+df3['YEAR'] = df3['YEAR'].apply(lambda x: x-1700)
+# YEAR is now number of years after 1700, scaling the data for better results
+df3['YEAR2'] = df3['YEAR'].apply(lambda x: x**2)
+# YEAR2 is YEAR squared, used as additional predictor
+
+X = sm.add_constant(df3[['YEAR','YEAR2']]) 
+# .add_constant indicates that our model includes an intercept term
+Y = df3['SUNACTIVITY']
+
+print(df3[['YEAR','YEAR2','SUNACTIVITY']].head())
+```
+
+In the code above, we are altering our predictors a little bit from the 
+orignal dataset; we are substracting the minimum year 1700 from all `YEAR` 
+values so it is more centered. It is generally good practice to scale and 
+center your data so that the model can have better fit. In our case this also 
+aids the interpretability of the intercept coefficient we will see later. 
+We are adding the varaible `YEAR2`, which is the number of years since 
+1700 squared to see if there is some non-linear relationship that may exist. 
+
+We can use the `.GLM` function with the `family='poisson'` argument to fit our 
+model. Some important parameters:
+
++ `data.endog` acts as a series of observations for the dependent variable $Y$
++ `data.exog` acts as a series of observations for each predictor
++ `family` specifies the distribution appropriate for the model
+
+```{python}
+result3 = sm.GLM(Y, X, family=sm.families.Poisson()).fit()
+print(result3.summary())
+```
+
++ **coef:** In this model, increasing the `YEAR` seems to increase the log of the expected 
+count of Sunspot activity (`SUNACTIVITY`) by a small amount; the expected count of sunspot 
+activty increases by $e^{.0003}$ (note that increasing `YEAR` also increases `YEAR2` so we 
+have to be careful with interpretability!) This model also suggests that the number of 
+sunspots is for the year 1700 is estimated to be $e^{3.6781}\approx39.57$, while the number of 
+actual sunspots that year was 5.
++ **Deviance:** two times the difference between the log-likelihood of a fitted GLM and 
+the log-likelihood of a perfect model where fitted responses match observed responses. 
+A greater deviance indicates a worse fit.
++ **Pearson chi2:** measures the goodness-of-fit of the model based on the square deviations 
+between observed and expected values based on the model. A large value suggests that the model 
+does not fit well.
+
+### Diagnostic Tests
+
+Throughout the GLMs listed above, we can find different statistics to assess how well the model fits the data. They include:
+
++ **Deviance**: Measures the goodness-of-fit by taking the difference between the log-likelihood of 
+a fitted GLM and the log-likelihood of a perfect model where fitted responses match observed responses. 
+A larger deviance indicates a worse fit for the model. This is a test statistic for Likelihood-ratio tests compared to a chi-squared distribution with $df=df_{\text{full}}-df_{\text{null}}$, for comparing 
+a full model against a null model (or some reduced model) similar to a 
+partial F-test. 
+
+```{python}
+print("Poisson Regression Deviance:", result3.deviance)
+```
+
++ **Pearson's chi-square test:** This tests whether the predicted probabilities from the model differ significantly from the observed counts. The test statistic is calculated by taking the difference between the null deviance (deviance of a model with just the intercept term) and residual deviance (how well the response variable can be predicted by a model with a given number of predictors). Large Pearson’s chi-squares indicate poor fit.
+
+```{python}
+print("Chi Squared Stat:",result3.pearson_chi2)
+```
+
++ **Residual Plots:** Like in linear regression, we can visually plot residuals to look for patterns that shouldn't be there. There are different types of residuals that we can look at, such as deviance residuals:
+```{python}
+fig = plt.figure(figsize=(8, 4))
+plt.scatter(df3['YEAR'],result3.resid_deviance)
+```
+
+
+
+### Nonparametric Models
+
+#### Kernel Density Estimation
+
+`statsmodels` has a non-parametric approach called kernel density estimation (KDE), 
+which estimates the underlying probability of a given assortment of data points. 
+KDE is used when you don't have enough data points to form a parametric model. 
+It estimates the density of continuous random variables, or extrapolates some 
+continuous function from discrete counts. KDE is a non-parametric way to estimate 
+the underlying distribution of data. The KDE weights all the distances of all data 
+points relative to every location. The more data points there are at a given 
+location, the higher the KDE estimate at that location. Points closer to a given 
+location are generally weighted more than those further away. The shape of the 
+kernel function itself indicates how the point distances are weighted. For example, 
+a uniform kernel function will give equal weighting across all values within a 
+bandwidth, whereas a triangle kernel function gives weighting dependent on linear 
+distance.
+
+KDE can be applied for univariate or multivariate data. `statsmodels` has two methods for this:
+- `sm.nonparametric.KDEunivariate`: For univariate data. This estimates the 
+bandwidth using Scott’s rule unless specified otherwise. Much faster than 
+using `.KDEMultivariate` due to its use of Fast Fourier Transforms on 
+univariate, continuous data.
+- `sm.nonparametric.KDEMultivariate`: This applies to both univariate and 
+multivariate data, but tends to be slower. Can use mixed types of data but requires specification.
+
+Here we will demonstrate how to apply it to univariate data, based off of 
+examples provided in the [documentation](https://www.statsmodels.org/stable/examples/notebooks/generated/kernel_density.html#Comparing-kernel-functions). 
+We will generate a histogram of based off of [geyser waiting time](https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/faithful) data from Rdatasets. This dataset records the waiting time between "Old Faithful" geyser's eruptions in Yellowstone National Park. Our goal is to fit a KDE with a Gaussian kernel function to this data.
+
+```{python}
+# Load data
+df5 = sm.datasets.get_rdataset("faithful", "datasets")
+waiting_obs = df5.data['waiting'] 
+
+# Scatter plot of data samples and histogram
+fig = plt.figure(figsize=(8, 4))
+ax = fig.add_subplot()
+ax.set_ylabel("Count")
+ax.set_xlabel("Time (min)")
+
+ax.hist(
+    waiting_obs,
+    bins=25, 
+    color="darkblue",
+    edgecolor="w", 
+    alpha=0.8,
+    label="Histogram"
+)
+
+ax.scatter(
+    waiting_obs,
+    np.abs(np.random.randn(waiting_obs.size)),
+    color="orange",
+    marker="o",
+    alpha=0.5,
+    label="Samples",
+)
+
+ax.legend(loc="best")
+ax.grid(True, alpha=0.35)
+```
+
+Now we want to fit our KDE based on our `waiting_obs` sample:
+```{python}
+kde = sm.nonparametric.KDEUnivariate(waiting_obs)
+kde.fit()  # Estimate the densities
+print("Estimated Bandwidth:", kde.bw)  
+
+# Scatter plot of data samples and histogram
+fig = plt.figure(figsize=(8, 4))
+ax1 = fig.add_subplot()
+ax1.set_ylabel("Count")
+ax1.set_xlabel("Time (min)")
+
+ax1.hist(
+    waiting_obs,
+    bins=25, 
+    color="darkblue",
+    edgecolor="w", 
+    alpha=0.8,
+    label="Histogram",
+)
+
+ax1.scatter(
+    waiting_obs,
+    np.abs(np.random.randn(waiting_obs.size)),
+    color="orange",
+    marker="o",
+    alpha=0.5,
+    label="Waiting times",
+)
+
+ax2 = ax1.twinx()
+ax2.plot(
+    kde.support, 
+    kde.density, 
+    lw=3, 
+    label="KDE")
+ax2.set_ylabel("Density")
+
+# Joining legends
+lines, labels = ax1.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax2.legend(lines + lines2, labels + labels2, loc=0)
+
+ax1.grid(True, alpha=0.35)
+
+```
+
+When fitting the KDE, a `kde.bw` or bandwidth parameter is returned.
+We can alter this to see how it affects the 
+fit and smoothness of the curve. The smaller the bandwidth, the more jagged the 
+estimated distribution becomes.
+
+```{python}
+# Scatter plot of data samples and histogram
+fig = plt.figure(figsize=(8, 4))
+ax1 = fig.add_subplot()
+ax1.set_ylabel("Count")
+ax1.set_xlabel("Time (min)")
+
+ax1.hist(
+    waiting_obs,
+    bins=25, 
+    color="darkblue",
+    edgecolor="w", 
+    alpha=0.8,
+    label="Histogram"
+)
+
+ax1.scatter(
+    waiting_obs,
+    np.abs(np.random.randn(waiting_obs.size)),
+    color="orange",
+    marker="o",
+    alpha=0.5,
+    label="Samples",
+)
+
+# Plot the KDE for various bandwidths
+ax2 = ax1.twinx()
+ax2.set_ylabel("Density")
+
+for (bandwidth, color) in [(0.5,"cyan"), (4,"#bbaa00"), (8,"#ff79ff")]:
+    kde.fit(bw=bandwidth)  # Estimate the densities
+    ax2.plot(
+        kde.support,
+        kde.density,
+        "--",
+        lw=2,
+        color=color,
+        label=f"KDE from samples, bw = {bandwidth}",
+        alpha=0.9
+    )
+ax1.legend(loc="best")
+ax2.legend(loc="best")
+ax1.grid(True, alpha=0.35)
+```
+
+### References
+
+* Installing `statsmodels`:
+    + <https://www.statsmodels.org/stable/install.html>
+
+* `Rdatasets` repository and `statsmodels` datasets:
+    + <https://github.com/vincentarelbundock/Rdatasets/blob/master/datasets.csv>
+    + <https://cran.r-project.org/web/packages/causaldata/causaldata.pdf>
+    + <https://hassavocadoboard.com/>
+    + <https://www.statsmodels.org/stable/datasets/index.html>
+    + <https://www.statsmodels.org/stable/datasets/generated/sunspots.html>
+    + <https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/faithful>
+
+* NYC 311 Service Request Data:
+    + <https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9/about_data>
+
+* Getting help with `statsmodels`:
+    + <https://www.statsmodels.org/stable/generated/statsmodels.tools.web.webdoc.html#statsmodels.tools.web.webdoc>
+    + <https://www.statsmodels.org/stable/endog_exog.html>
+
+* Loading data, model fit, and summary procedure:
+    + <https://www.statsmodels.org/stable/gettingstarted.html>
+
+* Summary Data Interpretation:
+    + <https://www.statology.org/a-simple-guide-to-understanding-the-f-test-of-overall-significance-in-regression/>
+    + <https://www.statology.org/linear-regression-p-value/>
+    + <https://www.statology.org/omnibus-test/>
+    + <https://www.statisticshowto.com/jarque-bera-test/>
+    + <https://www.statology.org/how-to-report-skewness-kurtosis/>
+    + <https://www.statology.org/interpret-log-likelihood/>
+    + <https://stackoverflow.com/questions/46700258/python-how-to-interpret-the-result-of-logistic-regression-by-sm-logit>
+    + <https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-what-are-pseudo-r-squareds/>
+    + <https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/>
+    + <https://vulstats.ucsd.edu/chi-squared.html>
+    + <https://roznn.github.io/GLM/sec-deviance.html>
+
+* Generalized Linear Models:
+    + <https://sscc.wisc.edu/sscc/pubs/glm-r/>
+    + <https://online.stat.psu.edu/stat504/lesson/6/6.1>
+    + <https://www.mygreatlearning.com/blog/generalized-linear-models/>
+    + <https://www.statsmodels.org/stable/examples/notebooks/generated/glm.html>
+
+* Logistic Regression:
+    + <https://www.andrewvillazon.com/logistic-regression-python-statsmodels/>
+    + <https://towardsdatascience.com/how-to-interpret-the-odds-ratio-with-categorical-variables-in-logistic-regression-5bb38e3fc6a8>
+    + <https://towardsdatascience.com/a-simple-interpretation-of-logistic-regression-coefficients-e3a40a62e8cf>
+    + <https://www.statology.org/interpret-log-likelihood/>
+
+* Poisson Regression:
+    + <https://tidypython.com/poisson-regression-in-python/>
+
+* Non-parametric Methods:
+    + <https://mathisonian.github.io/kde/>
+    + <https://www.statsmodels.org/stable/nonparametric.html>
+    + <https://www.statsmodels.org/dev/generated/statsmodels.nonparametric.kde.KDEUnivariate.html>
+    + <https://www.statsmodels.org/dev/generated/statsmodels.nonparametric.kernel_density.KDEMultivariate.html>
+    + <https://www.statsmodels.org/stable/examples/notebooks/generated/kernel_density.html>
+
+* Diagnostic tests:
+    + <https://www.statsmodels.org/stable/stats.html#residual-diagnostics-and-specification-tests>
+    + <https://bookdown.org/ltupper/340f21_notes/deviance-and-residuals.html>
+    + <https://www.statology.org/null-residual-deviance/>
+
+* Data Visualization:
+    + <https://stackoverflow.com/questions/5484922/secondary-axis-with-twinx-how-to-add-to-legend>

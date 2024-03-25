@@ -1,0 +1,7 @@
+# Visualization
+
+{{< include _matplotlib.qmd >}}
+
+{{< include _plotnine.qmd >}}
+
+{{< include _geopandas.qmd >}}

@@ -1,6 +1,6 @@
 # Preliminaries {.unnumbered}
 
-The notets were developed with Quarto; for details about Quarto, visit
+The notes were developed with Quarto; for details about Quarto, visit
 <https://quarto.org/docs/books>.
 
 
@@ -9,20 +9,20 @@ These lecture notes for STAT 3255/5255 in Spring 2024 represent a
 collaborative effort between Professor Jun Yan and the students
 enrolled in the course. This cooperative approach to education was
 facilitated through the use of GitHub, a platform that encourages
-collaborative coding and content development.
+collaborative coding and content development. To view
+these contributions and the lecture notes in their entirety, please
+visit our Spring 2024 repository at <https://github.com/statds/ids-s24>.
 
 
 Students contributed to the lecture notes by submitting pull requests
 to our dedicated GitHub repository. This method not only enriched the
 course material but also provided students with practical experience
-in collaborative software development and version control. To view
-these contributions and the lecture notes in their entirety, please
-visit our Spring 2024 repository at <https://github.com/statds/ids-s24>.
+in collaborative software development and version control. 
 
 
 For those interested in exploring the lecture notes from the previous
-years, the [Spring 2023](https://github.com/statds/ids-s23) and
-[Spring 2024](https://github.com/statds/ids-s22)
+years, the [Spring 2023](https://statds.github.io/ids-s23) and
+[Spring 2022](https://statds.github.io/ids-s22/)
 are both publicly accessible. These archives offer
 valuable insights into the evolution of the course content and the
 different perspectives brought by successive student cohorts.
@@ -83,6 +83,12 @@ Markdown.
 + Chugh, Charitarth
     - Get better at analyzing data/features
     - Learn about more xgboost & gradient boosted trees. 
++ Dennison, Jack
+    - Learn how to use Git and GitHub
+    - Be able to apply my skills in Python and Git to data analytics tasks
++ Elliott, Matt
+    - Faciliate myself into becoming a Data Scientist
+    - Learn new skills such as Quarto and GitHub
 + Lee, Joshua
     - Improve model optimization techniques
     - learn how to conduct better feature engineering
@@ -173,14 +179,19 @@ Here are some example tasks:
 + Data science ethics
 + Data science communication skills
 + Import/Export data
-+ Database operation wi1th Structured query language (SQL)
++ Arrow as a cross-platform data format
++ Database operation with Structured query language (SQL)
 + Descriptive statistics
-+ Statistical hypothesis tests `scypy.stats`
-+ Statistical models with `statsmodels`
-+ Data visualization with `matplotlib`
-+ Grammer of graphics for python `plotnine`
-+ Handling spatial data with `geopandas`
-+ Visualize spatial data in a Google map with `gmplot`
++ Statistical hypothesis tests
++ Statistical modeling
++ Data visualization
++ Accessing census and ACS data
++ Grammer of graphics
++ Handling spatial data
++ Visualize spatial data in a Google map
++ Animation
++ Classification and regression trees
++ Support vector machine
 + Random forest
 + Naive Bayes
 + Bagging vs boosting
@@ -198,33 +209,32 @@ Please use the following table to sign up.
 
    Date  | Presenter              | Topic
   ------ | ---------------------- | ------
-  02/07  | Matt Elliot            | 
-  02/07  | Weijia Wu              | 
+  02/07  | Matt Elliott           | Data science communication skills
   02/12  | Dr. Haim Bar           | Database management
-  02/14  | Victor, Lek            |
-  02/14  | Willam Taki            |
-  02/19  | Henry Schober          |
-  02/19  | Joshua Lee             |
-  02/21  | Pratham, Patel         |
-  02/21  | Olivia Massad          |
-  02/26  | Ge Li                  |
-  02/26  | Xingye Zhang           |
-  02/28  | Jack Dennison          |
+  02/19  | Willam Taki            | Visualization with `matplotlib`
+  02/19  | Joshua Lee             | Descriptive Statistics
+  02/07  | Weijia Wu              | Visualizaiton with `matplotlib` and `seaborn` 
+  02/21  | Pratham Patel          | Handling spatial data with `geopandas`
+  02/21  | Olivia Massad          | Grammar of Graphics `plotnine`
+  02/26  | Xingye Zhang           | Data visualizing NYC rodent dataset
+  02/28  | Jack Dennison          | Geographic Data Analysis
   02/28  | Isabelle Perez         | Statistical hypothesis tests `scypy.stats`
-  03/02  | Emmanuel Yankson       | Random Forest
-  03/02  | David Li               |
-  03/04  | Abigail Mori           |
-  03/04  | Leon Nguyen            | Statistical Modeling with statsmodels
-  03/25  | Alex Pugh              |
+  03/04  | Emmanuel Yankson       | Random Forest
+  03/04  | David Li               |
+  03/06  | Abigail Mori           | Accessing census and ACS data
+  03/06  | Leon Nguyen            | Statistical Modeling with `statsmodels`
+  03/25  | Alex Pugh              | Time Series Analysis
   03/25  | Charitath Chugh        | PyTorch
   03/27  | Vincent Xie            | Database Operations with SQL
-  03/27  |                        |
-  04/01  | William Qualls         |
-  04/01  |                        | 
-  04/03  | Madison Woo            | Calling C/C++ from Python
+  03/27  | Ge Li                  | Animation                       |
+  04/01  | William Qualls         | Web Scraping
+  04/01  |                        |
   04/03  | Braedon Hook           |
+  04/03  | Madison Woo            | Calling C/C++ from Python
   04/08  |                        |
   04/08  |                        |
+  04/10  |                        |
+  04/10  |                        |
 
 ### Final Project Presentation Schedule
 
@@ -233,11 +243,10 @@ final presentation.
 
    Date  | Presenter
   ------ | ---------------------- 
-  04/10  | 
-  04/15  | 
-  04/17  | 
-  04/22  | 
-  04/24  |
+  04/15  | Matt Elliott; Weijia Wu; William Taki; Joshua Lee; Pratham Patel
+  04/17  | Olivia Massad; Ge Li; Xingye Zhang; Jack Dennison; Isabelle Perez
+  04/22  | Emmanual Yankson; Davi Li; Abigail Mori; Leon Nguyen; Alex Pugh
+  04/24  | Charitath Chugh; Vincent Xie; Madison Woo; Braedon Hook
 
 
 
@@ -255,7 +264,7 @@ I have added a template file `mysection.qmd` and a new line to `_quarto.yml`
 as an example.
 
 For more detailed style guidance, please see my notes on [statistical
-wrirting](https://statds.github.io/stat-writing/using-the-right-tools-for-writing.html#latex-for-typesetting).
+writing](https://statds.github.io/stat-writing/using-the-right-tools-for-writing.html#latex-for-typesetting).
 
 
 Plagiarism is to be prevented. Remember that these class notes are publicly
@@ -273,7 +282,7 @@ code chunks, it would be hard to plagiarize.
 	- Never "Upload" your files; use the git command lines.
 	- Make commit message informative (think about the readers).
 + Use `quarto` source only. See @sec-quarto.
-+ For the conveinence of greading, add your html output to a release in your
++ For the convenience of grading, add your html output to a release in your
   repo.
 
 
@@ -288,9 +297,10 @@ code chunks, it would be hard to plagiarize.
 
 ### Presentation
 
-+ Don't forget to introduce yourself if there is no moderator
-+ Highlight your research questions and results, not code
-+ Give an outline, carry it out, and summarize
++ Don't forget to introduce yourself if there is no moderator.
++ Highlight your research questions and results, not code.
++ Give an outline, carry it out, and summarize.
++ Use your own examples to reduce the risk of plagiarism.
 
 
 <!-- Topic presentation template -->

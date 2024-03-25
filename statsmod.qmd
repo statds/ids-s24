@@ -1,0 +1,110 @@
+# Statistical Models
+
+## Introduction
+
+Statistical modeling is a cornerstone of data science, offering tools to
+understand complex relationships within data and to make predictions. Python,
+with its rich ecosystem for data analysis, features the `statsmodels` package—
+a comprehensive library designed for statistical modeling, tests, and data
+exploration. `statsmodels` stands out for its focus on classical statistical
+models and compatibility with the Python scientific stack (`numpy`, `scipy`,
+`pandas`).
+
+### Installation of `statsmodels`
+
+To start with statistical modeling, ensure `statsmodels` is installed:
+
+Using pip:
+
+```bash
+pip install statsmodels
+```
+
+### Features of `statsmodels`
+
+Package `statsmodels` offers a comprehensive range of statistical models and
+tests, making it a powerful tool for a wide array of data analysis tasks:
+
+- **Linear Regression Models**: Essential for predicting quantitative 
+  responses, these models form the backbone of many statistical analysis 
+  operations.
+  
+- **Generalized Linear Models (GLM)**: Expanding upon linear models, GLMs 
+  allow for response variables that have error distribution models other than 
+  a normal distribution, catering to a broader set of data characteristics.
+  
+- **Time Series Analysis**: This includes models like ARIMA for analyzing 
+  and forecasting time-series data, as well as more complex state space 
+  models and seasonal decompositions.
+  
+- **Nonparametric Methods**: For data that does not fit a standard 
+  distribution, `statsmodels` provides tools like kernel density estimation 
+  and smoothing techniques.
+  
+- **Statistical Tests**: A suite of hypothesis testing tools allows users 
+  to rigorously evaluate their models and assumptions, including diagnostics 
+  for model evaluation.
+
+Integrating `statsmodels` into your data science workflow enriches your 
+analytical capabilities, allowing for both exploratory data analysis and 
+complex statistical modeling.
+
+
+## Generalized Linear Models
+
+Generalized Linear Models (GLM) extend the classical linear regression to
+accommodate response variables, that follow distributions other than the
+normal distribution. GLMs consist of three main components:
+
++ **Random Component**: This specifies the distribution of the 
+response variable $Y$. It is assumed to be from the exponential family of 
+distributions, such as Binomial for binary data and Poisson for count data.
++ **Systematic Component**: This consists of the linear predictor, 
+a linear combination of unknown parameters and explanatory variables. It 
+is denoted as $\eta = X\beta$, where $X$ represents the explanatory 
+variables, and $\beta$ represents the coefficients.
++ **Link Function**: The link function, $g$, provides the 
+relationship between the linear predictor and the mean of the distribution 
+function. For a GLM, the mean of $Y$ is related to the linear predictor 
+through the link function as $\mu = g^{-1}(\eta)$.
+
+
+Generalized Linear Models (GLM) adapt to various data types through the
+selection of appropriate link functions and probability distributions. Here,
+we outline four special cases of GLM: normal regression, logistic regression,
+Poisson regression, and gamma regression.
+
++ Normal Regression (Linear Regression).
+In normal regression, the response variable has a normal distribution. The
+identity link function ($g(\mu) = \mu$) is typically used, making this case
+equivalent to classical linear regression.
+    - **Use Case**: Modeling continuous data where residuals are normally distributed.
+    - **Link Function**: Identity ($g(\mu) = \mu$)
+    - **Distribution**: Normal
++ Logistic Regression.
+Logistic regression is used for binary response variables. It employs the
+logit link function to model the probability that an observation falls into
+one of two categories.
+    - **Use Case**: Binary outcomes (e.g., success/failure).
+    - **Link Function**: Logit ($g(\mu) = \log\frac{\mu}{1-\mu}$)
+    - **Distribution**: Binomial
++ Poisson Regression.
+Poisson regression models count data using the Poisson distribution. It's
+ideal for modeling the rate at which events occur.
+    - **Use Case**: Count data, such as the number of occurrences of an event.
+    - **Link Function**: Log ($g(\mu) = \log(\mu)$)
+    - **Distribution**: Poisson
++ Gamma Regression.
+Gamma regression is suited for modeling positive continuous variables, 
+especially when data are skewed and variance increases with the mean.
+    - **Use Case**: Positive continuous outcomes with non-constant variance.
+    - **Link Function**: Inverse ($g(\mu) = \frac{1}{\mu}$)
+    - **Distribution**: Gamma
+
+Each GLM variant addresses specific types of data and research questions,
+enabling precise modeling and inference based on the underlying data
+distribution.
+
+
+{{< include _statsmodels.qmd >}}
+

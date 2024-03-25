@@ -195,10 +195,10 @@ The third is still dynamic programming but bottom-up.
 ```{python}
 def fib_dbu(n):
     mem = [None] * (n + 1)
-    mem[1]=1;
-    mem[2]=1;
-    for i in range(3,n+1):
-        mem[i] = mem[i-1] + mem[i-2]
+    mem[1] = 1;
+    mem[2] = 1;
+    for i in range(3, n + 1):
+        mem[i] = mem[i - 1] + mem[i - 2]
     return mem[n]
 
 
@@ -316,7 +316,7 @@ using Numpy and Pandas in Python.
 ```{python}
 import numpy as np
 
-x = np.array(2**63 - 1 , dtype='int')
+x = np.array(2 ** 63 - 1 , dtype = 'int')
 x
 # This should be the largest number numpy can display, with
 # the default int8 type (64 bits)
@@ -324,14 +324,14 @@ x
 
 What if we increment it by 1?
 ```{python}
-y = np.array(x + 1, dtype='int')
+y = np.array(x + 1, dtype = 'int')
 y
 # Because of the overflow, it becomes negative!
 ```
 For vanilla Python, the overflow errors are checked and more digits
 are allocated when needed, at the cost of being slow.
 ```{python}
-2**63 * 1000
+2 ** 63 * 1000
 ```
 This number is 1000 times largger than the prior number,
 but still displayed perfectly without any overflows
@@ -364,19 +364,19 @@ that's both very big and very precise. Most computers can represent all integers
 up to $2^{53}$, after that it starts skipping numbers.
 
 ```{python}
-2.1**53 + 1 == 2.1**53
+2.1 ** 53 + 1 == 2.1 ** 53
 
 # Find a number larger than 2 to the 53rd
 ```
 
 ```{python}
-x = 2.1**53
+x = 2.1 ** 53
 for i in range(1000000):
     x = x + 1
-x == 2.1**53
+x == 2.1 ** 53
 ```
 We add 1 to `x` by 1000000 times, but it still equal to its initial
-value,  2.1**53. This is because this number is too big that computer
+value,  `2.1 ** 53`. This is because this number is too big that computer
 can't handle it with precision like add 1.
 
 Machine epsilon is the smallest positive floating-point number `x` such that
@@ -417,8 +417,9 @@ environment.
 To start using this environment, you need to activate it. The 
 activation command varies depending on your operating system:
 
-+ On Windows, run env\Scripts\activate.
-+ On Unix or MacOS, use source env/bin/activate.
++ On Windows, run `myenv\Scripts\activate`.
++ On Linux or MacOS, use `source myenv/bin/activate` or
+  `. myenv/bin/activate`.
 
 Once activated, your command line will typically show the name of 
 the virtual environment, and you can then install and use packages 

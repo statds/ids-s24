@@ -130,7 +130,7 @@
        precision, recall, F1-score, and AUC.
 
 
-1. (Mid-term team project) The [NYC Open Data of 311 Service Requests](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9) contains
+1. The [NYC Open Data of 311 Service Requests](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9) contains
    all requests from 2010 to present. We consider a subset of it with request
    time between 00:00:00 01/15/2023 and 24:00:00 01/21/2023. The subset is
    available in CSV format as `data/nyc311_011523-012123_by022023.csv`. Read the
@@ -155,3 +155,146 @@
     1. Now you know the data quite well. Come up with a research question of
        interest that can be answered by the data, which could be analytics or
        visualizations. Perform the needed analyses and answer your question.
+
+1. **NYC Rodents**
+Rats in NYC are widespread, as they are in many densely populated
+areas (https://en.wikipedia.org/wiki/Rats_in_New_York_City). As of 
+October 2023, NYC dropped from the 2nd to the 3rd places in the 
+annual ["rattiest city" list](https://www.orkin.com/press-room/top-rodent-infested-cities-2023#)
+released by a pest control company. In 
+the 311 Service Request Data, there is one complain type `Rodent`. 
+Extract all the requests with complain type `Rodent`, created 
+between January 1, 2022 and December 31, 2023. Save them into a 
+csv file named `rodent_2022-2023.csv`.
+    1. Are there any complains that are not closed yet?
+    1. Are there any complains with a closed data before the
+    created date?
+    1. How many agencies were this complain type reported to?
+    1. Summarize the missingess for each variable.
+    1. Summarize a frequency table for the `descriptor` variable, 
+    and summarize a cross table by year.
+    1. Which types of 'DESCRIPTOR' do you think should be included
+    if our interest is rodent sighting?
+    1. Take a subset of the data with the descriptors you chose and
+    summarize the response time by borough.
+
+
+1. **NYC rodent sightings data cleaning**
+The data appears to need some cleaning before any further analysis.
+Some missing values could be filled based on other columns.
+    1. Checking all 47 column names suggests that some columns 
+    might be redundant. Identify them and demonstrate the redundancy.
+    2. Are zip code and borough always missing together? If geocodes
+    are available, use reverse geocoding to fill the zip code.
+    3. Export the cleaned data in both csv and feather format. 
+    Comment on the file sizes. 
+
+
+1. **SQL Practice on NYC rodent sightings**
+The NYC rodent sightings data that we prepared could be stored
+more efficiently using a database. Let us start from the csv file
+you exported from the last problem.
+    1. Create a table called `rodent` from the csv file.
+    1. The `agency` and `agency_name` columns are redundant in
+    the table. Create a table called `agency`, which contains
+    only these two columns, one agency a row.
+    1. Drop the `agency_name` name from the `rodent` table.
+    Justify why we do not need it here.
+    1. Comment on the sizes of the table (or exported csv file)
+    of `rodent` before and after dropping the `agency_name`
+    column.
+    1. Come up with a scheme for the two tables that allows
+    even more efficient storage of the `agency` column
+    in the `rodent` table. _Hint: use an integer to code the
+    agencies.
+
+1. **Logistic Modeling**
+The response time to 311 service requests is a measure of civic
+service quality. Let us model the response time to 311 requests
+with complain type `Rodent`.
+    1. Compute the response time in hours. Note that some response
+    will be missing because of unavailable closed date.
+    1. Compute a binary variable `over3d`, which is one if the
+    response time is greater than 3 days, and zero otherwise. Note
+    that this variable should have no missing values.
+    1. Use the package `uszipcode` to obtain the zip code level
+    covaraites such as median house income and median home value.
+    Merge these variables to the rodent data.
+    1. Split the data at random into training (80%) and testing (20%).
+    Build a logistic model to predict `over3d` on the training data,
+    and validate the performance on the testing data.
+    1. Build a lasso logistic model to predict `over3d`, and justify
+    your choice of the tuning parameter. Validate on the testing data.
+
+1. **Midterm Project: Rodents in NYC**
+[Rodents in NYC](https://en.wikipedia.org/wiki/Rats_in_New_York_City)
+are widespread, as they are in many densely populated areas. As of
+October 2023, NYC dropped from the 2nd to the 3rd places in the annual
+["rattiest city"
+list](https://www.orkin.com/press-room/top-rodent-infested-cities-2023#)
+released by a pest control company. Rat sightings in NYC was analyzed
+by Dr. Michael Walsh in a [2014 PeerJ
+article](https://peerj.com/articles/533/). We investigate this problem
+from a different angle with the [NYC Rodent Inspection
+data](https://data.cityofnewyork.us/Health/Rodent-Inspection/p937-wjvj/about_data),
+provided by the Department of Health and Mental Hygiene (DOHMH).
+Download the 2022-2023 data by filtering the `INSPECTION_DATE` to
+between 11:59:59 pm of 12/31/2021 and 12:00:00 am of 01/01/2024
+and `INSPECTION_TYPE` is either `Initial` or `Compliance` (which
+should be about 108 MB). Read the meta data information
+to understand the data.
+    1. Data cleaning.
+        + There are two zipcode columns: `ZIP_CODE` and `Zipcodes`.
+        Which one represent the zipcode of the inspection site? 
+        Comment on the data dictionary.
+        + Summarize the missing information. Are their missing values
+        that can be filled using other columns? Fill them if yes.
+        + Are their redundant information in the data? Try storing
+        the data using `arrow` and comment on the efficiency gain.
+        + Are there invalid zipcode or borough? Justify and clean
+        them up if yes.
+    1. Data exploration.
+        + Create binary variable `passing` indicating passing or
+        not for the inspection result. Does `passing` depend on
+        whether the inspection is initial or compliance? State
+        your hypothesis and summarize your test result.
+        + Are the passing pattern different across different
+        boroughs for initial inspections? How about compliance
+        inspections? State your hypothesis and summarize your
+        test results.
+        + If we suspect that the passing rate may depends on
+        the time of a day of the inspection, we may compare
+        the passting rates for inspections done in the mornings
+        and inspections one in the afternoons. Visualize the
+        comparison by borough and inspection type.
+        + Perform a formal hypothesis test to confirm the
+        observations from your visualization.
+    1. Data analytics.
+        + Aggregate the inspections by zip code to create
+        a dataset with five columns. The first three columns are
+         `zipcode`; `n_initial`, the
+        count of the initial inspections in that zipcode; and 
+        `n_initpass`, the number of initial inspections with a
+        passing result in that zipcode. The other two variables
+        are `n_compliance` and `n_comppass`, the counterpart
+        for compliance inspections.
+        + Add a variable to your dataset, `n_sighting`, which
+        represent the number of rodent sightings from the 311
+        service request data in the same 2022-2023 period.
+        + Merge your dataset with the simple zipcode table in
+        package `uszipcode` by zipcode to obtain demographic
+        and socioeconomic variables at the zipcode level.
+        + Build a binomial regression for the passing rate of initial
+        inspections at the zipcode level. Assess the goodness-of-fit
+        of your model. Summarize your results to a New Yorker
+        who is not data science savvy.
+    1. Now you know the data quite well. Come up with a research
+    question of interest that can be answered by the data, which
+    could be analytics or visualizations. Perform the needed
+    analyses and answer your question.
+	
+	
+
+
+
+

@@ -1,0 +1,177 @@
+# Supervised Learning
+
+## Introduction
+
+Supervised and unsupervised learning represent two core approaches in
+the field of machine learning, each with distinct methodologies,
+applications, and goals. Understanding the differences and
+applicabilities of these learning paradigms is fundamental for anyone
+venturing into data science and machine learning.
+
++ **Supervised Learning**
+Supervised learning is characterized by its use of labeled datasets to
+train algorithms. In this paradigm, the model is trained on a
+pre-defined set of training examples, which include an input and the
+corresponding output. The goal of supervised learning is to learn a
+mapping from inputs to outputs, enabling the model to make predictions
+or decisions based on new, unseen data. This approach is widely used
+in applications such as spam detection, image recognition, and
+predicting consumer behavior. Supervised learning is further divided
+into two main categories: regression, where the output is continuous,
+and classification, where the output is categorical.
+
+
++ **Unsupervised Learning**
+In contrast, unsupervised learning involves working with datasets
+without labeled responses. The aim here is to uncover hidden patterns,
+correlations, or structures from input data without the guidance of an
+explicit output variable. Unsupervised learning algorithms are adept
+at clustering, dimensionality reduction, and association tasks. They
+are invaluable in exploratory data analysis, customer segmentation,
+and anomaly detection, where the structure of the data is unknown, and
+the goal is to derive insights directly from the data itself.
+
+
+The key difference between supervised and unsupervised learning lies
+in the presence or absence of labeled output data. Supervised learning
+depends on known outputs to train the model, making it suitable for
+predictive tasks where the relationship between the input and output
+is clear. Unsupervised learning, however, thrives on discovering the
+intrinsic structure of data, making it ideal for exploratory analysis
+and understanding complex data dynamics without predefined labels.
+
+
+Both supervised and unsupervised learning have their place in the
+machine learning ecosystem, often complementing each other in
+comprehensive data analysis and modeling projects. While supervised
+learning allows for precise predictions and classifications,
+unsupervised learning offers deep insights and uncovers underlying
+patterns that might not be immediately apparent.
+
+
+## Classification versus Regression
+
+The main tasks in supervised learning can broadly be categorized into
+two types: classification and regression. Each task utilizes
+algorithms to interpret the input data and make predictions or
+decisions based on that data.
+
++ **Classification**
+Classification tasks involve categorizing data into predefined classes
+or groups. In these tasks, the output variable is categorical, such as
+"spam" or "not spam" in email filtering, or "malignant" or "benign" in
+tumor diagnosis. The aim is to accurately assign new, unseen instances
+to one of the categories based on the learning from the training
+dataset. Classification can be binary, involving two classes, or
+multiclass, involving more than two classes. Common algorithms used
+for classification include Logistic Regression, Decision Trees,
+Support Vector Machines, and Neural Networks.
+
+
++ **Regression**
+Regression tasks predict a continuous quantity. Unlike classification,
+where the outcomes are discrete labels, regression models predict a
+numeric value. Examples of regression tasks include predicting the
+price of a house based on its features, forecasting stock prices, or
+estimating the age of a person from a photograph. The goal is to find
+the relationship or correlation between the input features and the
+continuous output variable. Linear regression is the most basic form
+of regression, but there are more complex models like Polynomial
+Regression, Ridge Regression, Lasso Regression, and Regression Trees.
+
+
+Both classification and regression are foundational to supervised
+learning, addressing different types of predictive modeling
+problems. Classification is used when the output is a category, while
+regression is used when the output is a numeric value. The choice
+between classification and regression depends on the nature of the
+target variable you are trying to predict. Supervised learning
+algorithms learn from labeled data, refining their models to minimize
+error and improve prediction accuracy on new, unseen data.
+
+
+### Classification Metrics
+
+#### Confusion matrix
+
+<https://en.wikipedia.org/wiki/Confusion_matrix>
+
+Four entries in the confusion matrix:
+
++ TP: number of true positives
++ FN: number of false negatives
++ FP: number of false positives
++ TN: number of true negatives
+
+Four rates from the confusion matrix with actual (row) margins:
+
++ TPR: TP / (TP + FN). Also known as sensitivity.
++ FNR: TN / (TP + FN). Also known as miss rate.
++ FPR: FP / (FP + TN). Also known as false alarm, fall-out.
++ TNR: TN / (FP + TN). Also known as specificity.
+
+Note that TPR and FPR do not add up to one. Neither do FNR and FPR.
+
+Four rates from the confusion matrix with predicted (column) margins:
+
++ PPV: TP / (TP + FP). Also known as precision.
++ FDR: FP / (TP + FP).
++ FOR: FN / (FN + TN).
++ NPV: TN / (FN + TN).
+
+#### Measure of classification performance
+
+Measures for a given confusion matrix:
+
++ Accuracy: (TP + TN) / (P + N). The proportion of all corrected
+  predictions. Not good for highly imbalanced data.
++ Recall (sensitivity/TPR): TP / (TP + FN).  Intuitively, the ability of the
+  classifier to find all the positive samples.
++ Precision: TP / (TP + FP).  Intuitively, the ability
+  of the classifier not to label as positive a sample that is negative.
++ F-beta score: Harmonic mean of precision and recall with $\beta$ chosen such
+  that recall is considered $\beta$ times as important as precision,
+  $$
+  (1 + \beta^2) \frac{\text{precision} \cdot \text{recall}}
+  {\beta^2 \text{precision} + \text{recall}}
+  $$
+  See [stackexchange
+  post](https://stats.stackexchange.com/questions/221997/why-f-beta-score-define-beta-like-that)
+  for the motivation of $\beta^2$.
+
+When classification is obtained by dichotomizing a continuous score, the
+receiver operating characteristic (ROC) curve gives a graphical summary of the
+FPR and TPR for all thresholds. The ROC curve plots the TPR against the FPR at 
+all thresholds.
+
++ Increasing from $(0, 0)$ to $(1, 1)$.
++ Best classification passes $(0, 1)$.
++ Classification by random guess gives the 45-degree line.
++ Area between the ROC and the 45-degree line is the Gini coefficient, a measure
+  of inequality.
++ Area under the curve (AUC) of ROC thus provides an important metric of
+classification results.
+
+
+### Cross-validation
+
++ Goal: strike a bias-variance tradeoff.
++ K-fold: hold out each fold as testing data.
++ Scores: minimized to train a model
+
+Cross-validation is an important measure to prevent over-fitting. Good in-sample
+performance does not necessarily mean good out-sample performance. A general
+work flow in model selection with cross-validation is as follows.
+
++ Split the data into training and testing
++ For each candidate model $m$ (with possibly multiple tuning parameters)
+    - Fit the model to the training data
+    - Obtain the performance measure $f(m)$ on the testing data (e.g., CV score,
+      MSE, loss, etc.)
++ Choose the model $m^* = \arg\max_m f(m)$.
+
+
+
+<!-- ## Decision Tree -->
+
+{{< include _tree.qmd >}}
