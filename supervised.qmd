@@ -106,7 +106,7 @@ Four entries in the confusion matrix:
 Four rates from the confusion matrix with actual (row) margins:
 
 + TPR: TP / (TP + FN). Also known as sensitivity.
-+ FNR: TN / (TP + FN). Also known as miss rate.
++ FNR: FN / (TP + FN). Also known as miss rate.
 + FPR: FP / (FP + TN). Also known as false alarm, fall-out.
 + TNR: TN / (FP + TN). Also known as specificity.
 
