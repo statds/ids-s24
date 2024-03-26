@@ -1,30 +1,15 @@
----
-title: "Hypothesis Testing with scipy.stats"
-author: "Isabelle Perez"
-toc: true
-number-sections: true
-highlight-style: pygments
-format: 
-  html: 
-    code-fold: true
-    html-math-method: katex
-  pdf: 
-    geometry: 
-      - top=30mm
-      - left=20mm
-##  docx: default
---- 
+## Hypothesis Testing with scipy.stats
 
 This section was written by Isabelle Perez. 
 
-## Introduction 
+### Introduction 
 Hello! My name is Isabelle Perez and I am a junior Mathematics-Statistics major and 
 Computer Science minor. I am interested in learning about data science topics and 
 have an interest in how statistics can improve sports analytics, specifically in 
 baseball. Today's topic is the `scipy.stats` package and the many hypothesis tests 
 that we can perform using it. 
 
-## `Scipy.stats` 
+### `Scipy.stats` 
 The package `scipy.stats` is a subpackage of `Scipy` and contains many methods useful
 for statistics such as probability distributions, summary statistics, statistical tests,
 etc. The focus of this presentation will be on some of the many hypothesis tests that can 
@@ -37,8 +22,8 @@ is installed by using `pip install scipy` or
 
 To import the package, use the command `import scipy.stats`. 
 
-## Basic Statistical Hypothesis Tests 
-### Two-sample t-test 
+### Basic Statistical Hypothesis Tests 
+#### Two-sample t-test 
 
 | H~0~: $\mu_1 = \mu_2$  
 | H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$   
@@ -62,7 +47,7 @@ equal
 
 **Returns:** The t-statisic, a corresponding p-value, and the degrees of freedom. 
 
-### Paired t-test 
+#### Paired t-test 
 
 | H~0~: $\mu_1 = \mu_2$
 | H~1~: $\mu_1 \neq$ or $>$ or $<$ $\mu_2$  
@@ -82,7 +67,7 @@ Also has a method called `confidence_interval` with input parameter `confidence_
 that returns a tuple with the confidence interval around the difference in 
 population means of the two samples.  
 
-### ANOVA 
+#### ANOVA 
 
 | H~0~: $\mu_1 = \mu_2 = ... = \mu_n$
 | H~1~: at least two $\mu_i$ are not equal  
@@ -103,7 +88,7 @@ have length $1$.
 
 **Returns:** The F-statistic and a corresponding p-value. 
 
-### Example: Comparison of Mean Response Times by Borough  
+#### Example: Comparison of Mean Response Times by Borough  
 Looking at the 2022-2023 rodent sighting data from the NYC 311 Service Requests,  
 there are many ways a two-sample t-test may be useful. For example, we can consider 
 samples drawn from different boroughs and perform this hypothesis test to 
@@ -201,8 +186,8 @@ Queens response times. At the alpha level of $0.05$, we can also reject this nul
 hypothesis and conclude that the mean of sample means is less for Manhattan than 
 it is for Queens. 
 
-## Normality 
-### Shapiro-Wilk Test 
+### Normality 
+#### Shapiro-Wilk Test 
 
 | H~0~: data is drawn from a normal distribution  
 | H~1~: data is not drawn from a normal distribution     
@@ -219,7 +204,7 @@ it is for Queens.
 * The closer the test statistic is to $1$, the closer it is to a normal 
 distribution, with $1$ being a perfect match.   
 
-### NormalTest 
+#### NormalTest 
 
 | H~0~: data is drawn from a normal distribution  
 | H~1~: data is not drawn from a normal distribution   
@@ -240,7 +225,7 @@ and kurtosis (heaviness of the tail or how much data resides in the tails).
 The test compares the skewness and kurtosis of the sample to that of a normal 
 distribution, which are $0$ and $3$, respectively.
 
-### Example: Distribution of Response Times 
+#### Example: Distribution of Response Times 
 It can be useful to identify the distribution of a population because it gives
 us the ability to summarize the data more efficiently. We can identify 
 whether or not the distribution of a sample of response times  
@@ -279,8 +264,8 @@ plt.ylabel('Value Counts')
 plt.show()
 ``` 
 
-## Correlation   
-### Pearson's Correlation     
+### Correlation   
+#### Pearson's Correlation     
 
 | H~0~: the correlations is $0$
 | H~1~: the correlations is $\neq$, $<$, or $> 0$ 
@@ -303,7 +288,7 @@ have equal variances.
 **Returns:** The correlation coefficient and a corresponding p-value. It also 
 has the `confidence_interval` method. 
 
-### Chi-Squared Test 
+#### Chi-Squared Test 
 
 | H~0~: the two variables are independent of one another
 | H~1~: a dependency exists between the two variables 
@@ -320,7 +305,7 @@ and an array of expected frequencies from the table.
 
 * `dof = table.size - sum(table.shape) + table.ndim - 1` 
 
-### Example: Analyzing the Relationship Between Season and Response Time 
+#### Example: Analyzing the Relationship Between Season and Response Time 
 
 One way in which the chi-squared test may prove useful with the 2022-2023 311 Service
 Request rodent sighting data is by allowing us to identify dependencies between 
@@ -376,8 +361,8 @@ The bar chart above shows that the ranking of each season by number of rodent
 sightings is consistent across all five types of rodent sightings. This further suggests
 that there exists dependency between season and rodent sighting in Brooklyn. 
 
-## Nonparametric Hypothesis Tests   
-### Mann-Whitney U (Wilcoxon Rank-Sum) Test  
+### Nonparametric Hypothesis Tests   
+#### Mann-Whitney U (Wilcoxon Rank-Sum) Test  
 
 | H~0~: distribution of population 1 $=$ distribution of population 2
 | H~1~: distribution of population 1 $\neq$ or $>$ or $<$ distribution of population 2   
@@ -422,7 +407,7 @@ $\sigma_{U} = \sqrt{\frac{n_{1}n_{2}}{12}((n + 1) -
 essentially a comparison of medians. [5]
 ::: 
 
-### Wilcoxon Signed-Rank test
+#### Wilcoxon Signed-Rank test
 
 | H~0~: distribution of population 1 $=$ distribution of population 2
 | H~1~: distribution of population 1 $\neq$ or $>$ or $<$ distribution of population 2  
@@ -455,7 +440,7 @@ z-score when the `method` is `approx`.
 
 * Non-parametric version of the paired t-test.  
 
-### Kruskal-Wallis H-Test 
+#### Kruskal-Wallis H-Test 
 
 | H~0~: all populations have the same distribution 
 | H~1~: $>=2$ populations are distributed differently  
@@ -474,7 +459,7 @@ corresponding p-value.
 
 * Non-parametric version of ANOVA. 
 
-### Example: Distribution of Response Times for 2022 vs. 2023 
+#### Example: Distribution of Response Times for 2022 vs. 2023 
 
 We can use the Mann-Whitney test to compare the distributions of response times
 from our rodent data. For example, we can split the data into two groups, one for 2022
@@ -517,7 +502,7 @@ This small subset of data confirms the results of the one-sided hypothesis test,
 that in general, the counts of response times for 2022 are greater than those for 2023, 
 suggesting the distribution for 2022 is stochastically larger than that of 2023 data. 
 
-### Example: Distribution of Response Times by Season 
+#### Example: Distribution of Response Times by Season 
 
 Similar to the previous, example, we can use a non-parametric test to compare the distribution 
 of response times by season. Because in this case we have four samples to compare, we need
@@ -538,7 +523,7 @@ At an alpha level of $0.05$, the p-value of $0.0496$ is just small enough to rej
 null hypothesis, suggesting that the distribution of response times differs by season, 
 but not by much.   
 
-## References 
+### References 
 1. <https://docs.scipy.org/doc/scipy/reference/stats.html> (`scipy.stats` documentation)
 2. <https://libguides.library.kent.edu/SPSS/ChiSquare> 
 3. <https://library.virginia.edu/data/articles/getting-started-with-the-kruskal-wallis-test>
