@@ -225,10 +225,10 @@ Please use the following table to sign up.
   03/06  | Leon Nguyen            | Statistical Modeling with `statsmodels`
   03/25  | Alex Pugh              | Time Series Analysis
   03/25  | Charitath Chugh        | PyTorch
-  03/27  | Vincent Xie            | Database Operations with SQL
-  03/27  | Ge Li                  | Animation                       |
+  03/27  |                        | 
+  03/27  | Ge Li                  | Animation                      
   04/01  | William Qualls         | Web Scraping
-  04/01  |                        |
+  04/01  | Vincent Xie            | Database Operations with SQL
   04/03  | Braedon Hook           |
   04/03  | Madison Woo            | Calling C/C++ from Python
   04/08  |                        |
