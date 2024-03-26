@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science - 6&nbsp; Communicating Data Science</title>
+<title>Introduction to Data Science - 6&nbsp; Communication and Ethics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -81,7 +101,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./communication.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Communicating Data Science</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./communication.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Communication and Ethics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -148,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./communication.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Communicating Data Science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Communication and Ethics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -211,6 +231,14 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#gather-questions-and-feedback" id="toc-gather-questions-and-feedback" class="nav-link" data-scroll-target="#gather-questions-and-feedback"><span class="header-section-number">6.1.10</span> Gather questions and Feedback</a></li>
   <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources"><span class="header-section-number">6.1.11</span> Sources</a></li>
   </ul></li>
+  <li><a href="#ethical-considerations-for-data-scientists" id="toc-ethical-considerations-for-data-scientists" class="nav-link" data-scroll-target="#ethical-considerations-for-data-scientists"><span class="header-section-number">6.2</span> Ethical Considerations for Data Scientists</a>
+  <ul class="collapse">
+  <li><a href="#privacy-and-anonymity" id="toc-privacy-and-anonymity" class="nav-link" data-scroll-target="#privacy-and-anonymity"><span class="header-section-number">6.2.1</span> Privacy and Anonymity</a></li>
+  <li><a href="#bias-and-fairness" id="toc-bias-and-fairness" class="nav-link" data-scroll-target="#bias-and-fairness"><span class="header-section-number">6.2.2</span> Bias and Fairness</a></li>
+  <li><a href="#transparency-and-accountability" id="toc-transparency-and-accountability" class="nav-link" data-scroll-target="#transparency-and-accountability"><span class="header-section-number">6.2.3</span> Transparency and Accountability</a></li>
+  <li><a href="#data-integrity-and-quality" id="toc-data-integrity-and-quality" class="nav-link" data-scroll-target="#data-integrity-and-quality"><span class="header-section-number">6.2.4</span> Data Integrity and Quality</a></li>
+  <li><a href="#respect-for-intellectual-property" id="toc-respect-for-intellectual-property" class="nav-link" data-scroll-target="#respect-for-intellectual-property"><span class="header-section-number">6.2.5</span> Respect for Intellectual Property</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -219,7 +247,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Communicating Data Science</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Communication and Ethics</span></h1>
 </div>
 
 
@@ -417,8 +445,51 @@ https://thenewstack.io/7-best-practices-for-data-visualization/<br>
 https://www.learningtree.com/blog/the-6-major-skill-areas-of-data-science/<br>
 https://www.poynter.org/reporting-editing/2019/cohort4/<br>
 </p>
+</section>
+</section>
+<section id="ethical-considerations-for-data-scientists" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="ethical-considerations-for-data-scientists"><span class="header-section-number">6.2</span> Ethical Considerations for Data Scientists</h2>
+<p>The field of data science, with its vast capabilities for societal impact, necessitates a robust ethical framework. Below, we outline key ethical principles that should guide data scientists in their work, referencing foundational works that have contributed to the ongoing discourse on ethics in data science.</p>
+<section id="privacy-and-anonymity" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="privacy-and-anonymity"><span class="header-section-number">6.2.1</span> Privacy and Anonymity</h3>
+<p>Privacy refers to the right of individuals to control information about themselves and decides who can access it. Anonymity is closely related, allowing individuals to act or communicate without revealing their identities. In data science, respecting privacy means ensuring that personal data is used in a way that is consistent with the expectations of the individuals it pertains to and adheres to applicable laws and ethical guidelines. Anonymity protects individuals from potential harm that could arise from the disclosure of their identity alongside their data. Techniques like data anonymization are employed to protect privacy and anonymity, stripping datasets of personally identifiable information to prevent the tracing of data back to an individual.</p>
+<p>Ensuring the privacy and anonymity of data subjects is paramount in data science. <span class="citation" data-cites="oneil2016weapons">O’Neil (<a href="references.html#ref-oneil2016weapons" role="doc-biblioref">2016</a>)</span> and <span class="citation" data-cites="noble2018algorithms">Noble (<a href="references.html#ref-noble2018algorithms" role="doc-biblioref">2018</a>)</span> discuss the challenges and implications of privacy in the age of big data, highlighting the necessity for data scientists to employ techniques such as anonymization and secure data handling to protect individuals’ identities and personal information.</p>
+</section>
+<section id="bias-and-fairness" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="bias-and-fairness"><span class="header-section-number">6.2.2</span> Bias and Fairness</h3>
+<p>Bias in data science refers to systematic errors that favor certain outcomes over others, which can stem from the data collection process, algorithmic design, or model interpretation stages. Fairness is the principle that seeks to ensure equitable treatment and outcomes for all individuals, particularly across different demographic groups. Addressing bias and ensuring fairness involve critically evaluating and adjusting datasets and algorithms to prevent discrimination against any individual or group. This can include diversifying training data, employing statistical methods to identify and correct for biases, and designing algorithms that account for fairness metrics.</p>
+<p>The presence of bias in data and algorithms represents a significant ethical challenge, potentially leading to discrimination and unfair treatment. <span class="citation" data-cites="kearns2019ethical">Kearns and Roth (<a href="references.html#ref-kearns2019ethical" role="doc-biblioref">2019</a>)</span> explore mechanisms for detecting and mitigating bias to ensure fairness in algorithmic decision-making. Data scientists must critically examine both the data and the algorithms they use to prevent perpetuating or amplifying biases.</p>
+</section>
+<section id="transparency-and-accountability" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="transparency-and-accountability"><span class="header-section-number">6.2.3</span> Transparency and Accountability</h3>
+<p>Transparency in data science involves openness about the methodologies, data sources, and algorithms used in developing models, allowing others to understand and evaluate the decision-making process. Accountability means that data scientists and their organizations take responsibility for the outcomes of their data-driven decisions, including addressing any negative impacts. Achieving transparency and accountability requires thorough documentation, sharing of methodologies and data (where possible), and the creation of mechanisms for auditing and challenging algorithmic decisions.</p>
+<p>Transparency in the development and deployment of data science models, along with accountability for their outcomes, is critical. <span class="citation" data-cites="oneil2016weapons">O’Neil (<a href="references.html#ref-oneil2016weapons" role="doc-biblioref">2016</a>)</span> argues for the necessity of making data science processes transparent and accountable, particularly when models influence significant decisions affecting individuals’ lives.</p>
+</section>
+<section id="data-integrity-and-quality" class="level3" data-number="6.2.4">
+<h3 data-number="6.2.4" class="anchored" data-anchor-id="data-integrity-and-quality"><span class="header-section-number">6.2.4</span> Data Integrity and Quality</h3>
+<p>Data integrity refers to the accuracy, consistency, and reliability of data throughout its lifecycle. Quality of data means that the data is fit for its intended uses in operations, decision-making, and planning. In data science, ensuring data integrity and quality is critical for building models that accurately represent the world and make reliable predictions. This involves rigorous data collection, cleaning, and validation processes to ensure that data is not corrupted, accurately reflects the phenomena it is supposed to represent, and is used appropriately in models.</p>
+<p>Maintaining the integrity and quality of data is fundamental to ethical data science practice. <span class="citation" data-cites="saltz2019data">Saltz and Dewar (<a href="references.html#ref-saltz2019data" role="doc-biblioref">2019</a>)</span> emphasize the importance of ensuring that data used and produced by data scientists are accurate, valid, and reliable, supporting the credibility of data science findings and applications.</p>
+</section>
+<section id="respect-for-intellectual-property" class="level3" data-number="6.2.5">
+<h3 data-number="6.2.5" class="anchored" data-anchor-id="respect-for-intellectual-property"><span class="header-section-number">6.2.5</span> Respect for Intellectual Property</h3>
+<p>Respecting intellectual property in data science means acknowledging and adhering to the legal and moral rights of creators and owners of data, algorithms, software, and other resources used in data science projects. This includes proper attribution of sources, complying with licensing agreements, and not using copyrighted materials without permission. Ethical practice requires data scientists to be aware of the origins of the data and tools they use, to ensure that their use respects the rights of the creators and is in line with any terms and conditions of use.</p>
+<p>Data scientists must respect intellectual property rights, properly attributing data sources and adhering to the terms of use for data and software. The ethical use of data and software tools, acknowledging creators and complying with licensing, is essential for fostering a culture of integrity within the field <span class="citation" data-cites="saltz2019data">(<a href="references.html#ref-saltz2019data" role="doc-biblioref">Saltz and Dewar 2019</a>)</span>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-kearns2019ethical" class="csl-entry" role="listitem">
+Kearns, Michael, and Aaron Roth. 2019. <em>The Ethical Algorithm: The Science of Socially Aware Algorithm Design</em>. Oxford University Press.
+</div>
+<div id="ref-noble2018algorithms" class="csl-entry" role="listitem">
+Noble, Safiya Umoja. 2018. <em>Algorithms of Oppression: How Search Engines Reinforce Racism</em>. New York University Press.
+</div>
+<div id="ref-oneil2016weapons" class="csl-entry" role="listitem">
+O’Neil, Cathy. 2016. <em>Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy</em>. Crown.
+</div>
+<div id="ref-saltz2019data" class="csl-entry" role="listitem">
+Saltz, Jeffrey S., and Neil Dewar. 2019. <span>“Data Science Ethical Considerations: <span>A</span> Systematic Literature Review and Proposed Project Framework.”</span> <em>Ethics and Information Technology</em> 21 (3): 197–208.
+</div>
+</div>
 </section>
 </section>
 
