@@ -175,3 +175,6 @@ work flow in model selection with cross-validation is as follows.
 <!-- ## Decision Tree -->
 
 {{< include _tree.qmd >}}
+
+<!-- Nueral Networks -->
+{{< include pytorch.qmd >}}
