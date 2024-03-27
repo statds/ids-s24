@@ -7,7 +7,9 @@ talk and we will dive into some more advanced SQL commands.
 
 ## What is SQL?
 
-Structured Query Language (SQL) is a standard language for accessing and manipulating databases. It is used within relational database management systems such as MS SQL Server, MySQL, Oracle, etc... to perform CRUD operations.
+Structured Query Language (SQL) is a standard language for accessing and manipulating 
+databases. It is used within relational database management systems such as MS SQL 
+Server, MySQL, Oracle, etc... to perform CRUD operations.
 
 ### CRUD
 
@@ -82,14 +84,18 @@ CREATE TABLE contact_groups (
 			ON UPDATE NO ACTION
 );
 ```
-+ PRIMARY KEY() declares which variables are primary keys. We should remove the first two *Primary Key* declarations to have proper syntax.
++ PRIMARY KEY() declares which variables are primary keys. We should remove the first 
+  two *Primary Key* declarations to have proper syntax.
 + FOREIGN KEY() declares the variable as a foreign key
     + A constraint that is used to prevent actions that would destroy links between tables.
     + A field in one table that refers to a different `PRIMARY KEY` in another table. 
     + Table with a foreign key is a child table.
-    + Prevents invalid data from being inserted into the foreign key column because it has to be a value contained in the parent table.
-+ ON DELETE CASECADE: If a record in `contacts` is deleted, any corresponding records in `contact_groups` will also be deleted.
-+ ON UPDATE NO ACTION: If a `contact_id` in `contacts` is updated, no action will be taken on `contact_groups`.
+    + Prevents invalid data from being inserted into the foreign key column because it 
+      has to be a value contained in the parent table.
++ ON DELETE CASECADE: If a record in `contacts` is deleted, any corresponding records in 
+  `contact_groups` will also be deleted.
++ ON UPDATE NO ACTION: If a `contact_id` in `contacts` is updated, no action will be 
+  taken on `contact_groups`.
     + Can be replaced with `RESTRICT`.
 
 #### Inserting and Searching
