@@ -1,6 +1,9 @@
 ## Introduction
 
-Today, I will be presenting on Database Operations using SQL and I will demonstrate it by using sqlite3 in Python and I will use our cleaned rodent data set. This presentation will briefly go over what Professor Haim Bar talked about during his talk and we will dive into some more advanced SQL commands. 
+Today, I will be presenting on Database Operations using SQL and I will demonstrate 
+it by using sqlite3 in Python and I will use our cleaned rodent data set. This 
+presentation will briefly go over what Professor Haim Bar talked about during his 
+talk and we will dive into some more advanced SQL commands. 
 
 ## What is SQL?
 
