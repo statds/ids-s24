@@ -35,7 +35,7 @@ for all occupations”
 - The median annual pay for Data Scientists in May 2022 was around $103,500, 
 showing its high demand in a monetary light 
 
-![Data Science](0_POjH5vv_7t8s8loG.png){width=300}
+![Data Science](images/0_POjH5vv_7t8s8loG.png){width=300}
 
 ### Why does Communication Matter?
 
@@ -60,7 +60,7 @@ gather all the necessary information, clarify needs and expectations of
 stakeholders, and align their work with broader business goals.” 
 
 
-![Communication](04-communication_16x9.png){width=300}
+![Communication](images/04-communication_16x9.png){width=300}
 
 
 ### Inherent Communication Skills
@@ -74,7 +74,7 @@ stakeholders, and align their work with broader business goals.”
 - Respect
 - Cues 
 
-![Inherent Communication](communi.png){width=300}
+![Inherent Communication](images/communi.png){width=300}
 
 
 ### Identify your audience
@@ -95,7 +95,7 @@ from Harvard Business Review
 Data Scientists are treated in the field, communicating creates cooperation 
 that can lead to the avoidance of these issues found. 
 
-![Audience](web_ready_audience-needs_v01.png){width=300}
+![Audience](images/web_ready_audience-needs_v01.png){width=300}
 
 ### Data Applictions
 
@@ -114,7 +114,7 @@ facilitate their operations
 - Data science communication skills vary in these fields, as some may prefer
 verbal information or visual information. 
 
-![Applications](applications.png){width=300}
+![Applications](images/applications.png){width=300}
 
 ### Storytelling
 
@@ -138,7 +138,7 @@ Data scientists must remember that, and not just when presenting to people
 with a non-technical background. It’s important to find common ground with
 everyone you work with to build trust and move forward effectively.
 
-![Storytelling](story.png){width=300}
+![Storytelling](images/story.png){width=300}
 
 ### Data Visualization
 
@@ -148,7 +148,7 @@ vital step for Data Scientists in the field
     + Many of these forms of visualization can be combined with other
 learned skill sets that will be mentioned in the next topic 
 
-![Visuals](visuals.png){width=300}
+![Visuals](images/visuals.png){width=300}
 
 ### Usable Skill Sets for Data Communication
 
@@ -174,7 +174,7 @@ in data
 data to ensure that it is accurate and accessible to those who need it reliably
 throughout the data science project lifecycle
 
-![skillsets](skillsets.png){width=300}
+![skillsets](images/skillsets.png){width=300}
 
 ### Gather questions and Feedback
 
@@ -189,7 +189,7 @@ successful career as a data scientist.”
 understanding of the topic at hand, and can help avoid ambiguity that 
 would occur if communication was not present 
 
-![Feedback](feedback.png){width=300}
+![Feedback](images/feedback.png){width=300}
 
 
 ### Sources
