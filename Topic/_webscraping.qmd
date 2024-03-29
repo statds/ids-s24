@@ -1,0 +1,41 @@
+---
+title: "Introduction to Web Scraping"
+author: "William Qualls"
+toc: true
+number-sections: true
+highlight-style: pygments
+format: 
+  html: 
+    code-fold: true
+    html-math-method: katex
+  pdf: 
+    geometry: 
+      - top=30mm
+      - left=20mm
+##  docx: default
+---
+## Introduction to Web Scraping
+
+### Introduction 
+
+My name is Will Qualls, I'm a grad student looking to graduate with an M.S. in computer science this spring. I chose this topic, because when I was first learning python I got to work with web scrapers 
+
+### What is Web Scraping?
+
+Web scraping is the act of using a computer to parse through a webpage's HTML file and extract relevant information.
+
+Most webpages are coded using something called HTML (HyperTextMarkupLanguage). Within that file, is most of the content loaded into a website (however, dnyamic attributes may not be included). Because HTML follows a uniform, relatively straightforward structure, we can quickly locate and extract data given we know that structure.
+
+### Why Web Scraping?
+
+One primary use of web scraping, up until recently, was to cheaply and easily gather data from social media sites such as twitter, however recent updates to the API policies of many of these sites has made this infeasable. The main power of web scraping lies in the ability to gather data from any internet source, provided you have the credentials to acess said data, and that the source dosen't explicitly permit you from doing so. This means that data scientists don't need to rely on a webpage to have .csv files or other prepared data ready for them, thanks to web scraping they can simply visit a website and extract the information they need. 
+
+### Introducing BeautifulSoup.
+
+One potential issue with web scraping, is that websites can be very large. While it's entirely possible for someone with moderate python experience to 
+
+### Downsides
+
+Most websites at the very least will make use of something called a robots.txt file to let you know who is allowed to scrape their site, and what data is off limits. Some more advanced websites have rate limits to prevent you from scraping the page too many times, and others can differentiate between web scrapers and normal human traffic.
+
+### Example of dynamically updated content not working.
