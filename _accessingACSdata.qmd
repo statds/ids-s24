@@ -4,17 +4,31 @@ This section was written by Abigail Mori.
 
 ### Introduction
 
-Hi! My name is Abigail Mori and I am a current senior, graduating this May. This past summer I worked with the UConn's Center for Voting Technology Research. We used ACS data to analyze ease of voting within Connecticut. Though, I only used `sql` and never had to access this data through `python`. I am excited to show what I've learned over the past couple weeks.
+Hi! My name is Abigail Mori and I am a current senior, graduating this May. 
+This past summer I worked with the UConn's Center for Voting Technology 
+Research. We used ACS data to analyze ease of voting within Connecticut. 
+Though, I only used `sql` and never had to access this data through `python`. 
+I am excited to show what I've learned over the past couple weeks.
 
 ### Installation
 
-In order to properly access ACS data we will need make sure we have installed `cenpy` and `geodatasets`. `Cenpy` is a package that "automatically discovers US Census Bureau API endpoints and exposes them to Python in a consistent fashion." `Geodatasets` "contains an API on top of a JSON with metadata of externally hosted datasets containing geospatial information useful for illustrative and educational purposes." Both of these modules are dependent on `pandas`.
+In order to properly access ACS data we will need make sure we have installed 
+`cenpy` and `geodatasets`. `Cenpy` is a package that "automatically discovers 
+US Census Bureau API endpoints and exposes them to Python in a consistent 
+fashion." `Geodatasets` "contains an API on top of a JSON with metadata of 
+externally hosted datasets containing geospatial information useful for 
+illustrative and educational purposes." Both of these modules are dependent 
+on `pandas`.
 
 ### Accessing ACS Data
 
-There are many different kinds of census data, one of which is ACS (American Community Survery) data. The ACS data is made up of a "wide range of social, economic, demographic, and housing charateristics." There are multiple ways to access this data using Python. I will examine one way using `cenpy`.
+There are many different kinds of census data, one of which is ACS (American
+Community Survery) data. The ACS data is made up of a "wide range of social, 
+economic, demographic, and housing charateristics." There are multiple ways 
+to access this data using Python. I will examine one way using `cenpy`.
 
-For much of work I referenced a `cenpy` API reference page (https://cenpy-devs.github.io/cenpy/api.html)
+For much of work I referenced a `cenpy` API reference page 
+(https://cenpy-devs.github.io/cenpy/api.html)
 
 ```{python}
 import warnings
@@ -24,18 +38,25 @@ import geodatasets
 ```
 
 ```{python}
-# Set a variable to all tables in the The American Community Survey from the Census Bureau
+# Set a variable to all tables in the The American Community Survey from
+#  the Census Bureau
 acs = cen.products.ACS()
 # Filter through acs tables based on specific variables
 print(acs.filter_tables('RACE', by='description'))
-# Once you select your desired table you can add more specific parameters, in this case I chose to do so by state
-connecticut = cen.products.ACS(2019).from_state('Connecticut', variables= 'B02001')
+# Once you select your desired table you can add more specific parameters, 
+# in this case I chose to do so by state
+connecticut = cen.products.ACS(2019).from_state('Connecticut',
+ variables= 'B02001')
 print(connecticut.head())
-nevada = cen.products.ACS(2019).from_state('Nevada', variables= 'B02001')
+nevada = cen.products.ACS(2019).from_state('Nevada', 
+variables= 'B02001')
 print(nevada.head())
 ```
 
-Each columns meanings can be found here: https://api.census.gov/data/2019/acs/acs1/variables.html and https://www.census.gov/programs-surveys/acs/technical-documentation/table-shells.2019.html#list-tab-79594641
+Each columns meanings can be found here: 
+https://api.census.gov/data/2019/acs/acs1/variables.html and 
+https://www.census.gov/programs-surveys/acs/technical-documentation
+/table-shells.2019.html#list-tab-79594641
 
 |              |                                                              |
 |--------------|--------------------------------------------------------------|
@@ -52,9 +73,15 @@ Each columns meanings can be found here: https://api.census.gov/data/2019/acs/ac
 
 ### Visualizing
 
-`Cenpy` returns users with datasets based on specifications, like RACE. Some of the columns include: geiod, geometry, name, state, county, and tract. The geometry is made up of Polygons which then can be used to make a map with `matplotlib` Since, `cenpy` provides a table of type: geopandas.geodataframe.GeoDataFrame. `GeoPandas` provides a high-level interface to the `matplotlib` library for making maps.
+`Cenpy` returns users with datasets based on specifications, like RACE. Some of 
+the columns include: geiod, geometry, name, state, county, and tract. The 
+geometry is made up of Polygons which then can be used to make a map with 
+`matplotlib` Since, `cenpy` provides a table of type: 
+geopandas.geodataframe.GeoDataFrame. `GeoPandas` provides a high-level interface
+to the `matplotlib` library for making maps.
 
-Below, I show maps of Connecticut and Nevada which display the populations of Native Hawaiians and other Pacific Islanders by census tract.
+Below, I show maps of Connecticut and Nevada which display the populations 
+of Native Hawaiians and other Pacific Islanders by census tract.
 
 ```{python}
 import matplotlib.pyplot as plt
@@ -63,7 +90,8 @@ import pandas as pd
 ```
 
 ```{python}
-fig, (ax1,ax2) = plt.subplots(nrows=1, ncols=2, figsize=(20, 16))
+fig, (ax1,ax2) = plt.subplots(nrows=1, ncols=2, 
+figsize=(20, 16))
 
 #B02001_006E: total number of Native Hawaiians and other Pacific Islanders
 ax1 = connecticut.plot('B02001_006E', ax = ax1, cmap = 'viridis', legend = True)
@@ -72,23 +100,28 @@ ax2 = nevada.plot('B02001_006E', ax = ax2, cmap = 'viridis', legend = True)
 
 ### Further Analysis
 
-ACS data can allow individuals to see discrepancies in voting accessability. For instance, we can look at correlation between a poverty level and education in a specific state.
+ACS data can allow individuals to see discrepancies in voting accessability. 
+For instance, we can look at correlation between a poverty level and 
+education in a specific state.
 
 We can access this data doing the same search method as above.
 
-Like before we filter through the tables to access our desired data. In this instance I chose to select data concerning poverty and education in Connecticut.
+Like before we filter through the tables to access our desired data. In this 
+instance I chose to select data concerning poverty and education in Connecticut.
 
 ```{python}
 print(acs.filter_tables('POVERTY', by='description'))
 # B17001: Poverty status in the past 12 months 
-poverty_ct = cen.products.ACS(2019).from_state('Connecticut', variables = 'B17001')
+poverty_ct = cen.products.ACS(2019).from_state('Connecticut', 
+variables = 'B17001')
 poverty_ct.head()
 ```
 
 ```{python}
 print(acs.filter_tables('HOUSING', by = 'description'))
 # Total Population in occupied housing
-housing_ct = cen.products.ACS(2019).from_state('Connecticut', variables = 'B25008')
+housing_ct = cen.products.ACS(2019).from_state('Connecticut', 
+variables = 'B25008')
 housing_ct.head()
 ```
 
@@ -99,9 +132,11 @@ ax1 = poverty_ct.plot('B17001A_001E', ax = ax1, cmap = 'viridis', legend = True)
 ax2 = housing_ct.plot('B25008_001E', ax = ax2, cmap = 'viridis', legend = True)
 ```
 
-Based on this we can visualize the numbers of individuals who are in poverty and individuals who have housing by census tract.
+Based on this we can visualize the numbers of individuals who are in poverty 
+and individuals who have housing by census tract.
 
-A further step is to run statistical analysis to see if there is any dependence and correlation between poverty and housing attainment within Connecituct.
+A further step is to run statistical analysis to see if there is any dependence
+ and correlation between poverty and housing attainment within Connecituct.
 
 ### References
 
