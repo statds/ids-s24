@@ -57,7 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -102,6 +102,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -235,6 +238,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#filling-missing-values" id="toc-filling-missing-values" class="nav-link" data-scroll-target="#filling-missing-values"><span class="header-section-number">5.2</span> Filling Missing Values</a></li>
   <li><a href="#using-appache-arrow-library" id="toc-using-appache-arrow-library" class="nav-link" data-scroll-target="#using-appache-arrow-library"><span class="header-section-number">5.3</span> Using Appache <code>Arrow</code> Library</a></li>
   <li><a href="#accessing-the-census-data-with-uszipcode" id="toc-accessing-the-census-data-with-uszipcode" class="nav-link" data-scroll-target="#accessing-the-census-data-with-uszipcode"><span class="header-section-number">5.4</span> Accessing the Census Data with <code>uszipcode</code></a></li>
+  <li><a href="#database-operations-with-sql" id="toc-database-operations-with-sql" class="nav-link" data-scroll-target="#database-operations-with-sql"><span class="header-section-number">5.5</span> Database Operations with SQL</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">5.5.1</span> Introduction</a></li>
+  <li><a href="#what-is-sql" id="toc-what-is-sql" class="nav-link" data-scroll-target="#what-is-sql"><span class="header-section-number">5.5.2</span> What is SQL?</a></li>
+  <li><a href="#recap-and-overview-of-some-basics" id="toc-recap-and-overview-of-some-basics" class="nav-link" data-scroll-target="#recap-and-overview-of-some-basics"><span class="header-section-number">5.5.3</span> Recap and Overview of some Basics</a></li>
+  <li><a href="#utilizing-sqlite3-in-python-with-rodent-data-set" id="toc-utilizing-sqlite3-in-python-with-rodent-data-set" class="nav-link" data-scroll-target="#utilizing-sqlite3-in-python-with-rodent-data-set"><span class="header-section-number">5.5.4</span> Utilizing sqlite3 in Python with Rodent Data Set</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5.5.5</span> References</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -264,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="using-the-pandas-package" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="using-the-pandas-package"><span class="header-section-number">5.1</span> Using the <code>Pandas</code> Package</h2>
 <p>The pandas library simplifies data manipulation and analysis. It’s especially handy for dealing with CSV files.</p>
-<div id="afb2d301" class="cell" data-execution_count="1">
+<div id="2ce8e1e8" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the file name</span></span>
@@ -301,14 +312,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop the 'Location' since it is redundant</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># df.drop(columns=['Location'], inplace=True)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/cq/5ysgnwfn7c3g0h46xyzvpj800000gn/T/ipykernel_19990/754040398.py:22: FutureWarning:
+<pre><code>/var/folders/cq/5ysgnwfn7c3g0h46xyzvpj800000gn/T/ipykernel_27745/754040398.py:22: FutureWarning:
 
 The argument 'date_parser' is deprecated and will be removed in a future version. Please use 'date_format' instead, or read your data in as 'object' dtype and then call 'to_datetime'.
 </code></pre>
 </div>
 </div>
 <p>The <code>pandas</code> package also provides some utility functions for quick summaries about the data frame.</p>
-<div id="a7be1426" class="cell" data-execution_count="2">
+<div id="c73be9d2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.shape</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df.describe()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -364,7 +375,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>What are the unique values of <code>descriptor</code>?</p>
-<div id="32ec9b71" class="cell" data-execution_count="3">
+<div id="2e7a435c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.descriptor.unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>array(['Rat Sighting', 'Mouse Sighting', 'Condition Attracting Rodents',
@@ -375,7 +386,7 @@ dtype: int64</code></pre>
 <section id="filling-missing-values" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="filling-missing-values"><span class="header-section-number">5.2</span> Filling Missing Values</h2>
 <p>If geocodes are available but zip code is missing, we can use reverse geocoding to fill the zip code. This process involves querying a geocoding service with latitude and longitude to get the corresponding address details, including the ZIP code. This can be done with package <code>geopy</code>, which needs to be installed first: <code>pip install geopy</code>.</p>
-<div id="c69bff22" class="cell" data-execution_count="4">
+<div id="eab533e0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.geocoders <span class="im">import</span> Nominatim</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.exc <span class="im">import</span> GeocoderTimedOut, GeocoderServiceError</span>
@@ -414,11 +425,11 @@ dtype: int64</code></pre>
 <p>First, ensure you have pyarrow installed on your computer (and preferrably, in your current virtual environment):</p>
 <pre><code>pip install pyarrow</code></pre>
 <p>Feather is a fast, lightweight, and easy-to-use binary file format for storing data frames, optimized for speed and efficiency, particularly for IPC and data sharing between Python and R.</p>
-<div id="f3e00e2d" class="cell" data-execution_count="5">
+<div id="96f7b5c3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.to_feather(<span class="st">'data/rodent_2022-2023.feather'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Read the feather file back in:</p>
-<div id="7a7fc3d9" class="cell" data-execution_count="6">
+<div id="905d1d6b" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dff <span class="op">=</span> pd.read_feather(<span class="st">"data/rodent_2022-2023.feather"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dff.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -436,7 +447,7 @@ dtype: int64</code></pre>
 <section id="accessing-the-census-data-with-uszipcode" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="accessing-the-census-data-with-uszipcode"><span class="header-section-number">5.4</span> Accessing the Census Data with <code>uszipcode</code></h2>
 <p>First, ensure the DataFrame (df) is ready for merging with census data. Specifically, check that the <code>incident_zip</code> column is clean and consistent.</p>
-<div id="c2f1334e" class="cell" data-execution_count="7">
+<div id="91ebbd45" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'incident_zip'</span>].isnull().<span class="bu">sum</span>())</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize to 5-digit codes, if necessary</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'incident_zip'</span>] <span class="op">=</span> df[<span class="st">'incident_zip'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -479,14 +490,14 @@ dtype: int64</code></pre>
 <p>Install the <code>uszipcode</code> package into the current virtual environment by <code>pip install uszipcode</code>.</p>
 <p>Now let’s work on the rodent sightings data.</p>
 <p>We will first clean the incident_zip column to ensure it only contains valid ZIP codes. Then, we will use a vectorized approach to fetch the required data for each unique ZIP code and merge this information back into the original <code>DataFrame</code>.</p>
-<div id="c43f40c3" class="cell" data-execution_count="8">
+<div id="f562a76a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows where 'incident_zip' is missing or not a valid ZIP code format</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>valid_zip_df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'incident_zip'</span>]).copy()</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>valid_zip_df[<span class="st">'incident_zip'</span>] <span class="op">=</span> valid_zip_df[<span class="st">'incident_zip'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>unique_zips <span class="op">=</span> valid_zip_df[<span class="st">'incident_zip'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Since <code>uszipcode</code> doesn’t inherently support vectorized operations for multiple ZIP code queries, we’ll optimize the process by querying each unique ZIP code once, then merging the results with the original <code>DataFrame</code>. This approach minimizes redundant queries for ZIP codes that appear multiple times.</p>
-<div id="f3c7e168" class="cell" data-execution_count="9">
+<div id="47fd3108" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> uszipcode <span class="im">import</span> SearchEngine</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the SearchEngine</span></span>
@@ -541,8 +552,353 @@ Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove thi
       dtype='object')</code></pre>
 </div>
 </div>
+<!-- # Database Operations with SQL -->
+</section>
+<section id="database-operations-with-sql" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="database-operations-with-sql"><span class="header-section-number">5.5</span> Database Operations with SQL</h2>
+<section id="introduction" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.5.1</span> Introduction</h3>
+<p>Today, I will be presenting on Database Operations using SQL and I will demonstrate it by using sqlite3 in Python and I will use our cleaned rodent data set. This presentation will briefly go over what Professor Haim Bar talked about during his talk and we will dive into some more advanced SQL commands.</p>
+</section>
+<section id="what-is-sql" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="what-is-sql"><span class="header-section-number">5.5.2</span> What is SQL?</h3>
+<p>Structured Query Language (SQL) is a standard language for accessing and manipulating databases. It is used within relational database management systems such as MS SQL Server, MySQL, Oracle, etc… to perform CRUD operations.</p>
+<section id="crud" class="level4" data-number="5.5.2.1">
+<h4 data-number="5.5.2.1" class="anchored" data-anchor-id="crud"><span class="header-section-number">5.5.2.1</span> CRUD</h4>
+<ul>
+<li><u>C</u>reate - inserting new records/values</li>
+</ul>
+<p><strong>INSERT INTO</strong> table_name <strong>VALUES</strong> (field value 1, field value 2, …)</p>
+<ul>
+<li><u>R</u>ead - searching for records</li>
+</ul>
+<p><strong>SELECT</strong> field 1, field2, … <strong>FROM</strong> table_name [<strong>WHERE</strong> condition]</p>
+<ul>
+<li><u>U</u>pdate - modifying existing records</li>
+</ul>
+<p><strong>UPDATE</strong> table_name <strong>SET</strong> field1=value1, field2=value2, … [<strong>WHERE</strong> condition]</p>
+<ul>
+<li><u>D</u>elete - removing existing records</li>
+</ul>
+<p><strong>DELETE</strong> <strong>FROM</strong> table_name [<strong>WHERE</strong> condition]</p>
+</section>
+<section id="rdbms-vs-nosql" class="level4" data-number="5.5.2.2">
+<h4 data-number="5.5.2.2" class="anchored" data-anchor-id="rdbms-vs-nosql"><span class="header-section-number">5.5.2.2</span> RDBMS vs NoSQL</h4>
+<p>RDBMS</p>
+<ul>
+<li>Basis for SQL</li>
+<li>Models relationships in “Tables”</li>
+<li>Rows and Columns (Record/Fields)</li>
+<li>MS Access, SQL Server, MySQL</li>
+<li>Two tables can be linked if they have a matching field</li>
+</ul>
+<p>NoSQL</p>
+<ul>
+<li>“Not only” SQL or Non-SQL</li>
+<li>Great with large data sets</li>
+<li>Key / Value Pairs</li>
+<li>Does not always use SQL</li>
+<li>AWS DynamoDB</li>
+</ul>
+</section>
+</section>
+<section id="recap-and-overview-of-some-basics" class="level3" data-number="5.5.3">
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="recap-and-overview-of-some-basics"><span class="header-section-number">5.5.3</span> Recap and Overview of some Basics</h3>
+<blockquote class="blockquote">
+<p>Key Notes from Professor Bar</p>
+</blockquote>
+<section id="creating-tables" class="level4" data-number="5.5.3.1">
+<h4 data-number="5.5.3.1" class="anchored" data-anchor-id="creating-tables"><span class="header-section-number">5.5.3.1</span> Creating Tables</h4>
+<pre><code>CREATE TABLE contacts(
+    contact_id INTEGER PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    phone TEXT NOT NULL UNIQUE
+);</code></pre>
+<ul>
+<li>Creates a table named <em>contacts</em>.</li>
+<li>Five fields: contact_id, first_name, last_name, email, phone</li>
+<li>PRIMARY KEY: uniquely identifies each record in the table.</li>
+<li>Some columns will store character data while others will store integer data.</li>
+<li>NOT NULL: Columns <strong>cannot</strong> be empty.</li>
+<li>UNIQUE: All values in this specific column have to be different from each other.</li>
+</ul>
+<pre><code>CREATE TABLE contact_groups (
+    contact_id INTEGER PRIMARY KEY,
+    group_id INTEGER PRIMARY KEY,
+    PRIMARY KEY(contact_id, group_id)
+    FOREIGN KEY(contact_id)
+        REFERENCES contacts (contact_id)
+            ON DELETE CASCADE
+            ON UPDATE NO ACTION,
+    FOREIGN KEY(group_id)
+        REFERENCES groups (group_Id)
+            ON DELETE CASCADE
+            ON UPDATE NO ACTION
+);</code></pre>
+<ul>
+<li>PRIMARY KEY() declares which variables are primary keys. We should remove the first two <em>Primary Key</em> declarations to have proper syntax.</li>
+<li>FOREIGN KEY() declares the variable as a foreign key
+<ul>
+<li>A constraint that is used to prevent actions that would destroy links between tables.</li>
+<li>A field in one table that refers to a different <code>PRIMARY KEY</code> in another table.</li>
+<li>Table with a foreign key is a child table.</li>
+<li>Prevents invalid data from being inserted into the foreign key column because it has to be a value contained in the parent table.</li>
+</ul></li>
+<li>ON DELETE CASECADE: If a record in <code>contacts</code> is deleted, any corresponding records in <code>contact_groups</code> will also be deleted.</li>
+<li>ON UPDATE NO ACTION: If a <code>contact_id</code> in <code>contacts</code> is updated, no action will be taken on <code>contact_groups</code>.
+<ul>
+<li>Can be replaced with <code>RESTRICT</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="inserting-and-searching" class="level4" data-number="5.5.3.2">
+<h4 data-number="5.5.3.2" class="anchored" data-anchor-id="inserting-and-searching"><span class="header-section-number">5.5.3.2</span> Inserting and Searching</h4>
+<ul>
+<li>Multiple ways to insert values into a specific table.</li>
+</ul>
+<pre><code>INSERT INTO artists (name) VALUES('Bud Powell')
+INSERT INTO artists (name)
+VALUES
+    ('Buddy Rich')
+    ('Example 2')</code></pre>
+<ul>
+<li>Updating multiple or all rows.</li>
+</ul>
+<pre><code>SELECT employeeid, firstname, lastname, title, email FROM employees;
+UPDATE employees SET lastname = 'smith' WHERE employeeid = 3;
+
+# Multiple
+UPDATE employees SET city = 'Toronto', state='ON', 
+postalcode= 'M5p2n7' WHERE employeeid=4;
+
+# All
+UPDATE employees SET email = LOWER(firstname || "." || lastname || '@gmail.com';</code></pre>
+</section>
+<section id="deleting" class="level4" data-number="5.5.3.3">
+<h4 data-number="5.5.3.3" class="anchored" data-anchor-id="deleting"><span class="header-section-number">5.5.3.3</span> Deleting</h4>
+<ul>
+<li>Deleting Tables/Databases</li>
+</ul>
+<pre><code>DROP TABLE addresses;
+DROP DATABASE databasename;</code></pre>
+<p><strong>Note: Dropping a database will result in loss of information.</strong></p>
+<ul>
+<li>Deleting entries given a condition</li>
+</ul>
+<pre><code>DELETE FROM table_name WHERE condition;</code></pre>
+</section>
+</section>
+<section id="utilizing-sqlite3-in-python-with-rodent-data-set" class="level3" data-number="5.5.4">
+<h3 data-number="5.5.4" class="anchored" data-anchor-id="utilizing-sqlite3-in-python-with-rodent-data-set"><span class="header-section-number">5.5.4</span> Utilizing sqlite3 in Python with Rodent Data Set</h3>
+<p><strong>Connecting to SQLite3 Using Python</strong></p>
+<div id="c281035f" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Connects to Database</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">"presentation.db"</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Using our cleaned rodent data</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_feather(<span class="st">"data/rodent_2022-2023.feather"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="ed4d6cc9" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates Rodent table</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>data.to_sql(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">'rodent'</span>, <span class="co"># Name of SQL table</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>            conn, <span class="co"># sqlite3 connection</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>            if_exists <span class="op">=</span> <span class="st">'replace'</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>            index <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Cursor, Instance that allows you to invoke methods to execute SQL statements.</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>cursor <span class="op">=</span> conn.cursor()</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Executing example statement to show functionality</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>cursor.execute(<span class="st">"""</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="st">                SELECT *</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="st">                FROM rodent</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="st">                LIMIT 5</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="st">               """</span>)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> cursor.fetchall()</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Column names</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [description[<span class="dv">0</span>] <span class="cf">for</span> description <span class="kw">in</span> cursor.description]</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the output in a table format</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(rows, columns<span class="op">=</span>columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+<div>
 
 
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">unique_key</th>
+<th data-quarto-table-cell-role="th">created_date</th>
+<th data-quarto-table-cell-role="th">closed_date</th>
+<th data-quarto-table-cell-role="th">agency</th>
+<th data-quarto-table-cell-role="th">agency_name</th>
+<th data-quarto-table-cell-role="th">complaint_type</th>
+<th data-quarto-table-cell-role="th">descriptor</th>
+<th data-quarto-table-cell-role="th">location_type</th>
+<th data-quarto-table-cell-role="th">incident_zip</th>
+<th data-quarto-table-cell-role="th">incident_address</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">bridge_highway_segment</th>
+<th data-quarto-table-cell-role="th">latitude</th>
+<th data-quarto-table-cell-role="th">longitude</th>
+<th data-quarto-table-cell-role="th">location</th>
+<th data-quarto-table-cell-role="th">zip_codes</th>
+<th data-quarto-table-cell-role="th">community_districts</th>
+<th data-quarto-table-cell-role="th">borough_boundaries</th>
+<th data-quarto-table-cell-role="th">city_council_districts</th>
+<th data-quarto-table-cell-role="th">police_precincts</th>
+<th data-quarto-table-cell-role="th">police_precinct</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>59893776</td>
+<td>2023-12-31 23:05:41</td>
+<td>2023-12-31 23:05:41</td>
+<td>DOHMH</td>
+<td>Department of Health and Mental Hygiene</td>
+<td>Rodent</td>
+<td>Rat Sighting</td>
+<td>3+ Family Apt. Building</td>
+<td>11216</td>
+<td>265 PUTNAM AVENUE</td>
+<td>...</td>
+<td>None</td>
+<td>40.683857</td>
+<td>-73.951645</td>
+<td>(40.683855196486164, -73.95164557951071)</td>
+<td>17618.0</td>
+<td>69.0</td>
+<td>2.0</td>
+<td>49.0</td>
+<td>51.0</td>
+<td>51.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>59887523</td>
+<td>2023-12-31 22:19:22</td>
+<td>2024-01-03 08:47:02</td>
+<td>DOHMH</td>
+<td>Department of Health and Mental Hygiene</td>
+<td>Rodent</td>
+<td>Rat Sighting</td>
+<td>Commercial Building</td>
+<td>10028</td>
+<td>1538 THIRD AVENUE</td>
+<td>...</td>
+<td>None</td>
+<td>40.779243</td>
+<td>-73.953690</td>
+<td>(40.77924175816874, -73.95368859796383)</td>
+<td>10099.0</td>
+<td>23.0</td>
+<td>4.0</td>
+<td>1.0</td>
+<td>11.0</td>
+<td>11.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>59891998</td>
+<td>2023-12-31 22:03:12</td>
+<td>2023-12-31 22:03:12</td>
+<td>DOHMH</td>
+<td>Department of Health and Mental Hygiene</td>
+<td>Rodent</td>
+<td>Rat Sighting</td>
+<td>3+ Family Apt. Building</td>
+<td>10458</td>
+<td>2489 TIEBOUT AVENUE</td>
+<td>...</td>
+<td>None</td>
+<td>40.861694</td>
+<td>-73.894989</td>
+<td>(40.861693023118924, -73.89499228560491)</td>
+<td>10936.0</td>
+<td>6.0</td>
+<td>5.0</td>
+<td>22.0</td>
+<td>29.0</td>
+<td>29.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>59887520</td>
+<td>2023-12-31 21:13:02</td>
+<td>2024-01-03 09:33:43</td>
+<td>DOHMH</td>
+<td>Department of Health and Mental Hygiene</td>
+<td>Rodent</td>
+<td>Mouse Sighting</td>
+<td>3+ Family Apt. Building</td>
+<td>11206</td>
+<td>116 JEFFERSON STREET</td>
+<td>...</td>
+<td>None</td>
+<td>40.699741</td>
+<td>-73.930733</td>
+<td>(40.69974221739347, -73.93073474327662)</td>
+<td>17213.0</td>
+<td>42.0</td>
+<td>2.0</td>
+<td>30.0</td>
+<td>53.0</td>
+<td>53.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>59889297</td>
+<td>2023-12-31 20:50:10</td>
+<td>None</td>
+<td>DOHMH</td>
+<td>Department of Health and Mental Hygiene</td>
+<td>Rodent</td>
+<td>Rat Sighting</td>
+<td>1-2 Family Dwelling</td>
+<td>11206</td>
+<td>114 ELLERY STREET</td>
+<td>...</td>
+<td>None</td>
+<td>40.698444</td>
+<td>-73.948578</td>
+<td>(40.69844506428295, -73.94858040356128)</td>
+<td>17213.0</td>
+<td>69.0</td>
+<td>2.0</td>
+<td>49.0</td>
+<td>51.0</td>
+<td>51.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 47 columns</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="references" class="level3" data-number="5.5.5">
+<h3 data-number="5.5.5" class="anchored" data-anchor-id="references"><span class="header-section-number">5.5.5</span> References</h3>
+<ul>
+<li>https://www.w3schools.com/sql/</li>
+<li>https://aws.amazon.com/what-is/sql/</li>
+</ul>
+
+
+</section>
 </section>
 
 </main> <!-- /main -->
