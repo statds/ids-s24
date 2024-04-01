@@ -1,17 +1,18 @@
-## Introduction
+## Database Operations with SQL
+### Introduction
 
 Today, I will be presenting on Database Operations using SQL and I will demonstrate 
 it by using sqlite3 in Python and I will use our cleaned rodent data set. This 
 presentation will briefly go over what Professor Haim Bar talked about during his 
 talk and we will dive into some more advanced SQL commands. 
 
-## What is SQL?
+### What is SQL?
 
 Structured Query Language (SQL) is a standard language for accessing and manipulating 
 databases. It is used within relational database management systems such as MS SQL 
 Server, MySQL, Oracle, etc... to perform CRUD operations.
 
-### CRUD
+#### CRUD
 
 + [C]{.underline}reate - inserting new records/values
 
@@ -29,7 +30,7 @@ Server, MySQL, Oracle, etc... to perform CRUD operations.
 
 **DELETE** **FROM** table_name [**WHERE** condition]
 
-### RDBMS vs NoSQL
+#### RDBMS vs NoSQL
 
 RDBMS
 
@@ -47,11 +48,11 @@ NoSQL
 + Does not always use SQL
 + AWS DynamoDB
 
-## Recap and Overview of some Basics
+### Recap and Overview of some Basics
 
 > Key Notes from Professor Bar
 
-### Creating Tables
+#### Creating Tables
 
 ```
 CREATE TABLE contacts(
@@ -99,7 +100,7 @@ CREATE TABLE contact_groups (
   taken on `contact_groups`.
     + Can be replaced with `RESTRICT`.
 
-### Inserting and Searching
+#### Inserting and Searching
 
  + Multiple ways to insert values into a specific table.
 
@@ -125,7 +126,7 @@ postalcode= 'M5p2n7' WHERE employeeid=4;
 UPDATE employees SET email = LOWER(firstname || "." || lastname || '@gmail.com';
 ```
 
-### Deleting 
+#### Deleting 
 
 + Deleting Tables/Databases
 ```
@@ -140,7 +141,7 @@ DROP DATABASE databasename;
 DELETE FROM table_name WHERE condition;
 ```
 
-## Utilizing sqlite3 in Python with Rodent Data Set
+### Utilizing sqlite3 in Python with Rodent Data Set
 
 **Connecting to SQLite3 Using Python**
 
@@ -182,7 +183,7 @@ columns = [description[0] for description in cursor.description]
 pd.DataFrame(rows, columns=columns)
 ```
 
-## References
+### References
 
 + https://www.w3schools.com/sql/
 + https://aws.amazon.com/what-is/sql/
