@@ -20,18 +20,18 @@ format:
 
 My name is Will Qualls, I'm a grad student looking to graduate with an M.S. in computer science this spring. I chose this topic, because when I was first learning python I got to work with web scrapers 
 
-### What is Web Scraping?
+#### What is Web Scraping?
 
 Web scraping is the act of using a computer to parse through a webpage's HTML file and extract relevant information.
 
 Most webpages are coded using something called HTML (HyperTextMarkupLanguage), and every website is, at a high level, your browser's interpretation of an HTML document. HTML is a very structured language, and almost anything you see on the screen has to be in that HTML document, unless the webpage is dynamically fetching it from another source. So, web scraping is a way for computers to analyze that HTML document and extract data from the webste.
 
 
-### Why Web Scraping?
+#### Why Web Scraping?
 
 One primary use of web scraping, up until recently, was to cheaply and easily gather data from social media sites such as twitter, however recent updates to the API policies of many of these sites has made this infeasable. The main power of web scraping lies in the ability to gather data from any internet source, provided you have the credentials to acess said data, and that the source dosen't explicitly permit you from doing so. This means that data scientists don't need to rely on a webpage to have .csv files or other prepared data ready for them, thanks to web scraping they can simply visit a website and extract the information they need. 
 
-### Introducing BeautifulSoup.
+#### Introducing BeautifulSoup.
 
 One potential issue with web scraping, is that websites can be very large. While it's entirely possible for someone with moderate python experience to extract data from HTML code using string manipulation due to how well structured HTML is, this would be a messy, and time consuming task. Luckily, there are many python libraries pre-written, which allow for parsing through HTML much easier than this. One of the most popular ones, and the one we will be using today. is called Beautiful Soup.
 
@@ -151,6 +151,9 @@ Full_Jobs = []
 Questionable = []
 URL = 'https://www.teamworkonline.com/football-jobs/footballjobs/nfl-football-jobs?page=2'
 keywords = ['data','Data','Software','software','anal','Anal','quant','Quant']
+req = requests.get(URL)
+if req.status_code == 200:
+  soup = BeautifulSoup(req.content, 'html.parser')
 table = soup.find_all(attrs={'class':'organization-portal__grid'})
 ```
 
@@ -168,7 +171,7 @@ jobs = table.find_all(attrs={'class':"organization-portal__job"})
 print('There are {} Jobs'.format(len(jobs)))
 ```
 
-There are ___ jobs nested inside our original "table" HTML element. Let's take a closer look at the structure of this element, to get a more concrete example of what we want to scrape.
+There are 48 jobs nested inside our original "table" HTML element. Let's take a closer look at the structure of this element, to get a more concrete example of what we want to scrape.
 
 ![HTML Tree for a Job](HTML_Tree.png) 
 
@@ -184,6 +187,20 @@ print('Team: {}\nLocation: {}\nJob Title: {}\n'.format(team,location,name))
 
 We now have the job title, organization, and location for this first job. What the code in the function does, is loop through every job (which is an HTML element returned by a call to find_all), and extract this data. It will then check if any of the provided keywords are in the job title, and if they are it will check for other common words such as "Intern" or "Assist" to determine the level of job before sorting it into a list.
 
+Let's double check to make sure our code works for al jobs, and not just the one we checked.
+
+```{python}
+found_jobs = []
+for job in jobs:
+  target_job = job
+  team = target_job.find(attrs={'class':"organization-portal__job-category"}).string
+  location = target_job.find(attrs={'class':"organization-portal__job-location"}).string
+  name = target_job.find(attrs={'class':"organization-portal__job-title"}).string
+  found_jobs.append('Team: {}\nLocation: {}\nJob Title: {}\n'.format(team,location,name))
+print(len(found_jobs))
+print(found_jobs[9])
+```
+
 This allows us to simply run find_jobs whenever we want, and get back all the jobs that a search for any of the keywords would have returned, making checking in on job openings as often as you want, an effortless task.
 
 Finally, we'll look at a more data science specific example, showing how webscraping can be used to gather larger volumes of data, in a quick and automated fashion.
@@ -196,6 +213,46 @@ Let's first start by gathering a list of the URLs for the dining hall menus. The
 
 ### Downsides
 
-Most websites at the very least will make use of something called a robots.txt file to let you know who is allowed to scrape their site, and what data is off limits. Some more advanced websites have rate limits to prevent you from scraping the page too many times, and others can differentiate between web scrapers and normal human traffic.
+For as powerful as webscraping is, it has it's limitations. Not every website wants you to scrape everything on it, and if they find you using a web crawler or scraper they can block your IP. Web scraping can also be slow when working with a large number of webpages, due to time spent conncting to the internet, and dosen't always work as expected with dynamically updated data.
 
-### Example of dynamically updated content not working.
+#### Robots.txt
+
+Most websites at the very least will make use of something called a robots.txt file to let you know who is allowed to scrape their site, and what data is off limits. Some more advanced websites have rate limits to prevent you from scraping the page too many times, and others can differentiate between web scrapers and normal human traffic. This can limit what we're allows to web scrape. To see a website's robots.txt file, simply add '/robots.txt' to the end of a page's home URL. Here is the robots.txt for UConn's website:
+
+![Robots.txt for Uconn.edu](RobUconn.png) 
+
+The User-Agent line tells us who the following commands applies to, and the * means that the rules apply to all users. Then, the disallow commands tell us what pages crawlers and web scrapers aren't allowed to visit. Any page with that URL prefix is disallowed by virtual of that line, so Disallow: Example/Page would also tell a program not to visit Example/Page/Page2.
+
+We also see an allow command. This can be used to allow a crawler to visit a webpage that was previously barred by a disallow command. This is used when a page someone wants to allow has a previously barred prefix. In this case, while 
+/wordpress/wp-admin/ and most of it's postfixes are disallowed,  /wordpress/wp-admin/admin-ajax.php has been specifically allowed, so robots can visit them.
+
+Let's look at a more advanced robots.txt file, this time for professional football data site ProFootballRefrence.
+
+![Robots.txt for ProFootballRefrence](RobPFR.png) 
+
+This time, we see multiple user agents. AhrefsBot,SlySearch has a Disallow: /, as does GPT bot. This means that these agents are being asked not to crawl or scrape any part of ProFootballReference. Twitterbots however, have an empty disallow, meaning that everything is allowed.
+
+Below, are a series of disallows that apply to everyone. In general, Google will go with the least restrictive directive, meaning that scraping these websites is off limits to all agents except a Twitterbot.
+#### Dynamic Data
+
+Web scrapers don't always work when working with dynamically allocated data. Consider the following webpage:
+![The UConn Gym Capacity webpage](capacity.png) 
+
+This website dynamically updates every second to tell you how many people are using the uconn rec center at any given moment. The Number in the example is at 0, since this is being written outside of the gym's operating hours, but during the workday it would be updating. 
+
+Say we wanted to gather data on how many people were at the gym at all times of the day, so we could graph it and discover when the busisest and slowest times were at the rec. Theoretically we could web scrape the page right? Let's see.
+
+```{python}
+new_url = 'https://app.safespace.io/api/display/live-occupancy/86fb9e11'
+req = requests.get(new_url)
+if req.status_code == 200:
+    soup = BeautifulSoup(req.content, 'html.parser')
+answer = soup.find_all(attrs = {'id':'occupants'})
+print(answer)
+```
+
+As we can see, the space where we'd expect the occupancy number to be is empty. This occurs regularly when trying to scrape dynamically updated data. So, web scraping isn't always the best option when trying to acess constantly updating figures, and someone wishing to acess the data would likely need to find out where the website is receiving the data from, and try and get permission to access that source.
+
+### Sources
+
+https://www.conductor.com/academy/robotstxt/
