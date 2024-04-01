@@ -18,22 +18,55 @@ format:
 
 ### Introduction 
 
-My name is Will Qualls, I'm a grad student looking to graduate with an M.S. in computer science this spring. I chose this topic, because when I was first learning python I got to work with web scrapers 
+My name is Will Qualls, I'm a grad student looking to graduate with an M.S. in 
+computer science this spring. I want to go into sports data or software
+engineering. I chose this topic, because when I was first learning python
+I got to work with web scrapers, and I thought it was super cool how I could
+take any data displayed on a webpage and get it in python to manipulate and 
+work with. One of my first personal projects was web-scraping ProFootballRefrence
+to get NFL player stats and try to use them to create a metric for comparing
+players across different eras of football. Web scraping is a tool that I still
+find myself using, as recently as last football season I used a web scraper to
+automate the collection of NFL matchups and their results so my friends and I
+could do a game-picks pool in google sheets, where all we had to do was pick
+winners before the game, and then python would get the scores from ProFootballRefrence 
+and grade our picks for us.
 
 #### What is Web Scraping?
 
-Web scraping is the act of using a computer to parse through a webpage's HTML file and extract relevant information.
+Web scraping is the act of using a computer to parse through a webpage's HTML
+file and extract relevant information.
 
-Most webpages are coded using something called HTML (HyperTextMarkupLanguage), and every website is, at a high level, your browser's interpretation of an HTML document. HTML is a very structured language, and almost anything you see on the screen has to be in that HTML document, unless the webpage is dynamically fetching it from another source. So, web scraping is a way for computers to analyze that HTML document and extract data from the webste.
+Most webpages are coded using something called HTML (HyperTextMarkupLanguage),
+and every website is, at a high level, your browser's interpretation of an 
+HTML document. HTML is a very structured language, and almost anything you
+see on the screen has to be in that HTML document, unless the webpage is
+dynamically fetching it from another source. So, web scraping is a way for
+computers to analyze that HTML document and extract data from the webste.
 
 
 #### Why Web Scraping?
 
-One primary use of web scraping, up until recently, was to cheaply and easily gather data from social media sites such as twitter, however recent updates to the API policies of many of these sites has made this infeasable. The main power of web scraping lies in the ability to gather data from any internet source, provided you have the credentials to acess said data, and that the source dosen't explicitly permit you from doing so. This means that data scientists don't need to rely on a webpage to have .csv files or other prepared data ready for them, thanks to web scraping they can simply visit a website and extract the information they need. 
+One primary use of web scraping, up until recently, was to cheaply and easily
+gather data from social media sites such as twitter, however recent updates to
+the API policies of many of these sites has made this infeasable. The main
+power of web scraping lies in the ability to gather data from any internet
+source, provided you have the credentials to acess said data, and that the
+source dosen't explicitly permit you from doing so. This means that data
+scientists don't need to rely on a webpage to have .csv files or other prepared
+data ready for them, thanks to web scraping they can simply visit a website and
+extract the information they need. Web scraping is still a very useful tool, as 
+we will see later in this project.
 
 #### Introducing BeautifulSoup.
 
-One potential issue with web scraping, is that websites can be very large. While it's entirely possible for someone with moderate python experience to extract data from HTML code using string manipulation due to how well structured HTML is, this would be a messy, and time consuming task. Luckily, there are many python libraries pre-written, which allow for parsing through HTML much easier than this. One of the most popular ones, and the one we will be using today. is called Beautiful Soup.
+One potential issue with web scraping, is that websites can be very large.
+While it's entirely possible for someone with moderate python experience
+to extract data from HTML code using string manipulation due to how well
+structured HTML is, this would be a messy, and time consuming task. Luckily,
+there are many python libraries pre-written, which allow for parsing through
+HTML much easier than this. One of the most popular ones, and the one we will
+be using today. is called Beautiful Soup.
 
 To install beautiful soup on your machine, run "pip install beautifulsoup4" in the terminal, inside the directory where you want the installation.
 
@@ -205,15 +238,18 @@ This allows us to simply run find_jobs whenever we want, and get back all the jo
 
 Finally, we'll look at a more data science specific example, showing how webscraping can be used to gather larger volumes of data, in a quick and automated fashion.
 
-### Uconn Dining Hall Example
+### More in depth uses of Web Scrapers
+I won't show code here, since most web scraping follows the same pattern; get HTML, inspect the website, and find tags ot other attributes to extract date from. However, I do want to take a moment to comment on how the technique can be expanded to larger scale projects than simply wanting a quicker way to check the job market.
 
-Let's say we want to conduct a study on foods offered at the UConn dining halls. One way to do this, would be to go online, look at the menus, and then manually chart them. But this is time consuming, and furthermore the menus are only available for about a week in advance, meaning that to to a long term study you would need to do this at least once a week, for every single dining hall. Web scraping provides an easier way to do this.
+In the previous example, we had a web scraper that took advantage of commmon formatting in a group of HTML pages to quickly gather data from all of them. This is a common occurance, which is great for us as data scientists. In the past, I've used web scraping to gather injury data from every NFL team for every season going back to 2009, since each webpage has an identical structure. This allowed me to gather data on over 22,000 players listed across 448 seperate webpages, by building the scraper for one webpage, and then iterating through all the URLs for each team's injury page, which also had a similar structure. This program took well over an hour to run, but it was exponentially faster than trying to gather all that data by hand. Furthermore, it removed the chance of human error ocurring, which was massive for data accuracy.
 
-Let's first start by gathering a list of the URLs for the dining hall menus. These can be found as links on the uconn dining homepage, under "Menus & Nutrition". While it would be more practical 
+Web scraping can take a long time when working with a high volume of webpages, simply because it takes time to connect to a webpage. Another program I wrote for my senior design project iterated through the course catalog for every single major at UConn, gathered the links to each individual course, and then scraped those individual course pages to collect data on the class, such as where/when it was offered, class size, and professor. This program had to connect to thousands of webpages, and took several hours to run. It was still however, like the ProFootballReference scraper, exponentially faster and more accurate then collecting the data by hand
+
+
 
 ### Downsides
 
-For as powerful as webscraping is, it has it's limitations. Not every website wants you to scrape everything on it, and if they find you using a web crawler or scraper they can block your IP. Web scraping can also be slow when working with a large number of webpages, due to time spent conncting to the internet, and dosen't always work as expected with dynamically updated data.
+For as powerful as webscraping is, it has it's limitations. Not every website wants you to scrape everything on it, and if they find you using a web crawler or scraper they can block your IP. Web scraping can also be slow when working with a large number of webpages, as explained earlier, and dosen't always work as expected with dynamically updated data.
 
 #### Robots.txt
 
@@ -233,6 +269,7 @@ Let's look at a more advanced robots.txt file, this time for professional footba
 This time, we see multiple user agents. AhrefsBot,SlySearch has a Disallow: /, as does GPT bot. This means that these agents are being asked not to crawl or scrape any part of ProFootballReference. Twitterbots however, have an empty disallow, meaning that everything is allowed.
 
 Below, are a series of disallows that apply to everyone. In general, Google will go with the least restrictive directive, meaning that scraping these websites is off limits to all agents except a Twitterbot.
+
 #### Dynamic Data
 
 Web scrapers don't always work when working with dynamically allocated data. Consider the following webpage:
@@ -252,6 +289,8 @@ print(answer)
 ```
 
 As we can see, the space where we'd expect the occupancy number to be is empty. This occurs regularly when trying to scrape dynamically updated data. So, web scraping isn't always the best option when trying to acess constantly updating figures, and someone wishing to acess the data would likely need to find out where the website is receiving the data from, and try and get permission to access that source.
+
+
 
 ### Sources
 
