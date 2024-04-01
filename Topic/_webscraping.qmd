@@ -168,7 +168,23 @@ jobs = table.find_all(attrs={'class':"organization-portal__job"})
 print('There are {} Jobs'.format(len(jobs)))
 ```
 
-There are ___ Jobs!
+There are ___ jobs nested inside our original "table" HTML element. Let's take a closer look at the structure of this element, to get a more concrete example of what we want to scrape.
+
+![HTML Tree for a Job](HTML_Tree.png) 
+
+As we can see, and as we discussed earlier, the organization-portal__grid class contains instances of organization-portal__job, which in turn contains more HTML elements. If we look towards the bottom of the HTML tree shown, we notice 3 more class names: organization-portal__job-title, organization-portal__job-category, and organization-portal__job-location. Let's extract these.
+
+```{python}
+target_job = jobs[0]
+team = target_job.find(attrs={'class':"organization-portal__job-category"}).string
+location = target_job.find(attrs={'class':"organization-portal__job-location"}).string
+name = target_job.find(attrs={'class':"organization-portal__job-title"}).string
+print('Team: {}\nLocation: {}\nJob Title: {}\n'.format(team,location,name))
+```
+
+We now have the job title, organization, and location for this first job. What the code in the function does, is loop through every job (which is an HTML element returned by a call to find_all), and extract this data. It will then check if any of the provided keywords are in the job title, and if they are it will check for other common words such as "Intern" or "Assist" to determine the level of job before sorting it into a list.
+
+This allows us to simply run find_jobs whenever we want, and get back all the jobs that a search for any of the keywords would have returned, making checking in on job openings as often as you want, an effortless task.
 
 Finally, we'll look at a more data science specific example, showing how webscraping can be used to gather larger volumes of data, in a quick and automated fashion.
 
