@@ -1,4 +1,4 @@
-# Exercises
+# Exercises {#sec-ex}
 
 1. **Git basics and GitHub setup**
   Learn the Git basics and set up an account on GitHub if you do not

@@ -1,4 +1,6 @@
-## Exploring NYC Rodent Dataset (by Xingye.Zhang)
+## Exploring NYC Rodent Dataset
+
+> This section was written by Xingye Zhang
 
 The main goal of my presentation is to show the process of 
 ‘transforming raw dataset’ into ‘compelling insights’ using various data 
