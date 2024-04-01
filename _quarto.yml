@@ -4,7 +4,17 @@ project:
 book:
   title: "Introduction to Data Science"
   subtitle: "STAT 3255/5255 @ UConn, Spring 2024"
-  author: "Jun Yan and Students in Spring 2024"
+  author:
+    - name: Jun Yan and Students in Spring 2024
+    - name: Matt Elliott
+    - name: Joshua Lee
+    - name: Olivia Massad
+    - name: Leon Nguyen
+    - name: Pratham Patel
+    - name: Isabelle Perez
+    - name: Weijia Wu
+    - name: Vincent Xie
+    - name: Xingye Zhang
   date: today
 
   sidebar:
@@ -24,6 +34,7 @@ book:
     - supervised.qmd
     - exercises.qmd
     - references.qmd
+
 bibliography: references.bib
 
 format:

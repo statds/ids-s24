@@ -29,10 +29,22 @@ different perspectives brought by successive student cohorts.
 
 ## Midterm Project
 
-Our mid-term project on rat sightings in New York City is to be
-showcased in a virtual session at the NYC Open Data Week, 2024, the
-week following the Spring Break. Four students will be selected to
-present topics on the mid-term project.
+Our mid-term project on rodent sightings in New York City was
+showcased in a virtual session at the NYC Open Data Week 2024
+entitled ["Landscape of Rodent Sightings in New York City: A Data
+Science
+Showcase"](https://2024.open-data.nyc/event/landscape-of-rodent-sightings-in-new-york-city-a-data-science-showcase/)
+on Wednesday, March 20, 2024.
+The project description is at Section @sec-ex.
+
+The presenters were
+
++ Vincent Xie: [slides](); [sources]().
++ Pratham Patel: [slides](); [sources]().
++ Isabelle Perez: [slides](); [sources]().
++ Joshua Lee: [slides](); [sources]().
+
+
 
 ## Final Project
 
@@ -211,12 +223,11 @@ Please use the following table to sign up.
   ------ | ---------------------- | ------
   02/07  | Matt Elliott           | Data science communication skills
   02/12  | Dr. Haim Bar           | Database management
-  02/19  | Willam Taki            | Visualization with MatPlotlib
+  02/19  | Willam Taki            | Visualization with `matplotlib`
   02/19  | Joshua Lee             | Descriptive Statistics
   02/07  | Weijia Wu              | Visualizaiton with `matplotlib` and `seaborn` 
   02/21  | Pratham Patel          | Handling spatial data with `geopandas`
   02/21  | Olivia Massad          | Grammar of Graphics `plotnine`
-  02/26  | Ge Li                  | Animation
   02/26  | Xingye Zhang           | Data visualizing NYC rodent dataset
   02/28  | Jack Dennison          | Geographic Data Analysis
   02/28  | Isabelle Perez         | Statistical hypothesis tests `scypy.stats`
@@ -224,14 +235,14 @@ Please use the following table to sign up.
   03/04  | David Li               |
   03/06  | Abigail Mori           | Accessing census and ACS data
   03/06  | Leon Nguyen            | Statistical Modeling with `statsmodels`
-  03/25  | Alex Pugh              |
+  03/25  | Alex Pugh              | Time Series Analysis
   03/25  | Charitath Chugh        | PyTorch
-  03/27  | Vincent Xie            | Database Operations with SQL
-  03/27  |                        |
+  03/27  |                        | 
+  03/27  | Ge Li                  | Animation                      
   04/01  | William Qualls         | Web Scraping
-  04/01  | Madison Woo            | Data Science Ethics 
+  04/01  | Vincent Xie            | Database Operations with SQL
   04/03  | Braedon Hook           |
-  04/03  |                        |
+  04/03  | Madison Woo            | Calling C/C++ from Python
   04/08  |                        |
   04/08  |                        |
   04/10  |                        |
@@ -257,9 +268,10 @@ Contribution to the class notes is through a `pull request'.
 
 + Start a new branch and switch to the new branch.
 + On the new branch, add a qmd file for your presentation
++ If using Python, create and activate a virtual environment with `requirements.txt` 
 + Edit `_quarto.yml` add a line for your qmd file to include it in the notes.
 + Work on your qmd file, test with `quarto render`.
-+ When satisfied, commit and make a pull request.
++ When satisfied, commit and make a pull request with your quarto files and an updated `requirements.txt`.
 
 I have added a template file `mysection.qmd` and a new line to `_quarto.yml`
 as an example.
@@ -278,7 +290,7 @@ code chunks, it would be hard to plagiarize.
 
 ### Homework Requirements
 
-+ Use the repo from Git Classroom to submit your work. See @sec-git.
++ Use the repo from Git Classroom to submit your work. See Section @sec-git.
     - Keep the repo clean (no tracking generated files).
 	- Never "Upload" your files; use the git command lines.
 	- Make commit message informative (think about the readers).

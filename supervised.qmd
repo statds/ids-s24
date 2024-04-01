@@ -49,6 +49,8 @@ unsupervised learning offers deep insights and uncovers underlying
 patterns that might not be immediately apparent.
 
 
+## Classification versus Regression
+
 The main tasks in supervised learning can broadly be categorized into
 two types: classification and regression. Each task utilizes
 algorithms to interpret the input data and make predictions or
@@ -86,6 +88,89 @@ between classification and regression depends on the nature of the
 target variable you are trying to predict. Supervised learning
 algorithms learn from labeled data, refining their models to minimize
 error and improve prediction accuracy on new, unseen data.
+
+
+### Classification Metrics
+
+#### Confusion matrix
+
+<https://en.wikipedia.org/wiki/Confusion_matrix>
+
+Four entries in the confusion matrix:
+
++ TP: number of true positives
++ FN: number of false negatives
++ FP: number of false positives
++ TN: number of true negatives
+
+Four rates from the confusion matrix with actual (row) margins:
+
++ TPR: TP / (TP + FN). Also known as sensitivity.
++ FNR: FN / (TP + FN). Also known as miss rate.
++ FPR: FP / (FP + TN). Also known as false alarm, fall-out.
++ TNR: TN / (FP + TN). Also known as specificity.
+
+Note that TPR and FPR do not add up to one. Neither do FNR and FPR.
+
+Four rates from the confusion matrix with predicted (column) margins:
+
++ PPV: TP / (TP + FP). Also known as precision.
++ FDR: FP / (TP + FP).
++ FOR: FN / (FN + TN).
++ NPV: TN / (FN + TN).
+
+#### Measure of classification performance
+
+Measures for a given confusion matrix:
+
++ Accuracy: (TP + TN) / (P + N). The proportion of all corrected
+  predictions. Not good for highly imbalanced data.
++ Recall (sensitivity/TPR): TP / (TP + FN).  Intuitively, the ability of the
+  classifier to find all the positive samples.
++ Precision: TP / (TP + FP).  Intuitively, the ability
+  of the classifier not to label as positive a sample that is negative.
++ F-beta score: Harmonic mean of precision and recall with $\beta$ chosen such
+  that recall is considered $\beta$ times as important as precision,
+  $$
+  (1 + \beta^2) \frac{\text{precision} \cdot \text{recall}}
+  {\beta^2 \text{precision} + \text{recall}}
+  $$
+  See [stackexchange
+  post](https://stats.stackexchange.com/questions/221997/why-f-beta-score-define-beta-like-that)
+  for the motivation of $\beta^2$.
+
+When classification is obtained by dichotomizing a continuous score, the
+receiver operating characteristic (ROC) curve gives a graphical summary of the
+FPR and TPR for all thresholds. The ROC curve plots the TPR against the FPR at 
+all thresholds.
+
++ Increasing from $(0, 0)$ to $(1, 1)$.
++ Best classification passes $(0, 1)$.
++ Classification by random guess gives the 45-degree line.
++ Area between the ROC and the 45-degree line is the Gini coefficient, a measure
+  of inequality.
++ Area under the curve (AUC) of ROC thus provides an important metric of
+classification results.
+
+
+### Cross-validation
+
++ Goal: strike a bias-variance tradeoff.
++ K-fold: hold out each fold as testing data.
++ Scores: minimized to train a model
+
+Cross-validation is an important measure to prevent over-fitting. Good in-sample
+performance does not necessarily mean good out-sample performance. A general
+work flow in model selection with cross-validation is as follows.
+
++ Split the data into training and testing
++ For each candidate model $m$ (with possibly multiple tuning parameters)
+    - Fit the model to the training data
+    - Obtain the performance measure $f(m)$ on the testing data (e.g., CV score,
+      MSE, loss, etc.)
++ Choose the model $m^* = \arg\max_m f(m)$.
+
+
 
 <!-- ## Decision Tree -->
 

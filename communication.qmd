@@ -1,3 +1,5 @@
-# Communicating Data Science
+# Communication and Ethics
 
 {{< include _presentation.qmd >}}
+
+{{< include _ethics.qmd >}}

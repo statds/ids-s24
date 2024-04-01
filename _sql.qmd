@@ -1,0 +1,189 @@
+## Database Operations with SQL
+### Introduction
+
+Today, I will be presenting on Database Operations using SQL and I will demonstrate 
+it by using sqlite3 in Python and I will use our cleaned rodent data set. This 
+presentation will briefly go over what Professor Haim Bar talked about during his 
+talk and we will dive into some more advanced SQL commands. 
+
+### What is SQL?
+
+Structured Query Language (SQL) is a standard language for accessing and manipulating 
+databases. It is used within relational database management systems such as MS SQL 
+Server, MySQL, Oracle, etc... to perform CRUD operations.
+
+#### CRUD
+
++ [C]{.underline}reate - inserting new records/values
+
+**INSERT INTO** table_name **VALUES** (field value 1, field value 2, ...) 
+
++ [R]{.underline}ead - searching for records
+
+**SELECT** field 1, field2, ... **FROM** table_name [**WHERE** condition]
+
++ [U]{.underline}pdate - modifying existing records
+
+**UPDATE** table_name **SET** field1=value1, field2=value2, ... [**WHERE** condition]
+
++ [D]{.underline}elete - removing existing records
+
+**DELETE** **FROM** table_name [**WHERE** condition]
+
+#### RDBMS vs NoSQL
+
+RDBMS
+
++ Basis for SQL
++ Models relationships in "Tables"
++ Rows and Columns (Record/Fields)
++ MS Access, SQL Server, MySQL
++ Two tables can be linked if they have a matching field
+
+NoSQL 
+
++ "Not only" SQL or Non-SQL
++ Great with large data sets
++ Key / Value Pairs
++ Does not always use SQL
++ AWS DynamoDB
+
+### Recap and Overview of some Basics
+
+> Key Notes from Professor Bar
+
+#### Creating Tables
+
+```
+CREATE TABLE contacts(
+	contact_id INTEGER PRIMARY KEY,
+	first_name TEXT NOT NULL,
+	last_name TEXT NOT NULL,
+	email TEXT NOT NULL UNIQUE,
+	phone TEXT NOT NULL UNIQUE
+);
+```
++ Creates a table named *contacts*.
++ Five fields: contact_id, first_name, last_name, email, phone
++ PRIMARY KEY: uniquely identifies each record in the table.
++ Some columns will store character data while others will store integer data.
++ NOT NULL: Columns **cannot** be empty.
++ UNIQUE: All values in this specific column have to be different from each other. 
+
+```
+CREATE TABLE contact_groups (
+	contact_id INTEGER PRIMARY KEY,
+	group_id INTEGER PRIMARY KEY,
+	PRIMARY KEY(contact_id, group_id)
+	FOREIGN KEY(contact_id)
+		REFERENCES contacts (contact_id)
+			ON DELETE CASCADE
+			ON UPDATE NO ACTION,
+	FOREIGN KEY(group_id)
+		REFERENCES groups (group_Id)
+			ON DELETE CASCADE
+			ON UPDATE NO ACTION
+);
+```
++ PRIMARY KEY() declares which variables are primary keys. We should remove the first 
+  two *Primary Key* declarations to have proper syntax.
++ FOREIGN KEY() declares the variable as a foreign key
+    + A constraint that is used to prevent actions that would 
+      destroy links between tables.
+    + A field in one table that refers to a different `PRIMARY KEY` in another table. 
+    + Table with a foreign key is a child table.
+    + Prevents invalid data from being inserted into the foreign key column 
+      because it has to be a value contained in the parent table.
++ ON DELETE CASECADE: If a record in `contacts` is deleted, any corresponding 
+  records in `contact_groups` will also be deleted.
++ ON UPDATE NO ACTION: If a `contact_id` in `contacts` is updated, no action will be 
+  taken on `contact_groups`.
+    + Can be replaced with `RESTRICT`.
+
+#### Inserting and Searching
+
+ + Multiple ways to insert values into a specific table.
+
+```
+INSERT INTO artists (name) VALUES('Bud Powell')
+INSERT INTO artists (name)
+VALUES
+	('Buddy Rich')
+	('Example 2')
+ ```
+
++ Updating multiple or all rows.
+
+ ```
+SELECT employeeid, firstname, lastname, title, email FROM employees;
+UPDATE employees SET lastname = 'smith' WHERE employeeid = 3;
+ 
+# Multiple
+UPDATE employees SET city = 'Toronto', state='ON', 
+postalcode= 'M5p2n7' WHERE employeeid=4;
+
+# All
+UPDATE employees SET email = LOWER(firstname || "." || lastname || '@gmail.com';
+```
+
+#### Deleting 
+
++ Deleting Tables/Databases
+```
+DROP TABLE addresses;
+DROP DATABASE databasename;
+```
+
+**Note: Dropping a database will result in loss of information.**
+
++ Deleting entries given a condition
+```
+DELETE FROM table_name WHERE condition;
+```
+
+### Utilizing sqlite3 in Python with Rodent Data Set
+
+**Connecting to SQLite3 Using Python**
+
+```{python}
+import pandas as pd
+import sqlite3
+
+# Connects to Database
+conn = sqlite3.connect("presentation.db")
+
+# Using our cleaned rodent data
+data = pd.read_feather("data/rodent_2022-2023.feather")
+```
+
+```{python}
+# Creates Rodent table
+data.to_sql(
+            'rodent', # Name of SQL table
+            conn, # sqlite3 connection
+            if_exists = 'replace',
+            index = False
+)
+
+# Cursor, Instance that allows you to invoke methods to execute SQL statements.
+cursor = conn.cursor()
+
+# Executing example statement to show functionality
+cursor.execute("""
+                SELECT *
+                FROM rodent
+                LIMIT 5
+               """)
+rows = cursor.fetchall()
+
+# Column names
+columns = [description[0] for description in cursor.description]
+
+# Displaying the output in a table format
+pd.DataFrame(rows, columns=columns)
+```
+
+### References
+
++ https://www.w3schools.com/sql/
++ https://aws.amazon.com/what-is/sql/
