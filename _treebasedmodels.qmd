@@ -50,9 +50,9 @@ our model on correct examples of our labels, which will come later.
                         accuracy (the proportion of correctly classified 
                         instances out of the total instances in the dataset),
                         precision (out of all positives, how many are correctly
-                        identified), and F1 Score (the harmonic mean of precision 
-                        and recall, it provides a balance between precision 
-                        and recall)
+                        identified), and F1 Score (the harmonic mean of 
+                        precision and recall, it provides a balance between 
+                        precision and recall)
 
 
 ### Training and Testing
@@ -67,7 +67,6 @@ hasn't seen before.
 
 
 ## Decision Trees
-![Decision Tree](images/Decision-Tree.png){width=700}
 
 A Decision Tree is hierarchical tree-like structure which frequently takes the 
 form of a binary tree in our case, where starting from the root node, we 
@@ -149,7 +148,8 @@ results, using the following hyperparameters:
 + `max_leaf_nodes`: Grow trees with `max_leaf_nodes` in best-first fashion
 + `min_impurity_decrease`: A node will be split if this split induces a 
 decrease of the impurity greater than or equal to this value.
-+ `class_weight`: Weights associated with classes in the form `{class_label: weight}`
++ `class_weight`: Weights associated with classes in the form 
+                  `{class_label: weight}`
 + `ccp_alpha`: Complexity parameter used for Minimal Cost-Complexity Pruning 
 + `random_state`: CControls the randomness of the estimator
 
@@ -170,7 +170,8 @@ import pandas as pd
 import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, f1_score, recall_score, precision_score
+from sklearn.metrics import accuracy_score, f1_score, recall_score 
+from sklearn.metrics import precision_score
 ```
 
 ```{python}
@@ -183,7 +184,8 @@ sub_df = ibm_df[["OverTime", "BusinessTravel", "MaritalStatus", "Attrition"]]
 ```
 
 ```{python}
-sub_df = sub_df.rename(columns={"BusinessTravel": "Freq. Travel", "MaritalStatus":"Married"})
+sub_df = sub_df.rename(columns={"BusinessTravel": "Freq. Travel", 
+"MaritalStatus":"Married"})
 
 
 # The following block maps the features onto boolean values for the model to
@@ -191,9 +193,11 @@ sub_df = sub_df.rename(columns={"BusinessTravel": "Freq. Travel", "MaritalStatus
 
 sub_df["OverTime"] = sub_df["OverTime"].map({"Yes": True, "No": False})
 
-sub_df["Freq. Travel"] = sub_df["Freq. Travel"].map({"Travel_Rarely": False, "Travel_Frequently": True, 'Non-Travel': True})
+sub_df["Freq. Travel"] = sub_df["Freq. Travel"].map({"Travel_Rarely": False, 
+"Travel_Frequently": True, 'Non-Travel': True})
 
-sub_df["Married"] = sub_df["Married"].map({"Single": False, "Married": True, "Divorced": False})
+sub_df["Married"] = sub_df["Married"].map({"Single": False, "Married": True, 
+"Divorced": False})
 
 sub_df["Attrition"] = sub_df["Attrition"].map({"Yes": True, "No": False})
 ```
@@ -282,12 +286,11 @@ So how are these trees being made?
 
 ### Bagging & Bootstrapping
 
-![Bootstrap](images/bootstrap_and_bagging.jpg){width=700}
 
-**Bootstrapping** involves making multiple datasets based on our original dataset. 
-These new datasets are sampled with replacement from the original dataset.Each
-bootstrap dataset is likely to be different promoting diversity amongst the 
-tress in the forest.
+**Bootstrapping** involves making multiple datasets based on our original 
+dataset. These new datasets are sampled with replacement from the original 
+dataset. Each bootstrap dataset is likely to be different promoting diversity
+amongst the tress in the forest.
 
 The process involves the random selection of a row from the original dataset 
 and then putting it into a separate smaller dataset called the bootstrapped 
@@ -304,13 +307,112 @@ the number of features excluded simultaneously.
 
 **Bagging** is the technique used to aggregate the predictions of the
 trees in an instance of Random Forest. Each tree in the forest is trained on a 
-bootstrap sample and makes predictions independently.
-The final prediction of the Random Forest is obtained by taking the majority 
-(in this case majority classification) across all of the trees.
+bootstrap sample and makes predictions independently. The final prediction of 
+the Random Forest is obtained by taking the majority (in this case majority 
+classification) across all of the trees.
 
-The following code takes the example dataset `Eating_Dataset.feather`, which 
-attempts to use a random forest model to predict whether or not a student is 
-likely to dine out based on the features of:
+## Generating an Example Dataset
+
+**Features of the Dataset**
+
+**Do I eat out?**
+
+**Code**
+```{python}
+from datetime import datetime
+import random
+
+eat_out = np.random.choice([True, False], size=100000)
+
+in_class = []
+
+
+for status in eat_out:
+    if status == True:
+       in_class.append(np.random.choice([True, False], p=[.10, .90]))
+    
+    else:
+        in_class.append(np.random.choice([False, True], p=[.40, .60]))
+
+good_places_open = []
+
+for status in eat_out:
+    if status == True:
+       good_places_open.append(np.random.choice([True, False], p=[.90, .10]))
+    
+    else:
+        good_places_open.append(np.random.choice([False, True], p=[.50, .50]))
+
+
+amount_of_money = []
+
+for status in eat_out:
+    if status:
+        choices = [round(random.uniform(55, 250), 2), 
+        round(random.uniform(0.0, 55), 2)]
+        
+        probabilities = [.90, .10]
+        
+        dollar_amount = np.random.choice(choices, p=probabilities)
+        
+        amount_of_money.append(dollar_amount)
+    
+
+    else:
+        choices = [round(random.uniform(55, 250), 2), 
+        round(random.uniform(0.0, 55), 2)]
+        
+        probabilities = [.41, .59]
+        
+        dollar_amount = np.random.choice(choices, p=probabilities)
+        
+        amount_of_money.append(dollar_amount)
+
+
+current_time = []
+
+for i in range(len(eat_out)):
+    early = random.randint(10, 19)
+    late = random.choice([20, 21, 22, 23, 0, 1, 2])
+    
+    if eat_out[i] and not in_class[i] and good_places_open[i]:
+        probabilities_t = [0.80, 0.20]
+        time_choices_hrs = [early, late]
+        
+    elif not eat_out[i] and not in_class[i] and not good_places_open[i]:
+        probabilities_t = [0.25, 0.75]
+        time_choices_hrs = [early, late]
+        
+    elif not eat_out[i] and in_class[i] and good_places_open[i]:
+        probabilities_t = [0.60, 0.40]
+        time_choices_hrs = [early, late]
+        
+    elif eat_out[i] and in_class[i]:
+        probabilities_t = [0.90, 0.10]
+        time_choices_hrs = [early, late]
+        
+    hour = np.random.choice(time_choices_hrs, p=probabilities_t)
+    minute = random.randint(0, 59)
+
+    now = datetime.now()
+    random_time = datetime(now.year, now.month, now.day, hour, minute)
+    given_time = random_time.strftime("%H:%M")
+    current_time.append(given_time) 
+
+
+my_data = {'In Class?':in_class, 'Are there good places open?':good_places_open, 
+           'Amount Of Money (In Dollars)':amount_of_money, 
+           'Time of Day (24-Hour)':current_time, 
+           'Do I eat out?':eat_out}
+
+dine_out_df = pd.DataFrame(data=my_data)
+
+```
+
+
+The following code takes the example dataset and attempts to use a random 
+forest model to predict whether or not a student is likely to dine out based 
+on the features of:
 
 
 **In Class?**: Whether or not the student is in class (Boolean)
@@ -332,13 +434,6 @@ import random
 ```
 
 ```{python}
-# The following lines loads Eating out Dataset 
-dine_out_df = pd.read_feather("data/Eating_Dataset.feather")
-
-dine_out_df.head()
-```
-
-```{python}
 def encode_time(time_str):
     hours, minutes = map(int, time_str.split(':'))
     
@@ -353,7 +448,8 @@ dine_out_df[['encoded_hours']] = dine_out_df['Time of Day (24-Hour)'].apply(enco
 X_rf = dine_out_df.drop(['Do I eat out?', 'Time of Day (24-Hour)'], axis=1)
 Y_rf = dine_out_df['Do I eat out?']
 
-X_train, X_test, Y_train, Y_test = train_test_split(X_rf, Y_rf, test_size=0.30, random_state=42, shuffle=True, stratify=Y_rf)
+X_train, X_test, Y_train, Y_test = train_test_split(X_rf, Y_rf, 
+test_size=0.30, random_state=42, shuffle=True, stratify=Y_rf)
 ```
 
 Although the random forest model shown below is only the default
@@ -367,12 +463,15 @@ model more closely follow the data presented:
 + `min_samples_leaf`: Min number of samples required to be at a leaf node
 + `min_weight_fraction_leaf`: The minimum weighted fraction of the sum total 
                               of weights required to be at a leaf node
-+ `max_features`: The number of features to consider when looking for the best split
++ `max_features`: The number of features to consider when looking for the 
+                  best split
 + `max_leaf_nodes`: Grow trees with `max_leaf_nodes` in best-first fashion
 + `min_impurity_decrease`: A node will be split if this split induces a 
-                           decrease of the impurity greater than or equal to this value.
+                           decrease of the impurity greater than or equal to 
+                           this value.
 + `boostrap`: Whether bootstrap samples are used when building trees
-+ `oob_score`: Whether to use out-of-bag samples to estimate the generalization score
++ `oob_score`: Whether to use out-of-bag samples to estimate the 
+               generalization score
 + `n_jobs`: The number of jobs to run in parallel
 + `random_state`: Controls both the randomness of the bootstrapping of the 
                   samples used when building trees
