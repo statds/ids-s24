@@ -49,9 +49,9 @@ NoSQL
 
 ## Recap and Overview of some Basics
 
-### Key Notes from Professor Bar
+> Key Notes from Professor Bar
 
-#### Creating Tables
+### Creating Tables
 
 ```
 CREATE TABLE contacts(
@@ -87,28 +87,60 @@ CREATE TABLE contact_groups (
 + PRIMARY KEY() declares which variables are primary keys. We should remove the first 
   two *Primary Key* declarations to have proper syntax.
 + FOREIGN KEY() declares the variable as a foreign key
-    + A constraint that is used to prevent actions that would destroy links between tables.
+    + A constraint that is used to prevent actions that would 
+      destroy links between tables.
     + A field in one table that refers to a different `PRIMARY KEY` in another table. 
     + Table with a foreign key is a child table.
-    + Prevents invalid data from being inserted into the foreign key column because it 
-      has to be a value contained in the parent table.
-+ ON DELETE CASECADE: If a record in `contacts` is deleted, any corresponding records in 
-  `contact_groups` will also be deleted.
+    + Prevents invalid data from being inserted into the foreign key column 
+      because it has to be a value contained in the parent table.
++ ON DELETE CASECADE: If a record in `contacts` is deleted, any corresponding 
+  records in `contact_groups` will also be deleted.
 + ON UPDATE NO ACTION: If a `contact_id` in `contacts` is updated, no action will be 
   taken on `contact_groups`.
     + Can be replaced with `RESTRICT`.
 
-#### Inserting and Searching
+### Inserting and Searching
+
+ + Multiple ways to insert values into a specific table.
 
 ```
-INSERT INTO artists (name). VALUES('Bud Powell')
+INSERT INTO artists (name) VALUES('Bud Powell')
 INSERT INTO artists (name)
 VALUES
 	('Buddy Rich')
 	('Example 2')
  ```
 
- + Multiple ways to insert values into a specific table.
++ Updating multiple or all rows.
+
+ ```
+SELECT employeeid, firstname, lastname, title, email FROM employees;
+UPDATE employees SET lastname = 'smith' WHERE employeeid = 3;
+ 
+# Multiple
+UPDATE employees SET city = 'Toronto', state='ON', 
+postalcode= 'M5p2n7' WHERE employeeid=4;
+
+# All
+UPDATE employees SET email = LOWER(firstname || "." || lastname || '@gmail.com';
+```
+
+### Deleting 
+
++ Deleting Tables/Databases
+```
+DROP TABLE addresses;
+DROP DATABASE databasename;
+```
+
+**Note: Dropping a database will result in loss of information.**
+
++ Deleting entries given a condition
+```
+DELETE FROM table_name WHERE condition;
+```
+
+## Utilizing sqlite3 in Python with Rodent Data Set
 
 **Connecting to SQLite3 Using Python**
 
@@ -132,7 +164,7 @@ data.to_sql(
             index = False
 )
 
-# Cursor
+# Cursor, Instance that allows you to invoke methods to execute SQL statements.
 cursor = conn.cursor()
 
 # Executing example statement to show functionality
