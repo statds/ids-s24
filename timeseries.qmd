@@ -1,0 +1,693 @@
+---
+title: "Time Series Analysis"
+format: html
+---
+
+## Introduction
+My name is Alex Pugh, and I am a senior Finance major in the Business School 
+and Statistics major in CLAS. I have interest in financial data and sports 
+analytics. I recently worked with ESPN as a Stats Analyst producing and 
+maintaining data across professional and collegiate sports. I also had an 
+experiential learning opportunity performing data analysis with UConn men's 
+ice hockey last semester, and I am currently working with UConn football 
+under the same program.
+
+## What is Time Series Data?
+Any information collected over regular intervals of time is considered to 
+follow a time series. Time series analysis is a way of studying the 
+characteristics of the response variable concerning time as the independent 
+variable. To estimate the target variable in predicting or forecasting, 
+using the time variable as the reference point can yield insights into 
+trends, seasonal patterns, and future forecasts. 
+
+The opposite of time series data is cross-sectional data - where 
+observations are collected at single point in time.
+
+As an example of time series data, we will be using stock prices for two 
+different companies: Starbucks (SBUX) and Supermicro (SMCI). Let's vizualize 
+their stock prices as a time series over the last year. We will pull real 
+time data using the package *yfinance*.
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+import yfinance as yf
+import datetime
+
+# Define the ticker symbols
+tickerSymbol1 = 'SBUX'
+tickerSymbol2 = 'SMCI'
+
+# Get data for the past year
+start_date = datetime.datetime.now() - datetime.timedelta(days=365)
+end_date = datetime.datetime.now()
+
+# Get the data
+SBUX = yf.download(tickerSymbol1, start=start_date, end=end_date)
+SMCI = yf.download(tickerSymbol2, start=start_date, end=end_date)
+
+SBUX.dropna(subset=['Close'], inplace=True)
+SMCI.dropna(subset=['Close'], inplace=True)
+
+# Plotting SBUX data
+plt.figure(figsize=(8, 5))
+plt.plot(SBUX.index, SBUX['Close'], label='SBUX', color='blue')
+plt.xlabel('Date')
+plt.ylabel('Close Price')
+plt.title('SBUX Close Price Over One Year')
+plt.legend()
+plt.grid(True)
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.show()
+
+# Plotting SMCI data
+plt.figure(figsize=(8, 5))
+plt.plot(SMCI.index, SMCI['Close'], label='SMCI', color='red')
+plt.xlabel('Date')
+plt.ylabel('Close Price')
+plt.title('SMCI Close Price Over One Year')
+plt.legend()
+plt.grid(True)
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.show()
+```
+
+## Identifying Data Trends
+
+### Elementary Data Trends
+
+- **Seasonal** - regular or fixed interval shifts within the dataset in a continuous timeline
+- **Cyclical** - no fixed interval, uncertainty in movement and its pattern
+- **Trend** - no fixed interval nor any divergence within the given dataset is a continuous timeline
+- **Irregular** - unexpected situations/events/scenarios and spikes in a short time span
+
+### Stationarity
+Stationarity is the primary underlying assumption in most time series 
+analysis. This refers to the idea that the origin of time does not affect 
+the properties of the process under the statistical factor, and that the 
+manner in which the data changes is constant. Statistically, this means that 
+the unconditional joint probability distribution does not change when 
+shifted in time. Consequently, parameters such as mean and variance also do 
+not change over time. If you draw a line through the middle of a time series 
+then it should be flat; it may have 'seasonal' cycles around the trend line, 
+but overall it does not trend up nor down.
+
+A stationary dataset should adhere to the following rules without having 
+Trend, Seasonality, Cyclical, and Irregularity components of the time series.
+
+- The mean value of them should be completely constant in the data during the analysis.
+- The variance should be constant with respect to the time-frame.
+- Covariance should measure the relationship between two variables and remain constant with resspect to time.
+  
+If any of these do not hold, we can say that the data is non-stationary.
+
+We can use the Augmented Dickey-Fuller (ADF) Test or the 
+Kwiatkowski-Phillips-Schmidt-Shin (KPSS) Test to prove stationarity. The 
+following are the null hypotheses for each test:
+
+- Augmented Dickey-Fuller (ADF) Test:
+  - Null Hypothesis: The time series has a unit root, indicating it is non-stationary.
+
+- Kwiatkowski-Phillips-Schmidt-Shin (KPSS) Test:
+  - Null Hypothesis: The time series is stationary around a deterministic trend.
+
+```{python}
+from statsmodels.tsa.stattools import adfuller, kpss
+
+import warnings
+warnings.filterwarnings("ignore")
+
+def adf_kpss_test(series, name):
+    # ADF Test
+    adf_result = adfuller(series, autolag='AIC')
+    print(f'ADF Test for {name}:')
+    print(f'ADF Statistic: {adf_result[0]}')
+    print(f'p-value: {adf_result[1]}')
+    print('Critical Values:')
+    for key, value in adf_result[4].items():
+        print(f'   {key}: {value}')
+
+    # KPSS Test
+    kpss_result = kpss(series, regression='c')
+    print(f'\nKPSS Test for {name}:')
+    print(f'KPSS Statistic: {kpss_result[0]}')
+    print(f'p-value: {kpss_result[1]}')
+    print('Critical Values:')
+    for key, value in kpss_result[3].items():
+        print(f'   {key}: {value}')
+
+# Perform ADF and KPSS tests for SBUX
+adf_kpss_test(SBUX['Close'], 'SBUX Stock Price')
+
+# Perform ADF and KPSS tests for SMCI
+adf_kpss_test(SMCI['Close'], 'SMCI Stock Price')
+```
+
+#### Interpretation
+
+Starbucks:
+
+- ADF Test: The ADF statistic is -1.84, and the p-value is 0.36. Since the p-value is greater than the significance level (0.05), we fail to reject the null hypothesis. This suggests that the time series of Starbucks' stock price is non-stationary.
+  
+- KPSS Test: The KPSS statistic is 1.29, and the p-value is 0.01. Here, since the p-value is less than the significance level (0.05), we reject the null hypothesis. This suggests that the time series of Starbucks' stock price is non-stationary according to the KPSS test as well.
+  
+Supermicro:
+
+- ADF Test: The ADF statistic is -0.28, and the p-value is 0.93. Similar to Starbucks, the p-value is greater than the significance level (0.05), indicating non-stationarity.
+
+- KPSS Test: The KPSS statistic is 1.39, and the p-value is 0.01. Here, since the p-value is less than the significance level (0.05), we reject the null hypothesis. This suggests that the time series of Starbucks' stock price is non-stationary according to the KPSS test as well.
+
+
+#### Converting Non-Stationary Into Stationary
+ 
+There are three methods available for this conversion – detrending, 
+differencing, and transformation.
+
+1. Detrending
+   
+    Detrending involves removing the trend effects from the given dataset 
+    and showing only the differences in values from the trend. It always 
+    allows cyclical patterns to be identified.
+
+$$
+    Detrend(t) = Observation(t) - Rolling Mean of Observation(1,...,t)
+$$
+
+2. Differencing
+   
+    This is a simple transformation of the series into a new time series, 
+    which we use to remove the series dependence on time and stabilize the 
+    mean of the time series, so trend and seasonality are reduced during 
+    this transformation.
+
+$$
+    Difference(t) = Observation(t) - Observation(t-1)
+$$
+
+3. Transformation
+
+    Power transformations, square root transformations, and log 
+    tranformations are different possible methods. The most commonly used is 
+    a log transformation.
+
+$$
+    Log Return(t) = log( Observation(t−1) / Observation(t) )
+$$
+
+```{python}
+import numpy as np
+
+SBUX.reset_index(inplace=True)
+SMCI.reset_index(inplace=True)
+
+# Step 1: Detrending
+SBUX['Detrended_Close'] = SBUX['Close'] - SBUX['Close'].rolling(window=365, 
+min_periods=1).mean()
+SMCI['Detrended_Close'] = SMCI['Close'] - SMCI['Close'].rolling(window=365, 
+min_periods=1).mean()
+
+# Step 2: Differencing
+SBUX['Differenced_Close'] = SBUX['Close'].diff()
+SMCI['Differenced_Close'] = SMCI['Close'].diff()
+
+# Step 3: Log Return Transformation
+# Calculate the percentage change
+SBUX['Return'] = SBUX['Close'].pct_change()
+SMCI['Return'] = SMCI['Close'].pct_change()
+
+# Apply natural logarithm to the percentage change
+SBUX['Log_Return'] = np.log(1 + SBUX['Return'])
+SMCI['Log_Return'] = np.log(1 + SMCI['Return'])
+
+# Plot original and transformed data for SBUX
+plt.figure(figsize=(8, 4))
+plt.subplot(2, 2, 1)
+plt.plot(SBUX['Date'], SBUX['Close'], label='Original', color='blue')
+plt.title('SBUX Price (Original)')
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.legend()
+plt.xticks(rotation=45)
+
+plt.subplot(2, 2, 2)
+plt.plot(SBUX['Date'], SBUX['Detrended_Close'], label='Detrended', 
+color='blue')
+plt.title('SBUX Close Price (Detrended)')
+plt.xlabel('Date')
+plt.ylabel('Detrended Price')
+plt.legend()
+plt.xticks(rotation=45)
+
+plt.subplot(2, 2, 3)
+plt.plot(SBUX['Date'][1:], SBUX['Differenced_Close'][1:], 
+label='Differenced', color='blue')
+plt.title('SBUX Close Price (Differenced)')
+plt.xlabel('Date')
+plt.ylabel('Differenced Price')
+plt.legend()
+plt.xticks(rotation=45)
+
+plt.subplot(2, 2, 4)
+plt.plot(SBUX['Date'], SBUX['Log_Return'], label='SBUX Log Return', 
+color='blue')
+plt.title('SBUX Log Returns')
+plt.xlabel('Date')
+plt.ylabel('Log Return')
+plt.legend()
+plt.xticks(rotation=45)
+
+# Plot original and transformed data for SMCI
+plt.figure(figsize=(8, 4))
+plt.subplot(2, 2, 1)
+plt.plot(SMCI['Date'], SMCI['Close'], label='Original', color = 'red')
+plt.title('SMCI Price (Original)')
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.legend()
+plt.xticks(rotation=45)
+
+plt.subplot(2, 2, 2)
+plt.plot(SMCI['Date'], SMCI['Detrended_Close'], label='Detrended', 
+color = 'red')
+plt.title('SMCI Close Price (Detrended)')
+plt.xlabel('Date')
+plt.ylabel('Detrended Price')
+plt.legend()
+plt.xticks(SMCI['Date'][::30], rotation=45) 
+
+plt.subplot(2, 2, 3)
+plt.plot(SMCI['Date'], SMCI['Differenced_Close'], label='Differenced', 
+color = 'red')
+plt.title('SMCI Close Price (Differenced)')
+plt.xlabel('Date')
+plt.ylabel('Differenced Price')
+plt.legend()
+plt.xticks(rotation=45)
+
+plt.subplot(2, 2, 4)
+plt.plot(SMCI['Date'], SMCI['Log_Return'], label='SMCI Log Return', 
+color='red')
+plt.title('SMCI Log Returns')
+plt.xlabel('Date')
+plt.ylabel('Log Return')
+plt.legend()
+plt.xticks(rotation=45)
+
+plt.tight_layout()
+plt.show()
+```
+
+We can now perform ADF and KPSS tests for stationarity on the changed data.
+
+```{python}
+# Perform ADF and KPSS tests for SBUX
+for series_name in ['Detrended_Close', 'Differenced_Close', 'Log_Return']:
+    adf_kpss_test(SBUX[series_name].dropna(), f"SBUX {series_name}")
+
+# Perform ADF and KPSS tests for SMCI
+for series_name in ['Detrended_Close', 'Differenced_Close', 'Log_Return']:
+    adf_kpss_test(SMCI[series_name].dropna(), f"SMCI {series_name}")
+```
+
+As of April 1, 2024, here is a summary table with the result of the above tests:
+
+| Series               | ADF Statistic | ADF p-value | KPSS Statistic | KPSS p-value | ADF H0 Rejected (Stationarity) | KPSS H0 Rejected (Stationarity) |
+|----------------------|---------------|-------------|----------------|--------------|---------------------------------|---------------------------------|
+| SBUX Detrended_Close | -2.881         | 0.048       | 0.330          | 0.1          | No (Non-Stationary)             | No (Stationary)                 |
+| SBUX Differenced_Close| -6.864         | 1.57e-09    | 0.029          | 0.1          | Yes (Stationary)                | No (Stationary)                 |
+| SBUX Log_Return       | -8.689         | 4.10e-14    | 0.029          | 0.1          | Yes (Stationary)                | No (Stationary)                 |
+| SMCI Detrended_Close | -0.733         | 0.838       | 1.161          | 0.01         | No (Non-Stationary)             | Yes (Non-Stationary)            |
+| SMCI Differenced_Close| -2.761      | 0.064       | 0.365          | 0.092        | No (Non-Stationary)             | No (Stationary)                 |
+| SMCI Log_Return      | -9.839         | 4.80e-17    | 0.157          | 0.1          | Yes (Stationary)                | No (Stationary)                 |
+
+The Starbucks stock price is stationary once differenced or the log return 
+is taken, and the Supermicro stock price is approximately stationary once taken the log return.
+
+### Autocorrelation
+Autocorrelation measures the relationship between a variable's current value 
+and its past values at different time lags. Data with strong autocorrelation 
+indicates that current values are highly influenced from past values. The 
+prescence of strong autocorrelation can lead to greater predicability of 
+future values. 
+
+Autocorrelation coefficient for different time lags for a variable can be 
+used to answer the following questions about a time series:
+
+1.	Is the data random?
+
+If a series is random, the autocorrelation between successive values at any 
+time lag k are close to zero. This means that successive values of a time 
+series are not related to each other.
+
+2.	Does the data have a trend or is it stationary?
+
+If a series has a trend, successive observations are highly correlated, and 
+the autocorrelation coefficients typically are significantly different from 
+zero for the first several time lags and then gradually drop toward zero as 
+the number of lags increase. 
+
+3.	Is the data seasonal?
+
+If a series has a seasonal pattern, a significant autocorrelation 
+coefficient will occur at the seasonal time lag or multiples of the seasonal 
+lag. The seasonal lag is 4 for quarterly data and 12 for monthly data.
+
+The autocorrelation coefficients for a stationary series decline to zero 
+fairly rapidly, generally after the second or third time lag. On the other 
+hand, sample autocorrelation for nonstationary series remain fairly large 
+for several time periods. Often, to analyze nonstationary series, the trend 
+is removed before additional modeling occurs. This is the reasoning for 
+performing the previous data manipulation.
+
+*Statsmodels* will grant us access to evaluating the datasets' 
+autocorrelations. 
+
+```{python}
+import statsmodels.api as sm
+from statsmodels.graphics.tsaplots import plot_acf
+from statsmodels.stats.diagnostic import acorr_ljungbox
+
+# ACF plot for SBUX log return data
+plt.figure(figsize=(10, 5))
+plot_acf(SBUX['Log_Return'].dropna(), lags=30, alpha=0.05)
+plt.title('Autocorrelation Function (ACF) for SBUX Log Returns')
+plt.xlabel('Lag')
+plt.ylabel('Autocorrelation')
+plt.show()
+
+# ACF plot for SMCI log return data
+plt.figure(figsize=(10, 5))
+plot_acf(SMCI['Log_Return'].dropna(), lags=30, alpha=0.05)
+plt.title('Autocorrelation Function (ACF) for SMCI Log Returns')
+plt.xlabel('Lag')
+plt.ylabel('Autocorrelation')
+plt.show()
+```
+
+Both log returned stock prices have an autocorrelation function that feature 
+none or minimal spikes in the autocorrelation coefficient. This indicates 
+that autocorrelation is weak in the log yield data, and that any value is 
+not strongly correlated with its previous value.
+
+## Forecasting using ARIMA
+An auto-regressive model is a simple model that predicts future performance 
+based on past performance. It is mainly used for forecasting when there is 
+some correlation between values in a given time series and those that 
+precede and succeed (back and forth).
+
+An AR is a Linear Regression model that uses lagged variables as input. By 
+indicating the input, the Linear Regression model can be easily built using 
+the scikit-learn library. Statsmodels library provides autoregression 
+model-specific functions where you must specify an appropriate lag value and 
+train the model. 
+
+ARIMA (autoregressive integrated moving average) is a widely used approach 
+for predicting stationary series. Building off of AR and ARMA - the latter 
+of which cannot utilize non-stationary data - ARIMA can be used on both 
+stationary and non-stationary data.
+
+- AutoRegressive **AR(p)** - a regression model with lagged values of y, until p-th time in the past, as predictors. Here, p = the number of lagged observations in the model, ε is white noise at time t, c is a constant and φs are parameters.
+
+$$
+\hat{y}_t = c + \phi_1 \cdot y_{t-1} + \phi_2 \cdot y_{t-2} + \ldots + \phi_p \cdot y_{t-p} + \varepsilon_t
+$$
+
+- Integrated **I(d)** - The difference is taken d times until the original series becomes stationary.
+
+$$
+B \cdot y_t = y_{t-1}
+$$
+
+where B is considered the backshift operator. Thus, the first order 
+difference is
+
+$$
+y_t^t = y_t - y_{t-1} = (1-B) \cdot y_t
+$$
+
+and the dth order difference can be written as
+
+$$
+y_t^t = (1-B)^d \cdot y_t
+$$
+
+- Moving average **MA(q)** - A moving average model uses a regression-like model on past forecast errors.  Here,  ε is white noise at time t, c is a constant, and θs are parameters
+
+$$
+\hat{y}_t = c + \theta_1 \cdot \epsilon_{t-1} + \theta_2 \cdot \epsilon_{t-2} + \ldots + \theta_q \cdot \epsilon_{t-q}
+$$
+
+Bringing these parameters together results in the following ARIMA(p,d,q) 
+model:
+
+$$
+\hat{y}_t^t = c + \phi_1 \cdot y_{t-1}^t + \phi_2 \cdot y_{t-2}^t + \ldots + \phi_p \cdot y_{t-p}^t + \theta_1 \cdot \epsilon_{t-1} + \theta_2 \cdot \epsilon_{t-2} + \ldots + \theta_q \cdot \epsilon_{t-q} + \epsilon_t
+$$
+
+#### Using Training and Test Data with ARIMA
+
+To illustrate the importance of transforming non-stationary data, we will 
+split our data into traning and test data. We will forecast the test data 
+using ARIMA on the original dataset, and compare root mean square errors 
+with the log yield data set.
+
+*Statsmodels* will allow us to access ARIMA, and *sklearn* will allow us to 
+utilize root mean square errors.
+
+```{python}
+from statsmodels.tsa.arima.model import ARIMA
+from sklearn.metrics import mean_squared_error
+
+# Function to split data into training and test sets
+def train_test_split(data, test_size):
+    split_index = int(len(data) * (1 - test_size))
+    train_data, test_data = data[:split_index], data[split_index:]
+    return train_data, test_data
+
+# Function to fit ARIMA model and forecast
+def fit_arima_forecast(train_data, test_data, order):
+    # Fit ARIMA model
+    model = ARIMA(train_data, order=order)
+    fitted_model = model.fit()
+    
+    # Forecast
+    forecast_values = fitted_model.forecast(steps=len(test_data))
+    
+    return forecast_values
+
+# Function to evaluate forecast performance
+def evaluate_forecast(actual, forecast):
+    rmse = np.sqrt(mean_squared_error(actual, forecast))
+    return rmse
+
+# Split data into training and test sets for SBUX
+sbux_train, sbux_test = train_test_split(SBUX['Close'], test_size=0.2)
+
+# Fit ARIMA model and forecast for SBUX
+sbux_order = (30, 1, 1)  
+sbux_forecast = fit_arima_forecast(sbux_train, sbux_test, sbux_order)
+
+# Evaluate forecast performance for SBUX
+sbux_rmse = evaluate_forecast(sbux_test, sbux_forecast)
+
+# Split data into training and test sets for SMCI
+smci_train, smci_test = train_test_split(SMCI['Close'], test_size=0.2)
+
+# Fit ARIMA model and forecast for SMCI
+smci_order = (30, 1, 1)  
+smci_forecast = fit_arima_forecast(smci_train, smci_test, smci_order)
+
+# Evaluate forecast performance for SMCI
+smci_rmse = evaluate_forecast(smci_test, smci_forecast)
+
+# Print RMSE for both SBUX and SMCI
+print("RMSE for SBUX:", sbux_rmse)
+print("RMSE for SMCI:", smci_rmse)
+
+# Split data into training and test sets for SBUX Log_Return
+sbux_diff_train, sbux_diff_test = train_test_split(
+    SBUX['Log_Return'].dropna(), test_size=0.2)
+
+# Fit ARIMA model and forecast for SBUX Log_Return
+sbux_diff_order = (30, 1, 1)  
+sbux_diff_forecast = fit_arima_forecast(sbux_diff_train, sbux_diff_test, 
+sbux_diff_order)
+
+# Evaluate forecast performance for SBUX Log_Return
+sbux_diff_rmse = evaluate_forecast(sbux_diff_test, sbux_diff_forecast)
+
+# Split data into training and test sets for SMCI Log_Return
+smci_diff_train, smci_diff_test = train_test_split(
+    SMCI['Log_Return'].dropna(), test_size=0.2)
+
+# Fit ARIMA model and forecast for SMCI Log_Return
+smci_diff_order = (30, 1, 1) 
+smci_diff_forecast = fit_arima_forecast(smci_diff_train, smci_diff_test, 
+smci_diff_order)
+
+# Evaluate forecast performance for SMCI Log_Return
+smci_diff_rmse = evaluate_forecast(smci_diff_test, smci_diff_forecast)
+
+# Print RMSE for both SBUX and SMCI Log_Return
+print("RMSE for SBUX Log Returns:", sbux_diff_rmse)
+print("RMSE for SMCI Log Returns:", smci_diff_rmse)
+```
+
+Finally, we can proceed with a forecast of these companies' stock prices using ARIMA. Although ARIMA does not require stationary data, we can improve the accuracy of our model by using our detrended stationary stock prices.
+
+```{python}
+# Set 'Date' column as index
+SBUX.set_index('Date', inplace=True)
+SMCI.set_index('Date', inplace=True)
+
+# Define a function to fit ARIMA model and make forecast
+def fit_arima_and_forecast(data, order):
+    model = ARIMA(data, order=order)
+    model_fit = model.fit()
+    forecast = model_fit.forecast(steps=12)  # Forecast 12 months ahead 
+    return forecast
+
+# Fit ARIMA model and make forecast for SBUX
+sbux_forecast = fit_arima_and_forecast(SBUX['Log_Return'], order=(30,1,1)) 
+sbux_forecast_index = pd.date_range(start=SBUX.index[-1], periods=13, 
+freq='M')[1:]  # Generate date range for forecast
+
+# Fit ARIMA model and make forecast for SMCI
+smci_forecast = fit_arima_and_forecast(SMCI['Log_Return'], order=(30,1,1))  
+smci_forecast_index = pd.date_range(start=SMCI.index[-1], periods=13, freq='M')[1:]  # Generate date range for forecast
+
+# Plot the forecasts
+plt.figure(figsize=(8, 4))
+plt.plot(SBUX.index, SBUX['Log_Return'], label='SBUX Price', color='blue')
+plt.plot(sbux_forecast_index, sbux_forecast, label='SBUX Forecast', 
+color='green')
+plt.xlabel('Date')
+plt.ylabel('Log Return Stock Price')
+plt.title('SBUX Stock Price and Forecast (Log Return)')
+plt.legend()
+plt.grid(True)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(8, 4))
+plt.plot(SMCI.index, SMCI['Log_Return'], label='SMCI Price', color='red')
+plt.plot(smci_forecast_index, smci_forecast, label='SMCI Forecast', 
+color='orange')
+plt.xlabel('Date')
+plt.ylabel('Log Return Stock Price')
+plt.title('SMCI Stock Price and Forecast (Log Return)')
+plt.legend()
+plt.grid(True)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+#### Interpretation of ARIMA
+
+This model predicts greater volatility for Supermicro's stock price than 
+Starbucks'. The change in Starbucks' stock price is not predicted to deviate 
+from zero, while the change in Supermicro's stock price is predicted to 
+fluctuate. We have a neutral valuation of Starbucks' stock, and would not 
+recommend buying nor selling. However, since the forecasted log return 
+stock are majority positive, we would recommend buying Supermicro stock. The 
+ARIMA model indicates an a positive outlook and an expectation of future 
+growth over the next 12 months.
+
+## Modeling Volatility With GARCH
+
+A change in the variance or volatility over time can cause problems when 
+modeling time series with classical methods like ARIMA. GARCH (Generalized 
+Autoregressive Conditional Heteroskedasticity) models changes in variance in 
+a time dependent data set. Consistent change in variance over time is called 
+increasing or decreasing volatility. In time series where the variance is 
+increasing in a systematic way, such as an increasing trend, this property 
+of the series is called heteroskedasticity. 
+
+GARCH models the variance at a time step as a function of the residual 
+errors from a mean process, while incorporating a moving average component. 
+This allows the model to predict conditional change in variance over time.
+
+The conditional variance is formulated as:
+
+$$
+\sigma^2_t = \alpha_0 + \alpha(B) \cdot \mu^2_t + \beta(B) \cdot \sigma^2_t
+$$
+
+where $\alpha(B) = \alpha_1 \cdot B + \ldots + \alpha_q \cdot B^q$ and $\beta(B) = \beta_1 \cdot B + \ldots + \beta_p \cdot B^p$ are polynomials in the 
+backshift operator B.
+
+The GARCH(p,q) model contains two parameters:
+
+- p: The number of lag variances included in the GARCH model.
+- q: The number of lag residual errors included in the GARCH model.
+
+The most frequently used heteroskedastic model with GARCH is GARCH(1,1), 
+where $p,q$ = 1. The formula for GARCH (1,1) is as follows:
+
+$$
+\sigma^2_t = \alpha_0 + \alpha_1 \cdot \mu^2_{t-1} + \beta_1 \cdot \sigma^2_{t-1}
+$$
+
+Now, lets forecast variance at time *t* for a test set of both Starbucks and 
+Supermicro stock prices. The *arch* package allows for us to complete these 
+calculations.
+```{python}
+from arch import arch_model
+
+# Drop rows with NaN values in SBUX and SMCI dataframes
+SBUX.dropna(inplace=True)
+SMCI.dropna(inplace=True)
+
+# Define GARCH models for SBUX and SMCI
+sbux_model = arch_model(SBUX['Log_Return'], mean='Zero', vol='GARCH', p=1, q=1)
+smci_model = arch_model(SMCI['Log_Return'], mean='Zero', vol='GARCH', p=1, q=1)
+
+# Fit GARCH models
+sbux_model_fit = sbux_model.fit()
+smci_model_fit = smci_model.fit()
+
+# Forecast the test set for SBUX
+sbux_forecast = sbux_model_fit.forecast(horizon=len(SBUX['Log_Return']))
+
+# Forecast the test set for SMCI
+smci_forecast = smci_model_fit.forecast(horizon=len(SMCI['Log_Return']))
+
+# Plot the actual variance and forecast variance for SBUX
+plt.plot(SBUX.index, SBUX['Log_Return'], label='Actual Variance (SBUX)')
+plt.plot(SBUX.index, sbux_forecast.variance.values[-1], label='Forecast Variance (SBUX)')
+plt.title('Expected vs Predicted Variance for SBUX')
+plt.xlabel('Time')
+plt.ylabel('Variance')
+plt.legend()
+plt.show()
+
+# Plot the actual variance and forecast variance for SMCI
+plt.plot(SMCI.index, SMCI['Log_Return'], label='Actual Variance (SMCI)')
+plt.plot(SMCI.index, smci_forecast.variance.values[-1], label='Forecast Variance (SMCI)')
+plt.title('Expected vs Predicted Variance for SMCI')
+plt.xlabel('Time')
+plt.ylabel('Variance')
+plt.legend()
+plt.show()
+```
+
+GARCH shows that the forecasted variance is constant around zero for the
+logged returns. A higher volatility than expected for a stock is attactive 
+for day trading, but far less so for long-term investments. Supermicro 
+appears to be more volatile than Starbucks, so a day trader would likely 
+be more interested in SMCI while an investor would be better off holding 
+onto SBUX.
+
+## Conclusion
+
+Conducting time series data analysis is a fundamental task encountered by 
+data scientists across various domains. A strong grasp of tools and 
+methodologies for analysis empowers data scientists to unveil underlying 
+trends, anticipate future events, and inform decision-making processes 
+effectively. Leveraging time series forecasting techniques enables the 
+anticipation of future occurrences within the data, thus playing a pivotal 
+role in decision-making processes.
