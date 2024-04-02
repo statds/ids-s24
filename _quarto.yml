@@ -12,6 +12,7 @@ book:
     - name: Leon Nguyen
     - name: Pratham Patel
     - name: Isabelle Perez
+    - name: Alex Pugh
     - name: Weijia Wu
     - name: Vincent Xie
     - name: Xingye Zhang
@@ -31,6 +32,7 @@ book:
     - eda.qmd
     - visualization.qmd
     - statsmod.qmd
+    - timeseries.qmd
     - supervised.qmd
     - exercises.qmd
     - references.qmd
