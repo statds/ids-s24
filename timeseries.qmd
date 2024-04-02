@@ -3,15 +3,6 @@ title: "Time Series Analysis"
 format: html
 ---
 
-## Introduction
-My name is Alex Pugh, and I am a senior Finance major in the Business School 
-and Statistics major in CLAS. I have interest in financial data and sports 
-analytics. I recently worked with ESPN as a Stats Analyst producing and 
-maintaining data across professional and collegiate sports. I also had an 
-experiential learning opportunity performing data analysis with UConn men's 
-ice hockey last semester, and I am currently working with UConn football 
-under the same program.
-
 ## What is Time Series Data?
 Any information collected over regular intervals of time is considered to 
 follow a time series. Time series analysis is a way of studying the 
