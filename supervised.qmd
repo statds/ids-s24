@@ -199,19 +199,6 @@ focusing on examples that are hard to predict, thus enhancing the
 overall predictive accuracy of the model.
 
 
-Boosted trees are a form of ensemble learning where multiple decision
-trees are combined to increase accuracy and performance. The process
-can be described using the following notations and steps:
-
-+ Let $D = {(x_i, y_i)}_{i=1}^{N}$ be the dataset with $N$ instances,
-where $x_i$ represents the features of the $i$-th instance, and $y_i$
-is the target variable.
-+ A decision tree is denoted as $h(x; \Theta)$, where $\Theta$
-represents the parameters of the tree.
-+ The final model is an ensemble of $M$ trees, represented as
-$F(x) = \sum_{m=1}^{M} \lambda_m h_m(x; \Theta_m)$, where $\lambda_m$
-is the weight of the $m$-th tree.
-
 ### Boosting Process
 
 In the context of gradient boosted trees, the ensemble model is built
