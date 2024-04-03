@@ -361,12 +361,6 @@ window.Quarto = {
 <section id="introduction-1" class="level3" data-number="10.4.1">
 <h3 data-number="10.4.1" class="anchored" data-anchor-id="introduction-1"><span class="header-section-number">10.4.1</span> Introduction</h3>
 <p>Boosted trees build on the concept of boosting, an ensemble technique that aims to create a strong classifier from a number of weak classifiers. In the context of boosted trees, the weak learners are decision trees, usually of a fixed size, which are added sequentially to the model. The key idea is to improve the model iteratively by focusing on examples that are hard to predict, thus enhancing the overall predictive accuracy of the model.</p>
-<p>Boosted trees are a form of ensemble learning where multiple decision trees are combined to increase accuracy and performance. The process can be described using the following notations and steps:</p>
-<ul>
-<li>Let <span class="math inline">\(D = {(x_i, y_i)}_{i=1}^{N}\)</span> be the dataset with <span class="math inline">\(N\)</span> instances, where <span class="math inline">\(x_i\)</span> represents the features of the <span class="math inline">\(i\)</span>-th instance, and <span class="math inline">\(y_i\)</span> is the target variable.</li>
-<li>A decision tree is denoted as <span class="math inline">\(h(x; \Theta)\)</span>, where <span class="math inline">\(\Theta\)</span> represents the parameters of the tree.</li>
-<li>The final model is an ensemble of <span class="math inline">\(M\)</span> trees, represented as <span class="math inline">\(F(x) = \sum_{m=1}^{M} \lambda_m h_m(x; \Theta_m)\)</span>, where <span class="math inline">\(\lambda_m\)</span> is the weight of the <span class="math inline">\(m\)</span>-th tree.</li>
-</ul>
 </section>
 <section id="boosting-process" class="level3" data-number="10.4.2">
 <h3 data-number="10.4.2" class="anchored" data-anchor-id="boosting-process"><span class="header-section-number">10.4.2</span> Boosting Process</h3>
