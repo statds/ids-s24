@@ -233,6 +233,12 @@ window.Quarto = {
   <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">10.2.2</span> Cross-validation</a></li>
   </ul></li>
   <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="header-section-number">10.3</span> Decision Trees</a></li>
+  <li><a href="#boosted-tree" id="toc-boosted-tree" class="nav-link" data-scroll-target="#boosted-tree"><span class="header-section-number">10.4</span> Boosted Tree</a>
+  <ul class="collapse">
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1"><span class="header-section-number">10.4.1</span> Introduction</a></li>
+  <li><a href="#boosting-process" id="toc-boosting-process" class="nav-link" data-scroll-target="#boosting-process"><span class="header-section-number">10.4.2</span> Boosting Process</a></li>
+  <li><a href="#boosting-vs-bagging-in-ensemble-learning" id="toc-boosting-vs-bagging-in-ensemble-learning" class="nav-link" data-scroll-target="#boosting-vs-bagging-in-ensemble-learning"><span class="header-section-number">10.4.3</span> Boosting vs Bagging in Ensemble Learning</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -348,8 +354,73 @@ window.Quarto = {
 </section>
 <section id="decision-trees" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="decision-trees"><span class="header-section-number">10.3</span> Decision Trees</h2>
+</section>
+<section id="boosted-tree" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="boosted-tree"><span class="header-section-number">10.4</span> Boosted Tree</h2>
+<p>Boosted trees are a powerful ensemble technique in machine learning that combines multiple weak learners, typically decision trees, to form a strong learner. The essence of the boosting approach is to fit sequential models, where each new model attempts to correct errors made by the previous ones. Gradient boosting, one of the most popular boosting methods, optimizes a loss function over weak learners by iteratively adding trees that correct the residuals of the combined ensemble.</p>
+<section id="introduction-1" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="introduction-1"><span class="header-section-number">10.4.1</span> Introduction</h3>
+<p>Boosted trees build on the concept of boosting, an ensemble technique that aims to create a strong classifier from a number of weak classifiers. In the context of boosted trees, the weak learners are decision trees, usually of a fixed size, which are added sequentially to the model. The key idea is to improve the model iteratively by focusing on examples that are hard to predict, thus enhancing the overall predictive accuracy of the model.</p>
+<p>Boosted trees are a form of ensemble learning where multiple decision trees are combined to increase accuracy and performance. The process can be described using the following notations and steps:</p>
+<ul>
+<li>Let <span class="math inline">\(D = {(x_i, y_i)}_{i=1}^{N}\)</span> be the dataset with <span class="math inline">\(N\)</span> instances, where <span class="math inline">\(x_i\)</span> represents the features of the <span class="math inline">\(i\)</span>-th instance, and <span class="math inline">\(y_i\)</span> is the target variable.</li>
+<li>A decision tree is denoted as <span class="math inline">\(h(x; \Theta)\)</span>, where <span class="math inline">\(\Theta\)</span> represents the parameters of the tree.</li>
+<li>The final model is an ensemble of <span class="math inline">\(M\)</span> trees, represented as <span class="math inline">\(F(x) = \sum_{m=1}^{M} \lambda_m h_m(x; \Theta_m)\)</span>, where <span class="math inline">\(\lambda_m\)</span> is the weight of the <span class="math inline">\(m\)</span>-th tree.</li>
+</ul>
+</section>
+<section id="boosting-process" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="boosting-process"><span class="header-section-number">10.4.2</span> Boosting Process</h3>
+<p>In the context of gradient boosted trees, the ensemble model is built iteratively, where each new tree is fitted to the residual errors made by the previous ensemble of trees. The aim is to minimize a loss function, and each tree incrementally improves the model by reducing the loss. The ensemble model after <span class="math inline">\(M\)</span> trees can be described more accurately as:</p>
+<p>The final predictive model is <span class="math inline">\(F_M(x)\)</span>, which represents the accumulated predictions of all <span class="math inline">\(M\)</span> trees, adjusted by their respective learning rates.</p>
+<p>The process can be delineated as follows:</p>
+<ul>
+<li>Initialization: Begin with a base model <span class="math inline">\(F_0(x)\)</span>, often the mean of the target variable for regression or the log odds for classification.</li>
+<li>Iterative Boosting:
+<ul>
+<li>At each stage <span class="math inline">\(m\)</span>, compute the pseudo-residuals, which are the gradients of the loss function with respect to the predictions of the current model, <span class="math inline">\(F_{m-1}(x)\)</span>.</li>
+<li>Fit a new tree, <span class="math inline">\(h_m(x)\)</span>, to these pseudo-residuals.</li>
+<li>Update the model by adding this new tree, weighted by a learning rate <span class="math inline">\(\lambda\)</span>, to minimize the loss, resulting in <span class="math inline">\(F_m(x) =
+F_{m-1}(x) + \lambda \cdot h_m(x)\)</span>.</li>
+</ul></li>
+<li>Final Model: After <span class="math inline">\(M\)</span> iterations, the ensemble model <span class="math inline">\(F_M(x)\)</span> represents the sum of the initial model and the incremental improvements made by each of the <span class="math inline">\(M\)</span> trees, where each tree is fitted to correct the residuals of the model up to that point.</li>
+</ul>
+<p>Key Concepts</p>
+<ul>
+<li>Loss Function (<span class="math inline">\(L\)</span>): A measure of how far the ensemble’s predictions are from the actual values. Common choices include the squared error for regression and logistic loss for classification.</li>
+<li>Learning Rate (<span class="math inline">\(\lambda\)</span>): A small positive number that scales the contribution of each tree. It helps in controlling the speed of learning and prevents overfitting.</li>
+</ul>
+<p>This iterative approach, focusing on correcting the errors of the ensemble up to the current step, distinguishes gradient boosting from other ensemble methods and allows for a nuanced adjustment of the model to the data.</p>
+</section>
+<section id="boosting-vs-bagging-in-ensemble-learning" class="level3" data-number="10.4.3">
+<h3 data-number="10.4.3" class="anchored" data-anchor-id="boosting-vs-bagging-in-ensemble-learning"><span class="header-section-number">10.4.3</span> Boosting vs Bagging in Ensemble Learning</h3>
+<p>Boosting and bagging are foundational ensemble learning techniques in machine learning, designed to improve the accuracy of predictive models by combining the strengths of multiple weaker models. Despite their common goal, they differ significantly in methodology and application.</p>
+<p>Boosting builds models in a sequential manner, focusing each subsequent model on correcting the errors made by the previous ones. The process initiates with a base model, with each new model added aiming to correct its predecessor, culminating in a weighted sum of all models.</p>
+<ul>
+<li><strong>Sequential Model Building</strong>: Models are built sequentially, each correcting the error of the ensemble before it.</li>
+<li><strong>Focus on Misclassification</strong>: Boosting prioritizes instances misclassified by earlier models, adapting to the “harder” cases.</li>
+<li><strong>Variance Reduction</strong>: It mainly reduces model variance, carefully avoiding overfitting despite increasing complexity.</li>
+</ul>
+<p>Examples include AdaBoost, Gradient Boosting, and XGBoost.</p>
+<p>Bagging, or Bootstrap Aggregating, constructs multiple models independently and combines their predictions through averaging or majority voting. Each model is trained on a randomly drawn subset of the data, allowing for parallel model construction.</p>
+<ul>
+<li><strong>Parallel Model Building</strong>: Models are built independently, enabling parallelization.</li>
+<li><strong>Uniform Attention</strong>: All instances are equally considered, with the diversity of the ensemble reducing variance.</li>
+<li><strong>Bias and Variance Reduction</strong>: Effective at reducing both, but particularly good at cutting down variance in complex models.</li>
+</ul>
+<p>Random Forest is a prominent example of bagging.</p>
+<section id="differences" class="level4" data-number="10.4.3.1">
+<h4 data-number="10.4.3.1" class="anchored" data-anchor-id="differences"><span class="header-section-number">10.4.3.1</span> Differences</h4>
+<ul>
+<li><strong>Model Dependency</strong>: Boosting’s models are interdependent, building upon the errors of their predecessors, unlike bagging’s independent models.</li>
+<li><strong>Error Correction Focus</strong>: Boosting directly targets previous errors, while bagging reduces error through diversity.</li>
+<li><strong>Computational Complexity</strong>: Boosting can be more computationally intensive due to its sequential nature.</li>
+<li><strong>Overfitting Risk</strong>: Boosting may overfit on noisy data, whereas bagging remains robust, especially as the number of models increases.</li>
+</ul>
+<p>Understanding the distinctions between boosting and bagging is crucial for selecting the appropriate ensemble method for specific machine learning tasks. Both strategies offer unique advantages and can be applied based on the problem, data characteristics, and desired outcomes.</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
