@@ -15,6 +15,7 @@ book:
     - name: Weijia Wu
     - name: Vincent Xie
     - name: Xingye Zhang
+    - name: William Qualls
   date: today
 
   sidebar:
@@ -27,6 +28,7 @@ book:
     - quarto.qmd
     - python.qmd
     - import.qmd
+    - webscraping.qmd
     - communication.qmd
     - eda.qmd
     - visualization.qmd

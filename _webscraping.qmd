@@ -434,9 +434,10 @@ access that source.
 Web scraping is a very powerful tool for data scientits, as it allows us to
 gather data from any publicly availble webpage. The most popular library,
 Beautiful Soup, allows us to easily parse through a webpage, searching
-by tag, attribute, or content to find what we need. This makes web scraping
-simple, and easily trasferrable to other similarly formatted webpages, allowing
-us to effortlessly collect large amounts of data.
+by tag, attribute, or content to find what we need. Although it has it's
+drawbacks, this makes web scraping simple, and easily trasferrable to other 
+similarly formatted webpages, allowing us to effortlessly collect large amounts
+of data. 
 
 ### Sources
 
