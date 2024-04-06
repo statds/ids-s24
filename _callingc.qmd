@@ -1,0 +1,301 @@
+## Calling C/C++ from Python
+
+This section was written by Madison Woo 
+
+### Introduction
+
+Hello! My name is Madison Woo and I am a junior majoring in statistical 
+data science with a mathematics minor. I have learned so much from watching 
+past presentations and hope to apply everything I was taught into the data 
+science field. I think it is important to learn how different coding languages 
+can be integrated. Today, I am going to be talking about how to call C/C++
+from python. 
+
+### Overview of C/C++ 
+
+- C is a general purpose programming language designed for systems programming.
+
+- C is a procedural programming language known for its simplicity and 
+efficiency, while C++ extends C with features for object-oriented programming, 
+providing higher-level abstractions and greater flexibility in software design.
+
+- The basic syntax and code structure of both C and C++ are the same. 
+
+- Memory usage in C/C++ is key. 
+
+**Python Syntax:**<br>
+if a >=0:<br> 
+&nbsp;&nbsp;b = c + a<br>
+&nbsp;&nbsp;d = d + 5<br>
+else:<br>
+&nbsp;&nbsp;b = c - a<br>
+&nbsp;&nbsp;d = d + 10<br>
+
+**C Syntax:**<br> 
+if (a >= 0) {<br>
+&nbsp;&nbsp;b = c + a;<br>
+&nbsp;&nbsp;d = d + 5;<br>
+}<br>
+else {<br>
+&nbsp;&nbsp;b = c – a;<br>
+&nbsp;&nbsp;d = d + 10;<br>
+}<br>
+
+#### How set it up (on VS code)
+
+- Need to install a C/C++ extension.  
+
+- Need to install a C/C++ compiler. 
+    * MinGW for Windows 
+    * Clang for MacOS 
+    * GCC for Linux 
+
+    Run in C/C++ compiler terminal: 
+    "pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain"
+
+    Press enter to install default number of packages, then enter Y
+    to proceed with the installation. 
+
+    You must adjust the file path on your computer
+
+    Create a .cpp file for C++. 
+
+    In the .cpp file, there is an option to "Run C/C++ File" with a play button.
+    Once you press that button, a list of compilers will pop up. Select
+    C/C++: g++.exe build and debug active file. You only have to do this the 
+    first time you run a .cpp file. From there, your code should successfully run
+    and an integrated terminal will appear.
+
+### Why would you need to call C/C++ from Python?
+
+- C/C++ has a faster execution speed.
+
+- Useful for large scale testing on C/C++ programming. 
+
+- You might have an existing file written in C/C++ that you can use. 
+
+```{python}
+# presentation.cpp file code 
+
+"""
+#include <iostream>
+#include <chrono>
+
+extern "C" {
+    void cpp_loop(long long& sum) {
+        for (int i = 0; i < 1000000; ++i) {
+            sum += i;
+        }
+    }
+}
+"""
+```
+
+```{python}
+import time
+import os
+
+# Compile the C++ file
+os.system('g++ presentation.cpp -o presentation_cpp')
+
+# Time the execution of the C++ program
+start_time_cpp = time.time()
+os.system('./presentation_cpp > output.txt')
+end_time_cpp = time.time()
+
+# Read the output file
+with open('output.txt', 'r') as file:
+    output = file.read()
+
+print("Runtime using C++:", (end_time_cpp - start_time_cpp) * 1000, "milliseconds")
+```
+
+```{python}
+import time
+
+def python_loop():
+    # Measure the start time
+    start_time = time.time()
+
+    # Perform a simple loop to compute the sum
+    sum_value = 0
+    for i in range(1000000):
+        sum_value += i
+
+    # Measure the end time
+    end_time = time.time()
+
+    # Calculate the duration
+    duration = (end_time - start_time) * 1000  
+
+    # Output execution time
+    print("Python loop execution time:", duration, "milliseconds")
+
+# Calling the function
+python_loop()
+```
+
+### Overview Python Bindings 
+
+Python bindings convert python to C/C++. There are several different methods 
+that can do this. The common types of python bindings are ctypes, CFFI, 
+PyBind11, and Cython.  
+
+Since C and Python manage memory differently, you’ll need to be aware of where 
+the memory for each object was allocated and make sure that it is freed on the
+same side of the language barrier.
+
+#### Marshalling Data Types 
+
+In computer science, marshalling is the process of transforming the memory 
+representation of an object to a data format suitable for storage or transmission. 
+It is typically used when data must be moved between different parts of a computer
+program or from one program to another.
+
+Marshalling is what python bindings are doing when they prepare to move 
+C/C++ to python and python to C/C++. Python bindings are necessary since each 
+coding language stores data in different ways. 
+
+- **Integers:** Python stores integers with arbitrary precision, meaning that
+ you can store very, very, large numbers. C specifies the exact sizes of integers. 
+- **Floating-point Numbers:** Python can store much larger (and much smaller) 
+floating-point numbers than C. This means that you’ll also have to pay attention
+to those values to ensure they stay in range.
+- **Strings:** Strings are complicated when creating python bindings. Python and
+ C store strings in quite different formats (C and C++ differ in this as well).
+Each type of python binding has a different way of dealing with strings 
+- **Boolean:** Marshalling them is really straightforward since there are only 
+two values. 
+
+### ctypes 
+
+A positive aspect of ctypes is that it is already part of the python standard 
+library (added in version 2.5). You can import as you normally would with python 
+packages. 
+
+#### C
+
+To create a shared libary enter:<br>
+"cc -fPIC -shared -o libraryname.so filename.c"
+
+```{python}
+# calling_c.c file code 
+
+"""
+#include <stdio.h>
+
+int square(int i) {
+	return i * i;
+}
+"""
+```
+
+```{python}
+from ctypes import * 
+
+# Loading the shared library 
+so_file = "./callingc.so"
+calling_c = CDLL(so_file)
+
+# Printing results 
+print(calling_c.square(10))
+```
+
+#### C++
+
+To create a shared library enter:<br>
+"g++ -shared -o libraryname.so filename.cpp" 
+
+ctypes doesn't have any knowledge of the function unless you explicitly inform 
+it. Any paramenters that aren't integers need to be specificed or else it will 
+be assumed as an integer.
+
+```{python}
+from ctypes import CDLL, c_int
+
+# Load the shared library
+mylibrary = CDLL('./mylibrary.so')
+
+# Declare the argument and return types for the function
+mylibrary.square.argtypes = [c_int]
+mylibrary.square.restype = c_int
+
+# Call the add function
+result = mylibrary.square(10)
+print(result)
+```
+
+### CFFI
+
+To install CFFI:<br>
+"pip install cffi" 
+
+You can import the cffi with "from cffi import FFI." You still need to have a 
+shared libary in order to access the C++ code.  
+
+```{python}
+from cffi import FFI
+
+# Define the C code containing the declaration of the square function
+c_code = """
+    int square(int i);
+"""
+
+# Create a new FFI instance
+ffi = FFI()
+
+# Include the C code in the FFI instance
+ffi.cdef(c_code)
+
+# Load the shared library
+mylib = ffi.dlopen('./mylibrary.so')  # Adjust the path if needed
+
+# Call the square function
+result = mylib.square(10)
+print(result)
+```
+
+Unlike ctypes, CFFI creates a new python module that can be loaded like other python
+modules.
+
+### PyBind11
+
+To install PyBind11:<br>
+"pip install pybind11" 
+
+PyBind11 requires "#include <pybind11/pybind11.h>" in the C/C++ file. 
+
+You need to create code to tell the tool how to build your Python bindings
+You will code this in C/C++, it should look something like this:
+
+PYBIND11_MODULE(pybind11, m) {
+    m.def("loop_example", &loop_example, "A function which does a loop in C++");
+}
+
+This code creates an entry for the python interpreter. 
+
+```{python}
+
+```
+
+### Cython 
+
+Cython allows you to compile python-like code into C extensions, which can then be 
+imported and used in python. 
+
+To install cython:<br>
+"pip install cython"
+
+You need to create a pyx file to call the function in the C/C++ file. The pyx file is 
+written in cython, which can be easy to learn if you have knowledge of the languages 
+python and C/C++.
+
+```{python}
+
+```
+
+### References 
+
+https://realpython.com/python-bindings-overview/#python-bindings-overview
+https://code.visualstudio.com/docs/languages/cpp
+https://www.digitalocean.com/community/tutorials/calling-c-functions-from-python
