@@ -22,7 +22,6 @@ book:
     - visualization.qmd
     - statsmod.qmd
     - supervised.qmd
-    # - pytorch.qmd
     - exercises.qmd
     - references.qmd
 
