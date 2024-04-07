@@ -163,157 +163,7 @@ of `OverTime`, `BusinessTravel`, and `MaritalStatus` in order to predict
 employee attrition or their likelyhood of remaining at the company, represented
 in the `Attrition` column. 
 
-### Decision Tree Code
-
-```{python}
-import pandas as pd
-import numpy as np
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, f1_score, recall_score 
-from sklearn.metrics import precision_score
-```
-
-```{python}
-#loads in Kaggle IBM 
-ibm_df = pd.read_csv("data/WA_Fn-UseC_-HR-Employee-Attrition.csv")
-```
-
-```{python}
-sub_df = ibm_df[["OverTime", "BusinessTravel", "MaritalStatus", "Attrition"]]
-```
-
-```{python}
-sub_df = sub_df.rename(columns={"BusinessTravel": "Freq. Travel", 
-"MaritalStatus":"Married"})
-
-
-# The following block maps the features onto boolean values for the model to
-# interpret and predict
-
-sub_df["OverTime"] = sub_df["OverTime"].map({"Yes": True, "No": False})
-
-sub_df["Freq. Travel"] = sub_df["Freq. Travel"].map({"Travel_Rarely": False, 
-"Travel_Frequently": True, 'Non-Travel': True})
-
-sub_df["Married"] = sub_df["Married"].map({"Single": False, "Married": True, 
-"Divorced": False})
-
-sub_df["Attrition"] = sub_df["Attrition"].map({"Yes": True, "No": False})
-```
-
-```{python}
-#displays the first five rows of the dataset
-sub_df.head()
-```
-
-```{python}
-X = sub_df.drop("Attrition", axis=1)
-y = sub_df["Attrition"]
-
-# Splits the data into a training and test set for models
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-```
-
-The code directly above using the train_test_split function is part of the 
-training and testing phase of machine learning discussed earlier. The dataset 
-is divided into two parts:
-
-+ Training Set: This portion of the data, typically the majority (e.g., 80% of 
-  the dataset in this example), is used to train the machine learning model. 
-  For instance, the variable X_train is trained on 80% of the dataset 
-  containing features like OverTime, BusinessTravel, and MaritalStatus, while 
-  the variable y_train is trained on 80% of the Attrition feature column. 
-  The model learns the patterns and relationships between these features and 
-  the target variable (Attrition) from this training data.
-
-+ Test Set: The remaining portion of the data, 20% of the dataset in this
-  case is set aside and not used during the training phase. 
-
-
-```{python}
-# Creates and Trains a Decision Tree Classifier object
-dtc = DecisionTreeClassifier()
-dtc.fit(X_train, y_train)
-```
-
-```{python}
-y_pred = dtc.predict(X_test)
-
-#uses the simple accuracy metric
-print("Accuracy:", accuracy_score(y_test, y_pred))
-```
-
-
-However, decision trees on their own can often not be enough to make accurate 
-choices based on the data available. Decision Trees have some pitfalls, 
-including 
-
-+ Instability with large amounts of data
-+ Overfitting
-+ Sensitive to small variations in input data
-+ High Variance
-
-Some of these effects can be mitigated through the usage of many, many, 
-many, decision trees. What if we had many decision trees such that the variance
-can be accounted for based on there existing multiple different combinations of
-each possible tree? What if we wanted the root of our tree to be different in 
-order to get outcomes? What if we needed our trees to compensate for large 
-amounts of data? Then, how about we use more than one tree? More than two? More
-than three? How about we use an entire forest of trees? Go big or go home. You 
-run into the idea of using a `Random Forest Algorithm`.
-
-
-
-## Random Forest
-
-In simple terms, you can envision the `Random Forest Algorithm` as a group of 
-decision trees combined together. Each decision tree operates independently, 
-making its own decisions similar to a single decision tree. After training, 
-when a data point is fed into the random forest, it passes through all the 
-decision trees created during training. The final prediction is determined 
-by the majority choice among all the decision trees, hopefully providing 
-an accurate outcome. More accurately, it is an ensemble learning method 
-(making a decision based on multiple models), which combines the predictions 
-of multiple decision trees.
-
-But how is a random forest generated? As previously stated, there are many
-ways to generate a decision tree, and for vast amounts of data creating
-an individual decision trees on it every single time can be a costly process
-in terms of resources and time. The roots of our trees can also differ as well.
-So how are these trees being made?
-
-
-### Bagging & Bootstrapping
-
-
-**Bootstrapping** involves making multiple datasets based on our original 
-dataset. These new datasets are sampled with replacement from the original 
-dataset. Each bootstrap dataset is likely to be different promoting diversity
-amongst the tress in the forest.
-
-The process involves the random selection of a row from the original dataset 
-and then putting it into a separate smaller dataset called the bootstrapped 
-dataset until the number of rows in your bootstrapped dataset equals the 
-number of rows in your original dataset. 
-
-Additionally, more randomness is introduced by randomly excluding columns in 
-the bootstrap dataset during the construction of the tree. When building a 
-decision tree on the bootstrap dataset and a split occurs, the algorithm 
-randomly chooses to exclude one of the features from the bootstrapped dataset 
-to introduce additional randomness. Although in the Scikit-Learn library you 
-cannot directly specify which feature to exclude randomly, you can control 
-the number of features excluded simultaneously.
-
-**Bagging** is the technique used to aggregate the predictions of the
-trees in an instance of Random Forest. Each tree in the forest is trained on a 
-bootstrap sample and makes predictions independently. The final prediction of 
-the Random Forest is obtained by taking the majority (in this case majority 
-classification) across all of the trees.
-
 ## Generating an Example Dataset
-
-**Features of the Dataset**
 
 **Do I eat out?**
 
@@ -321,6 +171,9 @@ classification) across all of the trees.
 ```{python}
 from datetime import datetime
 import random
+import pandas as pd
+import numpy as np
+
 
 eat_out = np.random.choice([True, False], size=100000)
 
@@ -409,11 +262,9 @@ dine_out_df = pd.DataFrame(data=my_data)
 
 ```
 
-
-The following code takes the example dataset and attempts to use a random 
-forest model to predict whether or not a student is likely to dine out based 
+The following code takes the example dataset and attempts to use a decision 
+tree model to predict whether or not a student is likely to dine out based 
 on the features of:
-
 
 **In Class?**: Whether or not the student is in class (Boolean)
 
@@ -426,11 +277,19 @@ on the features of:
 **Do I eat out?**: Asks if the student eats out (Target Label, Boolean)
 
 
-## Random Forest Code
+### Decision Tree Code
+
 ```{python}
-from sklearn.ensemble import RandomForestClassifier
-from datetime import datetime
-import random
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, f1_score, recall_score 
+from sklearn.metrics import precision_score
+```
+
+
+```{python}
+#displays the first five rows of the dataset
+dine_out_df.head()
 ```
 
 ```{python}
@@ -442,6 +301,128 @@ def encode_time(time_str):
     return pd.Series({'encoded_hours': normalized_hours})
 
 dine_out_df[['encoded_hours']] = dine_out_df['Time of Day (24-Hour)'].apply(encode_time)
+```
+
+```{python}
+X_dtc = dine_out_df.drop(['Do I eat out?', 'Time of Day (24-Hour)'], axis=1)
+Y_dtc = dine_out_df['Do I eat out?']
+
+X_train, X_test, Y_train, Y_test = train_test_split(X_dtc, Y_dtc, 
+test_size=0.30, random_state=42, shuffle=True, stratify=Y_dtc)
+```
+
+The code directly above using the train_test_split function is part of the 
+training and testing phase of machine learning discussed earlier. The dataset 
+is divided into two parts:
+
++ Training Set: This portion of the data, typically the majority (e.g., 70% of 
+  the dataset in this example), is used to train the machine learning model. 
+  For instance, the variable X_train is trained on 70% of the dataset 
+  containing features like OverTime, BusinessTravel, and MaritalStatus, while 
+  the variable y_train is trained on 70% of the Attrition feature column. 
+  The model learns the patterns and relationships between these features and 
+  the target variable (Attrition) from this training data.
+
++ Test Set: The remaining portion of the data, 30% of the dataset in this
+  case is set aside and not used during the training phase. 
+
+
+```{python}
+# Creates and Trains a Decision Tree Classifier object
+dtc = DecisionTreeClassifier()
+dtc.fit(X_train, Y_train)
+```
+
+```{python}
+y_pred_dtc = dtc.predict(X_test)
+
+accuracy_dtc = accuracy_score(Y_test, y_pred_dtc)
+
+precision_dtc = precision_score(Y_test, y_pred_dtc, average='binary')
+
+recall_dtc = recall_score(Y_test, y_pred_dtc, average='binary')
+
+f1_dtc = f1_score(Y_test, y_pred_dtc, average='binary')
+
+
+print(f'Accuracy: {accuracy_dtc:.4f}')
+print(f'Precision: {precision_dtc:.4f}')
+print(f'Recall: {recall_dtc:.4f}')
+print(f'F1 Score: {f1_dtc:.4f}')
+```
+
+However, decision trees on their own can often not be enough to make accurate 
+choices based on the data available. Decision Trees have some pitfalls, 
+including 
+
++ Instability with large amounts of data
++ Overfitting
++ Sensitive to small variations in input data
++ High Variance
+
+Some of these effects can be mitigated through the usage of many, many, 
+many, decision trees. What if we had many decision trees such that the variance
+can be accounted for based on there existing multiple different combinations of
+each possible tree? What if we wanted the root of our tree to be different in 
+order to get outcomes? What if we needed our trees to compensate for large 
+amounts of data? Then, how about we use more than one tree? More than two? More
+than three? How about we use an entire forest of trees? Go big or go home. You 
+run into the idea of using a `Random Forest Algorithm`.
+
+
+
+## Random Forest
+
+In simple terms, you can envision the `Random Forest Algorithm` as a group of 
+decision trees combined together. Each decision tree operates independently, 
+making its own decisions similar to a single decision tree. After training, 
+when a data point is fed into the random forest, it passes through all the 
+decision trees created during training. The final prediction is determined 
+by the majority choice among all the decision trees, hopefully providing 
+an accurate outcome. More accurately, it is an ensemble learning method 
+(making a decision based on multiple models), which combines the predictions 
+of multiple decision trees.
+
+But how is a random forest generated? As previously stated, there are many
+ways to generate a decision tree, and for vast amounts of data creating
+an individual decision trees on it every single time can be a costly process
+in terms of resources and time. The roots of our trees can also differ as well.
+So how are these trees being made?
+
+
+### Bagging & Bootstrapping
+
+
+**Bootstrapping** involves making multiple datasets based on our original 
+dataset. These new datasets are sampled with replacement from the original 
+dataset. Each bootstrap dataset is likely to be different promoting diversity
+amongst the tress in the forest.
+
+The process involves the random selection of a row from the original dataset 
+and then putting it into a separate smaller dataset called the bootstrapped 
+dataset until the number of rows in your bootstrapped dataset equals the 
+number of rows in your original dataset. 
+
+Additionally, more randomness is introduced by randomly excluding columns in 
+the bootstrap dataset during the construction of the tree. When building a 
+decision tree on the bootstrap dataset and a split occurs, the algorithm 
+randomly chooses to exclude one of the features from the bootstrapped dataset 
+to introduce additional randomness. Although in the Scikit-Learn library you 
+cannot directly specify which feature to exclude randomly, you can control 
+the number of features excluded simultaneously.
+
+**Bagging** is the technique used to aggregate the predictions of the
+trees in an instance of Random Forest. Each tree in the forest is trained on a 
+bootstrap sample and makes predictions independently. The final prediction of 
+the Random Forest is obtained by taking the majority (in this case majority 
+classification) across all of the trees.
+
+
+## Random Forest Code
+```{python}
+from sklearn.ensemble import RandomForestClassifier
+from datetime import datetime
+import random
 ```
 
 ```{python}
@@ -506,32 +487,8 @@ print(f'Recall: {recall_rf:.4f}')
 print(f'F1 Score: {f1_rf:.4f}')
 ```
 
-We will also create another decision tree in order to compare its performance
-to the random forest on this dataset.
-
-```{python}
-dtc_2 = DecisionTreeClassifier()
-dtc_2.fit(X_train, Y_train)
-```
-
-```{python}
-Y_pred_dtc2 = dtc_2.predict(X_test)
-
-accuracy_dtc2 = accuracy_score(Y_test, Y_pred_dtc2)
-
-precision_dtc2 = precision_score(Y_test, Y_pred_dtc2, average='binary')
-
-recall_dtc2 = recall_score(Y_test, Y_pred_dtc2, average='binary')
-
-f1_dtc2 = f1_score(Y_test, Y_pred_dtc2, average='binary')
-
-
-print(f'Accuracy: {accuracy_dtc2:.4f}')
-print(f'Precision: {precision_dtc2:.4f}')
-print(f'Recall: {recall_dtc2:.4f}')
-print(f'F1 Score: {f1_dtc2:.4f}')
-```
-
+In comparison, we see that even without hyperparameter tuning the random forest
+model outperforms the decision tree model that we have previously trained.
 
 
 ## References 
