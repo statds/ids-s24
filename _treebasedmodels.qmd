@@ -493,9 +493,6 @@ model outperforms the decision tree model that we have previously trained.
 
 ## References 
 
-* IBM Attrition Dataset
-    + https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset
-
 * Tree Based Models - UCONN Data Science
 
 * Decision Tree Classification Clearly Explained!
