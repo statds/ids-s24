@@ -5,11 +5,10 @@ This section was written by Madison Woo
 ### Introduction
 
 Hello! My name is Madison Woo and I am a junior majoring in statistical 
-data science with a mathematics minor. I have learned so much from watching 
-past presentations and hope to apply everything I was taught into the data 
-science field. I think it is important to learn how different coding languages 
-can be integrated. Today, I am going to be talking about how to call C/C++
-from python. 
+data science with a mathematics minor. I used to be a computer science major,
+so I have a good understanding of multiple coding languages. I think it is 
+important to learn how different coding languages can be integrated. Today,
+I am going to be talking about how to call C/C++ from python. 
 
 ### Overview of C/C++ 
 
@@ -23,23 +22,27 @@ providing higher-level abstractions and greater flexibility in software design.
 
 - Memory usage in C/C++ is key. 
 
-**Python Syntax:**<br>
-if a >=0:<br> 
-&nbsp;&nbsp;b = c + a<br>
-&nbsp;&nbsp;d = d + 5<br>
-else:<br>
-&nbsp;&nbsp;b = c - a<br>
-&nbsp;&nbsp;d = d + 10<br>
+```{python}
+"""
+Python Syntax:
+if a >=0: 
+    b = c + a
+    d = d + 5
+else:
+    b = c - a
+    d = d + 10
 
-**C Syntax:**<br> 
-if (a >= 0) {<br>
-&nbsp;&nbsp;b = c + a;<br>
-&nbsp;&nbsp;d = d + 5;<br>
-}<br>
-else {<br>
-&nbsp;&nbsp;b = c – a;<br>
-&nbsp;&nbsp;d = d + 10;<br>
-}<br>
+C Syntax:
+if (a >= 0) {
+    b = c + a;
+    d = d + 5;
+}
+else {
+    b = c – a;
+    d = d + 10;
+}
+"""
+```
 
 #### How set it up (on VS code)
 
@@ -58,7 +61,7 @@ else {<br>
 
     You must adjust the file path on your computer
 
-    Create a .cpp file for C++. 
+    Create a .c file for C or .cpp file for C++. 
 
     In the .cpp file, there is an option to "Run C/C++ File" with a play button.
     Once you press that button, a list of compilers will pop up. Select
@@ -79,7 +82,6 @@ else {<br>
 
 """
 #include <iostream>
-#include <chrono>
 
 extern "C" {
     void cpp_loop(long long& sum) {
@@ -175,7 +177,7 @@ packages.
 
 #### C
 
-To create a shared libary enter:<br>
+To create a shared libary enter:
 "cc -fPIC -shared -o libraryname.so filename.c"
 
 ```{python}
@@ -203,7 +205,7 @@ print(calling_c.square(10))
 
 #### C++
 
-To create a shared library enter:<br>
+To create a shared library enter:
 "g++ -shared -o libraryname.so filename.cpp" 
 
 ctypes doesn't have any knowledge of the function unless you explicitly inform 
@@ -227,11 +229,14 @@ print(result)
 
 ### CFFI
 
-To install CFFI:<br>
+To install CFFI:
 "pip install cffi" 
 
 You can import the cffi with "from cffi import FFI." You still need to have a 
 shared libary in order to access the C++ code.  
+
+Unlike ctypes, CFFI creates a new python module that can be loaded like other python
+modules.
 
 ```{python}
 from cffi import FFI
@@ -248,51 +253,16 @@ ffi = FFI()
 ffi.cdef(c_code)
 
 # Load the shared library
-mylib = ffi.dlopen('./mylibrary.so')  # Adjust the path if needed
+mylib = ffi.dlopen('./mylibrary.so')  
 
 # Call the square function
 result = mylib.square(10)
 print(result)
 ```
 
-Unlike ctypes, CFFI creates a new python module that can be loaded like other python
-modules.
+### Conclusion
 
-### PyBind11
 
-To install PyBind11:<br>
-"pip install pybind11" 
-
-PyBind11 requires "#include <pybind11/pybind11.h>" in the C/C++ file. 
-
-You need to create code to tell the tool how to build your Python bindings
-You will code this in C/C++, it should look something like this:
-
-PYBIND11_MODULE(pybind11, m) {
-    m.def("loop_example", &loop_example, "A function which does a loop in C++");
-}
-
-This code creates an entry for the python interpreter. 
-
-```{python}
-
-```
-
-### Cython 
-
-Cython allows you to compile python-like code into C extensions, which can then be 
-imported and used in python. 
-
-To install cython:<br>
-"pip install cython"
-
-You need to create a pyx file to call the function in the C/C++ file. The pyx file is 
-written in cython, which can be easy to learn if you have knowledge of the languages 
-python and C/C++.
-
-```{python}
-
-```
 
 ### References 
 
