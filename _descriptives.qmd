@@ -271,7 +271,7 @@ categorical variables to see if there may be any connections between
 those variables and the response time. It may also be useful to 
 examine relationships between geospatial data and the response time.
 
-## Univariate Categorical Descriptive Statistics
+### Univariate Categorical Descriptive Statistics
 
 Descriptive statistics for categorical data are primarily aimed at 
 understanding the rates of occurrence for different categorical 
@@ -327,7 +327,7 @@ fig = go.Figure(data=[go.Pie(labels=counts.index, values=counts.values, hole=.2)
 fig.show()
 ```
 
-## Chi-Squared Significance Tests (Contingency Table Testing)
+### Chi-Squared Significance Tests (Contingency Table Testing)
 
 In order to determine whether there exists a dependence between 
 several categorical variables, we can use chi-squared contingency
@@ -495,7 +495,7 @@ there is virtually 0 probability that such observations would be
 made given that the borough and rodent incident type reported were 
 independent.
 
-## Sources
+### Sources
 
 1. [towardsdatascience.com - Exploratory data analysis](https://towardsdatascience.com/a-data-scientists-essential-guide-to-exploratory-data-analysis-25637eee0cf6)
 2. [scribbr.com - Descriptive statistics](https://www.scribbr.com/statistics/descriptive-statistics/)
