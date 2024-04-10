@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -238,13 +238,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#filling-missing-values" id="toc-filling-missing-values" class="nav-link" data-scroll-target="#filling-missing-values"><span class="header-section-number">5.2</span> Filling Missing Values</a></li>
   <li><a href="#using-appache-arrow-library" id="toc-using-appache-arrow-library" class="nav-link" data-scroll-target="#using-appache-arrow-library"><span class="header-section-number">5.3</span> Using Appache <code>Arrow</code> Library</a></li>
   <li><a href="#accessing-the-census-data-with-uszipcode" id="toc-accessing-the-census-data-with-uszipcode" class="nav-link" data-scroll-target="#accessing-the-census-data-with-uszipcode"><span class="header-section-number">5.4</span> Accessing the Census Data with <code>uszipcode</code></a></li>
-  <li><a href="#database-operations-with-sql" id="toc-database-operations-with-sql" class="nav-link" data-scroll-target="#database-operations-with-sql"><span class="header-section-number">5.5</span> Database Operations with SQL</a>
+  <li><a href="#accessing-acs-data" id="toc-accessing-acs-data" class="nav-link" data-scroll-target="#accessing-acs-data"><span class="header-section-number">5.5</span> Accessing ACS Data</a>
   <ul class="collapse">
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">5.5.1</span> Introduction</a></li>
-  <li><a href="#what-is-sql" id="toc-what-is-sql" class="nav-link" data-scroll-target="#what-is-sql"><span class="header-section-number">5.5.2</span> What is SQL?</a></li>
-  <li><a href="#recap-and-overview-of-some-basics" id="toc-recap-and-overview-of-some-basics" class="nav-link" data-scroll-target="#recap-and-overview-of-some-basics"><span class="header-section-number">5.5.3</span> Recap and Overview of some Basics</a></li>
-  <li><a href="#utilizing-sqlite3-in-python-with-rodent-data-set" id="toc-utilizing-sqlite3-in-python-with-rodent-data-set" class="nav-link" data-scroll-target="#utilizing-sqlite3-in-python-with-rodent-data-set"><span class="header-section-number">5.5.4</span> Utilizing sqlite3 in Python with Rodent Data Set</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5.5.5</span> References</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><span class="header-section-number">5.5.2</span> Installation</a></li>
+  <li><a href="#accessing-acs-data-1" id="toc-accessing-acs-data-1" class="nav-link" data-scroll-target="#accessing-acs-data-1"><span class="header-section-number">5.5.3</span> Accessing ACS Data</a></li>
+  <li><a href="#visualizing" id="toc-visualizing" class="nav-link" data-scroll-target="#visualizing"><span class="header-section-number">5.5.4</span> Visualizing</a></li>
+  <li><a href="#further-analysis" id="toc-further-analysis" class="nav-link" data-scroll-target="#further-analysis"><span class="header-section-number">5.5.5</span> Further Analysis</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5.5.6</span> References</a></li>
+  </ul></li>
+  <li><a href="#database-operations-with-sql" id="toc-database-operations-with-sql" class="nav-link" data-scroll-target="#database-operations-with-sql"><span class="header-section-number">5.6</span> Database Operations with SQL</a>
+  <ul class="collapse">
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1"><span class="header-section-number">5.6.1</span> Introduction</a></li>
+  <li><a href="#what-is-sql" id="toc-what-is-sql" class="nav-link" data-scroll-target="#what-is-sql"><span class="header-section-number">5.6.2</span> What is SQL?</a></li>
+  <li><a href="#recap-and-overview-of-some-basics" id="toc-recap-and-overview-of-some-basics" class="nav-link" data-scroll-target="#recap-and-overview-of-some-basics"><span class="header-section-number">5.6.3</span> Recap and Overview of some Basics</a></li>
+  <li><a href="#utilizing-sqlite3-in-python-with-rodent-data-set" id="toc-utilizing-sqlite3-in-python-with-rodent-data-set" class="nav-link" data-scroll-target="#utilizing-sqlite3-in-python-with-rodent-data-set"><span class="header-section-number">5.6.4</span> Utilizing sqlite3 in Python with Rodent Data Set</a></li>
+  <li><a href="#references-1" id="toc-references-1" class="nav-link" data-scroll-target="#references-1"><span class="header-section-number">5.6.5</span> References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -275,7 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="using-the-pandas-package" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="using-the-pandas-package"><span class="header-section-number">5.1</span> Using the <code>Pandas</code> Package</h2>
 <p>The pandas library simplifies data manipulation and analysis. It’s especially handy for dealing with CSV files.</p>
-<div id="2ce8e1e8" class="cell" data-execution_count="1">
+<div id="f9d88008" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the file name</span></span>
@@ -312,14 +321,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop the 'Location' since it is redundant</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># df.drop(columns=['Location'], inplace=True)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/cq/5ysgnwfn7c3g0h46xyzvpj800000gn/T/ipykernel_27745/754040398.py:22: FutureWarning:
+<pre><code>/var/folders/cq/5ysgnwfn7c3g0h46xyzvpj800000gn/T/ipykernel_27231/754040398.py:22: FutureWarning:
 
 The argument 'date_parser' is deprecated and will be removed in a future version. Please use 'date_format' instead, or read your data in as 'object' dtype and then call 'to_datetime'.
 </code></pre>
 </div>
 </div>
 <p>The <code>pandas</code> package also provides some utility functions for quick summaries about the data frame.</p>
-<div id="c73be9d2" class="cell" data-execution_count="2">
+<div id="ed5fdc32" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.shape</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df.describe()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -375,7 +384,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>What are the unique values of <code>descriptor</code>?</p>
-<div id="2e7a435c" class="cell" data-execution_count="3">
+<div id="6fa6ebfd" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.descriptor.unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>array(['Rat Sighting', 'Mouse Sighting', 'Condition Attracting Rodents',
@@ -386,7 +395,7 @@ dtype: int64</code></pre>
 <section id="filling-missing-values" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="filling-missing-values"><span class="header-section-number">5.2</span> Filling Missing Values</h2>
 <p>If geocodes are available but zip code is missing, we can use reverse geocoding to fill the zip code. This process involves querying a geocoding service with latitude and longitude to get the corresponding address details, including the ZIP code. This can be done with package <code>geopy</code>, which needs to be installed first: <code>pip install geopy</code>.</p>
-<div id="eab533e0" class="cell" data-execution_count="4">
+<div id="f32f996c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.geocoders <span class="im">import</span> Nominatim</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.exc <span class="im">import</span> GeocoderTimedOut, GeocoderServiceError</span>
@@ -425,11 +434,11 @@ dtype: int64</code></pre>
 <p>First, ensure you have pyarrow installed on your computer (and preferrably, in your current virtual environment):</p>
 <pre><code>pip install pyarrow</code></pre>
 <p>Feather is a fast, lightweight, and easy-to-use binary file format for storing data frames, optimized for speed and efficiency, particularly for IPC and data sharing between Python and R.</p>
-<div id="96f7b5c3" class="cell" data-execution_count="5">
+<div id="f0365580" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.to_feather(<span class="st">'data/rodent_2022-2023.feather'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Read the feather file back in:</p>
-<div id="905d1d6b" class="cell" data-execution_count="6">
+<div id="60c48300" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dff <span class="op">=</span> pd.read_feather(<span class="st">"data/rodent_2022-2023.feather"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dff.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -447,7 +456,7 @@ dtype: int64</code></pre>
 <section id="accessing-the-census-data-with-uszipcode" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="accessing-the-census-data-with-uszipcode"><span class="header-section-number">5.4</span> Accessing the Census Data with <code>uszipcode</code></h2>
 <p>First, ensure the DataFrame (df) is ready for merging with census data. Specifically, check that the <code>incident_zip</code> column is clean and consistent.</p>
-<div id="91ebbd45" class="cell" data-execution_count="7">
+<div id="2eaf3897" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'incident_zip'</span>].isnull().<span class="bu">sum</span>())</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize to 5-digit codes, if necessary</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'incident_zip'</span>] <span class="op">=</span> df[<span class="st">'incident_zip'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -490,14 +499,14 @@ dtype: int64</code></pre>
 <p>Install the <code>uszipcode</code> package into the current virtual environment by <code>pip install uszipcode</code>.</p>
 <p>Now let’s work on the rodent sightings data.</p>
 <p>We will first clean the incident_zip column to ensure it only contains valid ZIP codes. Then, we will use a vectorized approach to fetch the required data for each unique ZIP code and merge this information back into the original <code>DataFrame</code>.</p>
-<div id="f562a76a" class="cell" data-execution_count="8">
+<div id="9e52876f" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows where 'incident_zip' is missing or not a valid ZIP code format</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>valid_zip_df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'incident_zip'</span>]).copy()</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>valid_zip_df[<span class="st">'incident_zip'</span>] <span class="op">=</span> valid_zip_df[<span class="st">'incident_zip'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>unique_zips <span class="op">=</span> valid_zip_df[<span class="st">'incident_zip'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Since <code>uszipcode</code> doesn’t inherently support vectorized operations for multiple ZIP code queries, we’ll optimize the process by querying each unique ZIP code once, then merging the results with the original <code>DataFrame</code>. This approach minimizes redundant queries for ZIP codes that appear multiple times.</p>
-<div id="47fd3108" class="cell" data-execution_count="9">
+<div id="9d805435" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> uszipcode <span class="im">import</span> SearchEngine</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the SearchEngine</span></span>
@@ -552,19 +561,643 @@ Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove thi
       dtype='object')</code></pre>
 </div>
 </div>
-<!-- # Database Operations with SQL -->
+<!-- # acess ACS data -->
 </section>
-<section id="database-operations-with-sql" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="database-operations-with-sql"><span class="header-section-number">5.5</span> Database Operations with SQL</h2>
+<section id="accessing-acs-data" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="accessing-acs-data"><span class="header-section-number">5.5</span> Accessing ACS Data</h2>
+<p>This section was written by Abigail Mori.</p>
 <section id="introduction" class="level3" data-number="5.5.1">
 <h3 data-number="5.5.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.5.1</span> Introduction</h3>
+<p>Hi! My name is Abigail Mori and I am a current senior, graduating this May. This past summer I worked with the UConn’s Center for Voting Technology Research. We used ACS data to analyze ease of voting within Connecticut. Though, I only used <code>sql</code> and never had to access this data through <code>python</code>. I am excited to show what I’ve learned over the past couple weeks.</p>
+</section>
+<section id="installation" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="installation"><span class="header-section-number">5.5.2</span> Installation</h3>
+<p>In order to properly access ACS data we will need make sure we have installed <code>cenpy</code> and <code>geodatasets</code>. <code>Cenpy</code> is a package that “automatically discovers US Census Bureau API endpoints and exposes them to Python in a consistent fashion.” <code>Geodatasets</code> “contains an API on top of a JSON with metadata of externally hosted datasets containing geospatial information useful for illustrative and educational purposes.” Both of these modules are dependent on <code>pandas</code>.</p>
+</section>
+<section id="accessing-acs-data-1" class="level3" data-number="5.5.3">
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="accessing-acs-data-1"><span class="header-section-number">5.5.3</span> Accessing ACS Data</h3>
+<p>There are many different kinds of census data, one of which is ACS (American Community Survery) data. The ACS data is made up of a “wide range of social, economic, demographic, and housing charateristics.” There are multiple ways to access this data using Python. I will examine one way using <code>cenpy</code>.</p>
+<p>For much of work I referenced a <code>cenpy</code> API reference page (https://cenpy-devs.github.io/cenpy/api.html)</p>
+<div id="8d3af4cf" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>warnings.simplefilter(action<span class="op">=</span><span class="st">'ignore'</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cenpy <span class="im">as</span> cen</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geodatasets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b96d09f0" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a variable to all tables in the The American Community Survey from</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  the Census Bureau</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>acs <span class="op">=</span> cen.products.ACS()</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter through acs tables based on specific variables</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(acs.filter_tables(<span class="st">'RACE'</span>, by<span class="op">=</span><span class="st">'description'</span>))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Once you select your desired table you can add more specific parameters, </span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># in this case I chose to do so by state</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>connecticut <span class="op">=</span> cen.products.ACS(<span class="dv">2019</span>).from_state(<span class="st">'Connecticut'</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a> variables<span class="op">=</span> <span class="st">'B02001'</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(connecticut.head())</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>nevada <span class="op">=</span> cen.products.ACS(<span class="dv">2019</span>).from_state(<span class="st">'Nevada'</span>, </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>variables<span class="op">=</span> <span class="st">'B02001'</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nevada.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                  description  \
+table_name                                                      
+B02001                                                   RACE   
+B02008      WHITE ALONE OR IN COMBINATION WITH ONE OR MORE...   
+B02009      BLACK OR AFRICAN AMERICAN ALONE OR IN COMBINAT...   
+B02010      AMERICAN INDIAN AND ALASKA NATIVE ALONE OR IN ...   
+B02011      ASIAN ALONE OR IN COMBINATION WITH ONE OR MORE...   
+B02012      NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALO...   
+B02013      SOME OTHER RACE ALONE OR IN COMBINATION WITH O...   
+B03002                      HISPANIC OR LATINO ORIGIN BY RACE   
+B25006                                    RACE OF HOUSEHOLDER   
+B98013      TOTAL POPULATION COVERAGE RATE BY WEIGHTING RA...   
+B99021                                     ALLOCATION OF RACE   
+C02003                                          DETAILED RACE   
+
+                                                      columns  
+table_name                                                     
+B02001      [B02001_001E, B02001_002E, B02001_003E, B02001...  
+B02008                                          [B02008_001E]  
+B02009                                          [B02009_001E]  
+B02010                                          [B02010_001E]  
+B02011                                          [B02011_001E]  
+B02012                                          [B02012_001E]  
+B02013                                          [B02013_001E]  
+B03002      [B03002_001E, B03002_002E, B03002_003E, B03002...  
+B25006      [B25006_001E, B25006_002E, B25006_003E, B25006...  
+B98013      [B98013_001E, B98013_002E, B98013_003E, B98013...  
+B99021                [B99021_001E, B99021_002E, B99021_003E]  
+C02003      [C02003_001E, C02003_002E, C02003_003E, C02003...  
+         GEOID                                           geometry  \
+0  09001010400  POLYGON ((-8201121.400 5017141.610, -8201100.1...   
+1  09001010600  POLYGON ((-8196750.330 5017084.050, -8196748.9...   
+2  09001010300  POLYGON ((-8200317.120 5018093.350, -8200295.0...   
+3  09001011300  POLYGON ((-8199823.530 5012413.050, -8199813.0...   
+4  09001020500  POLYGON ((-8193009.330 5026964.430, -8192869.1...   
+
+   B02001_001E  B02001_002E  B02001_003E  B02001_004E  B02001_005E  \
+0       5799.0       4698.0        531.0         17.0        346.0   
+1       2062.0       1518.0        282.0          0.0        145.0   
+2       3780.0       3305.0        123.0          0.0        247.0   
+3       3416.0       2530.0         65.0          8.0        154.0   
+4       4886.0       4236.0        232.0        117.0        114.0   
+
+   B02001_006E  B02001_007E  B02001_008E  B02001_009E  B02001_010E  \
+0          0.0        143.0         64.0          0.0         64.0   
+1         11.0         33.0         73.0          7.0         66.0   
+2          0.0         10.0         95.0         16.0         79.0   
+3         20.0        408.0        231.0         67.0        164.0   
+4         15.0          0.0        172.0          0.0        172.0   
+
+                                              NAME state county   tract  
+0  Census Tract 104, Fairfield County, Connecticut    09    001  010400  
+1  Census Tract 106, Fairfield County, Connecticut    09    001  010600  
+2  Census Tract 103, Fairfield County, Connecticut    09    001  010300  
+3  Census Tract 113, Fairfield County, Connecticut    09    001  011300  
+4  Census Tract 205, Fairfield County, Connecticut    09    001  020500  
+         GEOID                                           geometry  \
+0  32031002613  POLYGON ((-13358452.220 4827161.350, -13358451...   
+1  32031003308  POLYGON ((-13359059.470 4760834.720, -13357433...   
+2  32031980200  POLYGON ((-13358521.900 4802740.580, -13358516...   
+3  32031002407  POLYGON ((-13346382.740 4800296.200, -13346335...   
+4  32031001105  POLYGON ((-13343276.140 4791951.280, -13343275...   
+
+   B02001_001E  B02001_002E  B02001_003E  B02001_004E  B02001_005E  \
+0       5830.0       5387.0        140.0         35.0         74.0   
+1       2155.0       1976.0          0.0         35.0         74.0   
+2          0.0          0.0          0.0          0.0          0.0   
+3       4151.0       3025.0         87.0        114.0        671.0   
+4       3819.0       3434.0         67.0          0.0        233.0   
+
+   B02001_006E  B02001_007E  B02001_008E  B02001_009E  B02001_010E  \
+0         25.0         61.0        108.0          0.0        108.0   
+1          9.0          4.0         57.0         12.0         45.0   
+2          0.0          0.0          0.0          0.0          0.0   
+3         29.0         77.0        148.0         55.0         93.0   
+4         14.0         16.0         55.0          0.0         55.0   
+
+                                        NAME state county   tract  
+0  Census Tract 26.13, Washoe County, Nevada    32    031  002613  
+1  Census Tract 33.08, Washoe County, Nevada    32    031  003308  
+2   Census Tract 9802, Washoe County, Nevada    32    031  980200  
+3  Census Tract 24.07, Washoe County, Nevada    32    031  002407  
+4  Census Tract 11.05, Washoe County, Nevada    32    031  001105  </code></pre>
+</div>
+</div>
+<p>Each columns meanings can be found here: https://api.census.gov/data/2019/acs/acs1/variables.html and https://www.census.gov/programs-surveys/acs/technical-documentation /table-shells.2019.html#list-tab-79594641</p>
+<table class="table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 81%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>B02001_001E:</td>
+<td>Total</td>
+</tr>
+<tr class="even">
+<td>B02001_002E</td>
+<td>White alone</td>
+</tr>
+<tr class="odd">
+<td>B02001_003E</td>
+<td>Black or African American alone</td>
+</tr>
+<tr class="even">
+<td>B02001_004E</td>
+<td>American Indian and Alaska Native alone</td>
+</tr>
+<tr class="odd">
+<td>B02001_005E</td>
+<td>Asian alone</td>
+</tr>
+<tr class="even">
+<td>B02001_006E</td>
+<td>Native Hawaiian and Other Pacific Islander alone</td>
+</tr>
+<tr class="odd">
+<td>B02001_007E</td>
+<td>Some other race alone</td>
+</tr>
+<tr class="even">
+<td>B02001_008E</td>
+<td>Two or more races</td>
+</tr>
+<tr class="odd">
+<td>B02001_009E</td>
+<td>Two races including Some other race</td>
+</tr>
+<tr class="even">
+<td>B02001_010E</td>
+<td>Two races excluding Some other race, and three or more races</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="visualizing" class="level3" data-number="5.5.4">
+<h3 data-number="5.5.4" class="anchored" data-anchor-id="visualizing"><span class="header-section-number">5.5.4</span> Visualizing</h3>
+<p><code>Cenpy</code> returns users with datasets based on specifications, like RACE. Some of the columns include: geiod, geometry, name, state, county, and tract. The geometry is made up of Polygons which then can be used to make a map with <code>matplotlib</code> Since, <code>cenpy</code> provides a table of type: geopandas.geodataframe.GeoDataFrame. <code>GeoPandas</code> provides a high-level interface to the <code>matplotlib</code> library for making maps.</p>
+<p>Below, I show maps of Connecticut and Nevada which display the populations of Native Hawaiians and other Pacific Islanders by census tract.</p>
+<div id="b2ed5199" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9907d4b4" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fig, (ax1,ax2) <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">16</span>))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#B02001_006E: total number of Native Hawaiians and other Pacific Islanders</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> connecticut.plot(<span class="st">'B02001_006E'</span>, ax <span class="op">=</span> ax1, cmap <span class="op">=</span> <span class="st">'viridis'</span>, legend <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> nevada.plot(<span class="st">'B02001_006E'</span>, ax <span class="op">=</span> ax2, cmap <span class="op">=</span> <span class="st">'viridis'</span>, legend <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="import_files/figure-html/cell-14-output-1.png" width="1539" height="1210" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="further-analysis" class="level3" data-number="5.5.5">
+<h3 data-number="5.5.5" class="anchored" data-anchor-id="further-analysis"><span class="header-section-number">5.5.5</span> Further Analysis</h3>
+<p>ACS data can allow individuals to see discrepancies in voting accessability. For instance, we can look at correlation between a poverty level and education in a specific state.</p>
+<p>We can access this data doing the same search method as above.</p>
+<p>Like before we filter through the tables to access our desired data. In this instance I chose to select data concerning poverty and education in Connecticut.</p>
+<div id="657ae247" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(acs.filter_tables(<span class="st">'POVERTY'</span>, by<span class="op">=</span><span class="st">'description'</span>))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># B17001: Poverty status in the past 12 months </span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>poverty_ct <span class="op">=</span> cen.products.ACS(<span class="dv">2019</span>).from_state(<span class="st">'Connecticut'</span>, </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>variables <span class="op">=</span> <span class="st">'B17001'</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>poverty_ct.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                  description  \
+table_name                                                      
+B05010      RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 1...   
+B06012      PLACE OF BIRTH BY POVERTY STATUS IN THE PAST 1...   
+B07012      GEOGRAPHICAL MOBILITY IN THE PAST YEAR BY POVE...   
+B07412      GEOGRAPHICAL MOBILITY IN THE PAST YEAR BY POVE...   
+B08122      MEANS OF TRANSPORTATION TO WORK BY POVERTY STA...   
+B08522      MEANS OF TRANSPORTATION TO WORK BY POVERTY STA...   
+B10059      POVERTY STATUS IN THE PAST 12 MONTHS OF GRANDP...   
+B13010      WOMEN 15 TO 50 YEARS WHO HAD A BIRTH IN THE PA...   
+B14006      POVERTY STATUS IN THE PAST 12 MONTHS BY SCHOOL...   
+B16009      POVERTY STATUS IN THE PAST 12 MONTHS BY AGE BY...   
+B17001      POVERTY STATUS IN THE PAST 12 MONTHS BY SEX BY...   
+B17003      POVERTY STATUS IN THE PAST 12 MONTHS OF INDIVI...   
+B17004      POVERTY STATUS IN THE PAST 12 MONTHS OF INDIVI...   
+B17005      POVERTY STATUS IN THE PAST 12 MONTHS OF INDIVI...   
+B17006      POVERTY STATUS IN THE PAST 12 MONTHS OF RELATE...   
+B17007      POVERTY STATUS IN THE PAST 12 MONTHS OF UNRELA...   
+B17009      POVERTY STATUS BY WORK EXPERIENCE OF UNRELATED...   
+B17010      POVERTY STATUS IN THE PAST 12 MONTHS OF FAMILI...   
+B17012      POVERTY STATUS IN THE PAST 12 MONTHS OF FAMILI...   
+B17013      POVERTY STATUS IN THE PAST 12 MONTHS OF FAMILI...   
+B17014      POVERTY STATUS IN THE PAST 12 MONTHS OF FAMILI...   
+B17015      POVERTY STATUS IN THE PAST 12 MONTHS OF FAMILI...   
+B17016      POVERTY STATUS IN THE PAST 12 MONTHS OF FAMILI...   
+B17017      POVERTY STATUS IN THE PAST 12 MONTHS BY HOUSEH...   
+B17018      POVERTY STATUS IN THE PAST 12 MONTHS OF FAMILI...   
+B17019      POVERTY STATUS IN THE PAST 12 MONTHS OF FAMILI...   
+B17020            POVERTY STATUS IN THE PAST 12 MONTHS BY AGE   
+B17021      POVERTY STATUS OF INDIVIDUALS IN THE PAST 12 M...   
+B17022      RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 1...   
+B17023      POVERTY STATUS IN THE PAST 12 MONTHS OF FAMILI...   
+B17024      AGE BY RATIO OF INCOME TO POVERTY LEVEL IN THE...   
+B17025       POVERTY STATUS IN THE PAST 12 MONTHS BY NATIVITY   
+B17026      RATIO OF INCOME TO POVERTY LEVEL OF FAMILIES I...   
+B22003      RECEIPT OF FOOD STAMPS/SNAP IN THE PAST 12 MON...   
+B23024      POVERTY STATUS IN THE PAST 12 MONTHS BY DISABI...   
+B29003       CITIZEN, VOTING-AGE POPULATION BY POVERTY STATUS   
+B99171      ALLOCATION OF POVERTY STATUS IN THE PAST 12 MO...   
+B99172      ALLOCATION OF POVERTY STATUS IN THE PAST 12 MO...   
+C17002      RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 1...   
+C18130             AGE BY DISABILITY STATUS BY POVERTY STATUS   
+C18131      RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 1...   
+C21007      AGE BY VETERAN STATUS BY POVERTY STATUS IN THE...   
+C27016      HEALTH INSURANCE COVERAGE STATUS BY RATIO OF I...   
+C27017      PRIVATE HEALTH INSURANCE BY RATIO OF INCOME TO...   
+C27018      PUBLIC HEALTH INSURANCE BY RATIO OF INCOME TO ...   
+
+                                                      columns  
+table_name                                                     
+B05010      [B05010_001E, B05010_002E, B05010_003E, B05010...  
+B06012      [B06012_001E, B06012_002E, B06012_003E, B06012...  
+B07012      [B07012_001E, B07012_002E, B07012_003E, B07012...  
+B07412      [B07412_001E, B07412_002E, B07412_003E, B07412...  
+B08122      [B08122_001E, B08122_002E, B08122_003E, B08122...  
+B08522      [B08522_001E, B08522_002E, B08522_003E, B08522...  
+B10059      [B10059_001E, B10059_002E, B10059_003E, B10059...  
+B13010      [B13010_001E, B13010_002E, B13010_003E, B13010...  
+B14006      [B14006_001E, B14006_002E, B14006_003E, B14006...  
+B16009      [B16009_001E, B16009_002E, B16009_003E, B16009...  
+B17001      [B17001_001E, B17001_002E, B17001_003E, B17001...  
+B17003      [B17003_001E, B17003_002E, B17003_003E, B17003...  
+B17004      [B17004_001E, B17004_002E, B17004_003E, B17004...  
+B17005      [B17005_001E, B17005_002E, B17005_003E, B17005...  
+B17006      [B17006_001E, B17006_002E, B17006_003E, B17006...  
+B17007      [B17007_001E, B17007_002E, B17007_003E, B17007...  
+B17009      [B17009_001E, B17009_002E, B17009_003E, B17009...  
+B17010      [B17010_001E, B17010_002E, B17010_003E, B17010...  
+B17012      [B17012_001E, B17012_002E, B17012_003E, B17012...  
+B17013      [B17013_001E, B17013_002E, B17013_003E, B17013...  
+B17014      [B17014_001E, B17014_002E, B17014_003E, B17014...  
+B17015      [B17015_001E, B17015_002E, B17015_003E, B17015...  
+B17016      [B17016_001E, B17016_002E, B17016_003E, B17016...  
+B17017      [B17017_001E, B17017_002E, B17017_003E, B17017...  
+B17018      [B17018_001E, B17018_002E, B17018_003E, B17018...  
+B17019      [B17019_001E, B17019_002E, B17019_003E, B17019...  
+B17020      [B17020_001E, B17020_002E, B17020_003E, B17020...  
+B17021      [B17021_001E, B17021_002E, B17021_003E, B17021...  
+B17022      [B17022_001E, B17022_002E, B17022_003E, B17022...  
+B17023      [B17023_001E, B17023_002E, B17023_003E, B17023...  
+B17024      [B17024_001E, B17024_002E, B17024_003E, B17024...  
+B17025      [B17025_001E, B17025_002E, B17025_003E, B17025...  
+B17026      [B17026_001E, B17026_002E, B17026_003E, B17026...  
+B22003      [B22003_001E, B22003_002E, B22003_003E, B22003...  
+B23024      [B23024_001E, B23024_002E, B23024_003E, B23024...  
+B29003                [B29003_001E, B29003_002E, B29003_003E]  
+B99171      [B99171_001E, B99171_002E, B99171_003E, B99171...  
+B99172      [B99172_001E, B99172_002E, B99172_003E, B99172...  
+C17002      [C17002_001E, C17002_002E, C17002_003E, C17002...  
+C18130      [C18130_001E, C18130_002E, C18130_003E, C18130...  
+C18131      [C18131_001E, C18131_002E, C18131_003E, C18131...  
+C21007      [C21007_001E, C21007_002E, C21007_003E, C21007...  
+C27016      [C27016_001E, C27016_002E, C27016_003E, C27016...  
+C27017      [C27017_001E, C27017_002E, C27017_003E, C27017...  
+C27018      [C27018_001E, C27018_002E, C27018_003E, C27018...  </code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">GEOID</th>
+<th data-quarto-table-cell-role="th">geometry</th>
+<th data-quarto-table-cell-role="th">B17001A_001E</th>
+<th data-quarto-table-cell-role="th">B17001A_002E</th>
+<th data-quarto-table-cell-role="th">B17001A_003E</th>
+<th data-quarto-table-cell-role="th">B17001A_004E</th>
+<th data-quarto-table-cell-role="th">B17001A_005E</th>
+<th data-quarto-table-cell-role="th">B17001A_006E</th>
+<th data-quarto-table-cell-role="th">B17001A_007E</th>
+<th data-quarto-table-cell-role="th">B17001A_008E</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">B17001_051E</th>
+<th data-quarto-table-cell-role="th">B17001_052E</th>
+<th data-quarto-table-cell-role="th">B17001_053E</th>
+<th data-quarto-table-cell-role="th">B17001_054E</th>
+<th data-quarto-table-cell-role="th">B17001_055E</th>
+<th data-quarto-table-cell-role="th">B17001_056E</th>
+<th data-quarto-table-cell-role="th">B17001_057E</th>
+<th data-quarto-table-cell-role="th">B17001_058E</th>
+<th data-quarto-table-cell-role="th">B17001_059E</th>
+<th data-quarto-table-cell-role="th">NAME</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>09001010400</td>
+<td>POLYGON ((-8201121.400 5017141.610, -8201100.1...</td>
+<td>4698.0</td>
+<td>399.0</td>
+<td>232.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>17.0</td>
+<td>0.0</td>
+<td>15.0</td>
+<td>...</td>
+<td>0.0</td>
+<td>88.0</td>
+<td>252.0</td>
+<td>511.0</td>
+<td>282.0</td>
+<td>443.0</td>
+<td>358.0</td>
+<td>343.0</td>
+<td>273.0</td>
+<td>Census Tract 104, Fairfield County, Connecticut</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>09001010600</td>
+<td>POLYGON ((-8196750.330 5017084.050, -8196748.9...</td>
+<td>1513.0</td>
+<td>151.0</td>
+<td>62.0</td>
+<td>10.0</td>
+<td>10.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>...</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>36.0</td>
+<td>135.0</td>
+<td>130.0</td>
+<td>171.0</td>
+<td>147.0</td>
+<td>172.0</td>
+<td>118.0</td>
+<td>Census Tract 106, Fairfield County, Connecticut</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>09001010300</td>
+<td>POLYGON ((-8200317.120 5018093.350, -8200295.0...</td>
+<td>3300.0</td>
+<td>152.0</td>
+<td>62.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>21.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>...</td>
+<td>0.0</td>
+<td>11.0</td>
+<td>108.0</td>
+<td>91.0</td>
+<td>254.0</td>
+<td>246.0</td>
+<td>367.0</td>
+<td>167.0</td>
+<td>185.0</td>
+<td>Census Tract 103, Fairfield County, Connecticut</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>09001011300</td>
+<td>POLYGON ((-8199823.530 5012413.050, -8199813.0...</td>
+<td>2530.0</td>
+<td>262.0</td>
+<td>139.0</td>
+<td>0.0</td>
+<td>15.0</td>
+<td>41.0</td>
+<td>28.0</td>
+<td>0.0</td>
+<td>...</td>
+<td>8.0</td>
+<td>27.0</td>
+<td>91.0</td>
+<td>346.0</td>
+<td>202.0</td>
+<td>261.0</td>
+<td>226.0</td>
+<td>56.0</td>
+<td>100.0</td>
+<td>Census Tract 113, Fairfield County, Connecticut</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>09001020500</td>
+<td>POLYGON ((-8193009.330 5026964.430, -8192869.1...</td>
+<td>4094.0</td>
+<td>81.0</td>
+<td>48.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>...</td>
+<td>45.0</td>
+<td>22.0</td>
+<td>186.0</td>
+<td>110.0</td>
+<td>267.0</td>
+<td>318.0</td>
+<td>364.0</td>
+<td>229.0</td>
+<td>376.0</td>
+<td>Census Tract 205, Fairfield County, Connecticut</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 596 columns</p>
+</div>
+</div>
+</div>
+</div>
+<div id="1030e7f5" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(acs.filter_tables(<span class="st">'HOUSING'</span>, by <span class="op">=</span> <span class="st">'description'</span>))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Total Population in occupied housing</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>housing_ct <span class="op">=</span> cen.products.ACS(<span class="dv">2019</span>).from_state(<span class="st">'Connecticut'</span>, </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>variables <span class="op">=</span> <span class="st">'B25008'</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>housing_ct.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                  description  \
+table_name                                                      
+B25001                                          HOUSING UNITS   
+B25008      TOTAL POPULATION IN OCCUPIED HOUSING UNITS BY ...   
+B25010      AVERAGE HOUSEHOLD SIZE OF OCCUPIED HOUSING UNI...   
+B25026      TOTAL POPULATION IN OCCUPIED HOUSING UNITS BY ...   
+B25033      TOTAL POPULATION IN OCCUPIED HOUSING UNITS BY ...   
+B25047              PLUMBING FACILITIES FOR ALL HOUSING UNITS   
+B25048         PLUMBING FACILITIES FOR OCCUPIED HOUSING UNITS   
+B25051               KITCHEN FACILITIES FOR ALL HOUSING UNITS   
+B25052          KITCHEN FACILITIES FOR OCCUPIED HOUSING UNITS   
+B25101      MORTGAGE STATUS BY MONTHLY HOUSING COSTS AS A ...   
+B25104                                  MONTHLY HOUSING COSTS   
+B25105                 MEDIAN MONTHLY HOUSING COSTS (DOLLARS)   
+B25106      TENURE BY HOUSING COSTS AS A PERCENTAGE OF HOU...   
+B98001                         UNWEIGHTED HOUSING UNIT SAMPLE   
+B98011                             HOUSING UNIT COVERAGE RATE   
+B98021      HOUSING UNIT RESPONSE AND NONRESPONSE RATES WI...   
+B98032      OVERALL HOUSING UNIT CHARACTERISTIC ALLOCATION...   
+B992523     ALLOCATION OF SELECTED MONTHLY OWNER COSTS FOR...   
+
+                                                      columns  
+table_name                                                     
+B25001                                          [B25001_001E]  
+B25008                [B25008_001E, B25008_002E, B25008_003E]  
+B25010                [B25010_001E, B25010_002E, B25010_003E]  
+B25026      [B25026_001E, B25026_002E, B25026_003E, B25026...  
+B25033      [B25033_001E, B25033_002E, B25033_003E, B25033...  
+B25047                [B25047_001E, B25047_002E, B25047_003E]  
+B25048                [B25048_001E, B25048_002E, B25048_003E]  
+B25051                [B25051_001E, B25051_002E, B25051_003E]  
+B25052                [B25052_001E, B25052_002E, B25052_003E]  
+B25101      [B25101_001E, B25101_002E, B25101_003E, B25101...  
+B25104      [B25104_001E, B25104_002E, B25104_003E, B25104...  
+B25105                                          [B25105_001E]  
+B25106      [B25106_001E, B25106_002E, B25106_003E, B25106...  
+B98001                             [B98001_001E, B98001_002E]  
+B98011                                          [B98011_001E]  
+B98021      [B98021_001E, B98021_002E, B98021_003E, B98021...  
+B98032                                          [B98032_001E]  
+B992523            [B992523_001E, B992523_002E, B992523_003E]  </code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">GEOID</th>
+<th data-quarto-table-cell-role="th">geometry</th>
+<th data-quarto-table-cell-role="th">B25008_001E</th>
+<th data-quarto-table-cell-role="th">B25008_002E</th>
+<th data-quarto-table-cell-role="th">B25008_003E</th>
+<th data-quarto-table-cell-role="th">NAME</th>
+<th data-quarto-table-cell-role="th">state</th>
+<th data-quarto-table-cell-role="th">county</th>
+<th data-quarto-table-cell-role="th">tract</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>09001010400</td>
+<td>POLYGON ((-8201121.400 5017141.610, -8201100.1...</td>
+<td>5777.0</td>
+<td>3647.0</td>
+<td>2130.0</td>
+<td>Census Tract 104, Fairfield County, Connecticut</td>
+<td>09</td>
+<td>001</td>
+<td>010400</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>09001010600</td>
+<td>POLYGON ((-8196750.330 5017084.050, -8196748.9...</td>
+<td>2052.0</td>
+<td>858.0</td>
+<td>1194.0</td>
+<td>Census Tract 106, Fairfield County, Connecticut</td>
+<td>09</td>
+<td>001</td>
+<td>010600</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>09001010300</td>
+<td>POLYGON ((-8200317.120 5018093.350, -8200295.0...</td>
+<td>3717.0</td>
+<td>2791.0</td>
+<td>926.0</td>
+<td>Census Tract 103, Fairfield County, Connecticut</td>
+<td>09</td>
+<td>001</td>
+<td>010300</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>09001011300</td>
+<td>POLYGON ((-8199823.530 5012413.050, -8199813.0...</td>
+<td>3411.0</td>
+<td>1500.0</td>
+<td>1911.0</td>
+<td>Census Tract 113, Fairfield County, Connecticut</td>
+<td>09</td>
+<td>001</td>
+<td>011300</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>09001020500</td>
+<td>POLYGON ((-8193009.330 5026964.430, -8192869.1...</td>
+<td>4746.0</td>
+<td>4470.0</td>
+<td>276.0</td>
+<td>Census Tract 205, Fairfield County, Connecticut</td>
+<td>09</td>
+<td>001</td>
+<td>020500</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cc62540a" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fig, (ax1,ax2) <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">16</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> poverty_ct.plot(<span class="st">'B17001A_001E'</span>, ax <span class="op">=</span> ax1, cmap <span class="op">=</span> <span class="st">'viridis'</span>, legend <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> housing_ct.plot(<span class="st">'B25008_001E'</span>, ax <span class="op">=</span> ax2, cmap <span class="op">=</span> <span class="st">'viridis'</span>, legend <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="import_files/figure-html/cell-17-output-1.png" width="1547" height="1210" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Based on this we can visualize the numbers of individuals who are in poverty and individuals who have housing by census tract.</p>
+<p>A further step is to run statistical analysis to see if there is any dependence and correlation between poverty and housing attainment within Connecituct.</p>
+</section>
+<section id="references" class="level3" data-number="5.5.6">
+<h3 data-number="5.5.6" class="anchored" data-anchor-id="references"><span class="header-section-number">5.5.6</span> References</h3>
+<p>https://cenpy-devs.github.io/cenpy/api.html https://pypi.org/project/CensusData/ https://pypi.org/project/cenpy/0.9.1/ https://geopandas.org/en/stable/getting_started/introduction.html https://data.census.gov/table/ACSDT1Y2022.B02001?t=Race+and+Ethnicity https://www.census.gov/programs-surveys/acs/technical-documentation/table-shells.2019.html#list-tab-79594641</p>
+<!-- # Database Operations with SQL -->
+</section>
+</section>
+<section id="database-operations-with-sql" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="database-operations-with-sql"><span class="header-section-number">5.6</span> Database Operations with SQL</h2>
+<section id="introduction-1" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="introduction-1"><span class="header-section-number">5.6.1</span> Introduction</h3>
 <p>Today, I will be presenting on Database Operations using SQL and I will demonstrate it by using sqlite3 in Python and I will use our cleaned rodent data set. This presentation will briefly go over what Professor Haim Bar talked about during his talk and we will dive into some more advanced SQL commands.</p>
 </section>
-<section id="what-is-sql" class="level3" data-number="5.5.2">
-<h3 data-number="5.5.2" class="anchored" data-anchor-id="what-is-sql"><span class="header-section-number">5.5.2</span> What is SQL?</h3>
+<section id="what-is-sql" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="what-is-sql"><span class="header-section-number">5.6.2</span> What is SQL?</h3>
 <p>Structured Query Language (SQL) is a standard language for accessing and manipulating databases. It is used within relational database management systems such as MS SQL Server, MySQL, Oracle, etc… to perform CRUD operations.</p>
-<section id="crud" class="level4" data-number="5.5.2.1">
-<h4 data-number="5.5.2.1" class="anchored" data-anchor-id="crud"><span class="header-section-number">5.5.2.1</span> CRUD</h4>
+<section id="crud" class="level4" data-number="5.6.2.1">
+<h4 data-number="5.6.2.1" class="anchored" data-anchor-id="crud"><span class="header-section-number">5.6.2.1</span> CRUD</h4>
 <ul>
 <li><u>C</u>reate - inserting new records/values</li>
 </ul>
@@ -582,8 +1215,8 @@ Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove thi
 </ul>
 <p><strong>DELETE</strong> <strong>FROM</strong> table_name [<strong>WHERE</strong> condition]</p>
 </section>
-<section id="rdbms-vs-nosql" class="level4" data-number="5.5.2.2">
-<h4 data-number="5.5.2.2" class="anchored" data-anchor-id="rdbms-vs-nosql"><span class="header-section-number">5.5.2.2</span> RDBMS vs NoSQL</h4>
+<section id="rdbms-vs-nosql" class="level4" data-number="5.6.2.2">
+<h4 data-number="5.6.2.2" class="anchored" data-anchor-id="rdbms-vs-nosql"><span class="header-section-number">5.6.2.2</span> RDBMS vs NoSQL</h4>
 <p>RDBMS</p>
 <ul>
 <li>Basis for SQL</li>
@@ -602,13 +1235,13 @@ Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove thi
 </ul>
 </section>
 </section>
-<section id="recap-and-overview-of-some-basics" class="level3" data-number="5.5.3">
-<h3 data-number="5.5.3" class="anchored" data-anchor-id="recap-and-overview-of-some-basics"><span class="header-section-number">5.5.3</span> Recap and Overview of some Basics</h3>
+<section id="recap-and-overview-of-some-basics" class="level3" data-number="5.6.3">
+<h3 data-number="5.6.3" class="anchored" data-anchor-id="recap-and-overview-of-some-basics"><span class="header-section-number">5.6.3</span> Recap and Overview of some Basics</h3>
 <blockquote class="blockquote">
 <p>Key Notes from Professor Bar</p>
 </blockquote>
-<section id="creating-tables" class="level4" data-number="5.5.3.1">
-<h4 data-number="5.5.3.1" class="anchored" data-anchor-id="creating-tables"><span class="header-section-number">5.5.3.1</span> Creating Tables</h4>
+<section id="creating-tables" class="level4" data-number="5.6.3.1">
+<h4 data-number="5.6.3.1" class="anchored" data-anchor-id="creating-tables"><span class="header-section-number">5.6.3.1</span> Creating Tables</h4>
 <pre><code>CREATE TABLE contacts(
     contact_id INTEGER PRIMARY KEY,
     first_name TEXT NOT NULL,
@@ -653,8 +1286,8 @@ Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove thi
 </ul></li>
 </ul>
 </section>
-<section id="inserting-and-searching" class="level4" data-number="5.5.3.2">
-<h4 data-number="5.5.3.2" class="anchored" data-anchor-id="inserting-and-searching"><span class="header-section-number">5.5.3.2</span> Inserting and Searching</h4>
+<section id="inserting-and-searching" class="level4" data-number="5.6.3.2">
+<h4 data-number="5.6.3.2" class="anchored" data-anchor-id="inserting-and-searching"><span class="header-section-number">5.6.3.2</span> Inserting and Searching</h4>
 <ul>
 <li>Multiple ways to insert values into a specific table.</li>
 </ul>
@@ -676,8 +1309,8 @@ postalcode= 'M5p2n7' WHERE employeeid=4;
 # All
 UPDATE employees SET email = LOWER(firstname || "." || lastname || '@gmail.com';</code></pre>
 </section>
-<section id="deleting" class="level4" data-number="5.5.3.3">
-<h4 data-number="5.5.3.3" class="anchored" data-anchor-id="deleting"><span class="header-section-number">5.5.3.3</span> Deleting</h4>
+<section id="deleting" class="level4" data-number="5.6.3.3">
+<h4 data-number="5.6.3.3" class="anchored" data-anchor-id="deleting"><span class="header-section-number">5.6.3.3</span> Deleting</h4>
 <ul>
 <li>Deleting Tables/Databases</li>
 </ul>
@@ -690,45 +1323,45 @@ DROP DATABASE databasename;</code></pre>
 <pre><code>DELETE FROM table_name WHERE condition;</code></pre>
 </section>
 </section>
-<section id="utilizing-sqlite3-in-python-with-rodent-data-set" class="level3" data-number="5.5.4">
-<h3 data-number="5.5.4" class="anchored" data-anchor-id="utilizing-sqlite3-in-python-with-rodent-data-set"><span class="header-section-number">5.5.4</span> Utilizing sqlite3 in Python with Rodent Data Set</h3>
+<section id="utilizing-sqlite3-in-python-with-rodent-data-set" class="level3" data-number="5.6.4">
+<h3 data-number="5.6.4" class="anchored" data-anchor-id="utilizing-sqlite3-in-python-with-rodent-data-set"><span class="header-section-number">5.6.4</span> Utilizing sqlite3 in Python with Rodent Data Set</h3>
 <p><strong>Connecting to SQLite3 Using Python</strong></p>
-<div id="c281035f" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Connects to Database</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">"presentation.db"</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Using our cleaned rodent data</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_feather(<span class="st">"data/rodent_2022-2023.feather"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f4478d68" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Connects to Database</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">"presentation.db"</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Using our cleaned rodent data</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_feather(<span class="st">"data/rodent_2022-2023.feather"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="ed4d6cc9" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates Rodent table</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>data.to_sql(</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">'rodent'</span>, <span class="co"># Name of SQL table</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>            conn, <span class="co"># sqlite3 connection</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>            if_exists <span class="op">=</span> <span class="st">'replace'</span>,</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>            index <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Cursor, Instance that allows you to invoke methods to execute SQL statements.</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>cursor <span class="op">=</span> conn.cursor()</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Executing example statement to show functionality</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>cursor.execute(<span class="st">"""</span></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="st">                SELECT *</span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="st">                FROM rodent</span></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="st">                LIMIT 5</span></span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="st">               """</span>)</span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> cursor.fetchall()</span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Column names</span></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [description[<span class="dv">0</span>] <span class="cf">for</span> description <span class="kw">in</span> cursor.description]</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the output in a table format</span></span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(rows, columns<span class="op">=</span>columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div id="40939586" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates Rodent table</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>data.to_sql(</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">'rodent'</span>, <span class="co"># Name of SQL table</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>            conn, <span class="co"># sqlite3 connection</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>            if_exists <span class="op">=</span> <span class="st">'replace'</span>,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>            index <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Cursor, Instance that allows you to invoke methods to execute SQL statements.</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>cursor <span class="op">=</span> conn.cursor()</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Executing example statement to show functionality</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>cursor.execute(<span class="st">"""</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="st">                SELECT *</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="st">                FROM rodent</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="st">                LIMIT 5</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="st">               """</span>)</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> cursor.fetchall()</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Column names</span></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [description[<span class="dv">0</span>] <span class="cf">for</span> description <span class="kw">in</span> cursor.description]</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the output in a table format</span></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(rows, columns<span class="op">=</span>columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
 <div>
 <div>
 
@@ -890,8 +1523,8 @@ DROP DATABASE databasename;</code></pre>
 </div>
 </div>
 </section>
-<section id="references" class="level3" data-number="5.5.5">
-<h3 data-number="5.5.5" class="anchored" data-anchor-id="references"><span class="header-section-number">5.5.5</span> References</h3>
+<section id="references-1" class="level3" data-number="5.6.5">
+<h3 data-number="5.6.5" class="anchored" data-anchor-id="references-1"><span class="header-section-number">5.6.5</span> References</h3>
 <ul>
 <li>https://www.w3schools.com/sql/</li>
 <li>https://aws.amazon.com/what-is/sql/</li>

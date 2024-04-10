@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -239,6 +259,12 @@ window.Quarto = {
   <li><a href="#boosting-process" id="toc-boosting-process" class="nav-link" data-scroll-target="#boosting-process"><span class="header-section-number">10.4.2</span> Boosting Process</a></li>
   <li><a href="#boosting-vs-bagging-in-ensemble-learning" id="toc-boosting-vs-bagging-in-ensemble-learning" class="nav-link" data-scroll-target="#boosting-vs-bagging-in-ensemble-learning"><span class="header-section-number">10.4.3</span> Boosting vs Bagging in Ensemble Learning</a></li>
   </ul></li>
+  <li><a href="#handling-imbalanced-data" id="toc-handling-imbalanced-data" class="nav-link" data-scroll-target="#handling-imbalanced-data"><span class="header-section-number">10.5</span> Handling Imbalanced Data</a>
+  <ul class="collapse">
+  <li><a href="#imbalanced-data" id="toc-imbalanced-data" class="nav-link" data-scroll-target="#imbalanced-data"><span class="header-section-number">10.5.1</span> Imbalanced Data</a></li>
+  <li><a href="#approaches-to-handling-imbalanced-data" id="toc-approaches-to-handling-imbalanced-data" class="nav-link" data-scroll-target="#approaches-to-handling-imbalanced-data"><span class="header-section-number">10.5.2</span> Approaches to Handling Imbalanced Data</a></li>
+  <li><a href="#smote" id="toc-smote" class="nav-link" data-scroll-target="#smote"><span class="header-section-number">10.5.3</span> SMOTE</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -411,8 +437,92 @@ F_{m-1}(x) + \lambda \cdot h_m(x)\)</span>.</li>
 <li><strong>Overfitting Risk</strong>: Boosting may overfit on noisy data, whereas bagging remains robust, especially as the number of models increases.</li>
 </ul>
 <p>Understanding the distinctions between boosting and bagging is crucial for selecting the appropriate ensemble method for specific machine learning tasks. Both strategies offer unique advantages and can be applied based on the problem, data characteristics, and desired outcomes.</p>
+</section>
+</section>
+</section>
+<section id="handling-imbalanced-data" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="handling-imbalanced-data"><span class="header-section-number">10.5</span> Handling Imbalanced Data</h2>
+<p>Handling imbalanced data is a critical task in machine learning, particularly in classification problems where the distribution of instances across the known classes is uneven. This imbalance can significantly bias the model’s training process, leading to poor predictive performance, especially for the minority class. Understanding and addressing this issue is crucial for building effective and fair models.</p>
+<section id="imbalanced-data" class="level3" data-number="10.5.1">
+<h3 data-number="10.5.1" class="anchored" data-anchor-id="imbalanced-data"><span class="header-section-number">10.5.1</span> Imbalanced Data</h3>
+<p>Imbalanced data refers to a situation where the number of observations in one class significantly outweighs those in one or more other classes. This is a common scenario in various domains:</p>
+<ul>
+<li>In fraud detection, legitimate transactions vastly outnumber fraudulent ones.</li>
+<li>In medical diagnosis, the dataset might have more negative results (no disease) than positive results (disease presence).</li>
+<li>In email filtering, spam emails are less common than non-spam.</li>
+</ul>
+<p>Such disparities can lead to models that are overly biased towards the majority class, as they tend to optimize overall accuracy by simply predicting the majority class.</p>
+</section>
+<section id="approaches-to-handling-imbalanced-data" class="level3" data-number="10.5.2">
+<h3 data-number="10.5.2" class="anchored" data-anchor-id="approaches-to-handling-imbalanced-data"><span class="header-section-number">10.5.2</span> Approaches to Handling Imbalanced Data</h3>
+<ul>
+<li><p>Resampling Techniques:</p>
+<ul>
+<li>Oversampling Minority Class: Enhancing the representation of the minority class by replicating instances or generating synthetic samples. SMOTE (Synthetic Minority Over-sampling Technique) is a popular method for creating synthetic samples <span class="citation" data-cites="chawla2002smote">(<a href="references.html#ref-chawla2002smote" role="doc-biblioref">Chawla et al. 2002</a>)</span>.</li>
+<li>Undersampling Majority Class: Reducing the size of the majority class to balance the dataset. Careful selection or clustering methods are employed to retain information <span class="citation" data-cites="liu2008exploratory">(<a href="references.html#ref-liu2008exploratory" role="doc-biblioref">Liu, Wu, and Zhou 2008</a>)</span>.</li>
+</ul></li>
+<li><p>Cost-sensitive Learning: Adjusting the classification cost to make errors on the minority class more impactful than errors on the majority class. This approach often involves modifying the algorithm to be more sensitive to the minority class <span class="citation" data-cites="elkan2001foundations">(<a href="references.html#ref-elkan2001foundations" role="doc-biblioref">Elkan 2001</a>)</span>.</p></li>
+<li><p>Ensemble Methods: Leveraging multiple models to improve classification, particularly of the minority class. Techniques such as Balanced Random Forest <span class="citation" data-cites="chen2004using">(<a href="references.html#ref-chen2004using" role="doc-biblioref">Chen, Liaw, and Breiman 2004</a>)</span> and AdaBoost <span class="citation" data-cites="sun2007cost">(<a href="references.html#ref-sun2007cost" role="doc-biblioref">Sun, Wong, and Kamel 2007</a>)</span> have been adapted for imbalanced datasets.</p></li>
+<li><p>Algorithmic Adjustments: Some algorithms have built-in mechanisms for dealing with imbalanced data, such as adjusting class weights. This is evident in algorithms like SVM and logistic regression, where class weights can be inversely proportional to class frequencies <span class="citation" data-cites="king2001logistic">(<a href="references.html#ref-king2001logistic" role="doc-biblioref">King and Zeng 2001</a>)</span>.</p></li>
+</ul>
+</section>
+<section id="smote" class="level3" data-number="10.5.3">
+<h3 data-number="10.5.3" class="anchored" data-anchor-id="smote"><span class="header-section-number">10.5.3</span> SMOTE</h3>
+<p>The Synthetic Minority Over-sampling Technique (SMOTE) offers a nuanced approach to mitigating the challenges posed by imbalanced datasets. Unlike simple oversampling techniques that replicate minority class instances, SMOTE generates synthetic samples in a feature space, enhancing the diversity and representation of the minority class without directly copying existing observations <span class="citation" data-cites="chawla2002smote">(<a href="references.html#ref-chawla2002smote" role="doc-biblioref">Chawla et al. 2002</a>)</span>.</p>
+<section id="algorithm" class="level4" data-number="10.5.3.1">
+<h4 data-number="10.5.3.1" class="anchored" data-anchor-id="algorithm"><span class="header-section-number">10.5.3.1</span> Algorithm</h4>
+<p>SMOTE’s algorithm can be succinctly described using the following steps for each minority class sample <span class="math inline">\(x\)</span>:</p>
+<ol type="1">
+<li>Identify the <span class="math inline">\(k\)</span> nearest neighbors in the minority class for <span class="math inline">\(x\)</span>.</li>
+<li>Randomly choose one of these <span class="math inline">\(k\)</span> neighbors, call it <span class="math inline">\(x_{\text{nn}}\)</span>.</li>
+<li>Generate a synthetic sample <span class="math inline">\(x_{\text{new}}\)</span> along the line connecting <span class="math inline">\(x\)</span> and <span class="math inline">\(x_{\text{nn}}\)</span>. Mathematically, <span class="math inline">\(x_{\text{new}} = x + \lambda (x_{\text{nn}} - x)\)</span>, where <span class="math inline">\(\lambda\)</span> is a random number between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.</li>
+</ol>
+<p>This process is repeated until the class distribution is deemed balanced.</p>
+<p>Several software tools and libraries have made implementing SMOTE straightforward in various programming environments. In Python, the <code>imbalanced-learn</code> library provides an efficient and flexible implementation of SMOTE and its variants, allowing seamless integration with scikit-learn workflows. R users can utilize the <code>DMwR</code> package, which includes functions for applying SMOTE to datasets. These tools not only offer basic SMOTE functionality but also support advanced variants and allow for easy experimentation with different oversampling strategies.</p>
+</section>
+<section id="applications-considerations-and-variants" class="level4" data-number="10.5.3.2">
+<h4 data-number="10.5.3.2" class="anchored" data-anchor-id="applications-considerations-and-variants"><span class="header-section-number">10.5.3.2</span> Applications, Considerations, and Variants</h4>
+<p><strong>Applications</strong>: SMOTE’s approach to enriching datasets by synthesizing new examples has proven beneficial in various fields. For instance, in fraud detection, where fraudulent transactions are rare <span class="citation" data-cites="dalpozzolo2015calibrating">(<a href="references.html#ref-dalpozzolo2015calibrating" role="doc-biblioref">Dal Pozzolo et al. 2015</a>)</span>, and in medical diagnostics, where certain conditions may be underrepresented in datasets <span class="citation" data-cites="johnson2019survey">(<a href="references.html#ref-johnson2019survey" role="doc-biblioref">Johnson and Khoshgoftaar 2019</a>)</span>.</p>
+<p><strong>Considerations</strong>: While SMOTE enhances the representation of the minority class, it may also lead to overfitting, especially if the minority class is dispersed or if there’s significant overlap with the majority class <span class="citation" data-cites="guo2017learning">(<a href="references.html#ref-guo2017learning" role="doc-biblioref">Guo et al. 2017</a>)</span>. Choosing the right variant of SMOTE and adjusting its parameters requires careful consideration of the dataset’s characteristics.</p>
+<p><strong>Advanced Variants</strong>: Specific challenges in datasets have led to the development of SMOTE variants like Borderline-SMOTE, which generates samples closer to the decision boundary to improve classifier sensitivity to the minority class <span class="citation" data-cites="han2005borderline">(<a href="references.html#ref-han2005borderline" role="doc-biblioref">Han, Wang, and Mao 2005</a>)</span>. Each variant addresses particular issues, such as noise or the risk of generating ambiguous synthetic samples.</p>
+</section>
+<section id="conclusion" class="level4" data-number="10.5.3.3">
+<h4 data-number="10.5.3.3" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">10.5.3.3</span> Conclusion</h4>
+<p>SMOTE and its variants offer a sophisticated approach to mitigating the challenges posed by imbalanced datasets. Through synthetic sample generation, these methods enhance the diversity and representation of the minority class, facilitating improved model accuracy and generalizability. The choice of variant and parameters should be guided by the dataset’s characteristics and the problem context, underscoring the importance of careful experimentation and validation.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-chawla2002smote" class="csl-entry" role="listitem">
+Chawla, N. V., K. W. Bowyer, L. O. Hall, and W. P. Kegelmeyer. 2002. <span>“<span>SMOTE</span>: Synthetic Minority over-Sampling Technique.”</span> <em>Journal of Artificial Intelligence Research</em> 16: 321–57.
+</div>
+<div id="ref-chen2004using" class="csl-entry" role="listitem">
+Chen, Chao, Andy Liaw, and Leo Breiman. 2004. <span>“Using Random Forest to Learn Imbalanced Data.”</span> University of California, Berkeley.
+</div>
+<div id="ref-dalpozzolo2015calibrating" class="csl-entry" role="listitem">
+Dal Pozzolo, Andrea, Olivier Caelen, Reid A Johnson, and Gianluca Bontempi. 2015. <span>“Calibrating Probability with Undersampling for Unbalanced Classification.”</span> In <em>2015 IEEE Symposium Series on Computational Intelligence</em>, 159–66. IEEE.
+</div>
+<div id="ref-elkan2001foundations" class="csl-entry" role="listitem">
+Elkan, Charles. 2001. <span>“The Foundations of Cost-Sensitive Learning.”</span> In <em>Proceedings of the Seventeenth International Joint Conference on Artificial Intelligence</em>, 973–78. San Francisco, CA, USA: Morgan Kaufmann Publishers Inc.
+</div>
+<div id="ref-guo2017learning" class="csl-entry" role="listitem">
+Guo, Haixiang, Yijing Li, Jennifer Shang, Mingyun Gu, Yuanyue Huang, and Bing Gong. 2017. <span>“Learning from Class-Imbalanced Data: Review of Methods and Applications.”</span> <em>Expert Systems with Applications</em> 73: 220–39.
+</div>
+<div id="ref-han2005borderline" class="csl-entry" role="listitem">
+Han, Hui, Wen-Yuan Wang, and Bing-Huan Mao. 2005. <span>“Borderline-SMOTE: A New over-Sampling Method in Imbalanced Data Sets Learning.”</span> In <em>International Conference on Intelligent Computing</em>, 878–87. Springer.
+</div>
+<div id="ref-johnson2019survey" class="csl-entry" role="listitem">
+Johnson, Justin M., and Taghi M. Khoshgoftaar. 2019. <span>“Survey on Deep Learning with Class Imbalance.”</span> <em>Journal of Big Data</em> 6 (1): 27.
+</div>
+<div id="ref-king2001logistic" class="csl-entry" role="listitem">
+King, Gary, and Langche Zeng. 2001. <span>“Logistic Regression in Rare Events Data.”</span> <em>Political Analysis</em> 9 (2): 137–63.
+</div>
+<div id="ref-liu2008exploratory" class="csl-entry" role="listitem">
+Liu, Xu-Ying, Jianxin Wu, and Zhi-Hua Zhou. 2008. <span>“Exploratory Undersampling for Class-Imbalance Learning.”</span> <em>IEEE Transactions on Systems, Man, and Cybernetics, Part B (Cybernetics)</em> 39 (2): 539–50.
+</div>
+<div id="ref-sun2007cost" class="csl-entry" role="listitem">
+Sun, Yanmin, Andrew KC Wong, and Mohamed S Kamel. 2007. <span>“Cost-Sensitive Boosting for Classification of Imbalanced Data.”</span> <em>Pattern Recognition</em> 40 (12): 3358–78.
+</div>
+</div>
 </section>
 </section>
 </section>
