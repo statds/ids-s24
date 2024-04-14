@@ -42,7 +42,7 @@ The presenters were
 + Vincent Xie: [slides](); [sources]().
 + Pratham Patel: [slides](); [sources]().
 + Isabelle Perez: [slides](); [sources]().
-+ Joshua Lee: [slides](); [sources]().
++ Joshua Lee: [report](https://github.com/Yoshi234/rodent-landscape-opendata2024/releases/tag/Project-report-and-slides); [sources](https://github.com/Yoshi234/rodent-landscape-opendata2024).
 
 
 
