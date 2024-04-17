@@ -5,10 +5,10 @@ This section was written by Madison Woo
 ### Introduction
 
 Hello! My name is Madison Woo and I am a junior majoring in statistical 
-data science with a mathematics minor. I used to be a computer science major,
-so I have a good understanding of multiple coding languages. I think it is 
-important to learn how different coding languages can be integrated. Today,
-I am going to be talking about how to call C/C++ from python. 
+data science with a mathematics minor. I have a good understanding of multiple 
+coding languages and I think it is important to learn how different coding 
+languages can be integrated. Today, I am going to be talking about how to call 
+C/C++ from python. 
 
 ### Overview of C/C++ 
 
@@ -159,12 +159,11 @@ C/C++ to python and python to C/C++. Python bindings are necessary since each
 coding language stores data in different ways. 
 
 - **Integers:** Python stores integers with arbitrary precision, meaning that
- you can store very, very, large numbers. C specifies the exact sizes of integers. 
+you can store very, very, large numbers. C specifies the exact sizes of integers. 
 - **Floating-point Numbers:** Python can store much larger (and much smaller) 
-floating-point numbers than C. This means that you’ll also have to pay attention
-to those values to ensure they stay in range.
+floating-point numbers than C. 
 - **Strings:** Strings are complicated when creating python bindings. Python and
- C store strings in quite different formats (C and C++ differ in this as well).
+C store strings in quite different formats (C and C++ differ in this as well).
 Each type of python binding has a different way of dealing with strings 
 - **Boolean:** Marshalling them is really straightforward since there are only 
 two values. 
@@ -178,7 +177,7 @@ packages.
 #### C
 
 To create a shared libary enter:
-"cc -fPIC -shared -o libraryname.so filename.c"
+"cc -fPIC -shared -o callingc.so calling_c.c"
 
 ```{python}
 # calling_c.c file code 
@@ -206,7 +205,7 @@ print(calling_c.square(10))
 #### C++
 
 To create a shared library enter:
-"g++ -shared -o libraryname.so filename.cpp" 
+"g++ -shared -o mylibrary.so calling_c_plus.cpp" 
 
 ctypes doesn't have any knowledge of the function unless you explicitly inform 
 it. Any paramenters that aren't integers need to be specificed or else it will 
@@ -223,8 +222,7 @@ mylibrary.square.argtypes = [c_int]
 mylibrary.square.restype = c_int
 
 # Call the add function
-result = mylibrary.square(10)
-print(result)
+print(mylibrary.square(10))
 ```
 
 ### CFFI
@@ -259,10 +257,6 @@ mylib = ffi.dlopen('./mylibrary.so')
 result = mylib.square(10)
 print(result)
 ```
-
-### Conclusion
-
-
 
 ### References 
 
