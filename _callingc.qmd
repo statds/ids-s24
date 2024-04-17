@@ -258,6 +258,33 @@ result = mylib.square(10)
 print(result)
 ```
 
+### Conclusion 
+
+There are many other methods that you can use to call C/C++ from
+python, but the focus here was on ctypes and CFFI. There are also
+various strenghts and weaknesses for each method, which is something 
+you might want to consider when you are implementing this into your
+own code. 
+
+Advantages and Disadvantages of ctypes: 
+- Built into the standard library, requiring no extra steps to install.
+- Compatible with shared libraries and dynamic link libraries.
+- May not be compatible with more complex code because of the lack of
+automation.  
+- ctypes is older (created in 2003). 
+
+Advantages and Disadvantages of  CFFI: 
+- Generally runs faster than other methods. 
+- Compatible with shared libraries and dynamic link libraries.
+- Scales to larger projects. 
+- Have to load a new python module. 
+
+Selecting a method to call C/C++ is based off of preference, but 
+if you are looking to make use of extensive foreign functions, CFFI 
+is defintiely the way to go. If you have a simple C/C++ file you wish 
+to minimize external dependencies, use ctypes to help with package 
+fragility. 
+
 ### References 
 
 https://realpython.com/python-bindings-overview/#python-bindings-overview
