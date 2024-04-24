@@ -10,6 +10,11 @@ coding languages and I think it is important to learn how different coding
 languages can be integrated. Today, I am going to be talking about how to call 
 C/C++ from python. 
 
+### Presentation Disclaimer
+
+In order to follow along with the code in this presentation, you will need 
+to compile the C/C++ files located in the 'extra files' folder. 
+
 ### Overview of C/C++ 
 
 - C is a general purpose programming language designed for systems programming.
