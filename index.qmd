@@ -42,7 +42,7 @@ The presenters were
 + Vincent Xie: [slides](); [sources]().
 + Pratham Patel: [slides](); [sources]().
 + Isabelle Perez: [slides](); [sources]().
-+ Joshua Lee: [slides](); [sources]().
++ Joshua Lee: [report](https://github.com/Yoshi234/rodent-landscape-opendata2024/releases/tag/Project-report-and-slides); [sources](https://github.com/Yoshi234/rodent-landscape-opendata2024).
 
 
 
@@ -237,11 +237,11 @@ Please use the following table to sign up.
   03/06  | Leon Nguyen            | Statistical Modeling with `statsmodels`
   03/25  | Alex Pugh              | Time Series Analysis
   03/25  | Charitath Chugh        | PyTorch
-  03/27  | Vincent Xie            | Database Operations with SQL
-  03/27  | Ge Li                  | Animation                       |
+  03/27  |                        | 
+  03/27  | Ge Li                  | Animation                      
   04/01  | William Qualls         | Web Scraping
-  04/01  |                        |
-  04/03  | Braedon Hook           |
+  04/01  | Vincent Xie            | Database Operations with SQL
+  04/03  | Braedon Hook           | Long short-term memory (LSTM) network
   04/03  | Madison Woo            | Calling C/C++ from Python
   04/08  |                        |
   04/08  |                        |
@@ -256,9 +256,9 @@ final presentation.
    Date  | Presenter
   ------ | ---------------------- 
   04/15  | Matt Elliott; Weijia Wu; William Taki; Joshua Lee; Pratham Patel
-  04/17  | Olivia Massad; Ge Li; Xingye Zhang; Jack Dennison; Isabelle Perez
+  04/17  | Olivia Massad; Ge Li; Xingye Zhang; Isabelle Perez
   04/22  | Emmanual Yankson; Davi Li; Abigail Mori; Leon Nguyen; Alex Pugh
-  04/24  | Charitath Chugh; Vincent Xie; Madison Woo; Braedon Hook
+  04/24  | Jack Dennison; Charitath Chugh; Vincent Xie; Madison Woo; Braedon Hook
 
 
 

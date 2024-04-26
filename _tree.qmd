@@ -1,1 +1,521 @@
-## Decision Trees
+## Tree Based Machine Learning Models
+
+> Presented by Emmanuel Yankson
+
+##### About Me
+My name is Emmanuel Yankson, although some call me Emmy for short (first 
+three letters of my first name and the initial of my last name). I am a junior 
+studying statistical data science as a major and computer science as a minor. 
+Hobbies include playing the piano, philosphy, building computers, and 
+co-Teaching STAT 4188.
+
+### What is Machine Learning?
+Similar to how humans learn where there is a focus on acquisition of knowledge 
+that would better inform decisions made in the future, take that knowledge into
+our own personal exeprience which can then be used to inform us about the 
+knowledge we gather and decisions we make in the future, a machine learns 
+when we give it data, set criteria for training and testing, and then set 
+metrics for the outcomes of these tests which can then be used to improve 
+the effectiveness and learning of our model.
+
+There are different types of machine learning, namely supervised learning, 
+unsupervised learning, and reinforcement learning. Decision Trees and Random 
+Forest fall under the category of supervised, as given some labels Y, we train 
+our model on correct examples of our labels, which will come later.
+
+### Basic Terms
++ Training - The process involves pushing a separated section of your data 
+             to your model with the purpose of enabling the model to learn 
+             about which values are optimal for adjusting all the weights and 
+             biases, based on labeled examples. The training section of your 
+             data is typically the majority of your dataset, although the 
+             percentage depends on the size of the data you are working with
+
++ Testing - It serves as a completely independent dataset to evaluate the 
+            model's performance and generalization ability. The test section
+            of your data is typically the minority of your dataset, although
+            again the percentage depends on the size of the data you are 
+            working with
+
++ Models - An algorithm meant to learn from the data it recieves
+
++ Prediction - When the model recieves data and makes a prediction concerning 
+               our label of interest based on the previous data it received
+
++ Performance Metrics - A way to evaluate model effectiveness and performnace 
+                        in different aspects. Different performance metrics are
+                        used depending on the type of machine learning task and
+                        the specific goals of the analysis. In this file we 
+                        will be utilizing the performance metrics of 
+                        accuracy (the proportion of correctly classified 
+                        instances out of the total instances in the dataset),
+                        precision (out of all positives, how many are correctly
+                        identified), and F1 Score (the harmonic mean of 
+                        precision and recall, it provides a balance between 
+                        precision and recall)
+
+
+### Training and Testing
+So when it comes to training, testing, and evaluating our models, we of course 
+cannot have the model trained on the entirity of our dataset. Why? Because by 
+having a separate testing set, we can evaluate how well our trained model 
+generalizes to new, unseen data. Additionally, if were to train our model on 
+the entirity of our dataset, it would cause overfitting (Unexplained high 
+accuracy, used to training noise). While the model would perform very well 
+when it comes to the training set, it performs poorly for new data that it 
+hasn't seen before. 
+
+
+### Decision Trees
+
+A Decision Tree is hierarchical tree-like structure which frequently takes the 
+form of a binary tree in our case, where starting from the root node, we 
+recursively split our data until we reach an outcome. There are two types of 
+decision trees, regression and classification, with classification being the 
+focus of this discussion. 
+
+Examining the structure, imagine a Decision Tree as a series of interconnected 
+questions posed to our dataset. The root node plays the role of asking the 
+first question that results in the first split of the data. Subsequent internal
+nodes act as further questions, introducing additional criteria that lead to 
+successive splits. These splits create branches and sub-branches, forming a 
+branching structure throughout the tree.
+
+At each decision node, the dataset is partitioned based on the answers to the 
+posed questions, guiding the data along different paths within the tree. This 
+recursive process continues until we reach the leaves of the tree, which 
+represent the outcomes or decisions made. The leaves contain the final 
+classifications based on the criteria applied throughout the tree. When moving 
+along the tree, we will have our left branch denote our true or 'yes' 
+condition at that node, while we will have our right branch denote our false 
+condition at that particular node.
+
+Due its easy accessbility through visuals like a flow chart, it almost appears 
+that the decision tree algorithm is simpler than it actually is. One would 
+foolishly assume that the algorithm is a series of if-else statements that 
+parse through a dataset. How do we also decide the root note as well?
+
+However, simple if-else statements will not work as the purpose of this 
+machine learning algorithm is to find the optimal split for each decision 
+node. The hope is to get something called a pure leaf node, which is a leaf
+node a node where all instances of our datapoints share the same class or 
+outcome. 
+
+How do we find the optimal split? While there are different forms of splitting
+criteria, the one we will be discussing today is known as GINI.
+
+
+#### GINI Index
+The GINI Index, or GINI takes on values between 0 and 1 and calculated by the 
+following formula:
+
+*Gini(p)* = 1 - $\Sigma_{i=1}^J$ $p_{i}^2$
+
+Where the probability value in this case is the probability of the incorrect 
+classification squared subtracted by the probability of the correct 
+classification squared. We will calculate the Gini index for each side of the 
+split. And once we calculated the GINI index for both sides of the split we 
+can calculate the weighted GINI index:
+
+Weighted GINI = 1 - $\Sigma_{i=1}^J$ $w_{i}$ * $p_{i}^2$
+
+
+This weighted Gini value will provide a measure between 0 and 1, where 0 
+signifies the purest node. In a pure node, only one class of outcome exists, 
+and the data in that leaf node is entirely homogenous. On the other end of 
+the spectrum, a value of 1 indicates the highest level of impurity, suggesting 
+a mixture of outcomes present at that node.
+
+The weighted Gini index serves as the splitting criterion for our decision 
+nodes. The split that minimizes the weighted Gini index is chosen because 
+it represents the most effective way to segregate the data. This process 
+assigns more weight to important groups and less weight to less important 
+ones, allowing the decision tree algorithm to make informed and balanced 
+decisions at each internal node.
+
+Besides choosing the splitting criteria for your decision tree, there are
+other ways to tune your model in order to improve your classification 
+results, using the following hyperparameters:
+
++ `splitter`: The strategy used to choose the split at each node
++ `criterion`: "Gini", "Entropy", "log_loss"
++ `max_depth`: Maximum depth of the tree
++ `min_samples_split`: min number of samples required to split decision node
++ `min_samples_leaf`: Min number of samples required to be at a leaf node
++ `min_weight_fraction_leaf`: The minimum weighted fraction of the sum total 
+                              of weights required to be at a leaf node
++ `max_features`: The number of features to consider when looking for the best split
++ `max_leaf_nodes`: Grow trees with `max_leaf_nodes` in best-first fashion
++ `min_impurity_decrease`: A node will be split if this split induces a 
+decrease of the impurity greater than or equal to this value.
++ `class_weight`: Weights associated with classes in the form 
+                  `{class_label: weight}`
++ `ccp_alpha`: Complexity parameter used for Minimal Cost-Complexity Pruning 
++ `random_state`: CControls the randomness of the estimator
+
+Although we will be using the model in its most basic form, using this form
+of machine learning requires extensive testing and model tuning in order
+to receive the best results.
+
+The following example uses a synthetic dataset generated by myself which  
+uses multiple features in order to predict whether or not a student will dine
+out while staying on campus.
+
+### Generating an Example Dataset
+
+**Do I eat out?**
+
+**Code**
+
+```{python}
+
+from datetime import datetime
+import random
+import pandas as pd
+import numpy as np
+
+
+eat_out = np.random.choice([True, False], size=100000)
+
+in_class = []
+
+
+for status in eat_out:
+    if status == True:
+       in_class.append(np.random.choice([True, False], p=[.10, .90]))
+    
+    else:
+        in_class.append(np.random.choice([False, True], p=[.40, .60]))
+
+good_places_open = []
+
+for status in eat_out:
+    if status == True:
+       good_places_open.append(np.random.choice([True, False], p=[.90, .10]))
+    
+    else:
+        good_places_open.append(np.random.choice([False, True], p=[.50, .50]))
+
+
+amount_of_money = []
+
+for status in eat_out:
+    if status:
+        choices = [round(random.uniform(55, 250), 2), 
+        round(random.uniform(0.0, 55), 2)]
+        
+        probabilities = [.90, .10]
+        
+        dollar_amount = np.random.choice(choices, p=probabilities)
+        
+        amount_of_money.append(dollar_amount)
+    
+
+    else:
+        choices = [round(random.uniform(55, 250), 2), 
+        round(random.uniform(0.0, 55), 2)]
+        
+        probabilities = [.41, .59]
+        
+        dollar_amount = np.random.choice(choices, p=probabilities)
+        
+        amount_of_money.append(dollar_amount)
+
+
+current_time = []
+
+for i in range(len(eat_out)):
+    early = random.randint(10, 19)
+    late = random.choice([20, 21, 22, 23, 0, 1, 2])
+    
+    if eat_out[i] and not in_class[i] and good_places_open[i]:
+        probabilities_t = [0.80, 0.20]
+        time_choices_hrs = [early, late]
+        
+    elif not eat_out[i] and not in_class[i] and not good_places_open[i]:
+        probabilities_t = [0.25, 0.75]
+        time_choices_hrs = [early, late]
+        
+    elif not eat_out[i] and in_class[i] and good_places_open[i]:
+        probabilities_t = [0.60, 0.40]
+        time_choices_hrs = [early, late]
+        
+    elif eat_out[i] and in_class[i]:
+        probabilities_t = [0.90, 0.10]
+        time_choices_hrs = [early, late]
+        
+    hour = np.random.choice(time_choices_hrs, p=probabilities_t)
+    minute = random.randint(0, 59)
+
+    now = datetime.now()
+    random_time = datetime(now.year, now.month, now.day, hour, minute)
+    given_time = random_time.strftime("%H:%M")
+    current_time.append(given_time) 
+
+
+my_data = {'In Class?':in_class, 'Are there good places open?':good_places_open, 
+           'Amount Of Money (In Dollars)':amount_of_money, 
+           'Time of Day (24-Hour)':current_time, 
+           'Do I eat out?':eat_out}
+
+dine_out_df = pd.DataFrame(data=my_data)
+
+```
+
+
+The following code takes the example dataset and attempts to use a decision 
+tree model to predict whether or not a student is likely to dine out based 
+on the features of:
+
+**In Class?**: Whether or not the student is in class (Boolean)
+
+**Are there good places open?**: Asks if good restaurants are open (Boolean)
+
+**Amount of Money (In Dollars)**: Money in account (Continuous)
+
+**Time of Day (24 Hour)**: Time of the day when eating (Continuous)
+
+**Do I eat out?**: Asks if the student eats out (Target Label, Boolean)
+
+
+#### Decision Tree Code
+
+```{python}
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, f1_score, recall_score 
+from sklearn.metrics import precision_score
+```
+
+
+```{python}
+#displays the first five rows of the dataset
+dine_out_df.head()
+```
+
+```{python}
+def encode_time(time_str):
+    hours, minutes = map(int, time_str.split(':'))
+    
+    normalized_hours = hours / 24.0
+    
+    return pd.Series({'encoded_hours': normalized_hours})
+
+dine_out_df[['encoded_hours']] = dine_out_df['Time of Day (24-Hour)'].apply(encode_time)
+```
+
+```{python}
+X_dtc = dine_out_df.drop(['Do I eat out?', 'Time of Day (24-Hour)'], axis=1)
+Y_dtc = dine_out_df['Do I eat out?']
+
+X_train, X_test, Y_train, Y_test = train_test_split(X_dtc, Y_dtc, 
+test_size=0.30, random_state=42, shuffle=True, stratify=Y_dtc)
+```
+
+The code directly above using the train_test_split function is part of the 
+training and testing phase of machine learning discussed earlier. The dataset 
+is divided into two parts:
+
++ Training Set: This portion of the data, typically the majority (e.g., 70% of 
+  the dataset in this example), is used to train the machine learning model. 
+  For instance, the variable X_train is trained on 70% of the dataset 
+  containing features like OverTime, BusinessTravel, and MaritalStatus, while 
+  the variable y_train is trained on 70% of the Attrition feature column. 
+  The model learns the patterns and relationships between these features and 
+  the target variable (Attrition) from this training data.
+
++ Test Set: The remaining portion of the data, 30% of the dataset in this
+  case is set aside and not used during the training phase. 
+
+
+```{python}
+# Creates and Trains a Decision Tree Classifier object
+dtc = DecisionTreeClassifier()
+dtc.fit(X_train, Y_train)
+```
+
+```{python}
+y_pred_dtc = dtc.predict(X_test)
+
+accuracy_dtc = accuracy_score(Y_test, y_pred_dtc)
+
+precision_dtc = precision_score(Y_test, y_pred_dtc, average='binary')
+
+recall_dtc = recall_score(Y_test, y_pred_dtc, average='binary')
+
+f1_dtc = f1_score(Y_test, y_pred_dtc, average='binary')
+
+
+print(f'Accuracy: {accuracy_dtc:.4f}')
+print(f'Precision: {precision_dtc:.4f}')
+print(f'Recall: {recall_dtc:.4f}')
+print(f'F1 Score: {f1_dtc:.4f}')
+```
+
+However, decision trees on their own can often not be enough to make accurate 
+choices based on the data available. Decision Trees have some pitfalls, 
+including 
+
++ Instability with large amounts of data
++ Overfitting
++ Sensitive to small variations in input data
++ High Variance
+
+Some of these effects can be mitigated through the usage of many, many, 
+many, decision trees. What if we had many decision trees such that the variance
+can be accounted for based on there existing multiple different combinations of
+each possible tree? What if we wanted the root of our tree to be different in 
+order to get outcomes? What if we needed our trees to compensate for large 
+amounts of data? Then, how about we use more than one tree? More than two? More
+than three? How about we use an entire forest of trees? Go big or go home. You 
+run into the idea of using a `Random Forest Algorithm`.
+
+
+
+### Random Forest
+
+In simple terms, you can envision the `Random Forest Algorithm` as a group of 
+decision trees combined together. Each decision tree operates independently, 
+making its own decisions similar to a single decision tree. After training, 
+when a data point is fed into the random forest, it passes through all the 
+decision trees created during training. The final prediction is determined 
+by the majority choice among all the decision trees, hopefully providing 
+an accurate outcome. More accurately, it is an ensemble learning method 
+(making a decision based on multiple models), which combines the predictions 
+of multiple decision trees.
+
+But how is a random forest generated? As previously stated, there are many
+ways to generate a decision tree, and for vast amounts of data creating
+an individual decision trees on it every single time can be a costly process
+in terms of resources and time. The roots of our trees can also differ as well.
+So how are these trees being made?
+
+
+#### Bagging & Bootstrapping
+
+
+**Bootstrapping** involves making multiple datasets based on our original 
+dataset. These new datasets are sampled with replacement from the original 
+dataset. Each bootstrap dataset is likely to be different promoting diversity
+amongst the tress in the forest.
+
+The process involves the random selection of a row from the original dataset 
+and then putting it into a separate smaller dataset called the bootstrapped 
+dataset until the number of rows in your bootstrapped dataset equals the 
+number of rows in your original dataset. 
+
+Additionally, more randomness is introduced by randomly excluding columns in 
+the bootstrap dataset during the construction of the tree. When building a 
+decision tree on the bootstrap dataset and a split occurs, the algorithm 
+randomly chooses to exclude one of the features from the bootstrapped dataset 
+to introduce additional randomness. Although in the Scikit-Learn library you 
+cannot directly specify which feature to exclude randomly, you can control 
+the number of features excluded simultaneously.
+
+**Bagging** is the technique used to aggregate the predictions of the
+trees in an instance of Random Forest. Each tree in the forest is trained on a 
+bootstrap sample and makes predictions independently. The final prediction of 
+the Random Forest is obtained by taking the majority (in this case majority 
+classification) across all of the trees.
+
+
+## Random Forest Code
+```{python}
+from sklearn.ensemble import RandomForestClassifier
+from datetime import datetime
+import random
+```
+
+```{python}
+X_rf = dine_out_df.drop(['Do I eat out?', 'Time of Day (24-Hour)'], axis=1)
+Y_rf = dine_out_df['Do I eat out?']
+
+X_train, X_test, Y_train, Y_test = train_test_split(X_rf, Y_rf, 
+test_size=0.30, random_state=42, shuffle=True, stratify=Y_rf)
+```
+
+Although the random forest model shown below is only the default
+hyperparameters, we can tune the following hyperparameters to have our
+model more closely follow the data presented:
+
++ `n_estimators`: Number of trees in forest
++ `criterion`: "Gini", "Entropy", "log_loss"
++ `max_depth`: Maximum depth of the tree
++ `min_samples_split`: min number of samples required to split decision node
++ `min_samples_leaf`: Min number of samples required to be at a leaf node
++ `min_weight_fraction_leaf`: The minimum weighted fraction of the sum total 
+                              of weights required to be at a leaf node
++ `max_features`: The number of features to consider when looking for the 
+                  best split
++ `max_leaf_nodes`: Grow trees with `max_leaf_nodes` in best-first fashion
++ `min_impurity_decrease`: A node will be split if this split induces a 
+                           decrease of the impurity greater than or equal to 
+                           this value.
++ `boostrap`: Whether bootstrap samples are used when building trees
++ `oob_score`: Whether to use out-of-bag samples to estimate the 
+               generalization score
++ `n_jobs`: The number of jobs to run in parallel
++ `random_state`: Controls both the randomness of the bootstrapping of the 
+                  samples used when building trees
++ `Verbose`: Controls the verbosity when fitting and predicting
+
+What you'll notice is that besides some new parameters, many of the parameters
+of the random forest classifier are the same as the parameters of the decision
+tree classifier. This is of course because the random forest is an ensemble of 
+decision trees.
+
+```{python}
+rf_classifier = RandomForestClassifier() 
+
+rf_classifier.fit(X_train, Y_train)
+
+Y_pred_rf = rf_classifier.predict(X_test)
+```
+
+```{python}
+accuracy_rf = accuracy_score(Y_test, Y_pred_rf)
+
+precision_rf = precision_score(Y_test, Y_pred_rf, average='binary')
+
+recall_rf = recall_score(Y_test, Y_pred_rf, average='binary')
+
+f1_rf = f1_score(Y_test, Y_pred_rf, average='binary')
+
+
+print(f'Accuracy: {accuracy_rf:.4f}')
+print(f'Precision: {precision_rf:.4f}')
+print(f'Recall: {recall_rf:.4f}')
+print(f'F1 Score: {f1_rf:.4f}')
+```
+
+In comparison, we see that even without hyperparameter tuning the random forest
+model outperforms the decision tree model that we have previously trained.
+
+
+## References 
+
+* Tree Based Models - UCONN Data Science
+
+* Decision Tree Classification Clearly Explained!
+    + https://www.youtube.com/watch?v=ZVR2Way4nwQ
+
+* What is Random Forest? - IBM
+    + https://www.ibm.com/topics/random-forest#:~:text=Random%20forest%20is%20a%20commonly,both%20classification%20and%20regression%20problems.
+
+* sklearn.ensemble.RandomForestClassifier - Scikit Learn Documentation
+    + https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
+
+* sklearn.tree.DecisionTreeClassifier - Scikit Learn Documentation
+    + https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
+
+* Gini Index and Entropy|Gini Index and Information gain in Decision Tree|
+  Decision tree splitting rule
+  + https://www.youtube.com/watch?v=-W0DnxQK1Eo
+
+* Random Forest | ScienceDirect
+  + https://www.sciencedirect.com/topics/engineering/random-forest
+
+* Bootstrapping and OOB samples in Random Forests | Medium
+  + https://medium.com/analytics-vidhya/bootstrapping-and-oob-samples-in-random-forests-6e083b6bc341
+
+

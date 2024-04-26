@@ -175,3 +175,248 @@ work flow in model selection with cross-validation is as follows.
 <!-- ## Decision Tree -->
 
 {{< include _tree.qmd >}}
+
+
+## Boosted Tree
+
+
+Boosted trees are a powerful ensemble technique in machine learning
+that combines multiple weak learners, typically decision trees, to
+form a strong learner. The essence of the boosting approach is to fit
+sequential models, where each new model attempts to correct errors
+made by the previous ones. Gradient boosting, one of the most popular
+boosting methods, optimizes a loss function over weak learners by
+iteratively adding trees that correct the residuals of the combined
+ensemble.
+
+### Introduction
+Boosted trees build on the concept of boosting, an ensemble technique
+that aims to create a strong classifier from a number of weak
+classifiers. In the context of boosted trees, the weak learners are
+decision trees, usually of a fixed size, which are added sequentially
+to the model. The key idea is to improve the model iteratively by
+focusing on examples that are hard to predict, thus enhancing the
+overall predictive accuracy of the model.
+
+
+### Boosting Process
+
+In the context of gradient boosted trees, the ensemble model is built
+iteratively, where each new tree is fitted to the residual errors made
+by the previous ensemble of trees. The aim is to minimize a loss
+function, and each tree incrementally improves the model by reducing
+the loss. The ensemble model after $M$ trees can be described more
+accurately as:
+
+
+The final predictive model is $F_M(x)$, which represents the
+accumulated predictions of all $M$ trees, adjusted by their respective
+learning rates.
+
+
+The process can be delineated as follows:
+
++ Initialization: Begin with a base model $F_0(x)$, often the mean of
+the target variable for regression or the log odds for classification.
++ Iterative Boosting:
+  - At each stage $m$, compute the pseudo-residuals, which are the
+  gradients of the loss function with respect to the predictions of
+  the current model, $F_{m-1}(x)$.
+  - Fit a new tree, $h_m(x)$, to these pseudo-residuals.
+  - Update the model by adding this new tree, weighted by a learning
+  rate $\lambda$, to minimize the loss, resulting in $F_m(x) =
+  F_{m-1}(x) + \lambda \cdot h_m(x)$.
++ Final Model: After $M$ iterations, the ensemble model $F_M(x)$
+represents the sum of the initial model and the incremental
+improvements made by each of the $M$ trees, where each tree is fitted
+to correct the residuals of the model up to that point.
+
+Key Concepts
+
++ Loss Function ($L$): A measure of how far the ensemble's predictions
+are from the actual values. Common choices include the squared error for
+regression and logistic loss for classification.
++ Learning Rate ($\lambda$): A small positive number that scales the
+contribution of each tree. It helps in controlling the speed of learning
+and prevents overfitting.
+
+
+This iterative approach, focusing on correcting the errors of the
+ensemble up to the current step, distinguishes gradient boosting from
+other ensemble methods and allows for a nuanced adjustment of the
+model to the data.
+
+
+### Boosting vs Bagging in Ensemble Learning
+
+Boosting and bagging are foundational ensemble learning techniques in 
+machine learning, designed to improve the accuracy of predictive models 
+by combining the strengths of multiple weaker models. Despite their 
+common goal, they differ significantly in methodology and application.
+
+Boosting builds models in a sequential manner, focusing each subsequent 
+model on correcting the errors made by the previous ones. The process 
+initiates with a base model, with each new model added aiming to 
+correct its predecessor, culminating in a weighted sum of all models.
+
+- **Sequential Model Building**: Models are built sequentially, each 
+  correcting the error of the ensemble before it.
+- **Focus on Misclassification**: Boosting prioritizes instances 
+  misclassified by earlier models, adapting to the "harder" cases.
+- **Variance Reduction**: It mainly reduces model variance, carefully 
+  avoiding overfitting despite increasing complexity.
+
+Examples include AdaBoost, Gradient Boosting, and XGBoost.
+
+Bagging, or Bootstrap Aggregating, constructs multiple models 
+independently and combines their predictions through averaging or 
+majority voting. Each model is trained on a randomly drawn subset 
+of the data, allowing for parallel model construction.
+
+- **Parallel Model Building**: Models are built independently, 
+  enabling parallelization.
+- **Uniform Attention**: All instances are equally considered, 
+  with the diversity of the ensemble reducing variance.
+- **Bias and Variance Reduction**: Effective at reducing both, 
+  but particularly good at cutting down variance in complex models.
+
+Random Forest is a prominent example of bagging.
+
+#### Differences
+
+- **Model Dependency**: Boosting's models are interdependent, building 
+  upon the errors of their predecessors, unlike bagging's independent 
+  models.
+- **Error Correction Focus**: Boosting directly targets previous errors, 
+  while bagging reduces error through diversity.
+- **Computational Complexity**: Boosting can be more computationally 
+  intensive due to its sequential nature.
+- **Overfitting Risk**: Boosting may overfit on noisy data, whereas 
+  bagging remains robust, especially as the number of models increases.
+
+
+Understanding the distinctions between boosting and bagging is crucial 
+for selecting the appropriate ensemble method for specific machine 
+learning tasks. Both strategies offer unique advantages and can be 
+applied based on the problem, data characteristics, and desired 
+outcomes.
+
+
+## Handling Imbalanced Data
+
+Handling imbalanced data is a critical task in machine learning,
+particularly in classification problems where the distribution of
+instances across the known classes is uneven. This imbalance can
+significantly bias the model's training process, leading to poor
+predictive performance, especially for the minority
+class. Understanding and addressing this issue is crucial for building
+effective and fair models.
+
+### Imbalanced Data
+
+Imbalanced data refers to a situation where the number of observations
+in one class significantly outweighs those in one or more other
+classes. This is a common scenario in various domains:
+
++ In fraud detection, legitimate transactions vastly outnumber
+fraudulent ones.
++ In medical diagnosis, the dataset might have more negative results
+(no disease) than positive results (disease presence).
++ In email filtering, spam emails are less common than non-spam.
+
+Such disparities can lead to models that are overly biased towards the
+majority class, as they tend to optimize overall accuracy by simply
+predicting the majority class.
+
+### Approaches to Handling Imbalanced Data
+
++ Resampling Techniques:
+  - Oversampling Minority Class: Enhancing the representation of the
+  minority class by replicating instances or generating synthetic
+  samples. SMOTE (Synthetic Minority Over-sampling Technique) is a
+  popular method for creating synthetic samples [@chawla2002smote].
+  - Undersampling Majority Class: Reducing the size of the majority
+  class to balance the dataset. Careful selection or clustering
+  methods are employed to retain information [@liu2008exploratory].
+
++ Cost-sensitive Learning: Adjusting the classification cost to make
+errors on the minority class more impactful than errors on the
+majority class. This approach often involves modifying the algorithm
+to be more sensitive to the minority class [@elkan2001foundations].
+
++ Ensemble Methods: Leveraging multiple models to improve
+classification, particularly of the minority class. Techniques such as
+Balanced Random Forest [@chen2004using] and AdaBoost [@sun2007cost]
+have been adapted for imbalanced datasets.
+
+
++ Algorithmic Adjustments: Some algorithms have built-in mechanisms
+for dealing with imbalanced data, such as adjusting class
+weights. This is evident in algorithms like SVM and logistic
+regression, where class weights can be inversely proportional to class
+frequencies [@king2001logistic].
+
+
+### SMOTE
+
+
+The Synthetic Minority Over-sampling Technique (SMOTE) offers a nuanced approach
+to mitigating the challenges posed by imbalanced datasets. Unlike simple 
+oversampling techniques that replicate minority class instances, SMOTE 
+generates synthetic samples in a feature space, enhancing the diversity and 
+representation of the minority class without directly copying existing 
+observations [@chawla2002smote].
+
+#### Algorithm
+
+SMOTE's algorithm can be succinctly described using the following steps for
+each minority class sample $x$:
+
+1. Identify the $k$ nearest neighbors in the minority class for $x$.
+2. Randomly choose one of these $k$ neighbors, call it $x_{\text{nn}}$.
+3. Generate a synthetic sample $x_{\text{new}}$ along the line connecting $x$
+   and $x_{\text{nn}}$. Mathematically, $x_{\text{new}} = x + \lambda (x_{\text{nn}} - x)$,
+   where $\lambda$ is a random number between $0$ and $1$.
+
+This process is repeated until the class distribution is deemed balanced.
+
+
+Several software tools and libraries have made implementing SMOTE straightforward
+in various programming environments. In Python, the `imbalanced-learn` library
+provides an efficient and flexible implementation of SMOTE and its variants,
+allowing seamless integration with scikit-learn workflows. R users can utilize
+the `DMwR` package, which includes functions for applying SMOTE to datasets.
+These tools not only offer basic SMOTE functionality but also support advanced
+variants and allow for easy experimentation with different oversampling strategies.
+
+
+#### Applications, Considerations, and Variants
+
+
+**Applications**: SMOTE's approach to enriching datasets by synthesizing new examples
+has proven beneficial in various fields. For instance, in fraud detection, where
+fraudulent transactions are rare [@dalpozzolo2015calibrating], and in
+medical diagnostics, where certain conditions may be underrepresented
+in datasets [@johnson2019survey].
+
+**Considerations**: While SMOTE enhances the representation of the minority class,
+it may also lead to overfitting, especially if the minority class is dispersed
+or if there's significant overlap with the majority class [@guo2017learning].
+Choosing the right variant of SMOTE and adjusting its parameters requires
+careful consideration of the dataset's characteristics.
+
+**Advanced Variants**: Specific challenges in datasets have led to the development
+of SMOTE variants like Borderline-SMOTE, which generates samples closer to the
+decision boundary to improve classifier sensitivity to the minority class
+[@han2005borderline]. Each variant addresses particular issues, such as noise or the
+risk of generating ambiguous synthetic samples.
+
+
+#### Conclusion
+
+SMOTE and its variants offer a sophisticated approach to mitigating the challenges
+posed by imbalanced datasets. Through synthetic sample generation, these methods
+enhance the diversity and representation of the minority class, facilitating
+improved model accuracy and generalizability. The choice of variant and
+parameters should be guided by the dataset's characteristics and the problem
+context, underscoring the importance of careful experimentation and validation.
