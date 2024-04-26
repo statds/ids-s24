@@ -20,9 +20,12 @@ This section was written by Jack Dennison.
 
  ## Introduction  
  Hello! My name is Jack Dennison and I am a junior dual Applied Data Analysis and Geographic Information 
- systems major. I am interested in the intersection of geography and statistics, so this presentation 
- reflects that. Therefore, I'm going to talk about the various ways that Geographic Data Analysis can be 
- done using python. Some examples of things that will be discussed are `geopy`, `geopandas`, and `arcpy`.
+ systems major. 
+ I am interested in the intersection of geography and statistics, so this presentation 
+ reflects that. 
+ Therefore, I'm going to talk about the various ways that Geographic Data Analysis can be 
+ done using python. 
+ Some examples of things that will be discussed are `geopy`, `geopandas`, and `arcpy`.
 
  ## Downloading the Necessary Packages
  In order to download GeoPy, you can simply install it using either Conda or pip commands.
@@ -36,7 +39,8 @@ This section was written by Jack Dennison.
  ```
  
  To install GeoPandas, it's recommended that you first download prerequisite packages, such as NumPy, 
- pandas, shapely, and Fiona. After that, you can use Conda or pip to install GeoPandas.
+ pandas, shapely, and Fiona. 
+ After that, you can use Conda or pip to install GeoPandas.
 
  Using Conda:
  ```bash
@@ -52,7 +56,8 @@ This section was written by Jack Dennison.
 
  ## GeoPy Overview
  GeoPy is a powerful Python library that provides geocoding capabilities and various geospatial 
- utilities. It allows users to perform various tasks related to geographical information, including 
+ utilities. 
+ It allows users to perform various tasks related to geographical information, including 
  geocoding, reverse geocoding, distance calculations, and more.
 
  ### Geocoding
