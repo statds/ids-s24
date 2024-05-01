@@ -5,17 +5,11 @@ book:
   title: "Introduction to Data Science"
   subtitle: "STAT 3255/5255 @ UConn, Spring 2024"
   author:
-    - name: Jun Yan and Students in Spring 2024
-    - name: Matt Elliott
-    - name: Joshua Lee
-    - name: Olivia Massad
-    - name: Leon Nguyen
-    - name: Pratham Patel
-    - name: Isabelle Perez
-    - name: Weijia Wu
-    - name: Vincent Xie
-    - name: Xingye Zhang
-    - name: William Qualls
+    - name: Jun Yan and Students in Spring 2024:
+    - name: Matt Elliott, Joshua Lee, Olivia Massad
+    - name: Leon Nguyen, Pratham Patel, Isabelle Perez
+    - name: William Qualls, Weijia Wu, Vincent Xie
+    - name: Emmanuel Yankson, Xingye Zhang
   date: today
 
   sidebar:
@@ -33,7 +27,7 @@ book:
     - visualization.qmd
     - statsmod.qmd
     - supervised.qmd
-    - webscraping.qmd
+    - advanced.qmd
     - exercises.qmd
     - references.qmd
 
