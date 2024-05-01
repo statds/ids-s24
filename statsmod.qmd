@@ -108,3 +108,4 @@ distribution.
 
 {{< include _statsmodels.qmd >}}
 
+{{< include _timeseries.qmd >}}
