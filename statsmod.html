@@ -285,6 +285,16 @@ window.Quarto = {
   <li><a href="#nonparametric-models" id="toc-nonparametric-models" class="nav-link" data-scroll-target="#nonparametric-models"><span class="header-section-number">9.3.9</span> Nonparametric Models</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">9.3.10</span> References</a></li>
   </ul></li>
+  <li><a href="#time-series-analysis" id="toc-time-series-analysis" class="nav-link" data-scroll-target="#time-series-analysis"><span class="header-section-number">9.4</span> Time Series Analysis</a>
+  <ul class="collapse">
+  <li><a href="#what-is-time-series-data" id="toc-what-is-time-series-data" class="nav-link" data-scroll-target="#what-is-time-series-data"><span class="header-section-number">9.4.1</span> What is Time Series Data?</a></li>
+  <li><a href="#identifying-data-trends" id="toc-identifying-data-trends" class="nav-link" data-scroll-target="#identifying-data-trends"><span class="header-section-number">9.4.2</span> Identifying Data Trends</a></li>
+  </ul></li>
+  <li><a href="#forecasting-using-arima" id="toc-forecasting-using-arima" class="nav-link" data-scroll-target="#forecasting-using-arima"><span class="header-section-number">9.5</span> Forecasting using ARIMA</a>
+  <ul class="collapse">
+  <li><a href="#modeling-volatility-with-garch" id="toc-modeling-volatility-with-garch" class="nav-link" data-scroll-target="#modeling-volatility-with-garch"><span class="header-section-number">9.5.1</span> Modeling Volatility With GARCH</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">9.5.2</span> Conclusion</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -391,7 +401,7 @@ window.Quarto = {
 <h3 data-number="9.3.3" class="anchored" data-anchor-id="installation-and-setup"><span class="header-section-number">9.3.3</span> Installation and Setup</h3>
 <p>To install <code>statsmodels</code>, use <code>pip install statsmodels</code> or <code>conda install statsmodels</code>, depending on whether you are using pip or conda.</p>
 <p>One of the major benefits of using <code>statsmodels</code> is their compatability with other commnonly used packages, such as <code>NumPy</code>, <code>SciPy</code>, and <code>Pandas</code>. These packages provide foundational scientific computing functionalities that are crucial for working with <code>statsmodels</code>. To ensure everything is set up correctly, import the necessary libraries at the beginning of your script:</p>
-<div id="4a93091e" class="cell" data-execution_count="1">
+<div id="24a9b690" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
@@ -411,7 +421,7 @@ window.Quarto = {
 <section id="importing-data" class="level3" data-number="9.3.4">
 <h3 data-number="9.3.4" class="anchored" data-anchor-id="importing-data"><span class="header-section-number">9.3.4</span> Importing Data</h3>
 <p>There are a few different options to import data. For example, <code>statsmodels</code> documentation demonstrates how to importing from a CSV file hosted online from the <a href="https://github.com/vincentarelbundock/Rdatasets/">Rdatasets repository</a>:</p>
-<div id="3b3ca2df" class="cell" data-execution_count="2">
+<div id="48f00e9f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reads the 'avocado' dataset from the causaldata package into df</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df0 <span class="op">=</span> sm.datasets.get_rdataset(dataname<span class="op">=</span><span class="st">'avocado'</span>, package<span class="op">=</span><span class="st">"causaldata"</span>).data</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We will be using this dataset later!</span></span>
@@ -428,7 +438,7 @@ window.Quarto = {
 </div>
 </div>
 <p>We can also read directly from a local CSV file with <code>pandas</code>. For example, we will be using the NYC 311 request rodent data:</p>
-<div id="a06affc5" class="cell" data-execution_count="3">
+<div id="aea65c7b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reads the csv file into df</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data/rodent_2022-2023.csv'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -497,12 +507,12 @@ window.Quarto = {
 <section id="troubleshooting" class="level3" data-number="9.3.5">
 <h3 data-number="9.3.5" class="anchored" data-anchor-id="troubleshooting"><span class="header-section-number">9.3.5</span> Troubleshooting</h3>
 <p>Whenever you are having problems with <code>statsmodels</code>, you can access the official documentation by visiting <a href="https://www.statsmodels.org/stable/index.html">this link</a>. If you are working in a code editor, you can also run the following in a code cell:</p>
-<div id="e3525cde" class="cell" data-execution_count="4">
+<div id="9b146798" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sm.webdoc() </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Opens the official documentation page in your browser</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To look for specific documentation, for example <code>sm.GLS</code>, you can run the following:</p>
-<div id="993b93b4" class="cell" data-execution_count="5">
+<div id="2f6eeba5" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sm.webdoc(func<span class="op">=</span>sm.GLS, stable<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># func : string* or function to search for documentation </span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># stable : (True) or development (False) documentation, default is stable</span></span>
@@ -538,7 +548,7 @@ window.Quarto = {
 <p>Simple and muliple linear regression are special cases where the expected value of the dependent value is equal to a linear combination of predictors. In other words, the link function is the identity function <span class="math inline">\(g[E(Y)]=E(Y)\)</span>. Make sure assumptions for linear regression hold before proceeding. The model for linear regression is given by: <span class="math display">\[y_i = X_i\beta + \epsilon_i\]</span> where <span class="math inline">\(X_i\)</span> is a vector of predictors for individual <span class="math inline">\(i\)</span>, and <span class="math inline">\(\beta\)</span> is a vector of coefficients that define this linear combination.</p>
 <p>We will be working with the <code>avocado</code> dataset from the package <code>causaldata</code> which contains information about the average price and total amount of avocados that were sold in California from 2015-2018. <code>AveragePrice</code> of a single avocado is our predictor, and <code>TotalVolume</code> is our outcome variable as a count of avocados.</p>
 <p>Here is an application of SLR with <code>statsmodels</code>:</p>
-<div id="becceac5" class="cell" data-execution_count="6">
+<div id="16118e4f" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can use .get_rdataset() to load data into Python from a repositiory of R packages.</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> sm.datasets.get_rdataset(<span class="st">'avocado'</span>, package<span class="op">=</span><span class="st">"causaldata"</span>).data</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -553,8 +563,8 @@ window.Quarto = {
 Dep. Variable:            TotalVolume   R-squared:                       0.441
 Model:                            OLS   Adj. R-squared:                  0.438
 Method:                 Least Squares   F-statistic:                     132.0
-Date:                Mon, 25 Mar 2024   Prob (F-statistic):           7.04e-23
-Time:                        16:27:18   Log-Likelihood:                -2550.3
+Date:                Wed, 01 May 2024   Prob (F-statistic):           7.04e-23
+Time:                        15:29:41   Log-Likelihood:                -2550.3
 No. Observations:                 169   AIC:                             5105.
 Df Residuals:                     167   BIC:                             5111.
 Df Model:                           1                                         
@@ -591,7 +601,7 @@ Notes:
 <p>Logistic regression is used when the response variable is binary. The response distribution is logistic which means it has support (input) on <span class="math inline">\((0,1)\)</span> and<br>
 is invertible. The log-odds link function is defined as <span class="math inline">\(\log\left(\frac{\mu}{1-\mu}\right)\)</span>, where <span class="math inline">\(\mu\)</span> is the predicted probability.</p>
 <p>Here we have an example from our <code>rodents</code> dataset, where the response variable <code>Under 3h</code> indicates whether the response time for a 311 service request was under 3 hours. 1 indicates that the response time is less than 3 hours, and 0 indications greater than or equal to 3 hours. We are creating a logistic regression model that can be used to estimate the odds ratio of 311 requests having a response time under 3 hours based on <code>Borough</code> and <code>Open Data Channel Type</code> (method of how 311 service request was submitted) as predictors.</p>
-<div id="41ce2e5c" class="cell" data-execution_count="7">
+<div id="b5ae3000" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loaded the dataset in a previous cell as df</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create binary variable</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Under 3h'</span>] <span class="op">=</span> (df[<span class="st">'Response Time'</span>] <span class="op">&lt;</span> <span class="dv">3</span>).astype(<span class="bu">int</span>)</span>
@@ -608,7 +618,7 @@ is invertible. The log-odds link function is defined as <span class="math inline
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For this regression to run properly, we needed to create <span class="math inline">\(k-1\)</span> dummy variables with <span class="math inline">\(k\)</span> levels in a given predictor. Here we have two categorical variables that we used <code>pd.get_dummies()</code> function to change from a categorical variable into dummy variables. We then dropped one dummy variable level from each category: <code>'Borough_QUEENS'</code> and <code>'Open Data Channel Type_MOBILE'</code>.</p>
-<div id="d6675457" class="cell" data-execution_count="8">
+<div id="5629635a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop all rows with NaN values</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df.dropna(inplace <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -630,8 +640,8 @@ is invertible. The log-odds link function is defined as <span class="math inline
 Dep. Variable:               Under 3h   No. Observations:                82846
 Model:                          Logit   Df Residuals:                    82839
 Method:                           MLE   Df Model:                            6
-Date:                Mon, 25 Mar 2024   Pseudo R-squ.:                 0.02459
-Time:                        16:27:19   Log-Likelihood:                -51035.
+Date:                Wed, 01 May 2024   Pseudo R-squ.:                 0.02459
+Time:                        15:29:42   Log-Likelihood:                -51035.
 converged:                       True   LL-Null:                       -52321.
 Covariance Type:            nonrobust   LLR p-value:                     0.000
 =================================================================================================
@@ -656,7 +666,7 @@ Open Data Channel Type_PHONE      0.4540      0.018     25.836      0.000       
 </ul>
 <p>Another example:</p>
 <p>We will use the <code>macrodata</code> dataset directly from <code>statsmodels</code>, which contains information on macroeconomic indicators in the US across different quarters from 1959 to 2009, such as unemployment rate, inflation rate, real gross domestic product, etc. I have created a binary variable <code>morethan5p</code> that has a value of 1 when the unemployment rate is more than 5% in a given quarter, and is 0 when it is equal to or less than 5%. We are creating a logistic regression model that can be used to estimate the odds ratio of the unemployment rate being greater than 5% based on <code>cpi</code> (end-of-quarter consumer price index) and <code>pop</code> (end-of-quarter population) as predictors.</p>
-<div id="457c9eec" class="cell" data-execution_count="9">
+<div id="8d56c548" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># df2 is an instance of a statsmodels dataset class</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> sm.datasets.macrodata.load_pandas()</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># add binary variable</span></span>
@@ -677,8 +687,8 @@ Open Data Channel Type_PHONE      0.4540      0.018     25.836      0.000       
 Dep. Variable:             morethan5p   No. Observations:                  203
 Model:                          Logit   Df Residuals:                      200
 Method:                           MLE   Df Model:                            2
-Date:                Mon, 25 Mar 2024   Pseudo R-squ.:                 0.05839
-Time:                        16:27:19   Log-Likelihood:                -113.48
+Date:                Wed, 01 May 2024   Pseudo R-squ.:                 0.05839
+Time:                        15:29:43   Log-Likelihood:                -113.48
 converged:                       True   LL-Null:                       -120.52
 Covariance Type:            nonrobust   LLR p-value:                 0.0008785
 ==============================================================================
@@ -691,7 +701,7 @@ pop           -0.1286      0.038     -3.349      0.001      -0.204      -0.053
 </div>
 </div>
 <p>We can compute odds ratios and other information by calling methods on the fitted result object. Below are the 95% confidence intervals of the odds ratio <span class="math inline">\(e^{\text{coef}}\)</span> of each coefficient:</p>
-<div id="73340891" class="cell" data-execution_count="10">
+<div id="043e14f4" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>odds_ratios <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    {</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Odds Ratio"</span>: result2.params,</span>
@@ -719,7 +729,7 @@ pop        8.793232e-01      0.815568  9.480629e-01</code></pre>
 <p>where <span class="math inline">\(\mu\)</span> is the probability of success (the response variable). The intercept <code>b0</code> is assumed to be 0 if not provided in the model. We will use <code>.add_constant</code> to indicate that our model includes an intercept term.</p>
 <p>Let’s use the <code>sunspots</code> dataset from <code>statsmodels</code>. This is a one variable dataset that counts the number of sunspots that occur in a given year (from 1700 - 2008). Note that the link function for Poisson regression is a log function, which means <span class="math inline">\(\log{E(Y)}=X\beta.\)</span></p>
 <p>We first load an instance of a <code>statsmodels</code> dataset class, analogous to a <code>pandas</code> dataframe:</p>
-<div id="2ddb265c" class="cell" data-execution_count="11">
+<div id="56f14f1a" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="op">=</span> sm.datasets.sunspots.load_pandas()</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df3 <span class="op">=</span> df3.data</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -749,7 +759,7 @@ pop        8.793232e-01      0.815568  9.480629e-01</code></pre>
 <li><code>data.exog</code> acts as a series of observations for each predictor</li>
 <li><code>family</code> specifies the distribution appropriate for the model</li>
 </ul>
-<div id="28f33458" class="cell" data-execution_count="12">
+<div id="2a637ae3" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>result3 <span class="op">=</span> sm.GLM(Y, X, family<span class="op">=</span>sm.families.Poisson()).fit()</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result3.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -760,8 +770,8 @@ Model:                            GLM   Df Residuals:                      306
 Model Family:                 Poisson   Df Model:                            2
 Link Function:                    Log   Scale:                          1.0000
 Method:                          IRLS   Log-Likelihood:                -5548.3
-Date:                Mon, 25 Mar 2024   Deviance:                       9460.6
-Time:                        16:27:19   Pearson chi2:                 9.37e+03
+Date:                Wed, 01 May 2024   Deviance:                       9460.6
+Time:                        15:29:43   Pearson chi2:                 9.37e+03
 No. Iterations:                     5   Pseudo R-squ. (CS):             0.8057
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -786,7 +796,7 @@ YEAR2       5.368e-06   1.13e-06      4.755      0.000    3.16e-06    7.58e-06
 <ul>
 <li><strong>Deviance</strong>: Measures the goodness-of-fit by taking the difference between the log-likelihood of a fitted GLM and the log-likelihood of a perfect model where fitted responses match observed responses. A larger deviance indicates a worse fit for the model. This is a test statistic for Likelihood-ratio tests compared to a chi-squared distribution with <span class="math inline">\(df=df_{\text{full}}-df_{\text{null}}\)</span>, for comparing a full model against a null model (or some reduced model) similar to a partial F-test.</li>
 </ul>
-<div id="862ce7d7" class="cell" data-execution_count="13">
+<div id="d36b0772" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Poisson Regression Deviance:"</span>, result3.deviance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Poisson Regression Deviance: 9460.616202027577</code></pre>
@@ -795,7 +805,7 @@ YEAR2       5.368e-06   1.13e-06      4.755      0.000    3.16e-06    7.58e-06
 <ul>
 <li><strong>Pearson’s chi-square test:</strong> This tests whether the predicted probabilities from the model differ significantly from the observed counts. The test statistic is calculated by taking the difference between the null deviance (deviance of a model with just the intercept term) and residual deviance (how well the response variable can be predicted by a model with a given number of predictors). Large Pearson’s chi-squares indicate poor fit.</li>
 </ul>
-<div id="86bad464" class="cell" data-execution_count="14">
+<div id="6dcfd13a" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Chi Squared Stat:"</span>,result3.pearson_chi2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Chi Squared Stat: 9368.0333091202</code></pre>
@@ -804,7 +814,7 @@ YEAR2       5.368e-06   1.13e-06      4.755      0.000    3.16e-06    7.58e-06
 <ul>
 <li><strong>Residual Plots:</strong> Like in linear regression, we can visually plot residuals to look for patterns that shouldn’t be there. There are different types of residuals that we can look at, such as deviance residuals:</li>
 </ul>
-<div id="fade0bc3" class="cell" data-execution_count="15">
+<div id="6f383a27" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(df3[<span class="st">'YEAR'</span>],result3.resid_deviance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -823,7 +833,7 @@ YEAR2       5.368e-06   1.13e-06      4.755      0.000    3.16e-06    7.58e-06
 <p><code>statsmodels</code> has a non-parametric approach called kernel density estimation (KDE), which estimates the underlying probability of a given assortment of data points. KDE is used when you don’t have enough data points to form a parametric model. It estimates the density of continuous random variables, or extrapolates some continuous function from discrete counts. KDE is a non-parametric way to estimate the underlying distribution of data. The KDE weights all the distances of all data points relative to every location. The more data points there are at a given location, the higher the KDE estimate at that location. Points closer to a given location are generally weighted more than those further away. The shape of the kernel function itself indicates how the point distances are weighted. For example, a uniform kernel function will give equal weighting across all values within a bandwidth, whereas a triangle kernel function gives weighting dependent on linear distance.</p>
 <p>KDE can be applied for univariate or multivariate data. <code>statsmodels</code> has two methods for this: - <code>sm.nonparametric.KDEunivariate</code>: For univariate data. This estimates the bandwidth using Scott’s rule unless specified otherwise. Much faster than using <code>.KDEMultivariate</code> due to its use of Fast Fourier Transforms on univariate, continuous data. - <code>sm.nonparametric.KDEMultivariate</code>: This applies to both univariate and multivariate data, but tends to be slower. Can use mixed types of data but requires specification.</p>
 <p>Here we will demonstrate how to apply it to univariate data, based off of examples provided in the <a href="https://www.statsmodels.org/stable/examples/notebooks/generated/kernel_density.html#Comparing-kernel-functions">documentation</a>. We will generate a histogram of based off of <a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/faithful">geyser waiting time</a> data from Rdatasets. This dataset records the waiting time between “Old Faithful” geyser’s eruptions in Yellowstone National Park. Our goal is to fit a KDE with a Gaussian kernel function to this data.</p>
-<div id="a66658a6" class="cell" data-execution_count="16">
+<div id="31952e66" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df5 <span class="op">=</span> sm.datasets.get_rdataset(<span class="st">"faithful"</span>, <span class="st">"datasets"</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>waiting_obs <span class="op">=</span> df5.data[<span class="st">'waiting'</span>] </span>
@@ -863,7 +873,7 @@ YEAR2       5.368e-06   1.13e-06      4.755      0.000    3.16e-06    7.58e-06
 </div>
 </div>
 <p>Now we want to fit our KDE based on our <code>waiting_obs</code> sample:</p>
-<div id="b5317154" class="cell" data-execution_count="17">
+<div id="a6ef69e2" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>kde <span class="op">=</span> sm.nonparametric.KDEUnivariate(waiting_obs)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>kde.fit()  <span class="co"># Estimate the densities</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Estimated Bandwidth:"</span>, kde.bw)  </span>
@@ -918,7 +928,7 @@ YEAR2       5.368e-06   1.13e-06      4.755      0.000    3.16e-06    7.58e-06
 </div>
 </div>
 <p>When fitting the KDE, a <code>kde.bw</code> or bandwidth parameter is returned. We can alter this to see how it affects the fit and smoothness of the curve. The smaller the bandwidth, the more jagged the estimated distribution becomes.</p>
-<div id="73ab6d6d" class="cell" data-execution_count="18">
+<div id="4467e2c2" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot of data samples and histogram</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot()</span>
@@ -1051,6 +1061,886 @@ YEAR2       5.368e-06   1.13e-06      4.755      0.000    3.16e-06    7.58e-06
 <li><a href="https://stackoverflow.com/questions/5484922/secondary-axis-with-twinx-how-to-add-to-legend" class="uri">https://stackoverflow.com/questions/5484922/secondary-axis-with-twinx-how-to-add-to-legend</a></li>
 </ul></li>
 </ul>
+</section>
+</section>
+<section id="time-series-analysis" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="time-series-analysis"><span class="header-section-number">9.4</span> Time Series Analysis</h2>
+<blockquote class="blockquote">
+<p>This section is presented by Alex Pugh</p>
+</blockquote>
+<section id="what-is-time-series-data" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="what-is-time-series-data"><span class="header-section-number">9.4.1</span> What is Time Series Data?</h3>
+<p>Any information collected over regular intervals of time is considered to follow a time series. Time series analysis is a way of studying the characteristics of the response variable concerning time as the independent variable. To estimate the target variable in predicting or forecasting, using the time variable as the reference point can yield insights into trends, seasonal patterns, and future forecasts.</p>
+<p>The opposite of time series data is cross-sectional data - where observations are collected at single point in time.</p>
+<p>As an example of time series data, we will be using stock prices for two different companies: Starbucks (SBUX) and Supermicro (SMCI). Let’s vizualize their stock prices as a time series over the last year. We will pull real time data using the package <em>yfinance</em>.</p>
+<div id="031f9119" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yfinance <span class="im">as</span> yf</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the ticker symbols</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>tickerSymbol1 <span class="op">=</span> <span class="st">'SBUX'</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>tickerSymbol2 <span class="op">=</span> <span class="st">'SMCI'</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Get data for the past year</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>start_date <span class="op">=</span> datetime.datetime.now() <span class="op">-</span> datetime.timedelta(days<span class="op">=</span><span class="dv">365</span>)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>end_date <span class="op">=</span> datetime.datetime.now()</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the data</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>SBUX <span class="op">=</span> yf.download(tickerSymbol1, start<span class="op">=</span>start_date, end<span class="op">=</span>end_date)</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>SMCI <span class="op">=</span> yf.download(tickerSymbol2, start<span class="op">=</span>start_date, end<span class="op">=</span>end_date)</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>SBUX.dropna(subset<span class="op">=</span>[<span class="st">'Close'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>SMCI.dropna(subset<span class="op">=</span>[<span class="st">'Close'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting SBUX data</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>plt.plot(SBUX.index, SBUX[<span class="st">'Close'</span>], label<span class="op">=</span><span class="st">'SBUX'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Close Price'</span>)</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'SBUX Close Price Over One Year'</span>)</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting SMCI data</span></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>plt.plot(SMCI.index, SMCI[<span class="st">'Close'</span>], label<span class="op">=</span><span class="st">'SMCI'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Close Price'</span>)</span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'SMCI Close Price Over One Year'</span>)</span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>[*********************100%%**********************]  1 of 1 completed
+[*********************100%%**********************]  1 of 1 completed</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="statsmod_files/figure-html/cell-20-output-2.png" width="758" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="statsmod_files/figure-html/cell-20-output-3.png" width="758" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="identifying-data-trends" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="identifying-data-trends"><span class="header-section-number">9.4.2</span> Identifying Data Trends</h3>
+<section id="elementary-data-trends" class="level4" data-number="9.4.2.1">
+<h4 data-number="9.4.2.1" class="anchored" data-anchor-id="elementary-data-trends"><span class="header-section-number">9.4.2.1</span> Elementary Data Trends</h4>
+<ul>
+<li><strong>Seasonal</strong> - regular or fixed interval shifts within the dataset in a continuous timeline</li>
+<li><strong>Cyclical</strong> - no fixed interval, uncertainty in movement and its pattern</li>
+<li><strong>Trend</strong> - no fixed interval nor any divergence within the given dataset is a continuous timeline</li>
+<li><strong>Irregular</strong> - unexpected situations/events/scenarios and spikes in a short time span</li>
+</ul>
+</section>
+<section id="stationarity" class="level4" data-number="9.4.2.2">
+<h4 data-number="9.4.2.2" class="anchored" data-anchor-id="stationarity"><span class="header-section-number">9.4.2.2</span> Stationarity</h4>
+<p>Stationarity is the primary underlying assumption in most time series analysis. This refers to the idea that the origin of time does not affect the properties of the process under the statistical factor, and that the manner in which the data changes is constant. Statistically, this means that the unconditional joint probability distribution does not change when shifted in time. Consequently, parameters such as mean and variance also do not change over time. If you draw a line through the middle of a time series then it should be flat; it may have ‘seasonal’ cycles around the trend line, but overall it does not trend up nor down.</p>
+<p>A stationary dataset should adhere to the following rules without having Trend, Seasonality, Cyclical, and Irregularity components of the time series.</p>
+<ul>
+<li>The mean value of them should be completely constant in the data during the analysis.</li>
+<li>The variance should be constant with respect to the time-frame.</li>
+<li>Covariance should measure the relationship between two variables and remain constant with resspect to time.</li>
+</ul>
+<p>If any of these do not hold, we can say that the data is non-stationary.</p>
+<p>We can use the Augmented Dickey-Fuller (ADF) Test or the Kwiatkowski-Phillips-Schmidt-Shin (KPSS) Test to prove stationarity. The following are the null hypotheses for each test:</p>
+<ul>
+<li>Augmented Dickey-Fuller (ADF) Test:
+<ul>
+<li>Null Hypothesis: The time series has a unit root, indicating it is non-stationary.</li>
+</ul></li>
+<li>Kwiatkowski-Phillips-Schmidt-Shin (KPSS) Test:
+<ul>
+<li>Null Hypothesis: The time series is stationary around a deterministic trend.</li>
+</ul></li>
+</ul>
+<div id="0ec047f3" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> adfuller, kpss</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> adf_kpss_test(series, name):</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ADF Test</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    adf_result <span class="op">=</span> adfuller(series, autolag<span class="op">=</span><span class="st">'AIC'</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'ADF Test for </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">:'</span>)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'ADF Statistic: </span><span class="sc">{</span>adf_result[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'p-value: </span><span class="sc">{</span>adf_result[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'Critical Values:'</span>)</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> key, value <span class="kw">in</span> adf_result[<span class="dv">4</span>].items():</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'   </span><span class="sc">{</span>key<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>value<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># KPSS Test</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    kpss_result <span class="op">=</span> kpss(series, regression<span class="op">=</span><span class="st">'c'</span>)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">KPSS Test for </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">:'</span>)</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'KPSS Statistic: </span><span class="sc">{</span>kpss_result[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'p-value: </span><span class="sc">{</span>kpss_result[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'Critical Values:'</span>)</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> key, value <span class="kw">in</span> kpss_result[<span class="dv">3</span>].items():</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'   </span><span class="sc">{</span>key<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>value<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform ADF and KPSS tests for SBUX</span></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>adf_kpss_test(SBUX[<span class="st">'Close'</span>], <span class="st">'SBUX Stock Price'</span>)</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform ADF and KPSS tests for SMCI</span></span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>adf_kpss_test(SMCI[<span class="st">'Close'</span>], <span class="st">'SMCI Stock Price'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ADF Test for SBUX Stock Price:
+ADF Statistic: -1.8767488685364573
+p-value: 0.34307697475147053
+Critical Values:
+   1%: -3.4566744514553016
+   5%: -2.8731248767783426
+   10%: -2.5729436702592023
+
+KPSS Test for SBUX Stock Price:
+KPSS Statistic: 1.4362693363679242
+p-value: 0.01
+Critical Values:
+   10%: 0.347
+   5%: 0.463
+   2.5%: 0.574
+   1%: 0.739
+ADF Test for SMCI Stock Price:
+ADF Statistic: -0.8453696601714261
+p-value: 0.80543059891859
+Critical Values:
+   1%: -3.457437824930831
+   5%: -2.873459364726563
+   10%: -2.573122099570008
+
+KPSS Test for SMCI Stock Price:
+KPSS Statistic: 1.6523328114790083
+p-value: 0.01
+Critical Values:
+   10%: 0.347
+   5%: 0.463
+   2.5%: 0.574
+   1%: 0.739</code></pre>
+</div>
+</div>
+<section id="interpretation" class="level5" data-number="9.4.2.2.1">
+<h5 data-number="9.4.2.2.1" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">9.4.2.2.1</span> Interpretation</h5>
+<p>Starbucks:</p>
+<ul>
+<li><p>ADF Test: The ADF statistic is -1.84, and the p-value is 0.36. Since the p-value is greater than the significance level (0.05), we fail to reject the null hypothesis. This suggests that the time series of Starbucks’ stock price is non-stationary.</p></li>
+<li><p>KPSS Test: The KPSS statistic is 1.29, and the p-value is 0.01. Here, since the p-value is less than the significance level (0.05), we reject the null hypothesis. This suggests that the time series of Starbucks’ stock price is non-stationary according to the KPSS test as well.</p></li>
+</ul>
+<p>Supermicro:</p>
+<ul>
+<li><p>ADF Test: The ADF statistic is -0.28, and the p-value is 0.93. Similar to Starbucks, the p-value is greater than the significance level (0.05), indicating non-stationarity.</p></li>
+<li><p>KPSS Test: The KPSS statistic is 1.39, and the p-value is 0.01. Here, since the p-value is less than the significance level (0.05), we reject the null hypothesis. This suggests that the time series of Starbucks’ stock price is non-stationary according to the KPSS test as well.</p></li>
+</ul>
+</section>
+<section id="converting-non-stationary-into-stationary" class="level5" data-number="9.4.2.2.2">
+<h5 data-number="9.4.2.2.2" class="anchored" data-anchor-id="converting-non-stationary-into-stationary"><span class="header-section-number">9.4.2.2.2</span> Converting Non-Stationary Into Stationary</h5>
+<p>There are three methods available for this conversion – detrending, differencing, and transformation.</p>
+<ol type="1">
+<li><p>Detrending</p>
+<p>Detrending involves removing the trend effects from the given dataset and showing only the differences in values from the trend. It always allows cyclical patterns to be identified.</p></li>
+</ol>
+<p><span class="math display">\[
+    Detrend(t) = Observation(t) - Rolling Mean of Observation(1,...,t)
+\]</span></p>
+<ol start="2" type="1">
+<li><p>Differencing</p>
+<p>This is a simple transformation of the series into a new time series, which we use to remove the series dependence on time and stabilize the mean of the time series, so trend and seasonality are reduced during this transformation.</p></li>
+</ol>
+<p><span class="math display">\[
+    Difference(t) = Observation(t) - Observation(t-1)
+\]</span></p>
+<ol start="3" type="1">
+<li><p>Transformation</p>
+<p>Power transformations, square root transformations, and log tranformations are different possible methods. The most commonly used is a log transformation.</p></li>
+</ol>
+<p><span class="math display">\[
+    Log Return(t) = log( Observation(t−1) / Observation(t) )
+\]</span></p>
+<div id="2e3e0ab2" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>SBUX.reset_index(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>SMCI.reset_index(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Detrending</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>SBUX[<span class="st">'Detrended_Close'</span>] <span class="op">=</span> SBUX[<span class="st">'Close'</span>] <span class="op">-</span> SBUX[<span class="st">'Close'</span>].rolling(window<span class="op">=</span><span class="dv">365</span>, </span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>min_periods<span class="op">=</span><span class="dv">1</span>).mean()</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>SMCI[<span class="st">'Detrended_Close'</span>] <span class="op">=</span> SMCI[<span class="st">'Close'</span>] <span class="op">-</span> SMCI[<span class="st">'Close'</span>].rolling(window<span class="op">=</span><span class="dv">365</span>, </span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>min_periods<span class="op">=</span><span class="dv">1</span>).mean()</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Differencing</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>SBUX[<span class="st">'Differenced_Close'</span>] <span class="op">=</span> SBUX[<span class="st">'Close'</span>].diff()</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>SMCI[<span class="st">'Differenced_Close'</span>] <span class="op">=</span> SMCI[<span class="st">'Close'</span>].diff()</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Log Return Transformation</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the percentage change</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>SBUX[<span class="st">'Return'</span>] <span class="op">=</span> SBUX[<span class="st">'Close'</span>].pct_change()</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>SMCI[<span class="st">'Return'</span>] <span class="op">=</span> SMCI[<span class="st">'Close'</span>].pct_change()</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply natural logarithm to the percentage change</span></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>SBUX[<span class="st">'Log_Return'</span>] <span class="op">=</span> np.log(<span class="dv">1</span> <span class="op">+</span> SBUX[<span class="st">'Return'</span>])</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>SMCI[<span class="st">'Log_Return'</span>] <span class="op">=</span> np.log(<span class="dv">1</span> <span class="op">+</span> SMCI[<span class="st">'Return'</span>])</span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot original and transformed data for SBUX</span></span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>plt.plot(SBUX[<span class="st">'Date'</span>], SBUX[<span class="st">'Close'</span>], label<span class="op">=</span><span class="st">'Original'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'SBUX Price (Original)'</span>)</span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Price'</span>)</span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a>plt.plot(SBUX[<span class="st">'Date'</span>], SBUX[<span class="st">'Detrended_Close'</span>], label<span class="op">=</span><span class="st">'Detrended'</span>, </span>
+<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a>color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'SBUX Close Price (Detrended)'</span>)</span>
+<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Detrended Price'</span>)</span>
+<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb35-42"><a href="#cb35-42" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb35-43"><a href="#cb35-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-44"><a href="#cb35-44" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb35-45"><a href="#cb35-45" aria-hidden="true" tabindex="-1"></a>plt.plot(SBUX[<span class="st">'Date'</span>][<span class="dv">1</span>:], SBUX[<span class="st">'Differenced_Close'</span>][<span class="dv">1</span>:], </span>
+<span id="cb35-46"><a href="#cb35-46" aria-hidden="true" tabindex="-1"></a>label<span class="op">=</span><span class="st">'Differenced'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb35-47"><a href="#cb35-47" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'SBUX Close Price (Differenced)'</span>)</span>
+<span id="cb35-48"><a href="#cb35-48" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb35-49"><a href="#cb35-49" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Differenced Price'</span>)</span>
+<span id="cb35-50"><a href="#cb35-50" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb35-51"><a href="#cb35-51" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb35-52"><a href="#cb35-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-53"><a href="#cb35-53" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb35-54"><a href="#cb35-54" aria-hidden="true" tabindex="-1"></a>plt.plot(SBUX[<span class="st">'Date'</span>], SBUX[<span class="st">'Log_Return'</span>], label<span class="op">=</span><span class="st">'SBUX Log Return'</span>, </span>
+<span id="cb35-55"><a href="#cb35-55" aria-hidden="true" tabindex="-1"></a>color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb35-56"><a href="#cb35-56" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'SBUX Log Returns'</span>)</span>
+<span id="cb35-57"><a href="#cb35-57" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb35-58"><a href="#cb35-58" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Log Return'</span>)</span>
+<span id="cb35-59"><a href="#cb35-59" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb35-60"><a href="#cb35-60" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb35-61"><a href="#cb35-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-62"><a href="#cb35-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot original and transformed data for SMCI</span></span>
+<span id="cb35-63"><a href="#cb35-63" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb35-64"><a href="#cb35-64" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb35-65"><a href="#cb35-65" aria-hidden="true" tabindex="-1"></a>plt.plot(SMCI[<span class="st">'Date'</span>], SMCI[<span class="st">'Close'</span>], label<span class="op">=</span><span class="st">'Original'</span>, color <span class="op">=</span> <span class="st">'red'</span>)</span>
+<span id="cb35-66"><a href="#cb35-66" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'SMCI Price (Original)'</span>)</span>
+<span id="cb35-67"><a href="#cb35-67" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb35-68"><a href="#cb35-68" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Price'</span>)</span>
+<span id="cb35-69"><a href="#cb35-69" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb35-70"><a href="#cb35-70" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb35-71"><a href="#cb35-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-72"><a href="#cb35-72" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb35-73"><a href="#cb35-73" aria-hidden="true" tabindex="-1"></a>plt.plot(SMCI[<span class="st">'Date'</span>], SMCI[<span class="st">'Detrended_Close'</span>], label<span class="op">=</span><span class="st">'Detrended'</span>, </span>
+<span id="cb35-74"><a href="#cb35-74" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> <span class="st">'red'</span>)</span>
+<span id="cb35-75"><a href="#cb35-75" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'SMCI Close Price (Detrended)'</span>)</span>
+<span id="cb35-76"><a href="#cb35-76" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb35-77"><a href="#cb35-77" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Detrended Price'</span>)</span>
+<span id="cb35-78"><a href="#cb35-78" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb35-79"><a href="#cb35-79" aria-hidden="true" tabindex="-1"></a>plt.xticks(SMCI[<span class="st">'Date'</span>][::<span class="dv">30</span>], rotation<span class="op">=</span><span class="dv">45</span>) </span>
+<span id="cb35-80"><a href="#cb35-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-81"><a href="#cb35-81" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb35-82"><a href="#cb35-82" aria-hidden="true" tabindex="-1"></a>plt.plot(SMCI[<span class="st">'Date'</span>], SMCI[<span class="st">'Differenced_Close'</span>], label<span class="op">=</span><span class="st">'Differenced'</span>, </span>
+<span id="cb35-83"><a href="#cb35-83" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> <span class="st">'red'</span>)</span>
+<span id="cb35-84"><a href="#cb35-84" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'SMCI Close Price (Differenced)'</span>)</span>
+<span id="cb35-85"><a href="#cb35-85" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb35-86"><a href="#cb35-86" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Differenced Price'</span>)</span>
+<span id="cb35-87"><a href="#cb35-87" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb35-88"><a href="#cb35-88" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb35-89"><a href="#cb35-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-90"><a href="#cb35-90" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb35-91"><a href="#cb35-91" aria-hidden="true" tabindex="-1"></a>plt.plot(SMCI[<span class="st">'Date'</span>], SMCI[<span class="st">'Log_Return'</span>], label<span class="op">=</span><span class="st">'SMCI Log Return'</span>, </span>
+<span id="cb35-92"><a href="#cb35-92" aria-hidden="true" tabindex="-1"></a>color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb35-93"><a href="#cb35-93" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'SMCI Log Returns'</span>)</span>
+<span id="cb35-94"><a href="#cb35-94" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb35-95"><a href="#cb35-95" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Log Return'</span>)</span>
+<span id="cb35-96"><a href="#cb35-96" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb35-97"><a href="#cb35-97" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb35-98"><a href="#cb35-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-99"><a href="#cb35-99" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb35-100"><a href="#cb35-100" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="statsmod_files/figure-html/cell-22-output-1.png" width="682" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="statsmod_files/figure-html/cell-22-output-2.png" width="754" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can now perform ADF and KPSS tests for stationarity on the changed data.</p>
+<div id="58210b6a" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform ADF and KPSS tests for SBUX</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> series_name <span class="kw">in</span> [<span class="st">'Detrended_Close'</span>, <span class="st">'Differenced_Close'</span>, <span class="st">'Log_Return'</span>]:</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    adf_kpss_test(SBUX[series_name].dropna(), <span class="ss">f"SBUX </span><span class="sc">{</span>series_name<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform ADF and KPSS tests for SMCI</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> series_name <span class="kw">in</span> [<span class="st">'Detrended_Close'</span>, <span class="st">'Differenced_Close'</span>, <span class="st">'Log_Return'</span>]:</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    adf_kpss_test(SMCI[series_name].dropna(), <span class="ss">f"SMCI </span><span class="sc">{</span>series_name<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ADF Test for SBUX Detrended_Close:
+ADF Statistic: -1.4073562618808706
+p-value: 0.578744397126715
+Critical Values:
+   1%: -3.4566744514553016
+   5%: -2.8731248767783426
+   10%: -2.5729436702592023
+
+KPSS Test for SBUX Detrended_Close:
+KPSS Statistic: 0.5271824191729886
+p-value: 0.03554450018626383
+Critical Values:
+   10%: 0.347
+   5%: 0.463
+   2.5%: 0.574
+   1%: 0.739
+ADF Test for SBUX Differenced_Close:
+ADF Statistic: -14.000936609212907
+p-value: 3.8632262739840877e-26
+Critical Values:
+   1%: -3.456780859712
+   5%: -2.8731715065600003
+   10%: -2.572968544
+
+KPSS Test for SBUX Differenced_Close:
+KPSS Statistic: 0.11652570915449154
+p-value: 0.1
+Critical Values:
+   10%: 0.347
+   5%: 0.463
+   2.5%: 0.574
+   1%: 0.739
+ADF Test for SBUX Log_Return:
+ADF Statistic: -12.7194485598207
+p-value: 9.900033390267044e-24
+Critical Values:
+   1%: -3.456780859712
+   5%: -2.8731715065600003
+   10%: -2.572968544
+
+KPSS Test for SBUX Log_Return:
+KPSS Statistic: 0.1349413283134889
+p-value: 0.1
+Critical Values:
+   10%: 0.347
+   5%: 0.463
+   2.5%: 0.574
+   1%: 0.739
+ADF Test for SMCI Detrended_Close:
+ADF Statistic: -1.139124220886117
+p-value: 0.6992202160005194
+Critical Values:
+   1%: -3.457437824930831
+   5%: -2.873459364726563
+   10%: -2.573122099570008
+
+KPSS Test for SMCI Detrended_Close:
+KPSS Statistic: 1.4239792155349653
+p-value: 0.01
+Critical Values:
+   10%: 0.347
+   5%: 0.463
+   2.5%: 0.574
+   1%: 0.739
+ADF Test for SMCI Differenced_Close:
+ADF Statistic: -5.304547916944405
+p-value: 5.358118355248533e-06
+Critical Values:
+   1%: -3.457437824930831
+   5%: -2.873459364726563
+   10%: -2.573122099570008
+
+KPSS Test for SMCI Differenced_Close:
+KPSS Statistic: 0.11656499714929217
+p-value: 0.1
+Critical Values:
+   10%: 0.347
+   5%: 0.463
+   2.5%: 0.574
+   1%: 0.739
+ADF Test for SMCI Log_Return:
+ADF Statistic: -4.962303571332611
+p-value: 2.6338728093037678e-05
+Critical Values:
+   1%: -3.457437824930831
+   5%: -2.873459364726563
+   10%: -2.573122099570008
+
+KPSS Test for SMCI Log_Return:
+KPSS Statistic: 0.17570697728897325
+p-value: 0.1
+Critical Values:
+   10%: 0.347
+   5%: 0.463
+   2.5%: 0.574
+   1%: 0.739</code></pre>
+</div>
+</div>
+<p>As of April 1, 2024, here is a summary table with the result of the above tests:</p>
+<table class="table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 10%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 22%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Series</th>
+<th>ADF Statistic</th>
+<th>ADF p-value</th>
+<th>KPSS Statistic</th>
+<th>KPSS p-value</th>
+<th>ADF H0 Rejected (Stationarity)</th>
+<th>KPSS H0 Rejected (Stationarity)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SBUX Detrended_Close</td>
+<td>-2.881</td>
+<td>0.048</td>
+<td>0.330</td>
+<td>0.1</td>
+<td>No (Non-Stationary)</td>
+<td>No (Stationary)</td>
+</tr>
+<tr class="even">
+<td>SBUX Differenced_Close</td>
+<td>-6.864</td>
+<td>1.57e-09</td>
+<td>0.029</td>
+<td>0.1</td>
+<td>Yes (Stationary)</td>
+<td>No (Stationary)</td>
+</tr>
+<tr class="odd">
+<td>SBUX Log_Return</td>
+<td>-8.689</td>
+<td>4.10e-14</td>
+<td>0.029</td>
+<td>0.1</td>
+<td>Yes (Stationary)</td>
+<td>No (Stationary)</td>
+</tr>
+<tr class="even">
+<td>SMCI Detrended_Close</td>
+<td>-0.733</td>
+<td>0.838</td>
+<td>1.161</td>
+<td>0.01</td>
+<td>No (Non-Stationary)</td>
+<td>Yes (Non-Stationary)</td>
+</tr>
+<tr class="odd">
+<td>SMCI Differenced_Close</td>
+<td>-2.761</td>
+<td>0.064</td>
+<td>0.365</td>
+<td>0.092</td>
+<td>No (Non-Stationary)</td>
+<td>No (Stationary)</td>
+</tr>
+<tr class="even">
+<td>SMCI Log_Return</td>
+<td>-9.839</td>
+<td>4.80e-17</td>
+<td>0.157</td>
+<td>0.1</td>
+<td>Yes (Stationary)</td>
+<td>No (Stationary)</td>
+</tr>
+</tbody>
+</table>
+<p>The Starbucks stock price is stationary once differenced or the log return is taken, and the Supermicro stock price is approximately stationary once taken the log return.</p>
+</section>
+</section>
+<section id="autocorrelation" class="level4" data-number="9.4.2.3">
+<h4 data-number="9.4.2.3" class="anchored" data-anchor-id="autocorrelation"><span class="header-section-number">9.4.2.3</span> Autocorrelation</h4>
+<p>Autocorrelation measures the relationship between a variable’s current value and its past values at different time lags. Data with strong autocorrelation indicates that current values are highly influenced from past values. The prescence of strong autocorrelation can lead to greater predicability of future values.</p>
+<p>Autocorrelation coefficient for different time lags for a variable can be used to answer the following questions about a time series:</p>
+<ol type="1">
+<li>Is the data random?</li>
+</ol>
+<p>If a series is random, the autocorrelation between successive values at any time lag k are close to zero. This means that successive values of a time series are not related to each other.</p>
+<ol start="2" type="1">
+<li>Does the data have a trend or is it stationary?</li>
+</ol>
+<p>If a series has a trend, successive observations are highly correlated, and the autocorrelation coefficients typically are significantly different from zero for the first several time lags and then gradually drop toward zero as the number of lags increase.</p>
+<ol start="3" type="1">
+<li>Is the data seasonal?</li>
+</ol>
+<p>If a series has a seasonal pattern, a significant autocorrelation coefficient will occur at the seasonal time lag or multiples of the seasonal lag. The seasonal lag is 4 for quarterly data and 12 for monthly data.</p>
+<p>The autocorrelation coefficients for a stationary series decline to zero fairly rapidly, generally after the second or third time lag. On the other hand, sample autocorrelation for nonstationary series remain fairly large for several time periods. Often, to analyze nonstationary series, the trend is removed before additional modeling occurs. This is the reasoning for performing the previous data manipulation.</p>
+<p><em>Statsmodels</em> will grant us access to evaluating the datasets’ autocorrelations.</p>
+<div id="940d60d8" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.graphics.tsaplots <span class="im">import</span> plot_acf</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.diagnostic <span class="im">import</span> acorr_ljungbox</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ACF plot for SBUX log return data</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>plot_acf(SBUX[<span class="st">'Log_Return'</span>].dropna(), lags<span class="op">=</span><span class="dv">30</span>, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Autocorrelation Function (ACF) for SBUX Log Returns'</span>)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Lag'</span>)</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Autocorrelation'</span>)</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="co"># ACF plot for SMCI log return data</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>plot_acf(SMCI[<span class="st">'Log_Return'</span>].dropna(), lags<span class="op">=</span><span class="dv">30</span>, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Autocorrelation Function (ACF) for SMCI Log Returns'</span>)</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Lag'</span>)</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Autocorrelation'</span>)</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 960x480 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="statsmod_files/figure-html/cell-24-output-2.png" width="608" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 960x480 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="statsmod_files/figure-html/cell-24-output-4.png" width="608" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Both log returned stock prices have an autocorrelation function that feature none or minimal spikes in the autocorrelation coefficient. This indicates that autocorrelation is weak in the log yield data, and that any value is not strongly correlated with its previous value.</p>
+</section>
+</section>
+</section>
+<section id="forecasting-using-arima" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="forecasting-using-arima"><span class="header-section-number">9.5</span> Forecasting using ARIMA</h2>
+<p>An auto-regressive model is a simple model that predicts future performance based on past performance. It is mainly used for forecasting when there is some correlation between values in a given time series and those that precede and succeed (back and forth).</p>
+<p>An AR is a Linear Regression model that uses lagged variables as input. By indicating the input, the Linear Regression model can be easily built using the scikit-learn library. Statsmodels library provides autoregression model-specific functions where you must specify an appropriate lag value and train the model.</p>
+<p>ARIMA (autoregressive integrated moving average) is a widely used approach for predicting stationary series. Building off of AR and ARMA - the latter of which cannot utilize non-stationary data - ARIMA can be used on both stationary and non-stationary data.</p>
+<ul>
+<li>AutoRegressive <strong>AR(p)</strong> - a regression model with lagged values of y, until p-th time in the past, as predictors. Here, p = the number of lagged observations in the model, ε is white noise at time t, c is a constant and φs are parameters.</li>
+</ul>
+<p><span class="math display">\[
+\hat{y}_t = c + \phi_1 \cdot y_{t-1} + \phi_2 \cdot y_{t-2} + \ldots + \phi_p \cdot y_{t-p} + \varepsilon_t
+\]</span></p>
+<ul>
+<li>Integrated <strong>I(d)</strong> - The difference is taken d times until the original series becomes stationary.</li>
+</ul>
+<p><span class="math display">\[
+B \cdot y_t = y_{t-1}
+\]</span></p>
+<p>where B is considered the backshift operator. Thus, the first order difference is</p>
+<p><span class="math display">\[
+y_t^t = y_t - y_{t-1} = (1-B) \cdot y_t
+\]</span></p>
+<p>and the dth order difference can be written as</p>
+<p><span class="math display">\[
+y_t^t = (1-B)^d \cdot y_t
+\]</span></p>
+<ul>
+<li>Moving average <strong>MA(q)</strong> - A moving average model uses a regression-like model on past forecast errors. Here, ε is white noise at time t, c is a constant, and θs are parameters</li>
+</ul>
+<p><span class="math display">\[
+\hat{y}_t = c + \theta_1 \cdot \epsilon_{t-1} + \theta_2 \cdot \epsilon_{t-2} + \ldots + \theta_q \cdot \epsilon_{t-q}
+\]</span></p>
+<p>Bringing these parameters together results in the following ARIMA(p,d,q) model:</p>
+<p><span class="math display">\[
+\hat{y}_t^t = c + \phi_1 \cdot y_{t-1}^t + \phi_2 \cdot y_{t-2}^t + \ldots + \phi_p \cdot y_{t-p}^t + \theta_1 \cdot \epsilon_{t-1} + \theta_2 \cdot \epsilon_{t-2} + \ldots + \theta_q \cdot \epsilon_{t-q} + \epsilon_t
+\]</span></p>
+<section id="using-training-and-test-data-with-arima" class="level4" data-number="9.5.0.1">
+<h4 data-number="9.5.0.1" class="anchored" data-anchor-id="using-training-and-test-data-with-arima"><span class="header-section-number">9.5.0.1</span> Using Training and Test Data with ARIMA</h4>
+<p>To illustrate the importance of transforming non-stationary data, we will split our data into traning and test data. We will forecast the test data using ARIMA on the original dataset, and compare root mean square errors with the log yield data set.</p>
+<p><em>Statsmodels</em> will allow us to access ARIMA, and <em>sklearn</em> will allow us to utilize root mean square errors.</p>
+<div id="5b39de0f" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.arima.model <span class="im">import</span> ARIMA</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to split data into training and test sets</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train_test_split(data, test_size):</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    split_index <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(data) <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> test_size))</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>    train_data, test_data <span class="op">=</span> data[:split_index], data[split_index:]</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> train_data, test_data</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to fit ARIMA model and forecast</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fit_arima_forecast(train_data, test_data, order):</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fit ARIMA model</span></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> ARIMA(train_data, order<span class="op">=</span>order)</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>    fitted_model <span class="op">=</span> model.fit()</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Forecast</span></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>    forecast_values <span class="op">=</span> fitted_model.forecast(steps<span class="op">=</span><span class="bu">len</span>(test_data))</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> forecast_values</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to evaluate forecast performance</span></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_forecast(actual, forecast):</span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>    rmse <span class="op">=</span> np.sqrt(mean_squared_error(actual, forecast))</span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rmse</span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and test sets for SBUX</span></span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a>sbux_train, sbux_test <span class="op">=</span> train_test_split(SBUX[<span class="st">'Close'</span>], test_size<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ARIMA model and forecast for SBUX</span></span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a>sbux_order <span class="op">=</span> (<span class="dv">30</span>, <span class="dv">1</span>, <span class="dv">1</span>)  </span>
+<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a>sbux_forecast <span class="op">=</span> fit_arima_forecast(sbux_train, sbux_test, sbux_order)</span>
+<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate forecast performance for SBUX</span></span>
+<span id="cb41-34"><a href="#cb41-34" aria-hidden="true" tabindex="-1"></a>sbux_rmse <span class="op">=</span> evaluate_forecast(sbux_test, sbux_forecast)</span>
+<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and test sets for SMCI</span></span>
+<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a>smci_train, smci_test <span class="op">=</span> train_test_split(SMCI[<span class="st">'Close'</span>], test_size<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ARIMA model and forecast for SMCI</span></span>
+<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a>smci_order <span class="op">=</span> (<span class="dv">30</span>, <span class="dv">1</span>, <span class="dv">1</span>)  </span>
+<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a>smci_forecast <span class="op">=</span> fit_arima_forecast(smci_train, smci_test, smci_order)</span>
+<span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-43"><a href="#cb41-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate forecast performance for SMCI</span></span>
+<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a>smci_rmse <span class="op">=</span> evaluate_forecast(smci_test, smci_forecast)</span>
+<span id="cb41-45"><a href="#cb41-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-46"><a href="#cb41-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Print RMSE for both SBUX and SMCI</span></span>
+<span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"RMSE for SBUX:"</span>, sbux_rmse)</span>
+<span id="cb41-48"><a href="#cb41-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"RMSE for SMCI:"</span>, smci_rmse)</span>
+<span id="cb41-49"><a href="#cb41-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-50"><a href="#cb41-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and test sets for SBUX Log_Return</span></span>
+<span id="cb41-51"><a href="#cb41-51" aria-hidden="true" tabindex="-1"></a>sbux_diff_train, sbux_diff_test <span class="op">=</span> train_test_split(</span>
+<span id="cb41-52"><a href="#cb41-52" aria-hidden="true" tabindex="-1"></a>    SBUX[<span class="st">'Log_Return'</span>].dropna(), test_size<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb41-53"><a href="#cb41-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-54"><a href="#cb41-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ARIMA model and forecast for SBUX Log_Return</span></span>
+<span id="cb41-55"><a href="#cb41-55" aria-hidden="true" tabindex="-1"></a>sbux_diff_order <span class="op">=</span> (<span class="dv">30</span>, <span class="dv">1</span>, <span class="dv">1</span>)  </span>
+<span id="cb41-56"><a href="#cb41-56" aria-hidden="true" tabindex="-1"></a>sbux_diff_forecast <span class="op">=</span> fit_arima_forecast(sbux_diff_train, sbux_diff_test, </span>
+<span id="cb41-57"><a href="#cb41-57" aria-hidden="true" tabindex="-1"></a>sbux_diff_order)</span>
+<span id="cb41-58"><a href="#cb41-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-59"><a href="#cb41-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate forecast performance for SBUX Log_Return</span></span>
+<span id="cb41-60"><a href="#cb41-60" aria-hidden="true" tabindex="-1"></a>sbux_diff_rmse <span class="op">=</span> evaluate_forecast(sbux_diff_test, sbux_diff_forecast)</span>
+<span id="cb41-61"><a href="#cb41-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-62"><a href="#cb41-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and test sets for SMCI Log_Return</span></span>
+<span id="cb41-63"><a href="#cb41-63" aria-hidden="true" tabindex="-1"></a>smci_diff_train, smci_diff_test <span class="op">=</span> train_test_split(</span>
+<span id="cb41-64"><a href="#cb41-64" aria-hidden="true" tabindex="-1"></a>    SMCI[<span class="st">'Log_Return'</span>].dropna(), test_size<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb41-65"><a href="#cb41-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-66"><a href="#cb41-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ARIMA model and forecast for SMCI Log_Return</span></span>
+<span id="cb41-67"><a href="#cb41-67" aria-hidden="true" tabindex="-1"></a>smci_diff_order <span class="op">=</span> (<span class="dv">30</span>, <span class="dv">1</span>, <span class="dv">1</span>) </span>
+<span id="cb41-68"><a href="#cb41-68" aria-hidden="true" tabindex="-1"></a>smci_diff_forecast <span class="op">=</span> fit_arima_forecast(smci_diff_train, smci_diff_test, </span>
+<span id="cb41-69"><a href="#cb41-69" aria-hidden="true" tabindex="-1"></a>smci_diff_order)</span>
+<span id="cb41-70"><a href="#cb41-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-71"><a href="#cb41-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate forecast performance for SMCI Log_Return</span></span>
+<span id="cb41-72"><a href="#cb41-72" aria-hidden="true" tabindex="-1"></a>smci_diff_rmse <span class="op">=</span> evaluate_forecast(smci_diff_test, smci_diff_forecast)</span>
+<span id="cb41-73"><a href="#cb41-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-74"><a href="#cb41-74" aria-hidden="true" tabindex="-1"></a><span class="co"># Print RMSE for both SBUX and SMCI Log_Return</span></span>
+<span id="cb41-75"><a href="#cb41-75" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"RMSE for SBUX Log Returns:"</span>, sbux_diff_rmse)</span>
+<span id="cb41-76"><a href="#cb41-76" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"RMSE for SMCI Log Returns:"</span>, smci_diff_rmse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>RMSE for SBUX: 5.203162195733355
+RMSE for SMCI: 387.44378470841997
+RMSE for SBUX Log Returns: 0.026718558204201322
+RMSE for SMCI Log Returns: 0.09062670255548778</code></pre>
+</div>
+</div>
+<p>Finally, we can proceed with a forecast of these companies’ stock prices using ARIMA. Although ARIMA does not require stationary data, we can improve the accuracy of our model by using our detrended stationary stock prices.</p>
+<div id="a4bb8a2f" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set 'Date' column as index</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>SBUX.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>SMCI.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a function to fit ARIMA model and make forecast</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fit_arima_and_forecast(data, order):</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> ARIMA(data, order<span class="op">=</span>order)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>    model_fit <span class="op">=</span> model.fit()</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    forecast <span class="op">=</span> model_fit.forecast(steps<span class="op">=</span><span class="dv">12</span>)  <span class="co"># Forecast 12 months ahead </span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> forecast</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ARIMA model and make forecast for SBUX</span></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>sbux_forecast <span class="op">=</span> fit_arima_and_forecast(SBUX[<span class="st">'Log_Return'</span>], order<span class="op">=</span>(<span class="dv">30</span>,<span class="dv">1</span>,<span class="dv">1</span>)) </span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>sbux_forecast_index <span class="op">=</span> pd.date_range(start<span class="op">=</span>SBUX.index[<span class="op">-</span><span class="dv">1</span>], periods<span class="op">=</span><span class="dv">13</span>, </span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>freq<span class="op">=</span><span class="st">'M'</span>)[<span class="dv">1</span>:]  <span class="co"># Generate date range for forecast</span></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ARIMA model and make forecast for SMCI</span></span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>smci_forecast <span class="op">=</span> fit_arima_and_forecast(SMCI[<span class="st">'Log_Return'</span>], order<span class="op">=</span>(<span class="dv">30</span>,<span class="dv">1</span>,<span class="dv">1</span>))  </span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>smci_forecast_index <span class="op">=</span> pd.date_range(start<span class="op">=</span>SMCI.index[<span class="op">-</span><span class="dv">1</span>], periods<span class="op">=</span><span class="dv">13</span>, freq<span class="op">=</span><span class="st">'M'</span>)[<span class="dv">1</span>:]  <span class="co"># Generate date range for forecast</span></span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the forecasts</span></span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a>plt.plot(SBUX.index, SBUX[<span class="st">'Log_Return'</span>], label<span class="op">=</span><span class="st">'SBUX Price'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>plt.plot(sbux_forecast_index, sbux_forecast, label<span class="op">=</span><span class="st">'SBUX Forecast'</span>, </span>
+<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a>color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Log Return Stock Price'</span>)</span>
+<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'SBUX Stock Price and Forecast (Log Return)'</span>)</span>
+<span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb43-32"><a href="#cb43-32" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb43-34"><a href="#cb43-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-35"><a href="#cb43-35" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a>plt.plot(SMCI.index, SMCI[<span class="st">'Log_Return'</span>], label<span class="op">=</span><span class="st">'SMCI Price'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb43-37"><a href="#cb43-37" aria-hidden="true" tabindex="-1"></a>plt.plot(smci_forecast_index, smci_forecast, label<span class="op">=</span><span class="st">'SMCI Forecast'</span>, </span>
+<span id="cb43-38"><a href="#cb43-38" aria-hidden="true" tabindex="-1"></a>color<span class="op">=</span><span class="st">'orange'</span>)</span>
+<span id="cb43-39"><a href="#cb43-39" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb43-40"><a href="#cb43-40" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Log Return Stock Price'</span>)</span>
+<span id="cb43-41"><a href="#cb43-41" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'SMCI Stock Price and Forecast (Log Return)'</span>)</span>
+<span id="cb43-42"><a href="#cb43-42" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb43-43"><a href="#cb43-43" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb43-44"><a href="#cb43-44" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb43-45"><a href="#cb43-45" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb43-46"><a href="#cb43-46" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="statsmod_files/figure-html/cell-26-output-1.png" width="758" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="statsmod_files/figure-html/cell-26-output-2.png" width="757" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="interpretation-of-arima" class="level5" data-number="9.5.0.1.1">
+<h5 data-number="9.5.0.1.1" class="anchored" data-anchor-id="interpretation-of-arima"><span class="header-section-number">9.5.0.1.1</span> Interpretation of ARIMA</h5>
+<p>This model predicts greater volatility for Supermicro’s stock price than Starbucks’. The change in Starbucks’ stock price is not predicted to deviate from zero, while the change in Supermicro’s stock price is predicted to fluctuate. We have a neutral valuation of Starbucks’ stock, and would not recommend buying nor selling. However, since the forecasted log return stock are majority positive, we would recommend buying Supermicro stock. The ARIMA model indicates an a positive outlook and an expectation of future growth over the next 12 months.</p>
+</section>
+</section>
+<section id="modeling-volatility-with-garch" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="modeling-volatility-with-garch"><span class="header-section-number">9.5.1</span> Modeling Volatility With GARCH</h3>
+<p>A change in the variance or volatility over time can cause problems when modeling time series with classical methods like ARIMA. GARCH (Generalized Autoregressive Conditional Heteroskedasticity) models changes in variance in a time dependent data set. Consistent change in variance over time is called increasing or decreasing volatility. In time series where the variance is increasing in a systematic way, such as an increasing trend, this property of the series is called heteroskedasticity.</p>
+<p>GARCH models the variance at a time step as a function of the residual errors from a mean process, while incorporating a moving average component. This allows the model to predict conditional change in variance over time.</p>
+<p>The conditional variance is formulated as:</p>
+<p><span class="math display">\[
+\sigma^2_t = \alpha_0 + \alpha(B) \cdot \mu^2_t + \beta(B) \cdot \sigma^2_t
+\]</span></p>
+<p>where <span class="math inline">\(\alpha(B) = \alpha_1 \cdot B + \ldots + \alpha_q \cdot B^q\)</span> and <span class="math inline">\(\beta(B) = \beta_1 \cdot B + \ldots + \beta_p \cdot B^p\)</span> are polynomials in the backshift operator B.</p>
+<p>The GARCH(p,q) model contains two parameters:</p>
+<ul>
+<li>p: The number of lag variances included in the GARCH model.</li>
+<li>q: The number of lag residual errors included in the GARCH model.</li>
+</ul>
+<p>The most frequently used heteroskedastic model with GARCH is GARCH(1,1), where <span class="math inline">\(p,q\)</span> = 1. The formula for GARCH (1,1) is as follows:</p>
+<p><span class="math display">\[
+\sigma^2_t = \alpha_0 + \alpha_1 \cdot \mu^2_{t-1} + \beta_1 \cdot \sigma^2_{t-1}
+\]</span></p>
+<p>Now, lets forecast variance at time <em>t</em> for a test set of both Starbucks and Supermicro stock prices. The <em>arch</em> package allows for us to complete these calculations.</p>
+<div id="61b815d9" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> arch <span class="im">import</span> arch_model</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows with NaN values in SBUX and SMCI dataframes</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>SBUX.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>SMCI.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define GARCH models for SBUX and SMCI</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>sbux_model <span class="op">=</span> arch_model(SBUX[<span class="st">'Log_Return'</span>], mean<span class="op">=</span><span class="st">'Zero'</span>, vol<span class="op">=</span><span class="st">'GARCH'</span>, p<span class="op">=</span><span class="dv">1</span>, q<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>smci_model <span class="op">=</span> arch_model(SMCI[<span class="st">'Log_Return'</span>], mean<span class="op">=</span><span class="st">'Zero'</span>, vol<span class="op">=</span><span class="st">'GARCH'</span>, p<span class="op">=</span><span class="dv">1</span>, q<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit GARCH models</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>sbux_model_fit <span class="op">=</span> sbux_model.fit()</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>smci_model_fit <span class="op">=</span> smci_model.fit()</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast the test set for SBUX</span></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>sbux_forecast <span class="op">=</span> sbux_model_fit.forecast(horizon<span class="op">=</span><span class="bu">len</span>(SBUX[<span class="st">'Log_Return'</span>]))</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast the test set for SMCI</span></span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>smci_forecast <span class="op">=</span> smci_model_fit.forecast(horizon<span class="op">=</span><span class="bu">len</span>(SMCI[<span class="st">'Log_Return'</span>]))</span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the actual variance and forecast variance for SBUX</span></span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>plt.plot(SBUX.index, SBUX[<span class="st">'Log_Return'</span>], label<span class="op">=</span><span class="st">'Actual Variance (SBUX)'</span>)</span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a>plt.plot(SBUX.index, sbux_forecast.variance.values[<span class="op">-</span><span class="dv">1</span>], label<span class="op">=</span><span class="st">'Forecast Variance (SBUX)'</span>)</span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Expected vs Predicted Variance for SBUX'</span>)</span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Variance'</span>)</span>
+<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-30"><a href="#cb44-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the actual variance and forecast variance for SMCI</span></span>
+<span id="cb44-31"><a href="#cb44-31" aria-hidden="true" tabindex="-1"></a>plt.plot(SMCI.index, SMCI[<span class="st">'Log_Return'</span>], label<span class="op">=</span><span class="st">'Actual Variance (SMCI)'</span>)</span>
+<span id="cb44-32"><a href="#cb44-32" aria-hidden="true" tabindex="-1"></a>plt.plot(SMCI.index, smci_forecast.variance.values[<span class="op">-</span><span class="dv">1</span>], label<span class="op">=</span><span class="st">'Forecast Variance (SMCI)'</span>)</span>
+<span id="cb44-33"><a href="#cb44-33" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Expected vs Predicted Variance for SMCI'</span>)</span>
+<span id="cb44-34"><a href="#cb44-34" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb44-35"><a href="#cb44-35" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Variance'</span>)</span>
+<span id="cb44-36"><a href="#cb44-36" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb44-37"><a href="#cb44-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Iteration:      1,   Func. Count:      5,   Neg. LLF: 358097579.9412439
+Iteration:      2,   Func. Count:     11,   Neg. LLF: -655.949119752052
+Iteration:      3,   Func. Count:     17,   Neg. LLF: -455.66845988001626
+Iteration:      4,   Func. Count:     23,   Neg. LLF: -633.7713503261562
+Iteration:      5,   Func. Count:     28,   Neg. LLF: -662.4659498178196
+Iteration:      6,   Func. Count:     32,   Neg. LLF: -662.4718784136544
+Iteration:      7,   Func. Count:     36,   Neg. LLF: -662.4751595916471
+Iteration:      8,   Func. Count:     40,   Neg. LLF: -662.486634024593
+Iteration:      9,   Func. Count:     44,   Neg. LLF: -662.4894633348765
+Iteration:     10,   Func. Count:     48,   Neg. LLF: -662.489604600355
+Iteration:     11,   Func. Count:     52,   Neg. LLF: -305.2283082689668
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -662.4896063649699
+            Iterations: 12
+            Function evaluations: 58
+            Gradient evaluations: 11
+Iteration:      1,   Func. Count:      5,   Neg. LLF: 51048.92008722303
+Iteration:      2,   Func. Count:     11,   Neg. LLF: -272.5448314403104
+Iteration:      3,   Func. Count:     17,   Neg. LLF: -286.46897203456945
+Iteration:      4,   Func. Count:     22,   Neg. LLF: -346.94664830787303
+Iteration:      5,   Func. Count:     27,   Neg. LLF: -328.37083263347984
+Iteration:      6,   Func. Count:     32,   Neg. LLF: -349.0943859630313
+Iteration:      7,   Func. Count:     37,   Neg. LLF: -349.1651727212498
+Iteration:      8,   Func. Count:     41,   Neg. LLF: -349.1664669570813
+Iteration:      9,   Func. Count:     45,   Neg. LLF: -349.1664804244107
+Iteration:     10,   Func. Count:     49,   Neg. LLF: -349.1664810312767
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -349.1664810312767
+            Iterations: 10
+            Function evaluations: 49
+            Gradient evaluations: 10</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="statsmod_files/figure-html/cell-27-output-2.png" width="613" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="statsmod_files/figure-html/cell-27-output-3.png" width="604" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>GARCH shows that the forecasted variance is constant around zero for the logged returns. A higher volatility than expected for a stock is attactive for day trading, but far less so for long-term investments. Supermicro appears to be more volatile than Starbucks, so a day trader would likely be more interested in SMCI while an investor would be better off holding onto SBUX.</p>
+</section>
+<section id="conclusion" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">9.5.2</span> Conclusion</h3>
+<p>Conducting time series data analysis is a fundamental task encountered by data scientists across various domains. A strong grasp of tools and methodologies for analysis empowers data scientists to unveil underlying trends, anticipate future events, and inform decision-making processes effectively. Leveraging time series forecasting techniques enables the anticipation of future occurrences within the data, thus playing a pivotal role in decision-making processes.</p>
 
 
 </section>

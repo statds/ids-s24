@@ -237,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction-to-web-scraping" id="toc-introduction-to-web-scraping" class="nav-link active" data-scroll-target="#introduction-to-web-scraping"><span class="header-section-number">11.1</span> Introduction to Web Scraping</a>
+  <li><a href="#web-scraping" id="toc-web-scraping" class="nav-link active" data-scroll-target="#web-scraping"><span class="header-section-number">11.1</span> Web Scraping</a>
   <ul class="collapse">
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">11.1.1</span> Introduction</a></li>
   <li><a href="#uconn-website-example" id="toc-uconn-website-example" class="nav-link" data-scroll-target="#uconn-website-example"><span class="header-section-number">11.1.2</span> UConn website example</a></li>
@@ -246,6 +246,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#downsides" id="toc-downsides" class="nav-link" data-scroll-target="#downsides"><span class="header-section-number">11.1.5</span> Downsides</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">11.1.6</span> Conclusion</a></li>
   <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources"><span class="header-section-number">11.1.7</span> Sources</a></li>
+  </ul></li>
+  <li><a href="#animation" id="toc-animation" class="nav-link" data-scroll-target="#animation"><span class="header-section-number">11.2</span> Animation</a>
+  <ul class="collapse">
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1"><span class="header-section-number">11.2.1</span> Introduction</a></li>
+  <li><a href="#examples-of-data-animation-using-nyc-rodents-dataset" id="toc-examples-of-data-animation-using-nyc-rodents-dataset" class="nav-link" data-scroll-target="#examples-of-data-animation-using-nyc-rodents-dataset"><span class="header-section-number">11.2.2</span> Examples of data animation using NYC Rodents Dataset</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -273,8 +278,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- ## Web Scraping Tree -->
-<section id="introduction-to-web-scraping" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="introduction-to-web-scraping"><span class="header-section-number">11.1</span> Introduction to Web Scraping</h2>
+<section id="web-scraping" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="web-scraping"><span class="header-section-number">11.1</span> Web Scraping</h2>
 <p>This section was written by William Qualls.</p>
 <section id="introduction" class="level3" data-number="11.1.1">
 <h3 data-number="11.1.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">11.1.1</span> Introduction</h3>
@@ -293,7 +298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>One potential issue with web scraping, is that websites can be very large. While it’s entirely possible for someone with moderate python experience to extract data from HTML code using string manipulation due to how well structured HTML is, this would be a messy, and time consuming task. Luckily, there are many python libraries pre-written, which allow for parsing through HTML much easier than this. One of the most popular ones, and the one we will be using today. is called Beautiful Soup.</p>
 <p>To install beautiful soup on your machine, run “pip install beautifulsoup4” in the terminal, inside the directory where you want the installation.</p>
 <p>Here is an example of using beautiful soup, along with the builtin requests module, to acess the homepage of the UConn website.</p>
-<div id="cb30b89f" class="cell" data-execution_count="1">
+<div id="f2cfb22e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://uconn.edu/'</span></span>
@@ -321,7 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 <p>Then, we can paste the selector into python, and call soup.select(). This method returns a list containing every element matching the CSS selector we input. This time the list is of size 0, since the selector we input is very specific.</p>
-<div id="cc62c17b" class="cell" data-execution_count="2">
+<div id="ac1dae1d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>selector <span class="op">=</span> <span class="st">'#post-2 &gt; div.fl-builder-content.fl-builder-content-2.fl-builder-content-primary.fl-builder-global-templates-locked &gt; div.fl-row.fl-row-full-width.fl-row-bg-none.fl-node-604b7f4d94771.fl-row-default-height.fl-row-align-center.fl-row-has-layers &gt; div &gt; div.fl-row-content.fl-row-fixed-width.fl-node-content &gt; div &gt; div &gt; div &gt; div.fl-col-group.fl-node-604b7f4d94a9a.fl-col-group-nested.fl-col-group-equal-height.fl-col-group-align-center.fl-col-group-custom-width &gt; div.fl-col.fl-node-604b7f4d94a9b.fl-col-small-custom-width &gt; div &gt; div.fl-module.fl-module-rich-text.fl-node-604b7f4d94a9e &gt; div &gt; div &gt; p'</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>blurb <span class="op">=</span> soup.select(selector)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Blurb is of len </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(<span class="bu">len</span>(blurb)))</span>
@@ -338,7 +343,7 @@ From the research lab to the court, pushing limits is in Huskies’ DNA. We embr
 <p>When trying to find a job or an internship, it can become pretty tedious to repeatedly type the same five keywords, into the same five websites, just to look through the same twelve jobs you’ve already seen that you’ve already ruled out, for one reason or the other.</p>
 <p>It would be much easier to just run a python program that can web-scrape the job board and pick out the ones that intrest you based on a few keywords.</p>
 <p>Let’s take a look at the website TeamWorkOnline, a job board for working in sports, where most major organizations such as the NFL, MLB, NBA, and others will post job openings. I spent alot of time during internship season looking for jobs here, before developing a web scraper that would gather all the available jobs, and then look through them for me, only showing me ones I might be intrested in. The code for the scraper is below; We’ll run it once and then go through it to see how it works.</p>
-<div id="84cf4bd6" class="cell" data-execution_count="3">
+<div id="441f595c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> Job_Scraper():</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    Internships <span class="op">=</span> []</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    Full_Jobs <span class="op">=</span> []</span>
@@ -427,7 +432,7 @@ Questionable
 </figure>
 </div>
 <p>If nothing is found, the function will call find_all again, this time searching for elements where the class is organization-portal__job. To avoid just writing a wall of text, let’s walk through this line by line on the second page of the job board.</p>
-<div id="f771f1bf" class="cell" data-execution_count="4">
+<div id="17a1811d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Internships <span class="op">=</span> []</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Full_Jobs <span class="op">=</span> []</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Questionable <span class="op">=</span> []</span>
@@ -439,7 +444,7 @@ Questionable
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> soup.find_all(attrs<span class="op">=</span>{<span class="st">'class'</span>:<span class="st">'organization-portal__grid'</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This gives us a single HTML element, which functionally serves as a table containing several other HTML elements refrencing individual jobs. Let’s show this, and then make table refer to the element, rather than a list where the element is the only item.</p>
-<div id="e736881e" class="cell" data-execution_count="5">
+<div id="bbd91ab5" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'table is len </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(<span class="bu">len</span>(table)))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> table[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -447,7 +452,7 @@ Questionable
 </div>
 </div>
 <p>Now, we can use find_all again with a different attribute to get a list of elements refrencing individual jobs.</p>
-<div id="ce1e8d32" class="cell" data-execution_count="6">
+<div id="e7e83c2f" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>jobs <span class="op">=</span> table.find_all(attrs<span class="op">=</span>{<span class="st">'class'</span>:<span class="st">"organization-portal__job"</span>})</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'There are </span><span class="sc">{}</span><span class="st"> Jobs'</span>.<span class="bu">format</span>(<span class="bu">len</span>(jobs)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -462,22 +467,22 @@ Questionable
 </figure>
 </div>
 <p>As we can see, and as we discussed earlier, the organization-portal__grid class contains instances of organization-portal__job, which in turn contains more HTML elements. If we look towards the bottom of the HTML tree shown, we notice 3 more class names: organization-portal__job-title, organization-portal__job-category, and organization-portal__job-location. Let’s extract these.</p>
-<div id="82691541" class="cell" data-execution_count="7">
+<div id="b8eb694d" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>target_job <span class="op">=</span> jobs[<span class="dv">0</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>team <span class="op">=</span> target_job.find(attrs<span class="op">=</span>{<span class="st">'class'</span>:<span class="st">"organization-portal__job-category"</span>}).string</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>location <span class="op">=</span> target_job.find(attrs<span class="op">=</span>{<span class="st">'class'</span>:<span class="st">"organization-portal__job-location"</span>}).string</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> target_job.find(attrs<span class="op">=</span>{<span class="st">'class'</span>:<span class="st">"organization-portal__job-title"</span>}).string</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Team: </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">Location: </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">Job Title: </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">'</span>.<span class="bu">format</span>(team,location,name))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Team: Kansas City Chiefs
-Location: Kansas City · MO
-Job Title: Human Resources - Human Resources/Staffing Seasonal Assistant
+<pre><code>Team: Indianapolis Colts
+Location: Indianapolis · IN
+Job Title: Membership Services Manager
 </code></pre>
 </div>
 </div>
 <p>We now have the job title, organization, and location for this first job. What the code in the function does, is loop through every job (which is an HTML element returned by a call to find_all), and extract this data. It will then check if any of the provided keywords are in the job title, and if they are it will check for other common words such as “Intern” or “Assist” to determine the level of job before sorting it into a list.</p>
 <p>Let’s double check to make sure our code works for al jobs, and not just the one we checked.</p>
-<div id="918cb8ba" class="cell" data-execution_count="8">
+<div id="e7cda787" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>found_jobs <span class="op">=</span> []</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> job <span class="kw">in</span> jobs:</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  target_job <span class="op">=</span> job</span>
@@ -489,9 +494,9 @@ Job Title: Human Resources - Human Resources/Staffing Seasonal Assistant
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(found_jobs[<span class="dv">9</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>48
-Team: Washington Commanders
-Location: College Park · MD
-Job Title: Finance Intern (Summer)
+Team: Green Bay Packers
+Location: Ashwaubenon · WI
+Job Title: Titletown Seasonal Summer Operator + Laborer
 </code></pre>
 </div>
 </div>
@@ -533,7 +538,7 @@ Job Title: Finance Intern (Summer)
 <p>Web scrapers don’t always work when working with dynamically allocated data. Consider the following webpage: <img src="images/capacity.png" class="img-fluid" alt="The UConn Gym Capacity webpage"></p>
 <p>This website dynamically updates every second to tell you how many people are using the uconn rec center at any given moment. The Number in the example is at 0, since this is being written outside of the gym’s operating hours, but during the workday it would be updating.</p>
 <p>Say we wanted to gather data on how many people were at the gym at all times of the day, so we could graph it and discover when the busisest and slowest times were at the rec. Theoretically we could web scrape the page right? Let’s see.</p>
-<div id="77aa2be0" class="cell" data-execution_count="9">
+<div id="a6a32ea0" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>new_url <span class="op">=</span> <span class="st">'https://app.safespace.io/api/display/live-occupancy/86fb9e11'</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>req <span class="op">=</span> requests.get(new_url)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> req.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
@@ -554,8 +559,187 @@ Job Title: Finance Intern (Summer)
 <section id="sources" class="level3" data-number="11.1.7">
 <h3 data-number="11.1.7" class="anchored" data-anchor-id="sources"><span class="header-section-number">11.1.7</span> Sources</h3>
 <p>https://www.conductor.com/academy/robotstxt/</p>
+<!-- ## Animation -->
+</section>
+</section>
+<section id="animation" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="animation"><span class="header-section-number">11.2</span> Animation</h2>
+<p>Hello everyone! My name is Ge Li and I am a senior double major in Math and Statistics. I am going to do the Animation analysis here with python.</p>
+<section id="introduction-1" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="introduction-1"><span class="header-section-number">11.2.1</span> Introduction</h3>
+<section id="what-is-data-animation" class="level4" data-number="11.2.1.1">
+<h4 data-number="11.2.1.1" class="anchored" data-anchor-id="what-is-data-animation"><span class="header-section-number">11.2.1.1</span> What is data animation?</h4>
+<p>Data animation is the process of adding movement, interactivity, and visual effects to your data displays. It can help you highlight changes over time, compare different scenarios, reveal hidden details, and create a dynamic and immersive experience for your viewers. Data animation can take many forms, such as animated maps, timelines, transitions, sliders, and interactive dashboards. You can use data animation to enhance your presentations, reports, websites, or social media posts.</p>
+</section>
+<section id="why-animate-your-data" class="level4" data-number="11.2.1.2">
+<h4 data-number="11.2.1.2" class="anchored" data-anchor-id="why-animate-your-data"><span class="header-section-number">11.2.1.2</span> Why animate your data?</h4>
+<p>Data animation can provide a variety of advantages to your data analysis and communication. Capturing attention and generating interest is possible by adding color, motion, and sound. It can also improve understanding and retention by showing how complex or abstract concepts work or change over time. Furthermore, data animation can be used to persuade and influence by conveying a message or story with your data and creating emotional impact. It can also motivate action or change by demonstrating consequences, opportunities, or solutions</p>
+</section>
+<section id="how-to-animate-your-data" class="level4" data-number="11.2.1.3">
+<h4 data-number="11.2.1.3" class="anchored" data-anchor-id="how-to-animate-your-data"><span class="header-section-number">11.2.1.3</span> How to animate your data?</h4>
+<p>Before animating your data, it’s important to define your purpose and audience. Consider the main question, problem, or idea you want to address and the best way to communicate it. Then choose the data and format that best suit your purpose and audience. What type of data do you have? How much, how complex, and how reliable is it? What kind of chart, graph, or map will best display it? Finally, decide how to animate and interact with your data. What kind of movement, transition, or effect will you use? How will you control the speed, direction, and duration of the animation? How will you enable user input, feedback, or navigation? By following these steps, you can create an effective animation that meets your goals and resonates with your audience.</p>
+</section>
+</section>
+<section id="examples-of-data-animation-using-nyc-rodents-dataset" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="examples-of-data-animation-using-nyc-rodents-dataset"><span class="header-section-number">11.2.2</span> Examples of data animation using NYC Rodents Dataset</h3>
+<section id="data-examination-and-queation-exploration" class="level4" data-number="11.2.2.1">
+<h4 data-number="11.2.2.1" class="anchored" data-anchor-id="data-examination-and-queation-exploration"><span class="header-section-number">11.2.2.1</span> Data Examination and Queation Exploration</h4>
+<p>The dataset contains information on rodent complaints across different locations, with a total of 2,669 entries. Each entry includes details such as the unique key, created and closed dates of the complaint, agency and agency name handling the complaint, complaint type, descriptor (specifics about the complaint), location type, incident zip code, address, and additional geographical and administrative details.</p>
+<p>Given the nature of this dataset, we can explore several interesting questions and topics for data animation, focusing on trends, patterns, and insights related to rodent complaints. Here are some potential ideas:</p>
+<p>Temporal Trends: How have rodent complaints changed over time? We can animate the number of complaints over the months to identify any seasonal patterns or trends.</p>
+<p>Geographical Distribution: Which areas have the highest concentration of rodent complaints? An animated heatmap or choropleth map showing the density of complaints across different zip codes or boroughs could provide insights.</p>
+<p>Comparison by Location Type: How do rodent complaints vary by location type (e.g., residential vs.&nbsp;commercial buildings)? We can create an animated bar chart that updates over time to show the distribution of complaints by location type.</p>
+</section>
+<section id="temporal-trends-over-time" class="level4" data-number="11.2.2.2">
+<h4 data-number="11.2.2.2" class="anchored" data-anchor-id="temporal-trends-over-time"><span class="header-section-number">11.2.2.2</span> Temporal Trends over time</h4>
+<p>An animation is a sequence of frames where each frame corresponds to a plot on a Figure. The animation process in Matplotlib can be thought of in 2 different ways:</p>
+<p>FuncAnimation: Generate data for first frame and then modify this data for each frame to create an animated plot.</p>
+<p>ArtistAnimation: Generate a list (iterable) of artists that will draw in each frame in the animation.</p>
+<p>FuncAnimation is more efficient in terms of speed and memory as it draws an artist once and then modifies it. On the other hand ArtistAnimation is flexible as it allows any iterable of artists to be animated in a sequence.</p>
+</section>
+<section id="geographical-distribution" class="level4" data-number="11.2.2.3">
+<h4 data-number="11.2.2.3" class="anchored" data-anchor-id="geographical-distribution"><span class="header-section-number">11.2.2.3</span> Geographical Distribution</h4>
+<p>A GeoJSON file for NYC ZIP code boundaries is a dataset that contains geographic information about the boundaries of ZIP code areas in New York City represented in the GeoJSON format. GeoJSON is a format for encoding a variety of geographic data structures, such as points, lines, polygons, and multi-part collections.</p>
+<p>GeoJSON files provide spatial data that can be used for various geospatial analyses, such as understanding the distribution of demographic characteristics, economic activities, or public services across different ZIP code areas in New York City.</p>
+<p>With the help of libraries like geopandas, folium, or leaflet.js, GeoJSON files can be used to visualize geographic boundaries on maps. For instance, one could create choropleth maps to visualize patterns or densities of certain attributes (like population density, income levels, etc.) across different ZIP code areas.</p>
+<section id="comparison-by-location-type" class="level5" data-number="11.2.2.3.1">
+<h5 data-number="11.2.2.3.1" class="anchored" data-anchor-id="comparison-by-location-type"><span class="header-section-number">11.2.2.3.1</span> Comparison by Location Type</h5>
+<p>Folium is a Python library used for visualizing geospatial data interactively. It allows you to create interactive maps directly within your Python environment, making it easy to explore and analyze geographic data. Folium builds on the capabilities of the Leaflet.js library, providing a Python wrapper that simplifies the process of creating maps with various layers and markers.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'rodent_2022-2023.csv'</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows of the dataframe to understand its structure and content</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>df.head(), df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert 'Created Date' to datetime format and extract the year and month for grouping</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Created Date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Created Date'</span>])</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'YearMonth'</span>] <span class="op">=</span> df[<span class="st">'Created Date'</span>].dt.to_period(<span class="st">'M'</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate data to count the number of complaints per month</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>monthly_complaints <span class="op">=</span> df.groupby(<span class="st">'YearMonth'</span>).size().reset_index(name<span class="op">=</span><span class="st">'Complaints'</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort the data by 'YearMonth' to ensure it's in chronological order</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>monthly_complaints <span class="op">=</span> monthly_complaints.sort_values(<span class="st">'YearMonth'</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>monthly_complaints.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.animation <span class="im">as</span> animation</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> HTML</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert 'YearMonth' from Period to string for plotting</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>monthly_complaints[<span class="st">'YearMonthStr'</span>] <span class="op">=</span> monthly_complaints[<span class="st">'YearMonth'</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting up the figure and axis for the animation, with correction for date formatting</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, monthly_complaints[<span class="st">'Complaints'</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">10</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Month'</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Number of Rodent Complaints'</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Monthly Rodent Complaints (2022-2023)'</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">"right"</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize an empty line plot</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>line, <span class="op">=</span> ax.plot([], [], lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="bu">len</span>(monthly_complaints[<span class="st">'YearMonthStr'</span>]) <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(<span class="bu">range</span>(<span class="bu">len</span>(monthly_complaints[<span class="st">'YearMonthStr'</span>])))</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>ax.set_xticklabels(monthly_complaints[<span class="st">'YearMonthStr'</span>], rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">"right"</span>)</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to update the plot for each frame, with correction for date formatting</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update(num, monthly_complaints, line):</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    line.set_data(<span class="bu">range</span>(num), monthly_complaints[<span class="st">'Complaints'</span>][:num])</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> line,</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the animation, with correction for date formatting</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>ani <span class="op">=</span> animation.FuncAnimation(fig, update, <span class="bu">len</span>(monthly_complaints), fargs<span class="op">=</span>[monthly_complaints, line],</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>                              interval<span class="op">=</span><span class="dv">500</span>, blit<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the animation to HTML to display it in the notebook, with correction</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>HTML(ani.to_jshtml())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert 'Created Date' to datetime format</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Created Date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Created Date'</span>])</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Year and Month for aggregation</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'YearMonth'</span>] <span class="op">=</span> df[<span class="st">'Created Date'</span>].dt.to_period(<span class="st">'M'</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate the data: Count the number of complaints per ZIP code and Year-Month</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>aggregated_data <span class="op">=</span> df.groupby([<span class="st">'Incident Zip'</span>, <span class="st">'YearMonth'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Complaints'</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the aggregated data</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>aggregated_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the geoJSON file for NYC ZIP code boundaries</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>geojson_path <span class="op">=</span> <span class="st">'nyc-zip-code-tabulation-areas-polygons.geojson'</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(geojson_path) <span class="im">as</span> f:</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    nyc_geojson <span class="op">=</span> json.load(f)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first item to understand its structure</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">next</span>(<span class="bu">iter</span>(nyc_geojson[<span class="st">'features'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare the data: Make sure the ZIP codes are in the same format as in the geoJSON</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>aggregated_data[<span class="st">'Incident Zip'</span>] <span class="op">=</span> aggregated_data[<span class="st">'Incident Zip'</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotly expects the animation_frame column to be string type</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>aggregated_data[<span class="st">'YearMonth'</span>] <span class="op">=</span> aggregated_data[<span class="st">'YearMonth'</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the choropleth map</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.choropleth(aggregated_data,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>                    geojson<span class="op">=</span>nyc_geojson,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>                    locations<span class="op">=</span><span class="st">'Incident Zip'</span>, <span class="co"># The ZIP code is the feature identifier in the geoJSON</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>                    featureidkey<span class="op">=</span><span class="st">"properties.postalCode"</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>                    color<span class="op">=</span><span class="st">'Complaints'</span>,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>                    animation_frame<span class="op">=</span><span class="st">'YearMonth'</span>,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>                    color_continuous_scale<span class="op">=</span><span class="st">'Reds'</span>,</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>                    range_color<span class="op">=</span>(<span class="dv">0</span>, aggregated_data[<span class="st">'Complaints'</span>].<span class="bu">max</span>()),</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>                    labels<span class="op">=</span>{<span class="st">'Complaints'</span>:<span class="st">'Number of Complaints'</span>})</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>fig.update_geos(fitbounds<span class="op">=</span><span class="st">"locations"</span>, visible<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'YearMonth'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Created Date'</span>]).dt.to_period(<span class="st">'M'</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>complaints_by_location_time <span class="op">=</span> df.groupby([<span class="st">'YearMonth'</span>, <span class="st">'Location Type'</span>]).size().unstack(fill_value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.animation <span class="im">as</span> animation</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> HTML</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting up the figure and axis for the animation</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> animate(month):</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    ax.clear()  <span class="co"># Clear the previous bar chart</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> complaints_by_location_time.iloc[month]  <span class="co"># Get data for the current month</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    data.plot(kind<span class="op">=</span><span class="st">'bar'</span>, ax<span class="op">=</span>ax, color<span class="op">=</span><span class="st">'tab:blue'</span>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">'Rodent Complaints by Location Type: '</span> <span class="op">+</span> <span class="bu">str</span>(complaints_by_location_time.index[month]))</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'Number of Complaints'</span>)</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'Location Type'</span>)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>)  <span class="co"># Rotate x-axis labels for better readability</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the animation</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>ani <span class="op">=</span> animation.FuncAnimation(fig, animate, frames<span class="op">=</span><span class="bu">len</span>(complaints_by_location_time), interval<span class="op">=</span><span class="dv">500</span>, repeat<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the animation in the notebook</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>HTML(ani.to_jshtml())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace NaNs with a default location </span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>default_latitude <span class="op">=</span> <span class="fl">40.7128</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>default_longitude <span class="op">=</span> <span class="op">-</span><span class="fl">74.0060</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Latitude'</span>].fillna(default_latitude, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Longitude'</span>].fillna(default_longitude, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a map centered around an average location in NYC</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>nyc_map <span class="op">=</span> folium.Map(location<span class="op">=</span>[<span class="fl">40.7128</span>, <span class="op">-</span><span class="fl">74.0060</span>], zoom_start<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx, row <span class="kw">in</span> df.iterrows():</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    folium.Marker(</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>        location<span class="op">=</span>[row[<span class="st">'Latitude'</span>], row[<span class="st">'Longitude'</span>]],</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        popup<span class="op">=</span><span class="ss">f"Location Type: </span><span class="sc">{</span>row[<span class="st">'Location Type'</span>]<span class="sc">}</span><span class="ss">&lt;br&gt;Date: </span><span class="sc">{</span>row[<span class="st">'Created Date'</span>]<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        icon<span class="op">=</span>folium.Icon(color<span class="op">=</span><span class="st">'blue'</span> <span class="cf">if</span> row[<span class="st">'Location Type'</span>] <span class="op">==</span> <span class="st">'Residential'</span> <span class="cf">else</span> <span class="st">'red'</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    ).add_to(nyc_map)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the map</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>nyc_map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
+</section>
 </section>
 </section>
 
