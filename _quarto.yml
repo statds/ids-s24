@@ -8,7 +8,7 @@ book:
     - name: Jun Yan and Students in Spring 2024:
     - name: Matt Elliott, Joshua Lee, Olivia Massad
     - name: Leon Nguyen, Pratham Patel, Isabelle Perez
-    - name: William Qualls, Weijia Wu, Vincent Xie
+    - name: Alex Pugh, William Qualls, Weijia Wu, Vincent Xie
     - name: Emmanuel Yankson, Xingye Zhang
   date: today
 
@@ -26,6 +26,7 @@ book:
     - eda.qmd
     - visualization.qmd
     - statsmod.qmd
+    - timeseries.qmd
     - supervised.qmd
     - advanced.qmd
     - exercises.qmd
