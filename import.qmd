@@ -276,6 +276,10 @@ merged_df = pd.merge(valid_zip_df, zip_info_df, how="left", on="incident_zip")
 merged_df.columns
 ```
 
+<!-- # acess ACS data -->
+
+{{< include _accessingACSdata.qmd >}}
+
 
 <!-- # Database Operations with SQL -->
 
