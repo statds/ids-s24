@@ -1,9 +1,8 @@
----
-title: "Time Series Analysis"
-format: html
----
+## Time Series Analysis
 
-## What is Time Series Data?
+> This section is presented by Alex Pugh
+
+### What is Time Series Data?
 Any information collected over regular intervals of time is considered to 
 follow a time series. Time series analysis is a way of studying the 
 characteristics of the response variable concerning time as the independent 
@@ -65,16 +64,16 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Identifying Data Trends
+### Identifying Data Trends
 
-### Elementary Data Trends
+#### Elementary Data Trends
 
 - **Seasonal** - regular or fixed interval shifts within the dataset in a continuous timeline
 - **Cyclical** - no fixed interval, uncertainty in movement and its pattern
 - **Trend** - no fixed interval nor any divergence within the given dataset is a continuous timeline
 - **Irregular** - unexpected situations/events/scenarios and spikes in a short time span
 
-### Stationarity
+#### Stationarity
 Stationarity is the primary underlying assumption in most time series 
 analysis. This refers to the idea that the origin of time does not affect 
 the properties of the process under the statistical factor, and that the 
@@ -136,7 +135,7 @@ adf_kpss_test(SBUX['Close'], 'SBUX Stock Price')
 adf_kpss_test(SMCI['Close'], 'SMCI Stock Price')
 ```
 
-#### Interpretation
+##### Interpretation
 
 Starbucks:
 
@@ -151,7 +150,7 @@ Supermicro:
 - KPSS Test: The KPSS statistic is 1.39, and the p-value is 0.01. Here, since the p-value is less than the significance level (0.05), we reject the null hypothesis. This suggests that the time series of Starbucks' stock price is non-stationary according to the KPSS test as well.
 
 
-#### Converting Non-Stationary Into Stationary
+##### Converting Non-Stationary Into Stationary
  
 There are three methods available for this conversion – detrending, 
 differencing, and transformation.
@@ -316,7 +315,7 @@ As of April 1, 2024, here is a summary table with the result of the above tests:
 The Starbucks stock price is stationary once differenced or the log return 
 is taken, and the Supermicro stock price is approximately stationary once taken the log return.
 
-### Autocorrelation
+#### Autocorrelation
 Autocorrelation measures the relationship between a variable's current value 
 and its past values at different time lags. Data with strong autocorrelation 
 indicates that current values are highly influenced from past values. The 
@@ -577,7 +576,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-#### Interpretation of ARIMA
+##### Interpretation of ARIMA
 
 This model predicts greater volatility for Supermicro's stock price than 
 Starbucks'. The change in Starbucks' stock price is not predicted to deviate 
@@ -588,7 +587,7 @@ stock are majority positive, we would recommend buying Supermicro stock. The
 ARIMA model indicates an a positive outlook and an expectation of future 
 growth over the next 12 months.
 
-## Modeling Volatility With GARCH
+### Modeling Volatility With GARCH
 
 A change in the variance or volatility over time can cause problems when 
 modeling time series with classical methods like ARIMA. GARCH (Generalized 
@@ -673,7 +672,7 @@ appears to be more volatile than Starbucks, so a day trader would likely
 be more interested in SMCI while an investor would be better off holding 
 onto SBUX.
 
-## Conclusion
+### Conclusion
 
 Conducting time series data analysis is a fundamental task encountered by 
 data scientists across various domains. A strong grasp of tools and 
