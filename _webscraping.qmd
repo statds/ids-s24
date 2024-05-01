@@ -1,20 +1,6 @@
----
-title: "Introduction to Web Scraping"
-author: "William Qualls"
-toc: true
-number-sections: true
-highlight-style: pygments
-format: 
-  html: 
-    code-fold: true
-    html-math-method: katex
-  pdf: 
-    geometry: 
-      - top=30mm
-      - left=20mm
-##  docx: default
----
 ## Introduction to Web Scraping
+
+This section was written by William Qualls. 
 
 ### Introduction 
 
