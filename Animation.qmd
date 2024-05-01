@@ -1,24 +1,22 @@
----
-title: "Animation Analysis"
-format: html
----
+## Animation
 
-## Introduction
 Hello everyone! My name is Ge Li and I am a senior double major in Math and Statistics. I am going to do the Animation analysis here with python. 
 
-## What is data animation?
+### Introduction
+
+#### What is data animation?
 Data animation is the process of adding movement, interactivity, and visual effects to your data displays. It can help you highlight changes over time, compare different scenarios, reveal hidden details, and create a dynamic and immersive experience for your viewers. Data animation can take many forms, such as animated maps, timelines, transitions, sliders, and interactive dashboards. You can use data animation to enhance your presentations, reports, websites, or social media posts.
 
-## Why animate your data?
+#### Why animate your data?
 Data animation can provide a variety of advantages to your data analysis and communication. Capturing attention and generating interest is possible by adding color, motion, and sound. It can also improve understanding and retention by showing how complex or abstract concepts work or change over time. Furthermore, data animation can be used to persuade and influence by conveying a message or story with your data and creating emotional impact. It can also motivate action or change by demonstrating consequences, opportunities, or solutions
 
 
-## How to animate your data?
+#### How to animate your data?
 Before animating your data, it's important to define your purpose and audience. Consider the main question, problem, or idea you want to address and the best way to communicate it. Then choose the data and format that best suit your purpose and audience. What type of data do you have? How much, how complex, and how reliable is it? What kind of chart, graph, or map will best display it? Finally, decide how to animate and interact with your data. What kind of movement, transition, or effect will you use? How will you control the speed, direction, and duration of the animation? How will you enable user input, feedback, or navigation? By following these steps, you can create an effective animation that meets your goals and resonates with your audience.
 
-## Examples of data animation using NYC Rodents Dataset
+### Examples of data animation using NYC Rodents Dataset
 
-## Data Examination and Queation Exploration
+#### Data Examination and Queation Exploration
 
 The dataset contains information on rodent complaints across different locations, with a total of 2,669 entries. Each entry includes details such as the unique key, created and closed dates of the complaint, agency and agency name handling the complaint, complaint type, descriptor (specifics about the complaint), location type, incident zip code, address, and additional geographical and administrative details.
 
@@ -31,7 +29,7 @@ Geographical Distribution: Which areas have the highest concentration of rodent 
 Comparison by Location Type: How do rodent complaints vary by location type (e.g., residential vs. commercial buildings)? We can create an animated bar chart that updates over time to show the distribution of complaints by location type.
 
 
-## Temporal Trends over time
+#### Temporal Trends over time
 
 An animation is a sequence of frames where each frame corresponds to a plot on a Figure.
 The animation process in Matplotlib can be thought of in 2 different ways:
@@ -42,7 +40,7 @@ ArtistAnimation: Generate a list (iterable) of artists that will draw in each fr
 
 FuncAnimation is more efficient in terms of speed and memory as it draws an artist once and then modifies it. On the other hand ArtistAnimation is flexible as it allows any iterable of artists to be animated in a sequence.
 
-## Geographical Distribution
+#### Geographical Distribution
 
 A GeoJSON file for NYC ZIP code boundaries is a dataset that contains geographic information about the boundaries of ZIP code areas in New York City represented in the GeoJSON format. GeoJSON is a format for encoding a variety of geographic data structures, such as points, lines, polygons, and multi-part collections.
 
@@ -50,9 +48,7 @@ GeoJSON files provide spatial data that can be used for various geospatial analy
 
 With the help of libraries like geopandas, folium, or leaflet.js, GeoJSON files can be used to visualize geographic boundaries on maps. For instance, one could create choropleth maps to visualize patterns or densities of certain attributes (like population density, income levels, etc.) across different ZIP code areas.
 
-## Comparison by Location Type
-
-## Show Complaints in an actual map
+##### Comparison by Location Type
 
 Folium is a Python library used for visualizing geospatial data interactively. It allows you to create interactive maps directly within your Python environment, making it easy to explore and analyze geographic data. Folium builds on the capabilities of the Leaflet.js library, providing a Python wrapper that simplifies the process of creating maps with various layers and markers.
 
