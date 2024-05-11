@@ -1,18 +1,20 @@
-## Database Operations with SQL
-### Introduction
+## Introduction
 
-Today, I will be presenting on Database Operations using SQL and I will demonstrate 
-it by using sqlite3 in Python and I will use our cleaned rodent data set. This 
-presentation will briefly go over what Professor Haim Bar talked about during his 
-talk and we will dive into some more advanced SQL commands. 
+Hello everyone, my name is Vincent Xie. I am a senior looking to graduate this spring in 
+Statistics with a minor in Computer Science. I decided to take this course in order to
+get an introductory understanding of Data Science and the life cycle of a Data Science
+Project. Today, I will be presenting on Database Operations using SQL by using sqlite3 
+in Python and I will use our rodent data set. This presentation will briefly go over 
+what Professor Haim Bar talked about during his talk and we will dive into some more 
+advanced SQL commands. 
 
-### What is SQL?
+## What is SQL?
 
 Structured Query Language (SQL) is a standard language for accessing and manipulating 
 databases. It is used within relational database management systems such as MS SQL 
 Server, MySQL, Oracle, etc... to perform CRUD operations.
 
-#### CRUD
+### CRUD
 
 + [C]{.underline}reate - inserting new records/values
 
@@ -30,7 +32,7 @@ Server, MySQL, Oracle, etc... to perform CRUD operations.
 
 **DELETE** **FROM** table_name [**WHERE** condition]
 
-#### RDBMS vs NoSQL
+### RDBMS vs NoSQL
 
 RDBMS
 
@@ -48,11 +50,11 @@ NoSQL
 + Does not always use SQL
 + AWS DynamoDB
 
-### Recap and Overview of some Basics
+## Recap and Overview of some Basics
 
 > Key Notes from Professor Bar
 
-#### Creating Tables
+### Creating Tables
 
 ```
 CREATE TABLE contacts(
@@ -63,6 +65,7 @@ CREATE TABLE contacts(
 	phone TEXT NOT NULL UNIQUE
 );
 ```
+
 + Creates a table named *contacts*.
 + Five fields: contact_id, first_name, last_name, email, phone
 + PRIMARY KEY: uniquely identifies each record in the table.
@@ -85,6 +88,7 @@ CREATE TABLE contact_groups (
 			ON UPDATE NO ACTION
 );
 ```
+
 + PRIMARY KEY() declares which variables are primary keys. We should remove the first 
   two *Primary Key* declarations to have proper syntax.
 + FOREIGN KEY() declares the variable as a foreign key
@@ -100,7 +104,28 @@ CREATE TABLE contact_groups (
   taken on `contact_groups`.
     + Can be replaced with `RESTRICT`.
 
-#### Inserting and Searching
+In these `CREATE` functions, it follows the format of a column name, datatype, and 
+a *constraint*. These constraints implement specific rules for the data in that 
+column. These rules can either be applied to columns or the whole table. Here are 
+a few commonly used constraints:
+
++ `NOT NULL`: Data cannot be empty.
++ `UNIQUE`: Data has to be different in each column.
++ `PRIMARY KEY`: Combination of `NOT NULL` and `UNIQUE`. Uniquely identifies 
+  each row.
++ `FOREIGN KEY`: Prevents actions that destroy links between tables.
++ `CHECK`: Ensures values in column satisfy a condition.
+
+**Example of `CHECK`**
+
+```
+CREATE TABLE Persons (
+    ...
+    Age int CHECK (Age>=18)
+);
+```
+
+### Inserting and Searching
 
  + Multiple ways to insert values into a specific table.
 
@@ -126,7 +151,7 @@ postalcode= 'M5p2n7' WHERE employeeid=4;
 UPDATE employees SET email = LOWER(firstname || "." || lastname || '@gmail.com';
 ```
 
-#### Deleting 
+### Deleting 
 
 + Deleting Tables/Databases
 ```
@@ -136,12 +161,13 @@ DROP DATABASE databasename;
 
 **Note: Dropping a database will result in loss of information.**
 
-+ Deleting entries given a condition
++ Deleting entries given a condition    
+
 ```
 DELETE FROM table_name WHERE condition;
 ```
 
-### Utilizing sqlite3 in Python with Rodent Data Set
+## Utilizing sqlite3 in Python with Rodent Data Set
 
 **Connecting to SQLite3 Using Python**
 
@@ -154,9 +180,21 @@ conn = sqlite3.connect("presentation.db")
 
 # Using our cleaned rodent data
 data = pd.read_feather("data/rodent_2022-2023.feather")
+
+# Creates Rodent table
+data.to_sql(
+            'rodent', # Name of SQL table
+            conn, # sqlite3 connection
+            if_exists = 'replace',
+            index = False
+)
+
+# Cursor, Instance that allows you to invoke methods to execute SQL statements.
+cursor = conn.cursor()
 ```
 
 ```{python}
+
 # Creates Rodent table
 data.to_sql(
             'rodent', # Name of SQL table
@@ -183,7 +221,360 @@ columns = [description[0] for description in cursor.description]
 pd.DataFrame(rows, columns=columns)
 ```
 
-### References
+### Creating Tables and Databases
 
-+ https://www.w3schools.com/sql/
-+ https://aws.amazon.com/what-is/sql/
+In order to perform database operations, we first need to create the databases 
+and tables. When we use SQLite3, this is already done when we connect to the 
+package. If we are not using Python, the commands would be typed as follows:
+
+```
+# Creating a database
+CREATE DATABASE databasename;
+
+# Creating a table
+CREATE TABLE table_name (
+    column1 datatype,
+    column2 datatype,
+    column3 datatype,
+   ....
+);
+```
+
+Datatypes include but not limited to:
+
++ Char(SIZE): Fixed length string (numbers/letters/special char)
+    + Value can range from 0 to 255.
++ Boolean
++ INT/INTEGER(SIZE)
++ DATE (YYYY-MM-DD)
++ DATETIME (YYYY-MM-DD HH:MI:SS)
++ TEXT
++ BLOB and TINYBLOB
+    + Binary Large Objects. Holds up to 65,535 and 255 bytes of data respectively.
+
+We can also create a table using the data from another table. Let's take a
+couple of columns and put them into our `TestTable`.
+
+```{python}
+cursor.execute("""
+                CREATE TABLE TestTable AS
+                SELECT unique_key, descriptor, city
+                FROM rodent;
+               """)
+
+cursor.execute("""
+                SELECT * 
+                FROM TestTable
+                LIMIT 5
+               """)
+rows = cursor.fetchall()
+
+# Column names
+columns = [description[0] for description in cursor.description]
+
+# Displaying the output in a table format
+pd.DataFrame(rows, columns=columns)
+```
+
+With our new table, we can also delete this table and any other tables that 
+may cause rendering issues. It is important to note that SQlite3 has a commit
+function which pushes our changes onto the database. It is a similar process
+to committing changes on GitHub.
+
+```{python}
+cursor.execute("""
+                DROP TABLE TestTable
+               """)
+
+# Commit changes
+conn.commit()
+```
+
+If you wanted to just delete the data itself, you can use the following
+command:
+
+```
+TRUNCATE TABLE table_name;
+```
+
+### Altering and Querying the Database
+
+Now that we have our databases and tables set up, we need to be able to 
+manipulate and query our data. The following commands include some that 
+are commonly used and others which may be useful in specific use cases.
+
+**Select/Select Distinct Statements**
+
++ Selects data from the database. 
++ Adding `DISTINCT` returns only distinct values.
+
+```{python}
+cursor.execute("""
+                SELECT COUNT(DISTINCT city) 
+                FROM rodent
+               """)
+
+# Fetch the result
+result = cursor.fetchone()
+
+# result is a tuple, so we take the first element to get the actual count
+count = result[0] if result else 0
+
+# Print the result
+print("Number of distinct cities:", count)
+```
+
+Our result of 47 tells us that `CITY` does not only represent the boroughs. 
+There are some values that represent neighborhoods in boroughs. One example
+would be Corona which is a neighborhood in Queens. 
+
+**WHERE Clause with Operators**
+
+The `WHERE` clause is used to filter records. It will extract data records 
+that fulfilled a specific condition. This can be combined with the `AND`, 
+`OR`, and `NOT` operators if there are multiple conditions can be met. 
+
+```{python}
+cursor.execute("""
+                SELECT *
+                FROM rodent
+                WHERE descriptor = 'Mouse Sighting'
+                AND location_type = '3+ Family Apt. Building'
+                LIMIT 5;
+               """)
+rows = cursor.fetchall()
+
+# Column names
+columns = [description[0] for description in cursor.description]
+
+# Displaying the output in a table format
+pd.DataFrame(rows, columns=columns)
+```
+
+You can also combine operators to meet specific conditions. However,
+be aware of parentheses. In order to get the right results, you must
+place the parentheses correctly. 
+
+```{python}
+cursor.execute("""
+                SELECT unique_key, descriptor, incident_address
+                FROM rodent
+                WHERE NOT descriptor = 'Rat Sighting'
+                LIMIT 5;
+               """)
+rows = cursor.fetchall()
+
+# Column names
+columns = [description[0] for description in cursor.description]
+
+# Displaying the output in a table format
+pd.DataFrame(rows, columns=columns)
+```
+```{python}
+cursor.execute("""
+                SELECT unique_key, incident_zip
+                FROM rodent
+                WHERE incident_zip NOT LIKE '11%'
+                ORDER BY incident_zip ASC
+                LIMIT 5;
+               """)
+rows = cursor.fetchall()
+
+# Column names
+columns = [description[0] for description in cursor.description]
+
+# Displaying the output in a table format
+pd.DataFrame(rows, columns=columns)
+```
+
+These two code cells are examples of how to utilize the `NOT` 
+operator. The first code cell returns all records that are 
+not **Rat Sightings**. The second code cell returns all records
+where the `Incident Zip` does not start with 11.
+
+Other `NOT` operators:
+
++ NOT BETWEEN
++ NOT IN
++ NOT Greater Than
++ NOT Less Than
+
+**Updating and Inserting Records**
+
+In order to insert records, we utilize the `INSERT INTO` statement. 
+We need to specify the values that are going to be put into the table,
+but we do not always need to specify the column names. If we don't, we
+need to make sure the values being inserted are typed in the same order 
+as the column names. 
+
+```{python}
+cursor.execute("""
+                INSERT INTO rodent (unique_key, city)
+                VALUES ('50000000', 'CT')
+               """)
+
+cursor.execute("""
+                SELECT *
+                FROM rodent
+                WHERE unique_key = '50000000';
+               """)
+
+rows = cursor.fetchall()
+
+# Column names
+columns = [description[0] for description in cursor.description]
+
+# Displaying the output in a table format
+pd.DataFrame(rows, columns=columns)
+```
+
+Notice how columns that were not given a value were left empty. In our case,
+providing an example to fill each column with a value would be very tedious.
+
+In order to update, we will use the `UPDATE` command.
+
+```{python}
+cursor.execute("""
+                UPDATE rodent
+                SET agency = 'UCONN', agency_name = 'STAT 3255'
+                WHERE unique_key = '50000000';
+               """)
+
+cursor.execute("""
+                SELECT *
+                FROM rodent
+                WHERE unique_key = '50000000';
+               """)
+
+rows = cursor.fetchall()
+
+# Column names
+columns = [description[0] for description in cursor.description]
+
+# Displaying the output in a table format
+pd.DataFrame(rows, columns=columns)
+```
+
+**Be aware**: If we omit the `WHERE` clause, you will update all records. 
+
+**Aggregate Functions**
+
+These functions perform calculations on a set of values and record one value. 
+They are often used with the `GROUP BY` clause and `SELECT` statements. 
+
+Here is a list of the most common functions:
+
++ min()
++ max()
++ count()
++ sum()
++ avg()
+
+For the rodent data set, we would mostly use `COUNT()` as the other functions
+do not provide a meaningful output.
+
+**Join Clause**
+
+A `JOIN` clause combines the rows from two or more tables based on a common 
+column. These are the different types of clauses:
+
++ INNER JOIN: Records that are in both tables.
++ LEFT JOIN: All records from table 1 and the matched records from table 2.
++ RIGHT JOIN: All records from table 2 and the matched records from table 1.
++ FULL JOIN: All records that match in both tables in left or right.
+
+**Procedures**
+
+A procedure is SQL code is that saved with the intention to be reused. It is
+similar to a python function where you can add parameters.
+
+```
+cursor.execute("""
+                CREATE PROCEDURE SelectUnique @unique_key nvarchar(30)
+                AS
+                SELECT * FROM rodent WHERE unique_key = @unique_key
+                GO;
+               """)
+
+cursor.execute("""
+                EXEC SelectUnique @unique_key = '50000000';
+               """)
+
+rows = cursor.fetchall()
+
+# Column names
+columns = [description[0] for description in cursor.description]
+
+# Displaying the output in a table format
+pd.DataFrame(rows, columns=columns)
+```
+
+**Altering Table**
+
+The `ALTER TABLE` function allows us to manipulate the columns in the table.
+This includes adding, deleting, or modifying it in an existing table. 
+The methods include:
+
++ ADD column_name datatype;
++ DROP COLUMN column_name;
++ RENAME COLUMN old_name to new_name;
++ ALTER/MODIFY COLUMN column_name datatype;
+
+Here is an example where I remove empty columns in the rodent data set.
+
+```{python}
+cursor.execute("""
+                ALTER TABLE rodent
+                DROP COLUMN agency_name;
+               """)
+
+cursor.execute("""
+                SELECT *
+                FROM rodent
+                LIMIT 1;
+               """)
+
+rows = cursor.fetchall()
+
+# Column names
+columns = [description[0] for description in cursor.description]
+
+# Displaying the output in a table format
+pd.DataFrame(rows, columns=columns)
+```
+
+**Auto-increment**
+
+When we create tables, we can generate a unique number automatically for new 
+entries. This is often placed with the primary key field so it is generated
+when a new record is inserted.
+
+```
+CREATE TABLE contacts(
+	contact_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+	first_name TEXT NOT NULL,
+	last_name TEXT NOT NULL,
+	email TEXT NOT NULL UNIQUE,
+	phone TEXT NOT NULL UNIQUE
+);
+```
+
+The default value is 1 but this can be changed. If you want it to increase by
+10, you would write `AUTO_INCREMENT=10`.
+
+### Closing out of SQLite3
+
+Before we finish our projects/assignments, we need to save our database with 
+changes and close the connection. It can be done using the following commands.
+
+```{python}
+conn.commit()
+conn.close()
+```
+
+In order to run SQL commands again, you need to reconnect to your database.
+
+## References
+
++ <https://www.w3schools.com/sql/>
++ <https://aws.amazon.com/what-is/sql/>
