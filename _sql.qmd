@@ -1,6 +1,9 @@
 ## Introduction
 
-Today, I will be presenting on Database Operations using SQL and I will demonstrate 
+Hello everyone, my name is Vincent Xie. I am a senior looking to graduate this spring in 
+Statistics with a minor in Computer Science. I decided to take this course in order to
+get an introductory understanding of Data Science and the life cycle of a Data Science
+Project. Today, I will be presenting on Database Operations using SQL and I will demonstrate 
 it by using sqlite3 in Python and I will use our rodent data set. This 
 presentation will briefly go over what Professor Haim Bar talked about during his 
 talk and we will dive into some more advanced SQL commands. 
