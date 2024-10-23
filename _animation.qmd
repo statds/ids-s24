@@ -56,7 +56,7 @@ Folium is a Python library used for visualizing geospatial data interactively. I
 import pandas as pd
 
 # Load the dataset
-df = pd.read_csv('rodent_2022-2023.csv')
+df = pd.read_csv('data/rodent_2022-2023.csv')
 
 # Display the first few rows of the dataframe to understand its structure and content
 df.head(), df.info()

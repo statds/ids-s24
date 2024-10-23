@@ -3,3 +3,7 @@
 
 <!-- ## Web Scraping Tree -->
 {{< include _webscraping.qmd >}}
+
+
+<!-- ## Animation -->
+{{< include _animation.qmd >}}
