@@ -230,20 +230,20 @@ for i in range(len(eat_out)):
     
     if eat_out[i] and not in_class[i] and good_places_open[i]:
         probabilities_t = [0.80, 0.20]
-        time_choices_hrs = [early, late]
         
     elif not eat_out[i] and not in_class[i] and not good_places_open[i]:
         probabilities_t = [0.25, 0.75]
-        time_choices_hrs = [early, late]
         
     elif not eat_out[i] and in_class[i] and good_places_open[i]:
         probabilities_t = [0.60, 0.40]
-        time_choices_hrs = [early, late]
         
     elif eat_out[i] and in_class[i]:
         probabilities_t = [0.90, 0.10]
-        time_choices_hrs = [early, late]
-        
+
+    else:
+        probabilities_t = [0.50, 0.50]
+
+    time_choices_hrs = [early, late]        
     hour = np.random.choice(time_choices_hrs, p=probabilities_t)
     minute = random.randint(0, 59)
 
@@ -289,7 +289,7 @@ from sklearn.metrics import precision_score
 
 
 ```{python}
-#displays the first five rows of the dataset
+# displays the first five rows of the dataset
 dine_out_df.head()
 ```
 
@@ -492,7 +492,7 @@ In comparison, we see that even without hyperparameter tuning the random forest
 model outperforms the decision tree model that we have previously trained.
 
 
-## References 
+### References 
 
 * Tree Based Models - UCONN Data Science
 
@@ -517,5 +517,4 @@ model outperforms the decision tree model that we have previously trained.
 
 * Bootstrapping and OOB samples in Random Forests | Medium
   + https://medium.com/analytics-vidhya/bootstrapping-and-oob-samples-in-random-forests-6e083b6bc341
-
 
