@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science - 10&nbsp; Supervised Learning</title>
+<title>10&nbsp; Supervised Learning – Introduction to Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -126,7 +126,7 @@ div.csl-indent {
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -164,13 +164,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./supervised.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised Learning</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -304,19 +304,21 @@ window.Quarto = {
   <li><a href="#generating-an-example-dataset" id="toc-generating-an-example-dataset" class="nav-link" data-scroll-target="#generating-an-example-dataset"><span class="header-section-number">10.3.5</span> Generating an Example Dataset</a></li>
   <li><a href="#random-forest" id="toc-random-forest" class="nav-link" data-scroll-target="#random-forest"><span class="header-section-number">10.3.6</span> Random Forest</a></li>
   </ul></li>
-  <li><a href="#random-forest-code" id="toc-random-forest-code" class="nav-link" data-scroll-target="#random-forest-code"><span class="header-section-number">10.4</span> Random Forest Code</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">10.5</span> References</a></li>
-  <li><a href="#boosted-tree" id="toc-boosted-tree" class="nav-link" data-scroll-target="#boosted-tree"><span class="header-section-number">10.6</span> Boosted Tree</a>
+  <li><a href="#random-forest-code" id="toc-random-forest-code" class="nav-link" data-scroll-target="#random-forest-code"><span class="header-section-number">10.4</span> Random Forest Code</a>
   <ul class="collapse">
-  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1"><span class="header-section-number">10.6.1</span> Introduction</a></li>
-  <li><a href="#boosting-process" id="toc-boosting-process" class="nav-link" data-scroll-target="#boosting-process"><span class="header-section-number">10.6.2</span> Boosting Process</a></li>
-  <li><a href="#boosting-vs-bagging-in-ensemble-learning" id="toc-boosting-vs-bagging-in-ensemble-learning" class="nav-link" data-scroll-target="#boosting-vs-bagging-in-ensemble-learning"><span class="header-section-number">10.6.3</span> Boosting vs Bagging in Ensemble Learning</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">10.4.1</span> References</a></li>
   </ul></li>
-  <li><a href="#handling-imbalanced-data" id="toc-handling-imbalanced-data" class="nav-link" data-scroll-target="#handling-imbalanced-data"><span class="header-section-number">10.7</span> Handling Imbalanced Data</a>
+  <li><a href="#boosted-tree" id="toc-boosted-tree" class="nav-link" data-scroll-target="#boosted-tree"><span class="header-section-number">10.5</span> Boosted Tree</a>
   <ul class="collapse">
-  <li><a href="#imbalanced-data" id="toc-imbalanced-data" class="nav-link" data-scroll-target="#imbalanced-data"><span class="header-section-number">10.7.1</span> Imbalanced Data</a></li>
-  <li><a href="#approaches-to-handling-imbalanced-data" id="toc-approaches-to-handling-imbalanced-data" class="nav-link" data-scroll-target="#approaches-to-handling-imbalanced-data"><span class="header-section-number">10.7.2</span> Approaches to Handling Imbalanced Data</a></li>
-  <li><a href="#smote" id="toc-smote" class="nav-link" data-scroll-target="#smote"><span class="header-section-number">10.7.3</span> SMOTE</a></li>
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1"><span class="header-section-number">10.5.1</span> Introduction</a></li>
+  <li><a href="#boosting-process" id="toc-boosting-process" class="nav-link" data-scroll-target="#boosting-process"><span class="header-section-number">10.5.2</span> Boosting Process</a></li>
+  <li><a href="#boosting-vs-bagging-in-ensemble-learning" id="toc-boosting-vs-bagging-in-ensemble-learning" class="nav-link" data-scroll-target="#boosting-vs-bagging-in-ensemble-learning"><span class="header-section-number">10.5.3</span> Boosting vs Bagging in Ensemble Learning</a></li>
+  </ul></li>
+  <li><a href="#handling-imbalanced-data" id="toc-handling-imbalanced-data" class="nav-link" data-scroll-target="#handling-imbalanced-data"><span class="header-section-number">10.6</span> Handling Imbalanced Data</a>
+  <ul class="collapse">
+  <li><a href="#imbalanced-data" id="toc-imbalanced-data" class="nav-link" data-scroll-target="#imbalanced-data"><span class="header-section-number">10.6.1</span> Imbalanced Data</a></li>
+  <li><a href="#approaches-to-handling-imbalanced-data" id="toc-approaches-to-handling-imbalanced-data" class="nav-link" data-scroll-target="#approaches-to-handling-imbalanced-data"><span class="header-section-number">10.6.2</span> Approaches to Handling Imbalanced Data</a></li>
+  <li><a href="#smote" id="toc-smote" class="nav-link" data-scroll-target="#smote"><span class="header-section-number">10.6.3</span> SMOTE</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -499,7 +501,7 @@ uses multiple features in order to predict whether or not a student will dine ou
 <h3 data-number="10.3.5" class="anchored" data-anchor-id="generating-an-example-dataset"><span class="header-section-number">10.3.5</span> Generating an Example Dataset</h3>
 <p><strong>Do I eat out?</strong></p>
 <p><strong>Code</strong></p>
-<div id="251229d1" class="cell" data-execution_count="1">
+<div id="4ecfcc4c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -561,20 +563,20 @@ uses multiple features in order to predict whether or not a student will dine ou
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> eat_out[i] <span class="kw">and</span> <span class="kw">not</span> in_class[i] <span class="kw">and</span> good_places_open[i]:</span>
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>        probabilities_t <span class="op">=</span> [<span class="fl">0.80</span>, <span class="fl">0.20</span>]</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>        time_choices_hrs <span class="op">=</span> [early, late]</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="kw">not</span> eat_out[i] <span class="kw">and</span> <span class="kw">not</span> in_class[i] <span class="kw">and</span> <span class="kw">not</span> good_places_open[i]:</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>        probabilities_t <span class="op">=</span> [<span class="fl">0.25</span>, <span class="fl">0.75</span>]</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>        time_choices_hrs <span class="op">=</span> [early, late]</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="kw">not</span> eat_out[i] <span class="kw">and</span> in_class[i] <span class="kw">and</span> good_places_open[i]:</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>        probabilities_t <span class="op">=</span> [<span class="fl">0.60</span>, <span class="fl">0.40</span>]</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>        time_choices_hrs <span class="op">=</span> [early, late]</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> eat_out[i] <span class="kw">and</span> in_class[i]:</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>        probabilities_t <span class="op">=</span> [<span class="fl">0.90</span>, <span class="fl">0.10</span>]</span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>        time_choices_hrs <span class="op">=</span> [early, late]</span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="kw">not</span> eat_out[i] <span class="kw">and</span> <span class="kw">not</span> in_class[i] <span class="kw">and</span> <span class="kw">not</span> good_places_open[i]:</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>        probabilities_t <span class="op">=</span> [<span class="fl">0.25</span>, <span class="fl">0.75</span>]</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="kw">not</span> eat_out[i] <span class="kw">and</span> in_class[i] <span class="kw">and</span> good_places_open[i]:</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        probabilities_t <span class="op">=</span> [<span class="fl">0.60</span>, <span class="fl">0.40</span>]</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> eat_out[i] <span class="kw">and</span> in_class[i]:</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>        probabilities_t <span class="op">=</span> [<span class="fl">0.90</span>, <span class="fl">0.10</span>]</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>        probabilities_t <span class="op">=</span> [<span class="fl">0.50</span>, <span class="fl">0.50</span>]</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>    time_choices_hrs <span class="op">=</span> [early, late]        </span>
 <span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    hour <span class="op">=</span> np.random.choice(time_choices_hrs, p<span class="op">=</span>probabilities_t)</span>
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>    minute <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">59</span>)</span>
 <span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
@@ -599,21 +601,20 @@ uses multiple features in order to predict whether or not a student will dine ou
 <p><strong>Do I eat out?</strong>: Asks if the student eats out (Target Label, Boolean)</p>
 <section id="decision-tree-code" class="level4" data-number="10.3.5.1">
 <h4 data-number="10.3.5.1" class="anchored" data-anchor-id="decision-tree-code"><span class="header-section-number">10.3.5.1</span> Decision Tree Code</h4>
-<div id="f5854ac5" class="cell" data-execution_count="2">
+<div id="d6502808" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, f1_score, recall_score </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> precision_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9e24f0bf" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#displays the first five rows of the dataset</span></span>
+<div id="c1996b78" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># displays the first five rows of the dataset</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dine_out_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -627,42 +628,42 @@ uses multiple features in order to predict whether or not a student will dine ou
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
+<td>True</td>
 <td>False</td>
-<td>True</td>
-<td>59.09</td>
-<td>15:01</td>
-<td>True</td>
+<td>172.68</td>
+<td>15:22</td>
+<td>False</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>True</td>
 <td>False</td>
-<td>90.13</td>
-<td>11:13</td>
+<td>True</td>
+<td>99.67</td>
+<td>19:44</td>
 <td>True</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>False</td>
 <td>True</td>
-<td>87.06</td>
-<td>18:35</td>
+<td>False</td>
+<td>228.22</td>
+<td>14:57</td>
 <td>True</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>False</td>
-<td>False</td>
-<td>18.29</td>
-<td>22:59</td>
+<td>True</td>
+<td>23.20</td>
+<td>17:17</td>
 <td>False</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>False</td>
 <td>True</td>
-<td>2.39</td>
-<td>19:54</td>
+<td>243.03</td>
+<td>18:57</td>
 <td>True</td>
 </tr>
 </tbody>
@@ -671,8 +672,7 @@ uses multiple features in order to predict whether or not a student will dine ou
 </div>
 </div>
 </div>
-</div>
-<div id="c341c01f" class="cell" data-execution_count="4">
+<div id="c3bfee34" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> encode_time(time_str):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    hours, minutes <span class="op">=</span> <span class="bu">map</span>(<span class="bu">int</span>, time_str.split(<span class="st">':'</span>))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -682,7 +682,7 @@ uses multiple features in order to predict whether or not a student will dine ou
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>dine_out_df[[<span class="st">'encoded_hours'</span>]] <span class="op">=</span> dine_out_df[<span class="st">'Time of Day (24-Hour)'</span>].<span class="bu">apply</span>(encode_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="3b01abc5" class="cell" data-execution_count="5">
+<div id="419d03c7" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>X_dtc <span class="op">=</span> dine_out_df.drop([<span class="st">'Do I eat out?'</span>, <span class="st">'Time of Day (24-Hour)'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Y_dtc <span class="op">=</span> dine_out_df[<span class="st">'Do I eat out?'</span>]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -694,7 +694,7 @@ uses multiple features in order to predict whether or not a student will dine ou
 <li><p>Training Set: This portion of the data, typically the majority (e.g., 70% of the dataset in this example), is used to train the machine learning model. For instance, the variable X_train is trained on 70% of the dataset containing features like OverTime, BusinessTravel, and MaritalStatus, while the variable y_train is trained on 70% of the Attrition feature column. The model learns the patterns and relationships between these features and the target variable (Attrition) from this training data.</p></li>
 <li><p>Test Set: The remaining portion of the data, 30% of the dataset in this case is set aside and not used during the training phase.</p></li>
 </ul>
-<div id="d85d0f93" class="cell" data-execution_count="6">
+<div id="29410dab" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates and Trains a Decision Tree Classifier object</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dtc <span class="op">=</span> DecisionTreeClassifier()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>dtc.fit(X_train, Y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1106,7 +1106,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </a></style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>DecisionTreeClassifier()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;DecisionTreeClassifier<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.tree.DecisionTreeClassifier.html">?<span>Documentation for DecisionTreeClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>DecisionTreeClassifier()</pre></div> </div></div></div></div>
 </div>
 </div>
-<div id="7947daa9" class="cell" data-execution_count="7">
+<div id="fc6707c0" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>y_pred_dtc <span class="op">=</span> dtc.predict(X_test)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>accuracy_dtc <span class="op">=</span> accuracy_score(Y_test, y_pred_dtc)</span>
@@ -1123,10 +1123,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Recall: </span><span class="sc">{</span>recall_dtc<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'F1 Score: </span><span class="sc">{</span>f1_dtc<span class="sc">:.4f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Accuracy: 0.7690
-Precision: 0.7688
-Recall: 0.7695
-F1 Score: 0.7692</code></pre>
+<pre><code>Accuracy: 0.7760
+Precision: 0.7789
+Recall: 0.7691
+F1 Score: 0.7740</code></pre>
 </div>
 </div>
 <p>However, decision trees on their own can often not be enough to make accurate choices based on the data available. Decision Trees have some pitfalls, including</p>
@@ -1154,12 +1154,12 @@ F1 Score: 0.7692</code></pre>
 </section>
 <section id="random-forest-code" class="level2" data-number="10.4">
 <h2 data-number="10.4" class="anchored" data-anchor-id="random-forest-code"><span class="header-section-number">10.4</span> Random Forest Code</h2>
-<div id="5aeabd7a" class="cell" data-execution_count="8">
+<div id="884eac29" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="26cd9485" class="cell" data-execution_count="9">
+<div id="39c3675a" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>X_rf <span class="op">=</span> dine_out_df.drop([<span class="st">'Do I eat out?'</span>, <span class="st">'Time of Day (24-Hour)'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>Y_rf <span class="op">=</span> dine_out_df[<span class="st">'Do I eat out?'</span>]</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1184,14 +1184,14 @@ F1 Score: 0.7692</code></pre>
 <li><code>Verbose</code>: Controls the verbosity when fitting and predicting</li>
 </ul>
 <p>What you’ll notice is that besides some new parameters, many of the parameters of the random forest classifier are the same as the parameters of the decision tree classifier. This is of course because the random forest is an ensemble of decision trees.</p>
-<div id="a80a81f6" class="cell" data-execution_count="10">
+<div id="36a9b9b2" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rf_classifier <span class="op">=</span> RandomForestClassifier() </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>rf_classifier.fit(X_train, Y_train)</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>Y_pred_rf <span class="op">=</span> rf_classifier.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="6f58c876" class="cell" data-execution_count="11">
+<div id="2a49299c" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>accuracy_rf <span class="op">=</span> accuracy_score(Y_test, Y_pred_rf)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>precision_rf <span class="op">=</span> precision_score(Y_test, Y_pred_rf, average<span class="op">=</span><span class="st">'binary'</span>)</span>
@@ -1206,16 +1206,15 @@ F1 Score: 0.7692</code></pre>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Recall: </span><span class="sc">{</span>recall_rf<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'F1 Score: </span><span class="sc">{</span>f1_rf<span class="sc">:.4f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Accuracy: 0.7794
-Precision: 0.7764
-Recall: 0.7851
-F1 Score: 0.7807</code></pre>
+<pre><code>Accuracy: 0.7833
+Precision: 0.7859
+Recall: 0.7773
+F1 Score: 0.7816</code></pre>
 </div>
 </div>
 <p>In comparison, we see that even without hyperparameter tuning the random forest model outperforms the decision tree model that we have previously trained.</p>
-</section>
-<section id="references" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="references"><span class="header-section-number">10.5</span> References</h2>
+<section id="references" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="references"><span class="header-section-number">10.4.1</span> References</h3>
 <ul>
 <li><p>Tree Based Models - UCONN Data Science</p></li>
 <li><p>Decision Tree Classification Clearly Explained!</p>
@@ -1248,15 +1247,16 @@ F1 Score: 0.7807</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="boosted-tree" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="boosted-tree"><span class="header-section-number">10.6</span> Boosted Tree</h2>
+</section>
+<section id="boosted-tree" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="boosted-tree"><span class="header-section-number">10.5</span> Boosted Tree</h2>
 <p>Boosted trees are a powerful ensemble technique in machine learning that combines multiple weak learners, typically decision trees, to form a strong learner. The essence of the boosting approach is to fit sequential models, where each new model attempts to correct errors made by the previous ones. Gradient boosting, one of the most popular boosting methods, optimizes a loss function over weak learners by iteratively adding trees that correct the residuals of the combined ensemble.</p>
-<section id="introduction-1" class="level3" data-number="10.6.1">
-<h3 data-number="10.6.1" class="anchored" data-anchor-id="introduction-1"><span class="header-section-number">10.6.1</span> Introduction</h3>
+<section id="introduction-1" class="level3" data-number="10.5.1">
+<h3 data-number="10.5.1" class="anchored" data-anchor-id="introduction-1"><span class="header-section-number">10.5.1</span> Introduction</h3>
 <p>Boosted trees build on the concept of boosting, an ensemble technique that aims to create a strong classifier from a number of weak classifiers. In the context of boosted trees, the weak learners are decision trees, usually of a fixed size, which are added sequentially to the model. The key idea is to improve the model iteratively by focusing on examples that are hard to predict, thus enhancing the overall predictive accuracy of the model.</p>
 </section>
-<section id="boosting-process" class="level3" data-number="10.6.2">
-<h3 data-number="10.6.2" class="anchored" data-anchor-id="boosting-process"><span class="header-section-number">10.6.2</span> Boosting Process</h3>
+<section id="boosting-process" class="level3" data-number="10.5.2">
+<h3 data-number="10.5.2" class="anchored" data-anchor-id="boosting-process"><span class="header-section-number">10.5.2</span> Boosting Process</h3>
 <p>In the context of gradient boosted trees, the ensemble model is built iteratively, where each new tree is fitted to the residual errors made by the previous ensemble of trees. The aim is to minimize a loss function, and each tree incrementally improves the model by reducing the loss. The ensemble model after <span class="math inline">\(M\)</span> trees can be described more accurately as:</p>
 <p>The final predictive model is <span class="math inline">\(F_M(x)\)</span>, which represents the accumulated predictions of all <span class="math inline">\(M\)</span> trees, adjusted by their respective learning rates.</p>
 <p>The process can be delineated as follows:</p>
@@ -1278,8 +1278,8 @@ F_{m-1}(x) + \lambda \cdot h_m(x)\)</span>.</li>
 </ul>
 <p>This iterative approach, focusing on correcting the errors of the ensemble up to the current step, distinguishes gradient boosting from other ensemble methods and allows for a nuanced adjustment of the model to the data.</p>
 </section>
-<section id="boosting-vs-bagging-in-ensemble-learning" class="level3" data-number="10.6.3">
-<h3 data-number="10.6.3" class="anchored" data-anchor-id="boosting-vs-bagging-in-ensemble-learning"><span class="header-section-number">10.6.3</span> Boosting vs Bagging in Ensemble Learning</h3>
+<section id="boosting-vs-bagging-in-ensemble-learning" class="level3" data-number="10.5.3">
+<h3 data-number="10.5.3" class="anchored" data-anchor-id="boosting-vs-bagging-in-ensemble-learning"><span class="header-section-number">10.5.3</span> Boosting vs Bagging in Ensemble Learning</h3>
 <p>Boosting and bagging are foundational ensemble learning techniques in machine learning, designed to improve the accuracy of predictive models by combining the strengths of multiple weaker models. Despite their common goal, they differ significantly in methodology and application.</p>
 <p>Boosting builds models in a sequential manner, focusing each subsequent model on correcting the errors made by the previous ones. The process initiates with a base model, with each new model added aiming to correct its predecessor, culminating in a weighted sum of all models.</p>
 <ul>
@@ -1295,8 +1295,8 @@ F_{m-1}(x) + \lambda \cdot h_m(x)\)</span>.</li>
 <li><strong>Bias and Variance Reduction</strong>: Effective at reducing both, but particularly good at cutting down variance in complex models.</li>
 </ul>
 <p>Random Forest is a prominent example of bagging.</p>
-<section id="differences" class="level4" data-number="10.6.3.1">
-<h4 data-number="10.6.3.1" class="anchored" data-anchor-id="differences"><span class="header-section-number">10.6.3.1</span> Differences</h4>
+<section id="differences" class="level4" data-number="10.5.3.1">
+<h4 data-number="10.5.3.1" class="anchored" data-anchor-id="differences"><span class="header-section-number">10.5.3.1</span> Differences</h4>
 <ul>
 <li><strong>Model Dependency</strong>: Boosting’s models are interdependent, building upon the errors of their predecessors, unlike bagging’s independent models.</li>
 <li><strong>Error Correction Focus</strong>: Boosting directly targets previous errors, while bagging reduces error through diversity.</li>
@@ -1307,11 +1307,11 @@ F_{m-1}(x) + \lambda \cdot h_m(x)\)</span>.</li>
 </section>
 </section>
 </section>
-<section id="handling-imbalanced-data" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="handling-imbalanced-data"><span class="header-section-number">10.7</span> Handling Imbalanced Data</h2>
+<section id="handling-imbalanced-data" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="handling-imbalanced-data"><span class="header-section-number">10.6</span> Handling Imbalanced Data</h2>
 <p>Handling imbalanced data is a critical task in machine learning, particularly in classification problems where the distribution of instances across the known classes is uneven. This imbalance can significantly bias the model’s training process, leading to poor predictive performance, especially for the minority class. Understanding and addressing this issue is crucial for building effective and fair models.</p>
-<section id="imbalanced-data" class="level3" data-number="10.7.1">
-<h3 data-number="10.7.1" class="anchored" data-anchor-id="imbalanced-data"><span class="header-section-number">10.7.1</span> Imbalanced Data</h3>
+<section id="imbalanced-data" class="level3" data-number="10.6.1">
+<h3 data-number="10.6.1" class="anchored" data-anchor-id="imbalanced-data"><span class="header-section-number">10.6.1</span> Imbalanced Data</h3>
 <p>Imbalanced data refers to a situation where the number of observations in one class significantly outweighs those in one or more other classes. This is a common scenario in various domains:</p>
 <ul>
 <li>In fraud detection, legitimate transactions vastly outnumber fraudulent ones.</li>
@@ -1320,8 +1320,8 @@ F_{m-1}(x) + \lambda \cdot h_m(x)\)</span>.</li>
 </ul>
 <p>Such disparities can lead to models that are overly biased towards the majority class, as they tend to optimize overall accuracy by simply predicting the majority class.</p>
 </section>
-<section id="approaches-to-handling-imbalanced-data" class="level3" data-number="10.7.2">
-<h3 data-number="10.7.2" class="anchored" data-anchor-id="approaches-to-handling-imbalanced-data"><span class="header-section-number">10.7.2</span> Approaches to Handling Imbalanced Data</h3>
+<section id="approaches-to-handling-imbalanced-data" class="level3" data-number="10.6.2">
+<h3 data-number="10.6.2" class="anchored" data-anchor-id="approaches-to-handling-imbalanced-data"><span class="header-section-number">10.6.2</span> Approaches to Handling Imbalanced Data</h3>
 <ul>
 <li><p>Resampling Techniques:</p>
 <ul>
@@ -1333,11 +1333,11 @@ F_{m-1}(x) + \lambda \cdot h_m(x)\)</span>.</li>
 <li><p>Algorithmic Adjustments: Some algorithms have built-in mechanisms for dealing with imbalanced data, such as adjusting class weights. This is evident in algorithms like SVM and logistic regression, where class weights can be inversely proportional to class frequencies <span class="citation" data-cites="king2001logistic">(<a href="references.html#ref-king2001logistic" role="doc-biblioref">King and Zeng 2001</a>)</span>.</p></li>
 </ul>
 </section>
-<section id="smote" class="level3" data-number="10.7.3">
-<h3 data-number="10.7.3" class="anchored" data-anchor-id="smote"><span class="header-section-number">10.7.3</span> SMOTE</h3>
+<section id="smote" class="level3" data-number="10.6.3">
+<h3 data-number="10.6.3" class="anchored" data-anchor-id="smote"><span class="header-section-number">10.6.3</span> SMOTE</h3>
 <p>The Synthetic Minority Over-sampling Technique (SMOTE) offers a nuanced approach to mitigating the challenges posed by imbalanced datasets. Unlike simple oversampling techniques that replicate minority class instances, SMOTE generates synthetic samples in a feature space, enhancing the diversity and representation of the minority class without directly copying existing observations <span class="citation" data-cites="chawla2002smote">(<a href="references.html#ref-chawla2002smote" role="doc-biblioref">Chawla et al. 2002</a>)</span>.</p>
-<section id="algorithm" class="level4" data-number="10.7.3.1">
-<h4 data-number="10.7.3.1" class="anchored" data-anchor-id="algorithm"><span class="header-section-number">10.7.3.1</span> Algorithm</h4>
+<section id="algorithm" class="level4" data-number="10.6.3.1">
+<h4 data-number="10.6.3.1" class="anchored" data-anchor-id="algorithm"><span class="header-section-number">10.6.3.1</span> Algorithm</h4>
 <p>SMOTE’s algorithm can be succinctly described using the following steps for each minority class sample <span class="math inline">\(x\)</span>:</p>
 <ol type="1">
 <li>Identify the <span class="math inline">\(k\)</span> nearest neighbors in the minority class for <span class="math inline">\(x\)</span>.</li>
@@ -1347,14 +1347,14 @@ F_{m-1}(x) + \lambda \cdot h_m(x)\)</span>.</li>
 <p>This process is repeated until the class distribution is deemed balanced.</p>
 <p>Several software tools and libraries have made implementing SMOTE straightforward in various programming environments. In Python, the <code>imbalanced-learn</code> library provides an efficient and flexible implementation of SMOTE and its variants, allowing seamless integration with scikit-learn workflows. R users can utilize the <code>DMwR</code> package, which includes functions for applying SMOTE to datasets. These tools not only offer basic SMOTE functionality but also support advanced variants and allow for easy experimentation with different oversampling strategies.</p>
 </section>
-<section id="applications-considerations-and-variants" class="level4" data-number="10.7.3.2">
-<h4 data-number="10.7.3.2" class="anchored" data-anchor-id="applications-considerations-and-variants"><span class="header-section-number">10.7.3.2</span> Applications, Considerations, and Variants</h4>
+<section id="applications-considerations-and-variants" class="level4" data-number="10.6.3.2">
+<h4 data-number="10.6.3.2" class="anchored" data-anchor-id="applications-considerations-and-variants"><span class="header-section-number">10.6.3.2</span> Applications, Considerations, and Variants</h4>
 <p><strong>Applications</strong>: SMOTE’s approach to enriching datasets by synthesizing new examples has proven beneficial in various fields. For instance, in fraud detection, where fraudulent transactions are rare <span class="citation" data-cites="dalpozzolo2015calibrating">(<a href="references.html#ref-dalpozzolo2015calibrating" role="doc-biblioref">Dal Pozzolo et al. 2015</a>)</span>, and in medical diagnostics, where certain conditions may be underrepresented in datasets <span class="citation" data-cites="johnson2019survey">(<a href="references.html#ref-johnson2019survey" role="doc-biblioref">Johnson and Khoshgoftaar 2019</a>)</span>.</p>
 <p><strong>Considerations</strong>: While SMOTE enhances the representation of the minority class, it may also lead to overfitting, especially if the minority class is dispersed or if there’s significant overlap with the majority class <span class="citation" data-cites="guo2017learning">(<a href="references.html#ref-guo2017learning" role="doc-biblioref">Guo et al. 2017</a>)</span>. Choosing the right variant of SMOTE and adjusting its parameters requires careful consideration of the dataset’s characteristics.</p>
 <p><strong>Advanced Variants</strong>: Specific challenges in datasets have led to the development of SMOTE variants like Borderline-SMOTE, which generates samples closer to the decision boundary to improve classifier sensitivity to the minority class <span class="citation" data-cites="han2005borderline">(<a href="references.html#ref-han2005borderline" role="doc-biblioref">Han, Wang, and Mao 2005</a>)</span>. Each variant addresses particular issues, such as noise or the risk of generating ambiguous synthetic samples.</p>
 </section>
-<section id="conclusion" class="level4" data-number="10.7.3.3">
-<h4 data-number="10.7.3.3" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">10.7.3.3</span> Conclusion</h4>
+<section id="conclusion" class="level4" data-number="10.6.3.3">
+<h4 data-number="10.6.3.3" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">10.6.3.3</span> Conclusion</h4>
 <p>SMOTE and its variants offer a sophisticated approach to mitigating the challenges posed by imbalanced datasets. Through synthetic sample generation, these methods enhance the diversity and representation of the minority class, facilitating improved model accuracy and generalizability. The choice of variant and parameters should be guided by the dataset’s characteristics and the problem context, underscoring the importance of careful experimentation and validation.</p>
 
 
@@ -1430,18 +1430,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1473,7 +1462,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1481,7 +1492,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
